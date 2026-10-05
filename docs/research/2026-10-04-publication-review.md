@@ -50,3 +50,22 @@ Red/green receipts are publication-quarantine-umask-red.txt and
 publication-quarantine-umask-green.txt. This test-only correction supersedes the
 original publication test bytes, while qualified installed product bytes remain
 unchanged. A new exact-head CI run is required before merging.
+
+## Pre-main supervisor-death finding
+
+Exact-head run 37261295303 exposed a real refresh startup race. The native worker
+armed PDEATHSIG only in main; a supervisor could die after Popen recorded a child
+but before that main captured its parent. A controlled LD_PRELOAD constructor
+stops the scanner before main and reproduces survival deterministically. Red
+receipt: publication-premain-shutdown-red.txt; the fixture explicitly kills and
+reaps the owned stopped child during teardown.
+
+Refresh.spawn now captures the supervisor PID and arms SIGKILL parent-death
+protection in its existing pre-exec setup, rejecting any changed parent before
+exec. The inherited setup protects monitor watchers, scanners and validators too.
+The temporary repaired runtime passes all 13 refresh cases, including the new
+loader-stop regression (publication-premain-shutdown-green.txt). Production
+private-state/root gates remain intact. This is a source fix, not new installed
+acceptance. Full publication-source regression, renewed installation qualification
+and exact-head CI precede adoption/merge. Previous installed shutdown evidence
+covers its original cases and does not establish this previously missing gap.

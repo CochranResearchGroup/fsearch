@@ -35,6 +35,42 @@ class RefreshWorker(unittest.TestCase):
             self.assertEqual(database.read_bytes(),before)
             state=json.loads(Path(str(database)+'.refresh.state').read_text())
             self.assertEqual(state['phase'],'stopped');self.assertIsNone(state['worker'])
+    def test_supervisor_shutdown_before_worker_main_proves_absence(self):
+        import signal
+        with tempfile.TemporaryDirectory(prefix='fsearch-refresh-loader-shutdown-') as temporary:
+            work=Path(temporary);root=work/'approved';root.mkdir();database=work/'accepted.db'
+            env=dict(os.environ,LD_PRELOAD=FAULT,FSEARCH_REFRESH_FIXTURE_STOP_BEFORE_MAIN='1')
+            process=subprocess.Popen(['python3',str(REFRESH),'refresh','--root',str(root),
+                '--database',str(database)],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            worker=None
+            try:
+                deadline=time.monotonic()+3
+                while time.monotonic()<deadline:
+                    try:
+                        state=json.loads(Path(str(database)+'.refresh.state').read_text())
+                        worker=(state.get('worker') or {}).get('pid')
+                        if worker and any(line.startswith('State:') and 'T' in line.split()[1]
+                            for line in Path('/proc',str(worker),'status').read_text().splitlines()):break
+                    except (OSError,ValueError):pass
+                    time.sleep(.005)
+                else:self.fail('fixture never stopped before native main')
+                process.terminate();process.communicate(timeout=3)
+                deadline=time.monotonic()+1
+                while time.monotonic()<deadline:
+                    try:reaped,_=os.waitpid(worker,os.WNOHANG)
+                    except ChildProcessError:break
+                    if reaped:break
+                    time.sleep(.005)
+                self.assertFalse(Path('/proc',str(worker)).exists(),'pre-main worker survived parent shutdown')
+                self.assertFalse(database.exists())
+            finally:
+                if process.poll() is None:process.kill()
+                process.communicate(timeout=3)
+                if worker:
+                    try:os.kill(worker,signal.SIGKILL)
+                    except ProcessLookupError:pass
+                    try:os.waitpid(worker,0)
+                    except ChildProcessError:pass
     def test_supervisor_shutdown_preserves_snapshot_and_requires_recovery(self):
         with tempfile.TemporaryDirectory(prefix='fsearch-refresh-shutdown-') as temporary:
             work=Path(temporary);root=work/'approved';root.mkdir();(root/'invoice.pdf').touch();database=work/'accepted.db'

@@ -13,6 +13,16 @@
 #include <time.h>
 #include <unistd.h>
 
+/* Hold the scanner in the loader, before its main can arm parent-death cleanup. */
+__attribute__((constructor)) static void hold_before_main(void) {
+    if (!getenv("FSEARCH_REFRESH_FIXTURE_STOP_BEFORE_MAIN")) return;
+    char executable[4096];
+    ssize_t count = readlink("/proc/self/exe", executable, sizeof(executable)-1);
+    if (count <= 0) return;
+    executable[count] = 0;
+    if (strstr(executable, "fsearch-refresh-worker")) raise(SIGSTOP);
+}
+
 long syscall(long number, ...) {
     long (*real_call)(long, ...) = dlsym(RTLD_NEXT, "syscall");
     va_list args; va_start(args, number); long result;

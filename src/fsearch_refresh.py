@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Explicit-root refresh; candidate construction never replaces serving workers."""
-import argparse,importlib.machinery,importlib.util,json,os,resource,selectors,shutil,struct,subprocess,time,uuid
+import argparse,ctypes,signal,importlib.machinery,importlib.util,json,os,resource,selectors,shutil,struct,subprocess,time,uuid
 from pathlib import Path
 base=Path(__file__).resolve().parent
 service_path=base/'fsearch-service'
@@ -22,13 +22,22 @@ def decode_reply(data):
             raise BoundaryError('worker_protocol_failed')
     return reply
 
+_prctl = ctypes.CDLL(None, use_errno=True).prctl
+
+def prepare_worker(expected_parent):
+    # Arm cleanup before exec/loader work; never adopt a different parent.
+    if _prctl(1, signal.SIGKILL, 0, 0, 0) or os.getppid() != expected_parent:
+        os._exit(3)
+    lifecycle.worker_limits()
+
 class Refresh:
     def __init__(self,directory):
         self.directory=directory;self.worker=None;self.record=None;self.quarantined=False
     def save(self,phase,reason):
         self.directory.save({'phase':phase,'reason':reason,'worker':self.record,'supervisor':lifecycle.identity(os.getpid())})
     def spawn(self,command):
-        self.worker=subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,close_fds=True,preexec_fn=lifecycle.worker_limits)
+        expected_parent=os.getpid()
+        self.worker=subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,close_fds=True,preexec_fn=lambda: prepare_worker(expected_parent))
         self.record=lifecycle.identity(self.worker.pid)
         self.save('starting','refresh_worker')
         self.worker.stdin.write(b'G');self.worker.stdin.flush()
