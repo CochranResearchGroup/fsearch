@@ -15,6 +15,7 @@
 #include <unistd.h>
 
 static bool triggered;
+static bool query_triggered;
 static bool is_snapshot(const char *path) {
     size_t len = strlen(path);
     return (len >= 12 && !strcmp(path + len - 12, "/snapshot.db")) ||
@@ -22,8 +23,12 @@ static bool is_snapshot(const char *path) {
 }
 static void pause_fixture(const char *delay_key) {
     const char *delay = getenv(delay_key);
-    if (!delay || triggered) return;
-    triggered = true;
+    bool query = !strcmp(delay_key, "FSEARCH_FIXTURE_QUERY_DELAY_MS");
+    const char *armed = getenv("FSEARCH_FIXTURE_QUERY_DELAY_ARM_FILE");
+    if (query && armed && access(armed, F_OK) != 0) return;
+    bool *once = query ? &query_triggered : &triggered;
+    if (!delay || *once) return;
+    *once = true;
     const char *marker = getenv("FSEARCH_FIXTURE_MARKER");
     if (marker) {
         FILE *fp = fopen(marker, "w");

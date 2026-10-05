@@ -1,0 +1,17 @@
+F
+======================================================================
+FAIL: test_uncertain_cleanup_stays_quarantined_until_explicit_recovery (__main__.WarmService.test_uncertain_cleanup_stays_quarantined_until_explicit_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 347, in test_uncertain_cleanup_stays_quarantined_until_explicit_recovery
+    self.assertEqual(payload.get('error',{}).get('code'),'cleanup_unproved',result.stdout)
+AssertionError: 'deadline' != 'cleanup_unproved'
+- deadline
++ cleanup_unproved
+ : {"schema_version":1,"status":"error","complete":false,"error":{"code":"deadline"},"results":[],"request_id":"67005-97779320817-3304388528"}
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.197s
+
+FAILED (failures=1)

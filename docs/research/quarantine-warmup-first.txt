@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_uncertain_cleanup_stays_quarantined_until_explicit_recovery (__main__.WarmService.test_uncertain_cleanup_stays_quarantined_until_explicit_recovery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 353, in test_uncertain_cleanup_stays_quarantined_until_explicit_recovery
+    self.assertEqual(payload.get('error',{}).get('code'),'cleanup_unproved',result.stdout)
+AssertionError: None != 'cleanup_unproved' : {"schema_version":1,"status":"ok","complete":true,"truncated":false,"visibility":"cached","examined":1,"snapshot":{"identity":"2096:6726240:332:1791213448:43674588:1791213448:61274588","mtime_unix":1791213448,"age_seconds":0,"roots":[{"path":"/tmp/fsearch-service-quarantine-v1rfhfvp/owned","path_bytes_base64":null,"last_scan_unix":1791213448,"age_seconds":0,"last_error_code":0}]},"results":[{"path":"/tmp/fsearch-service-quarantine-v1rfhfvp/owned/invoice.pdf","path_bytes_base64":null}],"request_id":"75034-97842785933-1396441785"}
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.421s
+
+FAILED (failures=1)
