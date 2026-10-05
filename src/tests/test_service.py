@@ -336,19 +336,30 @@ class WarmService(unittest.TestCase):
             work=Path(temporary); root=work/'owned'; root.mkdir(); (root/'invoice.pdf').touch()
             snapshot=work/'snapshot.db'; sock=work/'search.sock'; blocked=work/'block-waitpid'; blocked.touch()
             subprocess.run([FIXTURE,'build',str(snapshot),str(root)],check=True,capture_output=True,timeout=10); snapshot.chmod(0o600)
-            env=dict(os.environ,LD_PRELOAD=FAULT,FSEARCH_FIXTURE_QUERY_DELAY_MS='500',FSEARCH_FIXTURE_WAITPID_BLOCK_FILE=str(blocked))
+            armed=work/'arm-query-delay'
+            env=dict(os.environ,LD_PRELOAD=FAULT,FSEARCH_FIXTURE_AFTER_LOAD_DELAY_MS='250',FSEARCH_FIXTURE_QUERY_DELAY_MS='500',FSEARCH_FIXTURE_QUERY_DELAY_ARM_FILE=str(armed),FSEARCH_FIXTURE_WAITPID_BLOCK_FILE=str(blocked))
             server=subprocess.Popen([SERVICE,'serve','--socket',str(sock),'--database',str(snapshot)],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
             try:
                 for _ in range(200):
                     if sock.exists(): break
                     time.sleep(.01)
+                # Prove a resident worker before testing active-query cleanup. A cold
+                # 50ms request can correctly expire in the queue during worker load.
+                warmed=subprocess.run([CLI,'--socket',str(sock),'--query','invoice','--timeout-ms','2000'],capture_output=True,text=True,timeout=5)
+                self.assertEqual(warmed.returncode,0,warmed.stdout+warmed.stderr)
+                resident=json.loads((work/'search.sock.state').read_text())['worker']
+                self.assertIsNotNone(resident)
+                armed.touch()
                 result=subprocess.run([CLI,'--socket',str(sock),'--query','invoice','--timeout-ms','50'],capture_output=True,text=True,timeout=5)
                 payload=json.loads(result.stdout)
                 self.assertEqual(payload.get('error',{}).get('code'),'cleanup_unproved',result.stdout)
                 state=json.loads((work/'search.sock.state').read_text()); self.assertEqual(state['phase'],'quarantined')
+                self.assertEqual(state['worker'],resident)
                 denied=subprocess.run([CLI,'--socket',str(sock),'--query','invoice'],capture_output=True,text=True,timeout=5)
                 self.assertEqual(json.loads(denied.stdout)['error']['code'],'quarantined')
-                blocked.unlink(); time.sleep(.15)
+                blocked.unlink()
+                deadline=time.monotonic()+2
+                while Path(f"/proc/{state['worker']['pid']}").exists() and time.monotonic()<deadline:time.sleep(.005)
                 self.assertFalse(Path(f"/proc/{state['worker']['pid']}").exists(), 'quarantined supervisor must reap once evidence is available')
             finally:
                 if blocked.exists(): blocked.unlink()
