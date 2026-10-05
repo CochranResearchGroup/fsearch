@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_supervisor_shutdown_before_worker_main_proves_absence (__main__.RefreshWorker.test_supervisor_shutdown_before_worker_main_proves_absence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-publication-20261004/src/tests/test_refresh.py", line 64, in test_supervisor_shutdown_before_worker_main_proves_absence
+    self.assertFalse(Path('/proc',str(worker)).exists(),'pre-main worker survived parent shutdown')
+AssertionError: True is not false : pre-main worker survived parent shutdown
+
+----------------------------------------------------------------------
+Ran 1 test in 1.066s
+
+FAILED (failures=1)

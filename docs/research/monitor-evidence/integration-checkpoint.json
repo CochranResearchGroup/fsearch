@@ -1,0 +1,21 @@
+{
+  "public_worker_tests": 10,
+  "public_supervisor_tests": 14,
+  "regression_targets": 18,
+  "remaining_fsearch_pids": [],
+  "installed": false,
+  "monitoring_issue_complete": false,
+  "warm_replacement_ack_verified": true,
+  "pending": [
+    "watch startup deadline fault",
+    "monitor resource readback and query isolation during monitoring",
+    "Standards and Spec review",
+    "installed qualification"
+  ],
+  "sha256": {
+    "src/fsearch_monitor.py": "3cd58dcfb2f30bbde94247e9a50b5392f9334489d7124e0d34caad5c0a2c0a31",
+    "src/tests/test_monitor.py": "a6661b8237ff466445969594aea1838554183fca214cc641c3a1236806b87fb4",
+    "src/tests/test_monitor_worker.py": "a0a337375d51324b6ad6256477a1f736a6cda9e26c5cf44bfba3908fdd0b7006",
+    "/tmp/fsearch-warm-release-build/src/fsearch-monitor": "3cd58dcfb2f30bbde94247e9a50b5392f9334489d7124e0d34caad5c0a2c0a31"
+  }
+}

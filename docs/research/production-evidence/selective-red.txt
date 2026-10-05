@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_selective_query_reaches_late_cached_name_with_small_verification_budget (__main__.WarmService.test_selective_query_reaches_late_cached_name_with_small_verification_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 71, in test_selective_query_reaches_late_cached_name_with_small_verification_budget
+    self.assertTrue(payload['complete'],payload)
+AssertionError: False is not true : {'schema_version': 1, 'status': 'work_limit', 'complete': False, 'truncated': True, 'visibility': 'cached', 'examined': 2, 'snapshot': {'identity': '2096:6534216:201557:1791154746:279149103:1791154746:296749103', 'mtime_unix': 1791154746, 'age_seconds': 0, 'roots': [{'path': '/tmp/fsearch-service-fixture-j8e1ejcc/owned', 'path_bytes_base64': None, 'last_scan_unix': 1791154746, 'age_seconds': 0, 'last_error_code': 0}]}, 'results': [], 'request_id': 'late-selective'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.509s
+
+FAILED (failures=1)

@@ -1,0 +1,19 @@
+{
+  "public_supervisor_tests": 9,
+  "regression_targets": 18,
+  "remaining_fsearch_pids": [],
+  "installed": false,
+  "monitoring_issue_complete": false,
+  "pending": [
+    "uncertain cleanup and explicit restart recovery",
+    "unsupported confinement and mount rejection faults",
+    "overflow through supervisor",
+    "warm service replacement integration",
+    "source review and installed qualification"
+  ],
+  "sha256": {
+    "src/fsearch_monitor.py": "b848f1379864f4a6c712bffea6666ace6550dcd0037b7f82595628e12c9590dc",
+    "src/tests/test_monitor.py": "4ed0186707a8460288dc41dad12844b32b84b18c35a2c213be21edc40b57346d",
+    "/tmp/fsearch-warm-release-build/src/fsearch-monitor": "b848f1379864f4a6c712bffea6666ace6550dcd0037b7f82595628e12c9590dc"
+  }
+}

@@ -1,0 +1,39 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+ninja: no work to do.
+1/1 fsearch:warm_service FAIL           19.86s   exit status 1
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=2 LD_LIBRARY_PATH=/tmp/fsearch-warm-release-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3 /tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py /tmp/fsearch-warm-release-build/src/fsearch-service /tmp/fsearch-warm-release-build/src/fsearch-cli /tmp/fsearch-warm-release-build/src/tests/snapshot_fixture /tmp/fsearch-warm-release-build/src/tests/libheadless_fault_fixture.so
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+.............E...............
+======================================================================
+ERROR: test_queue_is_bounded_and_deadline_includes_waiting (__main__.WarmService.test_queue_is_bounded_and_deadline_includes_waiting)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 289, in test_queue_is_bounded_and_deadline_includes_waiting
+    with self.owned_service({'FSEARCH_FIXTURE_QUERY_DELAY_MS':'500','FSEARCH_FIXTURE_MARKER':str(marker)}) as (_,_,_,sock,_):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 248, in owned_service
+    subprocess.run([FIXTURE,'build',str(snapshot),str(root)],check=True,capture_output=True,timeout=10); snapshot.chmod(0o600)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/tmp/fsearch-warm-release-build/src/tests/snapshot_fixture', 'build', '/tmp/fsearch-service-fixture-qf4ao8dq/snapshot.db', '/tmp/fsearch-service-fixture-qf4ao8dq/owned']' died with <Signals.SIGABRT: 6>.
+
+----------------------------------------------------------------------
+Ran 29 tests in 22.510s
+
+FAILED (errors=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:warm_service FAIL           19.86s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

@@ -1,0 +1,1 @@
+Use codegraph explore for definitions, source, callers and impact. Trust fresh indexed source. Use rg/direct reads for docs, literals, configs or files flagged stale. Check codegraph status after edits.

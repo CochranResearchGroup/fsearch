@@ -1,0 +1,1 @@
+Use gh with explicit --repo CochranResearchGroup/fsearch. GitHub Issues are the work tracker; specs and research also have checked-in source artifacts. PRs as a request surface: no. Use structured arguments or --body-file for multiline bodies. Do not publish requests to upstream without user authorization.

@@ -1,0 +1,79 @@
+70619 execve("/tmp/fsearch-headless-baseline-build/headless_probe", ["/tmp/fsearch-headless-baseline-b"..., "query", "<fixture>/"..., "contenttype:pdf", "10"], 0x7ffe2d6032f8 /* 258 vars */) = 0
+70619 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+70619 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpango-1.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgio-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgobject-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libglib-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libicuuc.so.74", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libfribidi.so.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libthai.so.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libharfbuzz.so.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgmodule-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libmount.so.1", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libffi.so.8", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libicudata.so.74", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdatrie.so.1", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libfreetype.so.6", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgraphite2.so.3", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libblkid.so.1", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbz2.so.1.0", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpng16.so.16", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbrotlidec.so.1", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbrotlicommon.so.1", O_RDONLY|O_CLOEXEC) = 3
+70619 statfs("/sys/fs/selinux", {f_type=SYSFS_MAGIC, f_bsize=4096, f_blocks=0, f_bfree=0, f_bavail=0, f_files=0, f_ffree=0, f_fsid={val=[0xdff19c14, 0x4f8e434f]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_NOSUID|ST_NODEV|ST_NOEXEC|ST_NOATIME}) = 0
+70619 statfs("/selinux", 0x7ffec521b970) = -1 ENOENT (No such file or directory)
+70619 openat(AT_FDCWD, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3
+70619 openat(AT_FDCWD, "/proc/mounts", O_RDONLY|O_CLOEXEC) = 3
+70619 access("/etc/selinux/config", F_OK) = -1 ENOENT (No such file or directory)
+70619 openat(AT_FDCWD, "<fixture>/PROTOTYPE-wipe-me.db", O_RDONLY) = 3
+70619 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 4
+70619 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 4
+70631 openat(AT_FDCWD, "/sys/devices/system/cpu/online", O_RDONLY|O_CLOEXEC) = 4
+70641 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gio/modules", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+70641 newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gio/modules/giomodule.cache", {st_mode=S_IFREG|0644, st_size=150, ...}, 0) = 0
+70641 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gio/modules/giomodule.cache", O_RDONLY|O_CLOEXEC) = 7
+70641 newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gio/modules/libgiognomeproxy.so", {st_mode=S_IFREG|0644, st_size=22680, ...}, 0) = 0
+70641 newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gio/modules/libgiolibproxy.so", {st_mode=S_IFREG|0644, st_size=18584, ...}, 0) = 0
+70641 newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gio/modules/libgiognutls.so", {st_mode=S_IFREG|0644, st_size=129312, ...}, 0) = 0
+70641 newfstatat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gio/modules/libdconfsettings.so", {st_mode=S_IFREG|0644, st_size=59464, ...}, 0) = 0
+70641 access("/.flatpak-info", F_OK)    = -1 ENOENT (No such file or directory)
+70641 statx(AT_FDCWD, "<fixture>/PROTOTYPE-wipe-me-root/invoice-one.pdf", AT_STATX_SYNC_AS_STAT|AT_SYMLINK_NOFOLLOW|AT_NO_AUTOMOUNT, STATX_ALL, 0x7248ceffb960) = -1 ENOENT (No such file or directory)
+70641 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/charset.alias", O_RDONLY) = -1 ENOENT (No such file or directory)
+70641 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY|O_CLOEXEC) = 3
+70641 statx(AT_FDCWD, "<fixture>/PROTOTYPE-wipe-me-root/invoice-two.pdf", AT_STATX_SYNC_AS_STAT|AT_SYMLINK_NOFOLLOW|AT_NO_AUTOMOUNT, STATX_ALL, 0x7248ceffb960) = -1 ENOENT (No such file or directory)
+70641 statx(AT_FDCWD, "<fixture>/PROTOTYPE-wipe-me-root/line\nbreak.pdf", AT_STATX_SYNC_AS_STAT|AT_SYMLINK_NOFOLLOW|AT_NO_AUTOMOUNT, STATX_ALL, 0x7248ceffb960) = -1 ENOENT (No such file or directory)
+70641 statx(AT_FDCWD, "<fixture>/PROTOTYPE-wipe-me-root/notes.txt", AT_STATX_SYNC_AS_STAT|AT_SYMLINK_NOFOLLOW|AT_NO_AUTOMOUNT, STATX_ALL, 0x7248ceffb960) = -1 ENOENT (No such file or directory)
+70641 statx(AT_FDCWD, "<fixture>/PROTOTYPE-wipe-me-root/quote\"file.pdf", AT_STATX_SYNC_AS_STAT|AT_SYMLINK_NOFOLLOW|AT_NO_AUTOMOUNT, STATX_ALL, 0x7248ceffb960) = -1 ENOENT (No such file or directory)
+70623 statx(AT_FDCWD, "<fixture>/PROTOTYPE-wipe-me-root", AT_STATX_SYNC_AS_STAT|AT_SYMLINK_NOFOLLOW|AT_NO_AUTOMOUNT, STATX_ALL, 0x7249109fd960) = -1 ENOENT (No such file or directory)
+70644 +++ exited with 0 +++
+70642 +++ exited with 0 +++
+70624 +++ exited with 0 +++
+70643 +++ exited with 0 +++
+70625 +++ exited with 0 +++
+70628 ???( <unfinished ...>
+70641 +++ exited with 0 +++
+70640 +++ exited with 0 +++
+70639 +++ exited with 0 +++
+70638 +++ exited with 0 +++
+70637 +++ exited with 0 +++
+70636 +++ exited with 0 +++
+70635 +++ exited with 0 +++
+70634 +++ exited with 0 +++
+70633 +++ exited with 0 +++
+70632 +++ exited with 0 +++
+70631 +++ exited with 0 +++
+70630 +++ exited with 0 +++
+70629 +++ exited with 0 +++
+70628 +++ exited with 0 +++
+70627 +++ exited with 0 +++
+70626 +++ exited with 0 +++
+70623 +++ exited with 0 +++
+70619 +++ exited with 0 +++

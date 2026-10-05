@@ -1,0 +1,105 @@
+{
+  "source_qualified": true,
+  "installed_qualified": true,
+  "review_pending": false,
+  "baseline": "5ec26bab",
+  "scope": "Synthetic million-name query-serving qualification; no production root/update/adoption acceptance.",
+  "artifacts": {
+    "fsearch-cli": "8bed67d383d89b8f1a1293b3c6723d6a0fb0df305614167491c2b04d7e15fe62",
+    "fsearch-worker": "95d50cb640b8a6d8ff4f77daf577a6935d331a6a18a94a6d8f4af0ea6cbc56a3",
+    "fsearch-service": "85594baace2313655bcad26a7322eaa8e146224965ff9a4db6e35871a1e19899"
+  },
+  "sources": {
+    "src/fsearch_database.c": "d1b7c48906cdff819544024b481baa39301fecd359885f5e7832337655faba6e",
+    "src/fsearch_database_chunked_array.c": "6caa8725ecbcd19187eec504ad197ddc6e77c24a8bd022eaae9ee9fe065b0b21",
+    "src/fsearch_database_entry.c": "92a2d7c0bb0e5615816c4aa6adfabbb3d18789d13b2005ee53d75ea4f4b8e901",
+    "src/fsearch_database_entry_info.c": "ec041ed252df30403921045213d452f4d5746f31785a9f9f36196632c50b4c48",
+    "src/fsearch_database_exclude.c": "bf9d27120676570f680e2c04a2c19f1c61e2fd7812d7935d002708dcb23d4f73",
+    "src/fsearch_database_exclude_manager.c": "55815abeaa0fd6d1a2ee1a5a95b34f9e9030ce9149ab0ceef60fa84edc278fe1",
+    "src/fsearch_database_file.c": "44c2da6e6edcf00ce0a027469660924f9a869f445380f31fd744580a00135119",
+    "src/fsearch_database_include.c": "d394e8232967b31ed474b490a7f1b6259829a6e7f61784735a95a064bdd3a455",
+    "src/fsearch_database_include_manager.c": "d42b31e237672a266498f67351c8ee44829edc76fbc58dc1282768eea996d8c1",
+    "src/fsearch_database_index.c": "59964c89a1093477b1c52e649f5c7b9b5c1f4ee3068f19e4dfecd717b4e06c09",
+    "src/fsearch_database_index_event.c": "1350549019b4a29a2d4309aa070c1e1820c9a1471ff0b21cf9ae75db5e2dff68",
+    "src/fsearch_database_index_store.c": "6024c8902d3c062789fd7adc3ef8e4b0c00ec644972677fcd357f5226bad9d5e",
+    "src/fsearch_database_info.c": "5c78cb0104bacdd36c460fc6facb18d57f5aa8ca3a18acb16d88ca27c71f2009",
+    "src/fsearch_database_preferences_widget.c": "50bfd000314362ac1ad4458365cac22d7869c6c747d6817f9434aca3f4735e03",
+    "src/fsearch_database_rescan_manager.c": "76ee8f781b553cac04b52bd3ef4fe68d1bed7ea0d74feda21278e3279b9d51c0",
+    "src/fsearch_database_scan.c": "dbf03b52394fed0b269172769a46ea52220bc93e281b0e324892b269902834b0",
+    "src/fsearch_database_search_info.c": "8419b4198645652db88d7ac8026305f3a521691c7884a9982a186808e073e4ab",
+    "src/fsearch_database_search_view.c": "31fe5f72dbaddb63ec2ff2991bdd82ea4102b606d1c9d703fdbb8551f6448ac0",
+    "src/fsearch_database_sort.c": "55ba42ddd80d040fafa2718c0ed14d61f5866a37973cb9daf85edfd6623c784e",
+    "src/fsearch_database_work.c": "9d7e35c8c54b313e3e91456b7a9d3e3392d38b9168877a294f90fbe5c6343294",
+    "src/fsearch_database.h": "1534a84902a5486cb0d47716fc20425615df465f431b7e2964c70a3cc83084ff",
+    "src/fsearch_database_chunked_array.h": "0ebf6a3cd2dcf2adf9d16a9fad79c0ac8bff8b85aab87d6281976fa585537e46",
+    "src/fsearch_database_entry.h": "df3644ea18e788b203648b4d8f3859538297b2cd86317863132f321f7f89bfbd",
+    "src/fsearch_database_entry_flags.h": "906fba2ee77582d5f3896b681fd48c48369c03fbca504c198a77001ef214dbb1",
+    "src/fsearch_database_entry_info.h": "eaa732a0c17682072a96cdac28cae9d3cea6bf3d430654fbe1436018ef6ec7c7",
+    "src/fsearch_database_exclude.h": "5a5461ac79d913ad28a1ea1f07a82a0a5e1ec9c594caeea00ffc3ebe708ff46a",
+    "src/fsearch_database_exclude_manager.h": "61a6c6d6523542497d12c95696df6a2dc9bafadcad395faefecbfe92dc01662c",
+    "src/fsearch_database_file.h": "5189f3f37819450e821166a23dbf0ffebb832ff3b816128bd032d8fa7cccdc5b",
+    "src/fsearch_database_include.h": "fc963200ccdd53f166fd284d49959e813cdccc7774c4608cee784bdab3f6fe29",
+    "src/fsearch_database_include_manager.h": "a3212e1a0a12c28522e8f782cdda25716b2f3e9e51e85f48b4cfe09a9487bcf1",
+    "src/fsearch_database_index.h": "5a4032d0871ae24268ce98f754ea6c79e8a149535007a540add115413b3d38bc",
+    "src/fsearch_database_index_event.h": "fb2a46e69e2f9c076971ddf2ecbbce917a554567a4a5fefe1981ac839c399f4a",
+    "src/fsearch_database_index_properties.h": "41ba03e6d4c1f8c68e878145625d4870b73d4f09649ab5eb771fdce5ffa4a0c5",
+    "src/fsearch_database_index_store.h": "a55d93ce4342e0bfdaa2670245f827f3ce2c3d59deb150d7973da105a2a98785",
+    "src/fsearch_database_info.h": "f35788de87d5fb98644775531d32b0c7663e06137e0bd615d189f4f693e8aa50",
+    "src/fsearch_database_preferences_widget.h": "62cbf2b02ecba8fb36de4ce52eb8e8818e4c90a9cd02bb1c1e739469c4c77f0e",
+    "src/fsearch_database_rescan_manager.h": "f6dbcece2c8bacd091a5a037cead28d4a8236278b717d1db1df70de3fe37aa2f",
+    "src/fsearch_database_scan.h": "adf0b62c325835a8e28b1fa96e7b4c1bab0e10a66f522eceb14bdcd3ad956d7e",
+    "src/fsearch_database_scan_reason.h": "52c9e8fe68a9ad8ad6ede25cd2ff8cf811e8bd41312e50ebe43e2ce22acce8f0",
+    "src/fsearch_database_search_info.h": "9755c509f20e9aa7ee402f6da5e9036e17fbc7924af33aba6be6bfc9eb1b4d45",
+    "src/fsearch_database_search_view.h": "70952b48705e6d77e16f2576144901071adaf58fe10bea773c9bc8fe9e8e2090",
+    "src/fsearch_database_sort.h": "d535e597624a1df94f5046a3e627428b874a4916b5ed0399ffc9cc6eb11f2246",
+    "src/fsearch_database_work.h": "7b4b51419a45e49000eb971969f45f3948902c769f2c764596a8f0c1f7f70b3b",
+    "src/fsearch_headless.c": "b34992f281f4c3565b254dabe89c150e89bcecdd7f671218e01a6985fa706ee8",
+    "src/fsearch_utf.c": "9b87edc8509d4c1221c237aa89ea0ab883b389a013f378dae2cf7630ac96ec52"
+  },
+  "regressions": "final-source-regressions.txt",
+  "oracle_cases": 38,
+  "all_query_process_root_file_calls": 0,
+  "corpora": {
+    "full": {
+      "receipt": "candidate-worker-full.json",
+      "conservative_sum_hwm_kib": 103132,
+      "startup_request_ms": 259.77092100220034,
+      "gate_readback": {
+        "rss_pass": true,
+        "selective_pass": true,
+        "complete_short_unicode_path_pass": true,
+        "broad_result_limits_qualify_complete_search": false
+      }
+    },
+    "entropy": {
+      "receipt": "candidate-worker-entropy.json",
+      "conservative_sum_hwm_kib": 128020,
+      "startup_request_ms": 439.548371003184,
+      "gate_readback": {
+        "rss_pass": true,
+        "selective_pass": true,
+        "complete_short_unicode_path_pass": true,
+        "broad_result_limits_qualify_complete_search": false
+      }
+    },
+    "unicode-heavy": {
+      "receipt": "candidate-worker-unicode-heavy.json",
+      "conservative_sum_hwm_kib": 123316,
+      "startup_request_ms": 469.2737860023044,
+      "gate_readback": {
+        "rss_pass": true,
+        "selective_pass": true,
+        "complete_short_unicode_path_pass": true,
+        "broad_result_limits_qualify_complete_search": false
+      }
+    }
+  },
+  "provenance_note": "One trailing blank line in fsearch_database_entry.h was removed after measurements; measured header equals current header plus one newline. Runtime source and artifacts otherwise match.",
+  "reviewed_source_commit": "f3e98fb06012ac8d250549d1cb0b491d93454c3e",
+  "installed_source_commit": "f3e98fb06012ac8d250549d1cb0b491d93454c3e",
+  "installed_receipt": "installed-candidate-worker-entropy.json",
+  "installed_tests": {
+    "CLI": 15,
+    "service": 25
+  }
+}

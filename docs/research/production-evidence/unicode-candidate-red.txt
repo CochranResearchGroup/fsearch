@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_unicode_query_skips_ascii_names_without_losing_casefold_matches (__main__.WarmService.test_unicode_query_skips_ascii_names_without_losing_casefold_matches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 80, in test_unicode_query_skips_ascii_names_without_losing_casefold_matches
+    self.assertTrue(payload['complete'],payload)
+AssertionError: False is not true : {'schema_version': 1, 'status': 'work_limit', 'complete': False, 'truncated': True, 'visibility': 'cached', 'examined': 2, 'snapshot': {'identity': '2096:6534483:201603:1791155302:347188163:1791155302:364788164', 'mtime_unix': 1791155302, 'age_seconds': 0, 'roots': [{'path': '/tmp/fsearch-service-fixture-ecmoyjgq/owned', 'path_bytes_base64': None, 'last_scan_unix': 1791155302, 'age_seconds': 0, 'last_error_code': 0}]}, 'results': [], 'request_id': 'unicode-candidate'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.520s
+
+FAILED (failures=1)

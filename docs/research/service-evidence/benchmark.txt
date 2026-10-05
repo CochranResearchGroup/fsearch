@@ -1,0 +1,98 @@
+{
+  "workloads": [
+    {
+      "files": 10000,
+      "query": "entry00000",
+      "socket_ms": {
+        "first_ms": 31.466901000385405,
+        "p50_ms": 0.854809002703405,
+        "p95_ms": 1.0663659995771013
+      },
+      "gate_pass": true
+    },
+    {
+      "files": 10000,
+      "query": "absent-literal",
+      "socket_ms": {
+        "first_ms": 0.8888000011211261,
+        "p50_ms": 0.8880784989742097,
+        "p95_ms": 1.8185030021413695
+      },
+      "gate_pass": true
+    },
+    {
+      "files": 100000,
+      "query": "entry00000",
+      "socket_ms": {
+        "first_ms": 60.82822300231783,
+        "p50_ms": 13.71947150073538,
+        "p95_ms": 14.728197998920223
+      },
+      "gate_pass": true
+    },
+    {
+      "files": 100000,
+      "query": "absent-literal",
+      "socket_ms": {
+        "first_ms": 13.685404999705497,
+        "p50_ms": 14.372186000400688,
+        "p95_ms": 19.52188900031615
+      },
+      "gate_pass": true
+    }
+  ],
+  "limits": "Owned flat native fixtures, potentially warm OS caches; source release build. Summed observed RSS, not measured peak. No real-root/installed/MCP/default-adoption claim.",
+  "resources": [
+    {
+      "files": 10000,
+      "aggregate_rss_kib": 27592,
+      "idle_seconds": 6,
+      "idle_cpu_seconds": 0.020000000000000004,
+      "worker_identity_unchanged": true,
+      "gate_pass": true
+    },
+    {
+      "files": 100000,
+      "aggregate_rss_kib": 41712,
+      "idle_seconds": 6,
+      "idle_cpu_seconds": 0.03,
+      "worker_identity_unchanged": true,
+      "gate_pass": true
+    }
+  ],
+  "fresh_cli_client": [
+    {
+      "files": 10000,
+      "ms": {
+        "first_ms": 10.24390000020503,
+        "p50_ms": 7.192428998678224,
+        "p95_ms": 10.535596000408987
+      },
+      "note": "Fresh native CLI process; warm socket transport avoids Python startup."
+    },
+    {
+      "files": 100000,
+      "ms": {
+        "first_ms": 20.131934998062206,
+        "p50_ms": 19.545869499779656,
+        "p95_ms": 22.644895998382708
+      },
+      "note": "Fresh native CLI process; warm socket transport avoids Python startup."
+    }
+  ],
+  "isolation": [
+    {
+      "files": 10000,
+      "indexed_root_syscalls": 0,
+      "idle_seconds": 6,
+      "root_removed": true
+    },
+    {
+      "files": 100000,
+      "indexed_root_syscalls": 0,
+      "idle_seconds": 6,
+      "root_removed": true
+    }
+  ],
+  "all_gates_pass": true
+}

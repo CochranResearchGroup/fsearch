@@ -1,0 +1,48 @@
+97813 execve("/usr/bin/stat", ["stat", "/tmp/fsearch-monitor-trace-jrfo4"...], 0x7ffe079ee0b8 /* 258 vars */) = 0
+97813 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libselinux.so.1>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libc.so.6>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2>
+97813 statfs("/sys/fs/selinux", {f_type=SYSFS_MAGIC, f_bsize=4096, f_blocks=0, f_bfree=0, f_bavail=0, f_files=0, f_ffree=0, f_fsid={val=[0xdff19c14, 0x4f8e434f]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_NOSUID|ST_NODEV|ST_NOEXEC|ST_NOATIME}) = 0
+97813 statfs("/selinux", 0x7ffd43216800) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3</proc/filesystems>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/proc/mounts", O_RDONLY|O_CLOEXEC) = 3</proc/97813/mounts>
+97813 access("/etc/selinux/config", F_OK) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3</etc/locale.alias>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_IDENTIFICATION>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_MEASUREMENT>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_TELEPHONE>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_ADDRESS>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_NAME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_NAME", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_NAME>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_PAPER", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_PAPER", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_PAPER>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_MESSAGES>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_MONETARY>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_COLLATE>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_TIME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_TIME", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_TIME>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_NUMERIC>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/usr/lib/locale/C.utf8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3</usr/lib/locale/C.utf8/LC_CTYPE>
+97813 statx(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-monitor-trace-jrfo4903/excluded", AT_STATX_SYNC_AS_STAT|AT_SYMLINK_NOFOLLOW|AT_NO_AUTOMOUNT, STATX_ALL, {stx_mask=STATX_ALL|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0700, stx_size=4096, ...}) = 0
+97813 newfstatat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/nsswitch.conf", {st_mode=S_IFREG|0644, st_size=526, ...}, 0) = 0
+97813 newfstatat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/", {st_mode=S_IFDIR|0755, st_size=4096, ...}, 0) = 0
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/nsswitch.conf", O_RDONLY|O_CLOEXEC) = 3</etc/nsswitch.conf>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/passwd", O_RDONLY|O_CLOEXEC) = 3</etc/passwd>
+97813 newfstatat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/nsswitch.conf", {st_mode=S_IFREG|0644, st_size=526, ...}, 0) = 0
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/group", O_RDONLY|O_CLOEXEC) = 3</etc/group>
+97813 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/localtime", O_RDONLY|O_CLOEXEC) = 3</usr/share/zoneinfo/America/Chicago>
+97813 +++ exited with 0 +++

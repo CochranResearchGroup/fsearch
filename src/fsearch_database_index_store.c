@@ -35,11 +35,15 @@ typedef struct {
     GMainLoop *loop;
     GMainContext *ctx;
     GSource *event_source;
+    GMutex startup_mutex;
+    GCond startup_cond;
+    bool ready;
 } FsearchDatabaseThreadContext;
 
 struct FsearchDatabaseIndexStore {
     // Array of FsearchDatabaseIndex's
     GPtrArray *indices;
+    GPtrArray *snapshot_storage;
 
     // Hash table to all search results
     GHashTable *search_results;
@@ -134,29 +138,44 @@ thread_quit_func(GMainLoop *loop) {
 }
 
 static void
-thread_func(GMainContext *ctx, GMainLoop *loop) {
-    g_main_context_push_thread_default(ctx);
-    g_main_loop_run(loop);
-    g_main_context_pop_thread_default(ctx);
-    g_main_loop_unref(loop);
+thread_func(FsearchDatabaseThreadContext *context) {
+    g_main_context_push_thread_default(context->ctx);
+    g_mutex_lock(&context->startup_mutex);
+    context->ready = true;
+    g_cond_signal(&context->startup_cond);
+    g_mutex_unlock(&context->startup_mutex);
+    g_main_loop_run(context->loop);
+    g_main_context_pop_thread_default(context->ctx);
+    g_main_loop_unref(context->loop);
+}
+
+static void
+thread_context_wait_ready(FsearchDatabaseThreadContext *context) {
+    g_mutex_lock(&context->startup_mutex);
+    while (!context->ready) {
+        g_cond_wait(&context->startup_cond, &context->startup_mutex);
+    }
+    g_mutex_unlock(&context->startup_mutex);
+    g_cond_clear(&context->startup_cond);
+    g_mutex_clear(&context->startup_mutex);
 }
 
 static gpointer
 index_store_worker_thread_func(gpointer user_data) {
-    const FsearchDatabaseIndexStore *store = user_data;
+    FsearchDatabaseIndexStore *store = user_data;
     g_return_val_if_fail(store, NULL);
 
-    thread_func(store->worker.ctx, store->worker.loop);
+    thread_func(&store->worker);
 
     return NULL;
 }
 
 static gpointer
 index_store_monitor_thread_func(gpointer user_data) {
-    const FsearchDatabaseIndexStore *store = user_data;
+    FsearchDatabaseIndexStore *store = user_data;
     g_return_val_if_fail(store, NULL);
 
-    thread_func(store->monitor.ctx, store->monitor.loop);
+    thread_func(&store->monitor);
 
     return NULL;
 }
@@ -700,12 +719,15 @@ index_store_free(FsearchDatabaseIndexStore *store) {
     g_clear_pointer(&store->indices, g_ptr_array_unref);
     g_clear_pointer(&store->search_results, g_hash_table_unref);
     index_store_sorted_entries_free(store);
+    g_clear_pointer(&store->snapshot_storage, g_ptr_array_unref);
     g_clear_object(&store->include_manager);
     g_clear_object(&store->exclude_manager);
 
     // Wait for tasks to finish must be TRUE since the worker threads might be using the worker_pool_collect_queue
     // Hence, make sure to unref the queue only after the pool has been terminated
-    g_thread_pool_free(g_steal_pointer(&store->worker_pool), FALSE, TRUE);
+    if (store->worker_pool) {
+        g_thread_pool_free(g_steal_pointer(&store->worker_pool), FALSE, TRUE);
+    }
     g_clear_pointer(&store->worker_pool_collect_queue, g_async_queue_unref);
 
     // Only stop the monitor and worker threads after the indices have been freed, since they rely on them when freeing
@@ -726,12 +748,13 @@ index_store_free(FsearchDatabaseIndexStore *store) {
     g_free(store);
 }
 
-FsearchDatabaseIndexStore *
-fsearch_database_index_store_new(FsearchDatabaseIncludeManager *include_manager,
-                                 FsearchDatabaseExcludeManager *exclude_manager,
-                                 FsearchDatabaseIndexPropertyFlags flags,
-                                 FsearchDatabaseIndexStoreEventFunc event_func,
-                                 gpointer event_func_data) {
+static FsearchDatabaseIndexStore *
+index_store_new(FsearchDatabaseIncludeManager *include_manager,
+                FsearchDatabaseExcludeManager *exclude_manager,
+                FsearchDatabaseIndexPropertyFlags flags,
+                FsearchDatabaseIndexStoreEventFunc event_func,
+                gpointer event_func_data,
+                bool snapshot_only) {
     FsearchDatabaseIndexStore *store = g_new0(FsearchDatabaseIndexStore, 1);
 
     // Must be initialized before any thread/source below can lock it.
@@ -754,16 +777,27 @@ fsearch_database_index_store_new(FsearchDatabaseIncludeManager *include_manager,
     store->event_func = event_func;
     store->event_func_data = event_func_data;
 
+    // A snapshot has no workers, event sources or filesystem lifecycle.
+    if (snapshot_only) {
+        return store;
+    }
+
     store->worker_pool = g_thread_pool_new(index_store_worker_pool_func, store, g_get_num_processors(), TRUE, NULL);
     store->worker_pool_collect_queue = g_async_queue_new();
 
     store->monitor.ctx = g_main_context_new();
     store->monitor.loop = g_main_loop_new(store->monitor.ctx, FALSE);
+    g_mutex_init(&store->monitor.startup_mutex);
+    g_cond_init(&store->monitor.startup_cond);
     store->monitor.thread = g_thread_new("FsearchDatabaseIndexStoreMonitor", index_store_monitor_thread_func, store);
+    thread_context_wait_ready(&store->monitor);
 
     store->worker.ctx = g_main_context_new();
     store->worker.loop = g_main_loop_new(store->worker.ctx, FALSE);
+    g_mutex_init(&store->worker.startup_mutex);
+    g_cond_init(&store->worker.startup_cond);
     store->worker.thread = g_thread_new("FsearchDatabaseIndexStoreWorker", index_store_worker_thread_func, store);
+    thread_context_wait_ready(&store->worker);
     store->worker.event_source = g_timeout_source_new_seconds(1);
     g_source_set_priority(store->worker.event_source, G_PRIORITY_DEFAULT_IDLE);
     g_source_set_callback(store->worker.event_source, (GSourceFunc)index_store_proces_events_cb, store, NULL);
@@ -778,19 +812,43 @@ fsearch_database_index_store_new(FsearchDatabaseIncludeManager *include_manager,
 }
 
 FsearchDatabaseIndexStore *
-fsearch_database_index_store_new_with_content(GPtrArray *indices,
+fsearch_database_index_store_new(FsearchDatabaseIncludeManager *include_manager,
+                                 FsearchDatabaseExcludeManager *exclude_manager,
+                                 FsearchDatabaseIndexPropertyFlags flags,
+                                 FsearchDatabaseIndexStoreEventFunc event_func,
+                                 gpointer event_func_data) {
+    return index_store_new(include_manager, exclude_manager, flags, event_func, event_func_data, false);
+}
+
+static bool snapshot_chunks_equal(FsearchDatabaseChunkedArray *chunks, DynamicArray *array) {
+    if (!chunks || fsearch_database_chunked_array_get_num_entries(chunks) != darray_get_num_items(array)) return false;
+    g_autoptr(DynamicArray) parts = fsearch_database_chunked_array_get_chunks(chunks);
+    unsigned rank = 0;
+    for (unsigned c = 0; c < darray_get_num_items(parts); ++c) {
+        DynamicArray *part = darray_get_item(parts, c);
+        for (unsigned i = 0; i < darray_get_num_items(part); ++i)
+            if (darray_get_item(part, i) != darray_get_item(array, rank++)) return false;
+    }
+    return true;
+}
+
+static FsearchDatabaseIndexStore *
+index_store_new_with_content(GPtrArray *indices,
                                               DynamicArray **files,
                                               DynamicArray **folders,
                                               FsearchDatabaseIncludeManager *include_manager,
                                               FsearchDatabaseExcludeManager *exclude_manager,
                                               FsearchDatabaseIndexPropertyFlags flags,
                                               FsearchDatabaseIndexStoreEventFunc event_func,
-                                              gpointer event_func_data) {
-    FsearchDatabaseIndexStore *store = fsearch_database_index_store_new(include_manager,
-                                                                        exclude_manager,
-                                                                        flags,
-                                                                        event_func,
-                                                                        event_func_data);
+                                              gpointer event_func_data,
+                                              bool snapshot_only,
+                                              bool consume_arrays) {
+    FsearchDatabaseIndexStore *store = index_store_new(include_manager,
+                                                       exclude_manager,
+                                                       flags,
+                                                       event_func,
+                                                       event_func_data,
+                                                       snapshot_only);
 
     g_clear_pointer(&store->indices, g_ptr_array_unref);
     store->indices = g_ptr_array_ref(indices);
@@ -804,6 +862,20 @@ fsearch_database_index_store_new_with_content(GPtrArray *indices,
         DynamicArray *s_files = files[i];
         DynamicArray *s_folders = folders[i];
         if (s_folders && s_files) {
+            if (consume_arrays && i == DATABASE_INDEX_PROPERTY_PATH && store->indices->len == 1) {
+                FsearchDatabaseIndex *index = g_ptr_array_index(store->indices, 0);
+                g_autoptr(FsearchDatabaseChunkedArray) shared_files = fsearch_database_index_get_snapshot_chunks(index, true);
+                g_autoptr(FsearchDatabaseChunkedArray) shared_folders = fsearch_database_index_get_snapshot_chunks(index, false);
+                // Share only after proving exact pointer order, including malformed
+                // snapshots whose global arrays might differ from their one index.
+                if (snapshot_chunks_equal(shared_files, s_files) && snapshot_chunks_equal(shared_folders, s_folders)) {
+                    store->file_chunks[i] = g_steal_pointer(&shared_files);
+                    store->folder_chunks[i] = g_steal_pointer(&shared_folders);
+                    g_clear_pointer(&files[i], darray_unref);
+                    g_clear_pointer(&folders[i], darray_unref);
+                    continue;
+                }
+            }
             store->folder_chunks[i] = fsearch_database_chunked_array_new(s_folders,
                                                                          TRUE,
                                                                          fsearch_database_sort_order_chain_for_property(i),
@@ -817,6 +889,10 @@ fsearch_database_index_store_new_with_content(GPtrArray *indices,
                                                                        NULL,
                                                                        NULL);
         }
+        if (consume_arrays) {
+            g_clear_pointer(&files[i], darray_unref);
+            g_clear_pointer(&folders[i], darray_unref);
+        }
     }
 
     store->is_sorted = true;
@@ -825,6 +901,50 @@ fsearch_database_index_store_new_with_content(GPtrArray *indices,
     store->running = true;
 
     return store;
+}
+
+FsearchDatabaseIndexStore *
+fsearch_database_index_store_new_with_content(GPtrArray *indices,
+                                              DynamicArray **files,
+                                              DynamicArray **folders,
+                                              FsearchDatabaseIncludeManager *include_manager,
+                                              FsearchDatabaseExcludeManager *exclude_manager,
+                                              FsearchDatabaseIndexPropertyFlags flags,
+                                              FsearchDatabaseIndexStoreEventFunc event_func,
+                                              gpointer event_func_data) {
+    return index_store_new_with_content(indices, files, folders, include_manager, exclude_manager,
+                                         flags, event_func, event_func_data, false, false);
+}
+
+FsearchDatabaseIndexStore *
+fsearch_database_index_store_new_snapshot(GPtrArray *indices,
+                                          DynamicArray **files,
+                                          DynamicArray **folders,
+                                          FsearchDatabaseIncludeManager *include_manager,
+                                          FsearchDatabaseExcludeManager *exclude_manager,
+                                          FsearchDatabaseIndexPropertyFlags flags) {
+    return index_store_new_with_content(indices, files, folders, include_manager, exclude_manager,
+                                         flags, NULL, NULL, true, false);
+}
+
+/* Consumes only the temporary pointer arrays; entries remain owned by indices.
+ * Used by the FD snapshot loader to avoid retaining all input arrays while each
+ * store property is copied. The borrowing constructor remains unchanged. */
+FsearchDatabaseIndexStore *
+fsearch_database_index_store_new_snapshot_take(GPtrArray *indices,
+                                               DynamicArray **files,
+                                               DynamicArray **folders,
+                                               FsearchDatabaseIncludeManager *include_manager,
+                                               FsearchDatabaseExcludeManager *exclude_manager,
+                                               FsearchDatabaseIndexPropertyFlags flags) {
+    return index_store_new_with_content(indices, files, folders, include_manager, exclude_manager,
+                                       flags, NULL, NULL, true, true);
+}
+
+void
+fsearch_database_index_store_retain_snapshot_storage(FsearchDatabaseIndexStore *store, GPtrArray *storage) {
+    g_return_if_fail(store && !store->snapshot_storage && storage);
+    store->snapshot_storage = g_ptr_array_ref(storage);
 }
 
 FsearchDatabaseIndexStore *

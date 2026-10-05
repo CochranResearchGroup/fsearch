@@ -1,0 +1,71 @@
+# Qualified filename stack publication review
+
+Owner: ecochran76. Parent: #1. Publication base: origin/master d531eb3b.
+Original local head: 23e7cea0; installed native product source: 10170cfe.
+
+The fork publication includes bounded JSON queries, resident private service,
+contained refresh/monitoring, native candidate acceleration and their qualification
+artifacts. Existing upstream GUI defaults remain. Local product bytes in this
+publication equal the qualified original checkout; original local history remains
+retained. Installed identities/performance are anchored by their exact manifests,
+not by assuming the new publication commit has the old source SHA.
+
+GitHub push protection rejected the original local branch because an inherited
+environment line in a historical test log contained credentials. This fresh branch
+starts at the fork base and includes the qualified final tree with that one line
+redacted. The private original and redaction receipt remain; no bypass was used.
+A staging verification mistake exposed the old indexed line in tool output before
+it was replaced. Affected credentials require operator rotation; values are never
+included in this note. Staged-tree pattern checking is performed before pushing.
+Raw compiler/test whitespace is preserved as historical evidence; source-specific
+whitespace is checked separately.
+
+Fresh source requalification: 19 Meson targets pass with uvx --with ninja meson
+(after resolving absent global Meson/Ninja tools). Receipt: publication-source-tests.txt.
+The existing installed acceptance proves 91 public native cases and exact seven
+command identities, query/root isolation and moved-parent containment. Installed
+query/replacement performance retains its frozen three-corpus gates. Details and
+limitations remain in monitor-install-acceptance and column-prefetch-installed
+performance-qualification.json. No production root is admitted or continuously
+running service activated.
+
+Standards review: source/history custody, private backup, explicit configuration,
+whole-operation bounds, root admission and quarantine invariants retain their
+reviewed implementation. Spec review: query, refresh, monitoring and performance
+acceptance map to existing canonical receipts. File-searcher integration PR #21
+is merged at 19acc4b02a01c0893568da9012b7acd9e955f81a after passing CI; its separate
+installed MCP runtime is qualified without changing registration/default routing.
+No blocking source finding; native remote CI and tracker reconciliation remain.
+
+Memory disposition: forbidden; no personal memory write authorized.
+
+## CI fixture correction
+
+Run 37261080847 built successfully but failed one monitor case: the fixture wrote
+refresh quarantine with the process umask, producing 0644 on CI and receiving the
+correct unsafe_state refusal instead of exercising quarantine. An explicit 022
+umask reproduces the failure locally. The fixture now creates the file with mode
+0600 before writing it. Production private-state validation is unchanged.
+Red/green receipts are publication-quarantine-umask-red.txt and
+publication-quarantine-umask-green.txt. This test-only correction supersedes the
+original publication test bytes, while qualified installed product bytes remain
+unchanged. A new exact-head CI run is required before merging.
+
+## Pre-main supervisor-death finding
+
+Exact-head run 37261295303 exposed a real refresh startup race. The native worker
+armed PDEATHSIG only in main; a supervisor could die after Popen recorded a child
+but before that main captured its parent. A controlled LD_PRELOAD constructor
+stops the scanner before main and reproduces survival deterministically. Red
+receipt: publication-premain-shutdown-red.txt; the fixture explicitly kills and
+reaps the owned stopped child during teardown.
+
+Refresh.spawn now captures the supervisor PID and arms SIGKILL parent-death
+protection in its existing pre-exec setup, rejecting any changed parent before
+exec. The inherited setup protects monitor watchers, scanners and validators too.
+The temporary repaired runtime passes all 13 refresh cases, including the new
+loader-stop regression (publication-premain-shutdown-green.txt). Production
+private-state/root gates remain intact. This is a source fix, not new installed
+acceptance. Full publication-source regression, renewed installation qualification
+and exact-head CI precede adoption/merge. Previous installed shutdown evidence
+covers its original cases and does not establish this previously missing gap.

@@ -1,0 +1,53 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+[1/36] Compiling C object src/libfsearch.a.p/fsearch_preview.c.o
+[2/36] Compiling C object src/libfsearch.a.p/fsearch_listview_popup.c.o
+[3/36] Compiling C object src/tests/snapshot_fixture.p/snapshot_fixture.c.o
+[4/36] Compiling C object src/libfsearch.a.p/fsearch_database_work.c.o
+[5/36] Compiling C object src/libfsearch.a.p/fsearch_statusbar.c.o
+[6/36] Compiling C object src/tests/test_database_index_store.p/test_database_index_store.c.o
+[7/36] Compiling C object src/tests/test_database.p/test_database.c.o
+[8/36] Compiling C object src/fsearch.p/main.c.o
+[9/36] Compiling C object src/libfsearch.a.p/fsearch_window_actions.c.o
+[10/36] Compiling C object src/libfsearch.a.p/fsearch_database_index.c.o
+[11/36] Compiling C object src/libfsearch.a.p/fsearch_headless.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_headless.c: In function ‘fsearch_headless_search’:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_headless.c:247:32: warning: pointer/integer type mismatch in conditional expression
+  247 |                                : options->match_case ? strstr(name, options->query)
+      |                                ^
+[12/36] Compiling C object src/libfsearch.a.p/fsearch.c.o
+[13/36] Compiling C object src/libfsearch.a.p/fsearch_result_view.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_result_view.c:2: warning: "G_LOG_DOMAIN" redefined
+    2 | #define G_LOG_DOMAIN "fsearch-result-view"
+      | 
+In file included from /usr/include/glib-2.0/glib.h:64,
+                 from /usr/include/gtk-3.0/gdk/gdkconfig.h:8,
+                 from /usr/include/gtk-3.0/gdk/gdk.h:30,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_result_view.c:1:
+/usr/include/glib-2.0/glib/gmessages.h:320: note: this is the location of the previous definition
+  320 | #define G_LOG_DOMAIN    ((gchar*) 0)
+      | 
+[14/36] Compiling C object src/libfsearch.a.p/fsearch_database.c.o
+[15/36] Compiling C object src/libfsearch.a.p/fsearch_window.c.o
+[16/36] Compiling C object src/fsearch-cli.p/fsearch_cli.c.o
+[17/36] Compiling C object src/tests/test_database_file.p/test_database_file.c.o
+[18/36] Compiling C object src/libfsearch.a.p/fsearch_database_index_store.c.o
+[19/36] Compiling C object src/libfsearch.a.p/fsearch_database_file.c.o
+[20/36] Linking static target src/libfsearch.a
+[21/36] Linking target src/tests/test_string_utils
+[22/36] Linking target src/tests/test_database_entry
+[23/36] Linking target src/tests/test_database_chunked_array
+[24/36] Linking target src/tests/test_size_utils
+[25/36] Linking target src/tests/test_time_utils
+[26/36] Linking target src/tests/test_array
+[27/36] Linking target src/tests/test_database_include
+[28/36] Linking target src/tests/test_database_exclude
+[29/36] Linking target src/tests/test_database_file
+[30/36] Linking target src/fsearch-cli
+[31/36] Linking target src/tests/snapshot_fixture
+[32/36] Linking target src/tests/test_database_index_store
+[33/36] Linking target src/fsearch
+[34/36] Linking target src/tests/test_query
+[35/36] Linking target src/fsearch-worker
+[36/36] Linking target src/tests/test_database
+INFO: autodetecting backend as ninja
+INFO: calculating backend command to run: /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja -C /tmp/fsearch-warm-release-build

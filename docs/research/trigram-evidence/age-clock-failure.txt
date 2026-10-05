@@ -1,0 +1,10 @@
+Building 100000 virtual records
+100000: linear
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/prototypes/benchmark_trigram.py", line 106, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/prototypes/benchmark_trigram.py", line 89, in main
+    assert normalize(r['response'])==normalize(first['response']),(label,'unstable result')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('rare', 'unstable result')

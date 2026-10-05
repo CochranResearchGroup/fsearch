@@ -1,0 +1,65 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+[1/13] Linking target src/tests/test_database_entry
+[2/13] Linking target src/tests/test_database_exclude
+[3/13] Linking target src/tests/test_string_utils
+[4/13] Linking target src/fsearch-cli
+[5/13] Linking target src/tests/test_database
+[6/13] Linking target src/fsearch-worker
+[7/13] Linking target src/tests/test_query
+[8/13] Linking target src/tests/test_database_include
+[9/13] Linking target src/tests/test_database_chunked_array
+[10/13] Linking target src/tests/test_database_file
+[11/13] Linking target src/tests/test_array
+[12/13] Linking target src/tests/snapshot_fixture
+[13/13] Linking target src/tests/test_database_index_store
+ 1/15 fsearch:validate-metainfo           OK              0.18s
+ 2/15 fsearch:test_database               OK              0.17s
+ 3/15 fsearch:test_database_file          OK              0.17s
+ 4/15 fsearch:test_database_chunked_array OK              0.15s
+ 5/15 fsearch:test_database_index_store   OK              0.14s
+ 6/15 fsearch:test_database_include       OK              0.13s
+ 7/15 fsearch:test_database_exclude       OK              0.12s
+ 8/15 fsearch:test_database_entry         OK              0.10s
+ 9/15 fsearch:test_array                  OK              0.09s
+10/15 fsearch:test_size_utils             OK              0.06s
+11/15 fsearch:test_time_utils             OK              0.04s
+12/15 fsearch:test_query                  OK              0.07s
+13/15 fsearch:test_string_utils           OK              0.05s
+14/15 fsearch:headless_cli                OK              7.47s
+15/15 fsearch:warm_service                FAIL           16.57s   exit status 1
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=91 LD_LIBRARY_PATH=/tmp/fsearch-warm-release-build/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3 /tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py /tmp/fsearch-warm-release-build/src/fsearch-service /tmp/fsearch-warm-release-build/src/fsearch-cli /tmp/fsearch-warm-release-build/src/tests/snapshot_fixture /tmp/fsearch-warm-release-build/src/tests/libheadless_fault_fixture.so
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+E......................
+======================================================================
+ERROR: test_client_cannot_silently_retarget_an_existing_service_snapshot (__main__.WarmService.test_client_cannot_silently_retarget_an_existing_service_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 295, in test_client_cannot_silently_retarget_an_existing_service_snapshot
+    with self.owned_service() as (_,_,snapshot,sock,_):
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 142, in owned_service
+    subprocess.run([FIXTURE,'build',str(snapshot),str(root)],check=True,capture_output=True,timeout=10); snapshot.chmod(0o600)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/tmp/fsearch-warm-release-build/src/tests/snapshot_fixture', 'build', '/tmp/fsearch-service-fixture-_eg6x1km/snapshot.db', '/tmp/fsearch-service-fixture-_eg6x1km/owned']' died with <Signals.SIGSEGV: 11>.
+
+----------------------------------------------------------------------
+Ran 23 tests in 19.216s
+
+FAILED (errors=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+15/15 fsearch:warm_service                FAIL           16.57s   exit status 1
+
+Ok:                14  
+Fail:              1   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

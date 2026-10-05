@@ -1,0 +1,391 @@
+{
+  "build": "/tmp/fsearch-warm-release-build",
+  "compiler_command": "/usr/bin/gcc -Isrc/fsearch-cli.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -pthread -MD -MQ src/fsearch-cli.p/fsearch_cli.c.o -MF src/fsearch-cli.p/fsearch_cli.c.o.d -o src/fsearch-cli.p/fsearch_cli.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_cli.c",
+  "instrumentation": "copied CLI source; load/match/response microsecond markers; worker stderr enabled only in copy",
+  "workloads": [
+    {
+      "files": 10000,
+      "query": "entry00000",
+      "first": {
+        "load_ms": 2.64,
+        "match_ms": 0.669,
+        "response_ms": 0.007,
+        "total_ms": 10.69476799966651,
+        "examined": 10000
+      },
+      "subsequent_p50": {
+        "load_ms": 2.601,
+        "match_ms": 0.6615,
+        "response_ms": 0.0055,
+        "total_ms": 10.552079000262893
+      },
+      "raw": [
+        {
+          "load_ms": 2.64,
+          "match_ms": 0.669,
+          "response_ms": 0.007,
+          "total_ms": 10.69476799966651,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.696,
+          "match_ms": 0.661,
+          "response_ms": 0.005,
+          "total_ms": 10.398684000392677,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.973,
+          "match_ms": 0.671,
+          "response_ms": 0.006,
+          "total_ms": 11.05371199810179,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.504,
+          "match_ms": 0.663,
+          "response_ms": 0.006,
+          "total_ms": 10.610311001073569,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.508,
+          "match_ms": 0.662,
+          "response_ms": 0.008,
+          "total_ms": 9.850727001321502,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.659,
+          "match_ms": 0.712,
+          "response_ms": 0.006,
+          "total_ms": 10.650106996763498,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.54,
+          "match_ms": 0.648,
+          "response_ms": 0.005,
+          "total_ms": 10.493846999452217,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.529,
+          "match_ms": 0.637,
+          "response_ms": 0.005,
+          "total_ms": 10.260844999720575,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.649,
+          "match_ms": 0.648,
+          "response_ms": 0.006,
+          "total_ms": 11.525885998707963,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.553,
+          "match_ms": 0.623,
+          "response_ms": 0.005,
+          "total_ms": 10.183246002270607,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.99,
+          "match_ms": 0.671,
+          "response_ms": 0.005,
+          "total_ms": 11.539151000761194,
+          "examined": 10000
+        }
+      ]
+    },
+    {
+      "files": 10000,
+      "query": "absent-literal",
+      "first": {
+        "load_ms": 2.582,
+        "match_ms": 0.658,
+        "response_ms": 0.006,
+        "total_ms": 10.669127997971373,
+        "examined": 10000
+      },
+      "subsequent_p50": {
+        "load_ms": 2.554,
+        "match_ms": 0.696,
+        "response_ms": 0.006,
+        "total_ms": 10.626107001371565
+      },
+      "raw": [
+        {
+          "load_ms": 2.582,
+          "match_ms": 0.658,
+          "response_ms": 0.006,
+          "total_ms": 10.669127997971373,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.529,
+          "match_ms": 0.744,
+          "response_ms": 0.006,
+          "total_ms": 10.380910996900639,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.534,
+          "match_ms": 0.662,
+          "response_ms": 0.005,
+          "total_ms": 9.951390999049181,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.493,
+          "match_ms": 0.663,
+          "response_ms": 0.006,
+          "total_ms": 10.065900998597499,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.961,
+          "match_ms": 0.707,
+          "response_ms": 0.011,
+          "total_ms": 11.100783998699626,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.533,
+          "match_ms": 0.762,
+          "response_ms": 0.006,
+          "total_ms": 10.995728000125382,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.726,
+          "match_ms": 0.656,
+          "response_ms": 0.006,
+          "total_ms": 10.423159998026676,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.595,
+          "match_ms": 0.733,
+          "response_ms": 0.004,
+          "total_ms": 10.614263999741524,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.574,
+          "match_ms": 0.68,
+          "response_ms": 0.007,
+          "total_ms": 10.772926001664018,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.665,
+          "match_ms": 0.685,
+          "response_ms": 0.007,
+          "total_ms": 10.637950003001606,
+          "examined": 10000
+        },
+        {
+          "load_ms": 2.529,
+          "match_ms": 0.71,
+          "response_ms": 0.012,
+          "total_ms": 10.801371001434745,
+          "examined": 10000
+        }
+      ]
+    },
+    {
+      "files": 100000,
+      "query": "entry00000",
+      "first": {
+        "load_ms": 27.147,
+        "match_ms": 12.16,
+        "response_ms": 0.023,
+        "total_ms": 53.07631500181742,
+        "examined": 100000
+      },
+      "subsequent_p50": {
+        "load_ms": 25.3555,
+        "match_ms": 11.4985,
+        "response_ms": 0.022,
+        "total_ms": 48.478627499207505
+      },
+      "raw": [
+        {
+          "load_ms": 27.147,
+          "match_ms": 12.16,
+          "response_ms": 0.023,
+          "total_ms": 53.07631500181742,
+          "examined": 100000
+        },
+        {
+          "load_ms": 25.458,
+          "match_ms": 11.401,
+          "response_ms": 0.019,
+          "total_ms": 48.10772700147936,
+          "examined": 100000
+        },
+        {
+          "load_ms": 27.032,
+          "match_ms": 11.354,
+          "response_ms": 0.022,
+          "total_ms": 50.889398000435904,
+          "examined": 100000
+        },
+        {
+          "load_ms": 26.671,
+          "match_ms": 12.83,
+          "response_ms": 0.023,
+          "total_ms": 51.19209599797614,
+          "examined": 100000
+        },
+        {
+          "load_ms": 24.23,
+          "match_ms": 11.745,
+          "response_ms": 0.02,
+          "total_ms": 46.625615999801084,
+          "examined": 100000
+        },
+        {
+          "load_ms": 24.612,
+          "match_ms": 11.312,
+          "response_ms": 0.03,
+          "total_ms": 46.46757800219348,
+          "examined": 100000
+        },
+        {
+          "load_ms": 24.467,
+          "match_ms": 11.415,
+          "response_ms": 0.023,
+          "total_ms": 46.1999300023308,
+          "examined": 100000
+        },
+        {
+          "load_ms": 26.482,
+          "match_ms": 11.63,
+          "response_ms": 0.025,
+          "total_ms": 49.04897699816502,
+          "examined": 100000
+        },
+        {
+          "load_ms": 25.253,
+          "match_ms": 11.683,
+          "response_ms": 0.021,
+          "total_ms": 48.22510099984356,
+          "examined": 100000
+        },
+        {
+          "load_ms": 25.805,
+          "match_ms": 11.388,
+          "response_ms": 0.018,
+          "total_ms": 49.09172099723946,
+          "examined": 100000
+        },
+        {
+          "load_ms": 24.777,
+          "match_ms": 11.582,
+          "response_ms": 0.022,
+          "total_ms": 48.73215399857145,
+          "examined": 100000
+        }
+      ]
+    },
+    {
+      "files": 100000,
+      "query": "absent-literal",
+      "first": {
+        "load_ms": 24.093,
+        "match_ms": 11.646,
+        "response_ms": 0.024,
+        "total_ms": 47.3042159974284,
+        "examined": 100000
+      },
+      "subsequent_p50": {
+        "load_ms": 25.3405,
+        "match_ms": 12.1475,
+        "response_ms": 0.025,
+        "total_ms": 49.63766699802363
+      },
+      "raw": [
+        {
+          "load_ms": 24.093,
+          "match_ms": 11.646,
+          "response_ms": 0.024,
+          "total_ms": 47.3042159974284,
+          "examined": 100000
+        },
+        {
+          "load_ms": 24.962,
+          "match_ms": 12.574,
+          "response_ms": 0.02,
+          "total_ms": 49.18763599926024,
+          "examined": 100000
+        },
+        {
+          "load_ms": 25.388,
+          "match_ms": 11.839,
+          "response_ms": 0.026,
+          "total_ms": 48.284929998771986,
+          "examined": 100000
+        },
+        {
+          "load_ms": 27.172,
+          "match_ms": 12.016,
+          "response_ms": 0.021,
+          "total_ms": 50.82344800030114,
+          "examined": 100000
+        },
+        {
+          "load_ms": 25.979,
+          "match_ms": 12.339,
+          "response_ms": 0.024,
+          "total_ms": 50.16012600026443,
+          "examined": 100000
+        },
+        {
+          "load_ms": 25.089,
+          "match_ms": 11.545,
+          "response_ms": 0.025,
+          "total_ms": 48.7042710010428,
+          "examined": 100000
+        },
+        {
+          "load_ms": 25.204,
+          "match_ms": 12.279,
+          "response_ms": 0.032,
+          "total_ms": 50.08769799678703,
+          "examined": 100000
+        },
+        {
+          "load_ms": 25.293,
+          "match_ms": 11.608,
+          "response_ms": 0.025,
+          "total_ms": 48.72492300273734,
+          "examined": 100000
+        },
+        {
+          "load_ms": 30.092,
+          "match_ms": 13.043,
+          "response_ms": 0.025,
+          "total_ms": 57.426450002822094,
+          "examined": 100000
+        },
+        {
+          "load_ms": 27.22,
+          "match_ms": 11.79,
+          "response_ms": 0.026,
+          "total_ms": 53.30023699934827,
+          "examined": 100000
+        },
+        {
+          "load_ms": 24.806,
+          "match_ms": 12.554,
+          "response_ms": 0.023,
+          "total_ms": 49.04625899871462,
+          "examined": 100000
+        }
+      ]
+    }
+  ]
+}

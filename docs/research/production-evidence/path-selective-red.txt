@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_path_query_reaches_late_name_with_small_verification_budget (__main__.WarmService.test_path_query_reaches_late_name_with_small_verification_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 79, in test_path_query_reaches_late_name_with_small_verification_budget
+    self.assertTrue(payload['complete'],payload)
+AssertionError: False is not true : {'schema_version': 1, 'status': 'work_limit', 'complete': False, 'truncated': True, 'visibility': 'cached', 'examined': 2, 'snapshot': {'identity': '2096:6561001:201557:1791159968:191944898:1791159968:209544898', 'mtime_unix': 1791159968, 'age_seconds': 0, 'roots': [{'path': '/tmp/fsearch-service-fixture-eg5perza/owned', 'path_bytes_base64': None, 'last_scan_unix': 1791159968, 'age_seconds': 0, 'last_error_code': 0}]}, 'results': [], 'request_id': 'path-candidate'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.454s
+
+FAILED (failures=1)

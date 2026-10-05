@@ -1,0 +1,85 @@
+EEEEE
+======================================================================
+ERROR: test_create_rename_delete_in_nested_directory (__main__.MonitorWorker.test_create_rename_delete_in_nested_directory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor_worker.py", line 60, in test_create_rename_delete_in_nested_directory
+    worker = self.start(root)
+             ^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor_worker.py", line 31, in start
+    worker = subprocess.Popen([WORKER, '--root', str(root)], stdin=subprocess.PIPE,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/fsearch-warm-release-build/src/fsearch-monitor-worker'
+
+======================================================================
+ERROR: test_gate_precedes_root_access (__main__.MonitorWorker.test_gate_precedes_root_access)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor_worker.py", line 52, in test_gate_precedes_root_access
+    result = subprocess.run([WORKER, '--root', '/__fsearch_missing_gate_fixture__'],
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/fsearch-warm-release-build/src/fsearch-monitor-worker'
+
+======================================================================
+ERROR: test_missing_or_relative_root_is_structured (__main__.MonitorWorker.test_missing_or_relative_root_is_structured)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor_worker.py", line 47, in test_missing_or_relative_root_is_structured
+    result = subprocess.run([WORKER, *arguments], input=b'G', capture_output=True, timeout=3)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 548, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/fsearch-warm-release-build/src/fsearch-monitor-worker'
+
+======================================================================
+ERROR: test_moved_root_invalidates_watch_generation (__main__.MonitorWorker.test_moved_root_invalidates_watch_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor_worker.py", line 81, in test_moved_root_invalidates_watch_generation
+    worker = self.start(root); root.rename(work/'moved')
+             ^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor_worker.py", line 31, in start
+    worker = subprocess.Popen([WORKER, '--root', str(root)], stdin=subprocess.PIPE,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/fsearch-warm-release-build/src/fsearch-monitor-worker'
+
+======================================================================
+ERROR: test_symlink_target_is_not_watched (__main__.MonitorWorker.test_symlink_target_is_not_watched)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor_worker.py", line 73, in test_symlink_target_is_not_watched
+    worker = self.start(root); (outside/'private.pdf').touch()
+             ^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor_worker.py", line 31, in start
+    worker = subprocess.Popen([WORKER, '--root', str(root)], stdin=subprocess.PIPE,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1026, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1955, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/fsearch-warm-release-build/src/fsearch-monitor-worker'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.009s
+
+FAILED (errors=5)

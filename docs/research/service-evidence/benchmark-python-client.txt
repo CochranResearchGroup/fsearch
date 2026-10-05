@@ -1,0 +1,98 @@
+{
+  "workloads": [
+    {
+      "files": 10000,
+      "query": "entry00000",
+      "socket_ms": {
+        "first_ms": 24.15043599830824,
+        "p50_ms": 0.7685119999223389,
+        "p95_ms": 0.9662750017014332
+      },
+      "gate_pass": true
+    },
+    {
+      "files": 10000,
+      "query": "absent-literal",
+      "socket_ms": {
+        "first_ms": 0.8339060004800558,
+        "p50_ms": 0.867030001245439,
+        "p95_ms": 1.0748810018412769
+      },
+      "gate_pass": true
+    },
+    {
+      "files": 100000,
+      "query": "entry00000",
+      "socket_ms": {
+        "first_ms": 75.65207700099563,
+        "p50_ms": 13.265258001410984,
+        "p95_ms": 14.333456998429028
+      },
+      "gate_pass": true
+    },
+    {
+      "files": 100000,
+      "query": "absent-literal",
+      "socket_ms": {
+        "first_ms": 13.291450002725469,
+        "p50_ms": 13.768401002380415,
+        "p95_ms": 14.892380997480359
+      },
+      "gate_pass": true
+    }
+  ],
+  "limits": "Owned flat native fixtures, potentially warm OS caches; source release build. Summed observed RSS, not measured peak. No real-root/installed/MCP/default-adoption claim.",
+  "resources": [
+    {
+      "files": 10000,
+      "aggregate_rss_kib": 27288,
+      "idle_seconds": 6,
+      "idle_cpu_seconds": 0.030000000000000006,
+      "worker_identity_unchanged": true,
+      "gate_pass": true
+    },
+    {
+      "files": 100000,
+      "aggregate_rss_kib": 41512,
+      "idle_seconds": 6,
+      "idle_cpu_seconds": 0.039999999999999994,
+      "worker_identity_unchanged": true,
+      "gate_pass": true
+    }
+  ],
+  "fresh_cli_client": [
+    {
+      "files": 10000,
+      "ms": {
+        "first_ms": 59.065847999590915,
+        "p50_ms": 59.03289449997828,
+        "p95_ms": 64.8156889983511
+      },
+      "note": "Fresh Python client startup included; direct socket requests avoid it."
+    },
+    {
+      "files": 100000,
+      "ms": {
+        "first_ms": 85.43163800277398,
+        "p50_ms": 79.60318450022896,
+        "p95_ms": 101.4476519994787
+      },
+      "note": "Fresh Python client startup included; direct socket requests avoid it."
+    }
+  ],
+  "isolation": [
+    {
+      "files": 10000,
+      "indexed_root_syscalls": 0,
+      "idle_seconds": 6,
+      "root_removed": true
+    },
+    {
+      "files": 100000,
+      "indexed_root_syscalls": 0,
+      "idle_seconds": 6,
+      "root_removed": true
+    }
+  ],
+  "all_gates_pass": true
+}

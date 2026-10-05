@@ -1,0 +1,22 @@
+ninja: Entering directory `/tmp/fsearch-headless-baseline-build'
+[1/2] Compiling C object src/tests/libheadless_fault_fixture.so.p/headless_fault_fixture.c.o
+[2/2] Linking target src/tests/libheadless_fault_fixture.so
+ 1/14 fsearch:validate-metainfo           OK              0.06s
+ 2/14 fsearch:test_database               OK              0.06s
+ 3/14 fsearch:test_database_file          OK              0.05s
+ 4/14 fsearch:test_database_index_store   OK              0.05s
+ 5/14 fsearch:test_database_include       OK              0.04s
+ 6/14 fsearch:test_database_exclude       OK              0.04s
+ 7/14 fsearch:test_database_entry         OK              0.03s
+ 8/14 fsearch:test_array                  OK              0.03s
+ 9/14 fsearch:test_size_utils             OK              0.02s
+10/14 fsearch:test_time_utils             OK              0.02s
+11/14 fsearch:test_query                  OK              0.03s
+12/14 fsearch:test_string_utils           OK              0.02s
+13/14 fsearch:test_database_chunked_array OK              0.06s
+14/14 fsearch:headless_cli                OK              7.27s
+
+Ok:                14  
+Fail:              0   
+
+Full log written to /tmp/fsearch-headless-baseline-build/meson-logs/testlog.txt

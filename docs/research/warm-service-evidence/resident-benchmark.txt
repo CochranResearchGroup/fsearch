@@ -1,0 +1,108 @@
+{
+  "production_source_sha256": "f089f2c6a7bdea0702596ff19c459232c1914760ca931ff7f9509f24174d018d",
+  "prototype_sha256": "449c773815ffe0f60a28206b13ddead5245e90a78ad0ecea02d4cbbad410b311",
+  "compiler": "/usr/bin/gcc -Isrc/fsearch-cli.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -pthread -MD -MQ src/fsearch-cli.p/fsearch_cli.c.o -MF src/fsearch-cli.p/fsearch_cli.c.o.d -o src/fsearch-cli.p/fsearch_cli.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_cli.c",
+  "workloads": [
+    {
+      "files": 10000,
+      "query": "entry00000",
+      "ready_ms": 7.296219999261666,
+      "load_ms": 2.612,
+      "resident_rss_kib": 9048,
+      "resident_roundtrip": {
+        "first_ms": 0.8608040006947704,
+        "p50_ms": 0.6500829986180179,
+        "p95_ms": 0.7798469996487256
+      },
+      "matching": {
+        "first_ms": 0.725,
+        "p50_ms": 0.5345,
+        "p95_ms": 0.695
+      },
+      "oneshot_roundtrip": {
+        "first_ms": 10.413659001642372,
+        "p50_ms": 10.053227500975481,
+        "p95_ms": 13.42300900068949
+      },
+      "gate_pass": true
+    },
+    {
+      "files": 10000,
+      "query": "absent-literal",
+      "ready_ms": 7.296219999261666,
+      "load_ms": 2.612,
+      "resident_rss_kib": 9048,
+      "resident_roundtrip": {
+        "first_ms": 0.6766669976059347,
+        "p50_ms": 0.6518039990623947,
+        "p95_ms": 0.7448760006809607
+      },
+      "matching": {
+        "first_ms": 0.541,
+        "p50_ms": 0.517,
+        "p95_ms": 0.581
+      },
+      "oneshot_roundtrip": {
+        "first_ms": 9.617641997465398,
+        "p50_ms": 9.936200001902762,
+        "p95_ms": 11.937396000575973
+      },
+      "gate_pass": true
+    },
+    {
+      "files": 100000,
+      "query": "entry00000",
+      "ready_ms": 30.221272998460336,
+      "load_ms": 25.338,
+      "resident_rss_kib": 23308,
+      "resident_roundtrip": {
+        "first_ms": 11.816774000180885,
+        "p50_ms": 11.504087000503205,
+        "p95_ms": 12.53023300159839
+      },
+      "matching": {
+        "first_ms": 11.541,
+        "p50_ms": 11.317,
+        "p95_ms": 12.342
+      },
+      "oneshot_roundtrip": {
+        "first_ms": 49.14177500177175,
+        "p50_ms": 48.83994200099551,
+        "p95_ms": 55.571648001205176
+      },
+      "gate_pass": true
+    },
+    {
+      "files": 100000,
+      "query": "absent-literal",
+      "ready_ms": 30.221272998460336,
+      "load_ms": 25.338,
+      "resident_rss_kib": 23308,
+      "resident_roundtrip": {
+        "first_ms": 11.56165600332315,
+        "p50_ms": 11.68421100010164,
+        "p95_ms": 15.270150001015281
+      },
+      "matching": {
+        "first_ms": 11.342,
+        "p50_ms": 11.5005,
+        "p95_ms": 15.069
+      },
+      "oneshot_roundtrip": {
+        "first_ms": 50.814345999242505,
+        "p50_ms": 51.8091159992764,
+        "p95_ms": 66.57536199782044
+      },
+      "gate_pass": true
+    }
+  ],
+  "limits": "Pipe protocol, serial requests, no service supervision/reload/socket/queue; native fixtures and potentially warm OS caches.",
+  "isolation": {
+    "idle_seconds": 6,
+    "indexed_root_syscalls": 0,
+    "root_removed": true,
+    "eof_exit": 0,
+    "strace_follow_children": true
+  },
+  "all_gates_pass": true
+}

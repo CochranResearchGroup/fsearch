@@ -1,0 +1,14 @@
+......E........
+======================================================================
+ERROR: test_query_only_lifecycle_has_no_index_probes_or_background_threads (__main__.HeadlessCLI.test_query_only_lifecycle_has_no_index_probes_or_background_threads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_headless.py", line 183, in test_query_only_lifecycle_has_no_index_probes_or_background_threads
+    pid = int(marker.read_text())
+          ^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: ''
+
+----------------------------------------------------------------------
+Ran 15 tests in 1.327s
+
+FAILED (errors=1)

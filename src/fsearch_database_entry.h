@@ -242,4 +242,8 @@ db_entry_is_monitored_inotify(FsearchDatabaseEntry *entry);
 FsearchDatabaseEntryFlags
 db_entry_get_flags(FsearchDatabaseEntry *entry);
 
-G_DEFINE_AUTOPTR_CLEANUP_FUNC(FsearchDatabaseEntry, db_entry_free)
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(FsearchDatabaseEntry, db_entry_free)/* The snapshot store must retain allocator storage until all entry views die. */
+typedef void *(*FsearchEntryAllocator)(size_t size, void *context);
+FsearchDatabaseEntry *
+db_entry_new_in_snapshot_storage(FsearchDatabaseIndexPropertyFlags flags, const char *name,
+                                 FsearchDatabaseEntryType type, FsearchEntryAllocator allocator, void *context);

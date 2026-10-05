@@ -24,3 +24,12 @@ fsearch_database_file_load_config(const char *file_path,
 
 bool
 fsearch_database_file_save(FsearchDatabaseIndexStore *store, const char *file_path);
+
+// Load a trusted caller-validated fd without filesystem workers or event sources.
+// The caller retains fd ownership; indexed roots are never accessed by loading.
+bool
+fsearch_database_file_load_snapshot_fd(int fd, FsearchDatabaseIndexStore **store_out);
+
+// Immutable literal-query view: NAME order and parent links, without GUI indexes.
+bool
+fsearch_database_file_load_query_snapshot_fd(int fd, FsearchDatabaseIndexStore **store_out);

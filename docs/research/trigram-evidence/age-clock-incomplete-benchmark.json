@@ -1,0 +1,38 @@
+{
+  "source_commit": "5ec26bab64c267768f22208f20689708e4006024",
+  "samples": 100,
+  "prototype_only": true,
+  "boundaries": "Virtual filename records only; 256 MiB AS; 64 MiB snapshot; 500k verification and separate posting-operation cap. Matcher/stdio latency, not public socket or installed acceptance.",
+  "cases": [],
+  "resources": [
+    {
+      "ready": true,
+      "load_ms": 28.733,
+      "build_ms": 8.424,
+      "peak_rss_kib": 20640,
+      "peak_vm_kib": 60412,
+      "posting_payload_bytes": 0,
+      "posting_keys": 0,
+      "sqlite_pages_bytes": 0,
+      "files": 100000,
+      "mode": "linear",
+      "startup_within_2s": true
+    }
+  ],
+  "failures": [],
+  "hashes": {
+    "src/fsearch_headless.c": "681b8f6d0f5bef3f52c98e15dcfe48c1a7f60ec96e46aadc5a798ca7e69752a1",
+    "src/prototypes/trigram_probe.c": "b5008ebb0a648527254e188e7a603b702228af4f69323d34729774023b1ab058",
+    "src/prototypes/benchmark_trigram.py": "0f6648dd734af1b49f0b2db0465e974a8e1fff39c373aacf7161914615d75e95",
+    "docs/research/trigram-evidence/trigram-probe.generated.c": "8d350b916dfe54c83ac5f8648a41832461b1e64c79c99bb1802d1100e677bf5b",
+    "docs/research/trigram-evidence/trigram-probe": "e8a67cab6387660b7b2ec3cb09647e553521c4205c8f18c4cabe8f0ad217fb45"
+  },
+  "fixtures": [
+    {
+      "files": 100000,
+      "snapshot_bytes": 2893012,
+      "build_ms": 146.3678539985267,
+      "sha256": "ebcaa70b4e8a2fcb57a54685b8f65db6b757db0e017e6eb7fea004724bfc5d81"
+    }
+  ]
+}

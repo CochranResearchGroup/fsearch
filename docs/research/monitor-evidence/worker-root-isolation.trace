@@ -1,0 +1,11 @@
+97798 execve("/tmp/fsearch-warm-release-build/src/fsearch-monitor-worker", ["/tmp/fsearch-warm-release-build/"..., "--root", "/tmp/fsearch-monitor-trace-jrfo4"...], 0x7ffe0c70df30 /* 258 vars */) = 0
+97798 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+97798 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
+97798 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libc.so.6>
+97798 openat2(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-monitor-trace-jrfo4903/approved", {flags=O_RDONLY|O_CLOEXEC|O_PATH|O_DIRECTORY, resolve=RESOLVE_NO_SYMLINKS}, 24) = 3</tmp/fsearch-monitor-trace-jrfo4903/approved>
+97798 openat2(3</tmp/fsearch-monitor-trace-jrfo4903/approved>, ".", {flags=O_RDONLY|O_CLOEXEC|O_DIRECTORY, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 5</tmp/fsearch-monitor-trace-jrfo4903/approved>
+97798 inotify_add_watch(4<anon_inode:inotify>, "/proc/self/fd/5", IN_ATTRIB|IN_MOVED_FROM|IN_MOVED_TO|IN_CREATE|IN_DELETE|IN_DELETE_SELF|IN_MOVE_SELF|IN_UNMOUNT|IN_ONLYDIR) = 1
+97798 getdents64(5</tmp/fsearch-monitor-trace-jrfo4903/approved>, 0x5f5c2f1532d0 /* 3 entries */, 32768) = 80
+97798 openat2(5</tmp/fsearch-monitor-trace-jrfo4903/approved>, "alias", {flags=O_RDONLY|O_CLOEXEC|O_PATH, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = -1 ELOOP (Too many levels of symbolic links)
+97798 getdents64(5</tmp/fsearch-monitor-trace-jrfo4903/approved>, 0x5f5c2f1532d0 /* 0 entries */, 32768) = 0
+97798 +++ exited with 0 +++

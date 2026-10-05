@@ -1,0 +1,15 @@
+F
+======================================================================
+FAIL: test_unavailable_confinement_rejects_before_root_open (__main__.RefreshWorker.test_unavailable_confinement_rejects_before_root_open)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py", line 62, in test_unavailable_confinement_rejects_before_root_open
+    self.assertFalse(any('openat2(' in line and str(root) in line for line in trace.read_text().splitlines()),trace.read_text())
+AssertionError: True is not false : 48278 openat2(AT_FDCWD, "/tmp/fsearch-refresh-no-confinement-4ku44d6g/approved", {flags=O_RDONLY|O_CLOEXEC|O_PATH|O_DIRECTORY, resolve=RESOLVE_NO_SYMLINKS}, 24) = 3
+48278 +++ exited with 3 +++
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.074s
+
+FAILED (failures=1)

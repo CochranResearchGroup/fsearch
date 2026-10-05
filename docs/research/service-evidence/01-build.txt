@@ -1,0 +1,183 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+[0/1] Regenerating build files
+Cleaning... 0 files.
+The Meson build system
+Version: 1.12.1
+Source dir: /home/ecochran76/workspace.local/fsearch
+Build dir: /tmp/fsearch-warm-release-build
+Build type: native build
+Project name: fsearch
+Project version: 0.3
+C compiler for the host machine: /usr/bin/gcc (gcc 13.3.0 "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0")
+C linker for the host machine: /usr/bin/gcc ld.bfd 2.42
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Checking if "malloc_trim is supported on the build platform" runs: YES
+Checking if "fanotify is supported by the build platform and works without CAP_SYS_ADMIN capabilities" runs: YES
+Checking if "inotify is supported by the build platform" runs: YES
+Configuring io.github.cboxdoerfer.FSearch.desktop.in using configuration
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Program desktop-file-validate found: NO
+Program appstreamcli found: YES (/usr/bin/appstreamcli)
+Could not find file LINGUAS in /home/ecochran76/workspace.local/fsearch/help
+Program itstool found: YES (/home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/itstool)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Library m found: YES
+Dependency gio-unix-2.0 for host machine found: YES 2.80.0 (cached)
+Dependency gtk+-3.0 for host machine found: YES 3.24.41 (cached)
+Dependency libpcre2-8 for host machine found: YES 10.42 (cached)
+Dependency icu-uc for host machine found: YES 74.2 (cached)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+../../home/ecochran76/workspace.local/fsearch/src/meson.build:124: WARNING: Project targets '>= 0.46.0' but uses feature introduced in '0.47.0,': install_mode arg in configure_file.
+../../home/ecochran76/workspace.local/fsearch/src/meson.build:124: WARNING: Project targets '>= 0.46.0' but uses feature introduced in '0.47.0': copy arg in configure_file.
+../../home/ecochran76/workspace.local/fsearch/src/meson.build:124: WARNING: Project targets '>= 0.46.0' but uses feature introduced in '0.50.0': install arg in configure_file.
+Library dl found: YES
+Program python3 found: YES (/home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3)
+Program msginit found: YES (/usr/bin/msginit)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program xgettext found: YES (/usr/bin/xgettext)
+Configuring config.h using configuration
+Build targets in project: 73
+WARNING: Project specifies a minimum meson_version '>= 0.46.0' but uses features which were added in newer versions:
+ * 0.47.0: {'copy arg in configure_file'}
+ * 0.47.0,: {'install_mode arg in configure_file'}
+ * 0.50.0: {'install arg in configure_file'}
+NOTICE: Future-deprecated features used:
+ * 0.56.0: {'meson.source_root'}
+
+fsearch 0.3
+
+  User defined options
+    buildtype: release
+
+Found ninja-1.13.2.git.kitware.jobserver-pipe-1 at /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja
+[1/106] Compiling C object src/tests/test_time_utils.p/meson-generated_.._.._ui_resources.c.o
+[2/106] Compiling C object src/tests/test_size_utils.p/meson-generated_.._.._icon_resources.c.o
+[3/106] Compiling C object src/fsearch-worker.p/meson-generated_.._icon_resources.c.o
+[4/106] Compiling C object src/tests/test_size_utils.p/test_size_utils.c.o
+[5/106] Compiling C object src/tests/test_query.p/meson-generated_.._.._icon_resources.c.o
+[6/106] Compiling C object src/tests/test_string_utils.p/test_string_utils.c.o
+[7/106] Compiling C object src/tests/test_time_utils.p/meson-generated_.._.._icon_resources.c.o
+[8/106] Compiling C object src/fsearch.p/meson-generated_.._icon_resources.c.o
+[9/106] Compiling C object src/tests/test_query.p/meson-generated_.._.._ui_resources.c.o
+[10/106] Compiling C object src/tests/test_array.p/meson-generated_.._.._ui_resources.c.o
+[11/106] Compiling C object src/tests/test_size_utils.p/meson-generated_.._.._ui_resources.c.o
+[12/106] Compiling C object src/tests/test_time_utils.p/test_time_utils.c.o
+[13/106] Compiling C object src/tests/test_string_utils.p/meson-generated_.._.._icon_resources.c.o
+[14/106] Compiling C object src/tests/test_database_entry.p/meson-generated_.._.._icon_resources.c.o
+[15/106] Compiling C object src/tests/test_array.p/test_array.c.o
+[16/106] Compiling C object src/tests/test_database_include.p/meson-generated_.._.._icon_resources.c.o
+[17/106] Compiling C object src/tests/test_database_entry.p/meson-generated_.._.._ui_resources.c.o
+[18/106] Compiling C object src/tests/test_array.p/meson-generated_.._.._icon_resources.c.o
+[19/106] Compiling C object src/fsearch-worker.p/fsearch_worker.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_worker.c: In function ‘read_all’:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_worker.c:15:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   15 |         if (n <= 0) return false; p += n; size -= n; }
+      |         ^~
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_worker.c:15:35: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   15 |         if (n <= 0) return false; p += n; size -= n; }
+      |                                   ^
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_worker.c: In function ‘write_all’:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_worker.c:21:9: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+   21 |         if (n <= 0) return false; p += n; size -= n; }
+      |         ^~
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_worker.c:21:35: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+   21 |         if (n <= 0) return false; p += n; size -= n; }
+      |                                   ^
+[20/106] Compiling C object src/fsearch-worker.p/meson-generated_.._ui_resources.c.o
+[21/106] Compiling C object src/tests/test_string_utils.p/meson-generated_.._.._ui_resources.c.o
+[22/106] Compiling C object src/fsearch.p/meson-generated_.._ui_resources.c.o
+[23/106] Compiling C object src/tests/test_database_exclude.p/meson-generated_.._.._ui_resources.c.o
+[24/106] Compiling C object src/tests/test_database_include.p/meson-generated_.._.._ui_resources.c.o
+[25/106] Compiling C object src/tests/test_database_exclude.p/meson-generated_.._.._icon_resources.c.o
+[26/106] Compiling C object src/fsearch.p/main.c.o
+[27/106] Compiling C object src/tests/test_database_index_store.p/meson-generated_.._.._ui_resources.c.o
+[28/106] Building translation po/ar/LC_MESSAGES/fsearch-ar.mo
+[29/106] Compiling C object src/tests/test_database_include.p/test_database_include.c.o
+[30/106] Compiling C object src/tests/test_database_exclude.p/test_database_exclude.c.o
+[31/106] Building translation po/bg/LC_MESSAGES/fsearch-bg.mo
+[32/106] Compiling C object src/tests/test_query.p/test_query.c.o
+[33/106] Building translation po/ca/LC_MESSAGES/fsearch-ca.mo
+[34/106] Compiling C object src/tests/test_database_chunked_array.p/meson-generated_.._.._icon_resources.c.o
+[35/106] Building translation po/de/LC_MESSAGES/fsearch-de.mo
+[36/106] Building translation po/el/LC_MESSAGES/fsearch-el.mo
+[37/106] Building translation po/en_GB/LC_MESSAGES/fsearch-en_GB.mo
+[38/106] Compiling C object src/tests/test_database_chunked_array.p/meson-generated_.._.._ui_resources.c.o
+[39/106] Compiling C object src/tests/test_database_index_store.p/meson-generated_.._.._icon_resources.c.o
+[40/106] Building translation po/es/LC_MESSAGES/fsearch-es.mo
+[41/106] Building translation po/et/LC_MESSAGES/fsearch-et.mo
+[42/106] Building translation po/eu/LC_MESSAGES/fsearch-eu.mo
+[43/106] Building translation po/frc/LC_MESSAGES/fsearch-frc.mo
+[44/106] Building translation po/fi/LC_MESSAGES/fsearch-fi.mo
+[45/106] Building translation po/fr/LC_MESSAGES/fsearch-fr.mo
+[46/106] Building translation po/ga/LC_MESSAGES/fsearch-ga.mo
+[47/106] Compiling C object src/tests/test_database_file.p/meson-generated_.._.._icon_resources.c.o
+[48/106] Building translation po/gl/LC_MESSAGES/fsearch-gl.mo
+[49/106] Building translation po/he/LC_MESSAGES/fsearch-he.mo
+[50/106] Building translation po/hu/LC_MESSAGES/fsearch-hu.mo
+[51/106] Building translation po/id/LC_MESSAGES/fsearch-id.mo
+[52/106] Building translation po/ie/LC_MESSAGES/fsearch-ie.mo
+[53/106] Building translation po/it/LC_MESSAGES/fsearch-it.mo
+[54/106] Building translation po/ja/LC_MESSAGES/fsearch-ja.mo
+[55/106] Building translation po/ka/LC_MESSAGES/fsearch-ka.mo
+[56/106] Building translation po/ko/LC_MESSAGES/fsearch-ko.mo
+[57/106] Building translation po/lt/LC_MESSAGES/fsearch-lt.mo
+[58/106] Building translation po/mr/LC_MESSAGES/fsearch-mr.mo
+[59/106] Building translation po/nb_NO/LC_MESSAGES/fsearch-nb_NO.mo
+[60/106] Building translation po/pl/LC_MESSAGES/fsearch-pl.mo
+[61/106] Compiling C object src/tests/test_database.p/meson-generated_.._.._icon_resources.c.o
+[62/106] Compiling C object src/tests/test_database_file.p/meson-generated_.._.._ui_resources.c.o
+[63/106] Building translation po/nl/LC_MESSAGES/fsearch-nl.mo
+[64/106] Building translation po/prs/LC_MESSAGES/fsearch-prs.mo
+[65/106] Building translation po/pt/LC_MESSAGES/fsearch-pt.mo
+[66/106] Building translation po/pt_BR/LC_MESSAGES/fsearch-pt_BR.mo
+[67/106] Building translation po/ro/LC_MESSAGES/fsearch-ro.mo
+[68/106] Building translation po/ru/LC_MESSAGES/fsearch-ru.mo
+[69/106] Building translation po/sk/LC_MESSAGES/fsearch-sk.mo
+[70/106] Building translation po/sv/LC_MESSAGES/fsearch-sv.mo
+[71/106] Compiling C object src/libfsearch.a.p/fsearch_headless.c.o
+[72/106] Compiling C object src/tests/test_database.p/meson-generated_.._.._ui_resources.c.o
+[73/106] Building translation po/te/LC_MESSAGES/fsearch-te.mo
+[74/106] Building translation po/tr/LC_MESSAGES/fsearch-tr.mo
+[75/106] Building translation po/tzm/LC_MESSAGES/fsearch-tzm.mo
+[76/106] Building translation po/ur/LC_MESSAGES/fsearch-ur.mo
+[77/106] Building translation po/uk/LC_MESSAGES/fsearch-uk.mo
+[78/106] Building translation po/zh_CN/LC_MESSAGES/fsearch-zh_CN.mo
+[79/106] Building translation po/zgh/LC_MESSAGES/fsearch-zgh.mo
+[80/106] Building translation po/zh_Hant/LC_MESSAGES/fsearch-zh_Hant.mo
+[81/106] Linking static target src/libfsearch.a
+[82/106] Compiling C object src/fsearch-cli.p/fsearch_cli.c.o
+[83/106] Merging translations for data/io.github.cboxdoerfer.FSearch.desktop
+[84/106] Linking target src/tests/test_database_include
+[85/106] Linking target src/tests/test_array
+[86/106] Merging translations for data/io.github.cboxdoerfer.FSearch.metainfo.xml
+[87/106] Linking target src/tests/test_size_utils
+[88/106] Linking target src/tests/test_time_utils
+[89/106] Compiling C object src/tests/test_database_file.p/test_database_file.c.o
+[90/106] Linking target src/tests/snapshot_fixture
+[91/106] Compiling C object src/tests/test_database_index_store.p/test_database_index_store.c.o
+[92/106] Linking target src/tests/test_database_exclude
+[93/106] Linking target src/tests/test_string_utils
+[94/106] Linking target src/tests/test_query
+[95/106] Linking target src/fsearch-worker
+[96/106] Compiling C object src/tests/test_database_entry.p/test_database_entry.c.o
+[97/106] Compiling C object src/tests/test_database.p/test_database.c.o
+[98/106] Linking target src/fsearch-cli
+[99/106] Linking target src/fsearch
+[100/106] Linking target src/tests/test_database_file
+[101/106] Linking target src/tests/test_database_entry
+[102/106] Linking target src/tests/test_database_index_store
+[103/106] Linking target src/tests/test_database
+[104/106] Compiling C object src/tests/test_database_chunked_array.p/test_database_chunked_array.c.o
+[105/106] Linking target src/tests/test_database_chunked_array
+INFO: autodetecting backend as ninja
+INFO: calculating backend command to run: /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja -C /tmp/fsearch-warm-release-build

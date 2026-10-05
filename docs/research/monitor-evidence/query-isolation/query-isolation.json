@@ -1,0 +1,123 @@
+{
+  "owned_fixtures_only": true,
+  "runtime": "/tmp/fsearch-warm-release-build/src",
+  "queries": [
+    {
+      "label": "before-monitor",
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1,
+        "snapshot": {
+          "identity": "2096:6597562:272:1791168680:928464630:1791168680:972464630",
+          "mtime_unix": 1791168680,
+          "age_seconds": 1,
+          "roots": [
+            {
+              "path": "/tmp/fsearch-monitor-query-owned-zr9m6985/approved",
+              "path_bytes_base64": null,
+              "last_scan_unix": 1791168680,
+              "age_seconds": 1,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-zr9m6985/approved/invoice.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "28015-48603888716-2211564351"
+      }
+    },
+    {
+      "label": "while-monitoring",
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 2,
+        "snapshot": {
+          "identity": "2096:6595561:296:1791168681:878864627:1791168681:905264626",
+          "mtime_unix": 1791168681,
+          "age_seconds": 1,
+          "roots": [
+            {
+              "path": "/tmp/fsearch-monitor-query-owned-zr9m6985/approved",
+              "path_bytes_base64": null,
+              "last_scan_unix": 1791168681,
+              "age_seconds": 1,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-zr9m6985/approved/invoice-new.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-zr9m6985/approved/invoice.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "28079-48604491886-3952207733"
+      }
+    },
+    {
+      "label": "after-root-removal",
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 2,
+        "snapshot": {
+          "identity": "2096:6595561:296:1791168681:878864627:1791168681:905264626",
+          "mtime_unix": 1791168681,
+          "age_seconds": 2,
+          "roots": [
+            {
+              "path": "/tmp/fsearch-monitor-query-owned-zr9m6985/approved",
+              "path_bytes_base64": null,
+              "last_scan_unix": 1791168681,
+              "age_seconds": 2,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-zr9m6985/approved/invoice-new.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-zr9m6985/approved/invoice.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "28138-48605585294-361285463"
+      }
+    }
+  ],
+  "offline_failure": {
+    "schema_version": 1,
+    "status": "error",
+    "reason": "root_offline",
+    "root": "/tmp/fsearch-monitor-query-owned-zr9m6985/approved",
+    "snapshot_id": "2096:6595561:296:1791168681:878864627:1791168681:905264626",
+    "error": {
+      "code": "root_offline"
+    }
+  },
+  "all_query_process_root_probes": 0,
+  "negative_control_detected": true,
+  "service_exit": 0
+}

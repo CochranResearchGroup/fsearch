@@ -1,0 +1,47 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+ninja: no work to do.
+ 1/15 fsearch:validate-metainfo           OK              0.07s
+ 2/15 fsearch:test_database               OK              0.07s
+ 3/15 fsearch:test_database_file          OK              0.07s
+ 4/15 fsearch:test_database_chunked_array OK              0.06s
+ 5/15 fsearch:test_database_index_store   OK              0.06s
+ 6/15 fsearch:test_database_include       OK              0.05s
+ 7/15 fsearch:test_database_exclude       OK              0.05s
+ 8/15 fsearch:test_database_entry         OK              0.05s
+ 9/15 fsearch:test_array                  OK              0.04s
+10/15 fsearch:test_size_utils             OK              0.03s
+11/15 fsearch:test_time_utils             OK              0.02s
+12/15 fsearch:test_query                  OK              0.04s
+13/15 fsearch:test_string_utils           OK              0.03s
+14/15 fsearch:headless_cli                FAIL            7.21s   exit status 1
+>>> LD_LIBRARY_PATH=/tmp/fsearch-warm-release-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=84 /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3 /tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_headless.py /tmp/fsearch-warm-release-build/src/fsearch-cli /tmp/fsearch-warm-release-build/src/tests/snapshot_fixture /tmp/fsearch-warm-release-build/src/tests/libheadless_fault_fixture.so
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+.........F.....
+======================================================================
+FAIL: test_result_and_work_limits_report_incomplete_results (__main__.HeadlessCLI.test_result_and_work_limits_report_incomplete_results)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_headless.py", line 83, in test_result_and_work_limits_report_incomplete_results
+    self.assertEqual(work['status'], 'work_limit')
+AssertionError: 'ok' != 'work_limit'
+- ok
++ work_limit
+
+
+----------------------------------------------------------------------
+Ran 15 tests in 7.156s
+
+FAILED (failures=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+15/15 fsearch:warm_service                OK             14.72s
+
+Summary of Failures:
+
+14/15 fsearch:headless_cli                FAIL            7.21s   exit status 1
+
+Ok:                14  
+Fail:              1   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

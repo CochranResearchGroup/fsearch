@@ -1,0 +1,24 @@
+test_repeated_unicode_queries_keep_resident_worker_memory_bounded (<run_path>.WarmService.test_repeated_unicode_queries_keep_resident_worker_memory_bounded) ... FAIL
+
+======================================================================
+FAIL: test_repeated_unicode_queries_keep_resident_worker_memory_bounded (<run_path>.WarmService.test_repeated_unicode_queries_keep_resident_worker_memory_bounded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "src/tests/test_service.py", line 56, in test_repeated_unicode_queries_keep_resident_worker_memory_bounded
+    for _ in range(5): search()
+                       ^^^^^^^^
+  File "src/tests/test_service.py", line 55, in search
+    self.assertEqual([row['path'] for row in payload['results']],[str(root/'École.pdf')])
+AssertionError: Lists differ: [] != ['/tmp/fsearch-service-fixture-9plyq9ah/owned/École.pdf']
+
+Second list contains 1 additional elements.
+First extra element 0:
+'/tmp/fsearch-service-fixture-9plyq9ah/owned/École.pdf'
+
+- []
++ ['/tmp/fsearch-service-fixture-9plyq9ah/owned/École.pdf']
+
+----------------------------------------------------------------------
+Ran 1 test in 0.160s
+
+FAILED (failures=1)

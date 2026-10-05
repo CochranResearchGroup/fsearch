@@ -7,4 +7,6 @@ typedef enum FsearchDatabaseEntryFlags {
     FSEARCH_DATABASE_ENTRY_FLAG_MONITORED_INOTIFY = 1 << 3,
     FSEARCH_DATABASE_ENTRY_FLAG_MONITORED_FANOTIFY = 1 << 4,
     FSEARCH_DATABASE_ENTRY_FLAG_MONITORED_FAILED = 1 << 5,
+    // Immutable snapshot arena owns storage; ordinary entry destruction skips free.
+    FSEARCH_DATABASE_ENTRY_FLAG_SNAPSHOT_STORAGE = 1 << 6,
 } FsearchDatabaseEntryFlags;

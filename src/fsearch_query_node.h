@@ -145,3 +145,6 @@ fsearch_query_node_new_contenttype(const char *search_term, FsearchQueryFlags fl
 
 FsearchQueryNode *
 fsearch_query_node_new(const char *search_term, FsearchQueryFlags flags);
+// Cached literal substring matching; no regex, functions, macros or metadata probes.
+FsearchQueryNode *
+fsearch_query_node_new_literal(const char *search_term, FsearchQueryFlags flags);

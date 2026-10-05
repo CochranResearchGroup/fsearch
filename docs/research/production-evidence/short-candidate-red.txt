@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_short_substring_reaches_late_name_with_small_verification_budget (__main__.WarmService.test_short_substring_reaches_late_name_with_small_verification_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 88, in test_short_substring_reaches_late_name_with_small_verification_budget
+    self.assertTrue(payload['complete'],payload)
+AssertionError: False is not true : {'schema_version': 1, 'status': 'work_limit', 'complete': False, 'truncated': True, 'visibility': 'cached', 'examined': 2, 'snapshot': {'identity': '2096:6530725:201548:1791155358:653042616:1791155358:661842616', 'mtime_unix': 1791155358, 'age_seconds': 0, 'roots': [{'path': '/tmp/fsearch-service-fixture-4qysp0ig/owned', 'path_bytes_base64': None, 'last_scan_unix': 1791155358, 'age_seconds': 0, 'last_error_code': 0}]}, 'results': [], 'request_id': 'short-candidate'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.523s
+
+FAILED (failures=1)

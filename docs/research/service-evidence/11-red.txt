@@ -1,0 +1,21 @@
+F
+======================================================================
+FAIL: test_empty_literal_extension_matches_direct_cli_semantics (__main__.WarmService.test_empty_literal_extension_matches_direct_cli_semantics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 279, in test_empty_literal_extension_matches_direct_cli_semantics
+    self.assertEqual(json.loads(warm.stdout)['results'],json.loads(direct.stdout)['results'])
+AssertionError: Lists differ: [{'path': '/tmp/fsearch-service-fixture-if[49 chars]one}] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+{'path': '/tmp/fsearch-service-fixture-ifbi2tzb/owned/invoice.pdf', 'path_bytes_base64': None}
+
++ []
+- [{'path': '/tmp/fsearch-service-fixture-ifbi2tzb/owned/invoice.pdf',
+-   'path_bytes_base64': None}]
+
+----------------------------------------------------------------------
+Ran 1 test in 0.187s
+
+FAILED (failures=1)

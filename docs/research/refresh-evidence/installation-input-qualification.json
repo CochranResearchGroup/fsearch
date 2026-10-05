@@ -1,0 +1,23 @@
+{
+  "source_commit": "3d0bfaf2312b2e9bf4536c8592cc8aff769094ca",
+  "source_qualified": true,
+  "review_artifact": "docs/research/refresh-evidence/source-review.md",
+  "regression_sha256": "eea7bd67e6c69bd15f21e5c8a44a51992e471a182faece7f919a93b20b08a917",
+  "sources": {
+    "src/fsearch_cli.c": "c0720d0693daa73e35003c1af76601ab9f0cd76c489e47bd641a8e980b567fc7",
+    "src/fsearch_worker.c": "83fe96180d1282819413b2e4acd4b691e7c3f9cf915820d2a6ddf02b9e60bee9",
+    "src/fsearch_service.py": "63d1bd0c3957ee372901536a8006d6a33120cf14502573f1f843fc7d485eb816",
+    "src/fsearch_refresh.py": "a587ab37b8cfb62c1bc03ba22781cf77cd9e8b4d0fb487081a31deee864de4d3",
+    "src/fsearch_refresh_worker.c": "95bad8e51eb6169d8d0a3eaa7207d8b94144e849620780ebc8103d40a1ddca05",
+    "src/fsearch_database_index_store.c": "7ba35d1fca9f3ad5167440367876d4a529124b4af758ef530a76b1f45d9e7484",
+    "src/meson.build": "734e5c309c0a2bcc2d1b6905043426a76da4e650719630512f27ebd11d0af8d1"
+  },
+  "artifacts": {
+    "fsearch-cli": "cab75a4f8e18df0934f315cdfb1b27c42c49df3a7cc8a564502e9f6c3411bcd0",
+    "fsearch-worker": "e36db0e5a91e47120d477e0b27743c07a3824ed83e99393a8956b443a849b979",
+    "fsearch-service": "63d1bd0c3957ee372901536a8006d6a33120cf14502573f1f843fc7d485eb816",
+    "fsearch-refresh": "a587ab37b8cfb62c1bc03ba22781cf77cd9e8b4d0fb487081a31deee864de4d3",
+    "fsearch-refresh-worker": "4759b13bd62938f0f08618c07aeba7079e0b238e9d6cb74d635d7c22cd804195"
+  },
+  "installed_acceptance": false
+}

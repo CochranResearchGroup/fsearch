@@ -1,0 +1,41 @@
+{
+  "fixture_files": 10000,
+  "query": "entry0000",
+  "measurements": {
+    "fsearch_cli": {
+      "first_invocation_ms": 14.75951499742223,
+      "subsequent_processes": 30,
+      "p50_ms": 13.416178000625223,
+      "p95_ms": 16.765971999120666,
+      "max_process_rss_kib": 8320,
+      "results_correct": true
+    },
+    "file_searcher_sqlite_process": {
+      "first_invocation_ms": 47.03210500156274,
+      "subsequent_processes": 30,
+      "p50_ms": 42.64422450069105,
+      "p95_ms": 46.46541699912632,
+      "max_process_rss_kib": 18240,
+      "results_correct": true
+    },
+    "plocate_fixture_only": {
+      "first_invocation_ms": 4.522719998931279,
+      "subsequent_processes": 30,
+      "p50_ms": 4.376557999421493,
+      "p95_ms": 4.974331000994425,
+      "max_process_rss_kib": 5120,
+      "results_correct": true
+    },
+    "file_searcher_sqlite_in_process": {
+      "p50_ms": 0.24764899899309967,
+      "p95_ms": 0.31392500022775494
+    }
+  },
+  "fsearch_first_slice_gate_pass": true,
+  "fsearch_binary_sha256": "5ed80640638d29968bfc0ce96c71406ee52c2d475060f8bcc35c8cb0ca1af96c",
+  "fsearch_snapshot_sha256": "11f4f0780a63faf1143cfcb17d15bd02b67ec800288b6646fa7de32c5a0acec0",
+  "sqlite_python": "/home/ecochran76/.local/share/file-searcher/runtimes/19aabc5a20a9f35b07c8c3cfa2fe7b7ab5283f8b/python-3.12/bin/python",
+  "plocate_version": "plocate 1.1.19",
+  "source_base": "d531eb3b50560fb7d9ba731787100d827f4e1e8a",
+  "limits": "Separate fresh processes, potentially warm OS caches; tiny flat native fixture; no full MCP, real-root or adoption claim."
+}

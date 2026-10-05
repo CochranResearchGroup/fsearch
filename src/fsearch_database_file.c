@@ -1,6 +1,10 @@
 #define G_LOG_DOMAIN "fsearch-database-file"
 
 #include "fsearch_database_file.h"
+#if defined(__linux__)
+#include <sys/mman.h>
+#include <unistd.h>
+#endif
 
 #include "fsearch_array.h"
 #include "fsearch_database_chunked_array.h"
@@ -158,6 +162,49 @@ cursor_read(DatabaseFileReadCursor *cursor, void *dest, size_t size) {
     cursor->ptr += size;
 }
 
+/* Parsed names and attributes are copied into owned entries. Release only
+ * whole, already-consumed interior pages; keep allocator metadata/partial pages.
+ * This hint is confined to immutable FD loads and correctness ignores failure. */
+static void cursor_discard_consumed(const DatabaseFileReadCursor *cursor, uintptr_t *discarded, size_t page_size) {
+#if defined(__linux__)
+    if (!page_size) return;
+    uintptr_t end = (uintptr_t)cursor->ptr / page_size * page_size;
+    if (end > *discarded && end - *discarded >= 1024u * 1024u) {
+        madvise((void *)*discarded, end - *discarded, MADV_DONTNEED);
+        *discarded = end;
+    }
+#else
+    (void)cursor; (void)discarded; (void)page_size;
+#endif
+}
+
+typedef struct {
+    GPtrArray *blocks;
+    uint8_t *next;
+    size_t remaining;
+    size_t reserved;
+} SnapshotEntryArena;
+#define SNAPSHOT_ENTRY_ARENA_LIMIT (96u * 1024u * 1024u)
+static void snapshot_entry_arena_clear(SnapshotEntryArena *arena) {
+    g_clear_pointer(&arena->blocks, g_ptr_array_unref);
+}
+G_DEFINE_AUTO_CLEANUP_CLEAR_FUNC(SnapshotEntryArena, snapshot_entry_arena_clear)
+static void *snapshot_entry_allocate(size_t size, void *context) {
+    SnapshotEntryArena *arena = context;
+    size = (size + 7) & ~(size_t)7;
+    if (size > arena->remaining) {
+        size_t block_size = MAX(size, 1024u * 1024u);
+        if (block_size > SNAPSHOT_ENTRY_ARENA_LIMIT - arena->reserved) return NULL;
+        uint8_t *block = g_try_malloc(block_size);
+        if (!block) return NULL;
+        g_ptr_array_add(arena->blocks, block);
+        arena->next = block; arena->remaining = block_size; arena->reserved += block_size;
+    }
+    void *result = arena->next;
+    arena->next += size; arena->remaining -= size;
+    return result;
+}
+
 // region Database-File-Read
 
 static void
@@ -165,7 +212,8 @@ database_file_load_entry(DatabaseFileReadCursor *cursor,
                          FsearchDatabaseIndexPropertyFlags index_flags,
                          GString *previous_entry_name,
                          FsearchDatabaseEntry **entry_out,
-                         FsearchDatabaseEntryType type) {
+                         FsearchDatabaseEntryType type,
+                         SnapshotEntryArena *arena) {
     // name_offset: character position after which previous_entry_name and entry_name differ
     uint16_t name_offset = 0;
     cursor_read(cursor, &name_offset, sizeof(name_offset));
@@ -193,7 +241,9 @@ database_file_load_entry(DatabaseFileReadCursor *cursor,
         cursor->ptr += name_len;
     }
 
-    *entry_out = db_entry_new(index_flags, previous_entry_name->str, NULL, type);
+    *entry_out = arena ? db_entry_new_in_snapshot_storage(index_flags, previous_entry_name->str, type, snapshot_entry_allocate, arena)
+                       : db_entry_new(index_flags, previous_entry_name->str, NULL, type);
+    if (!*entry_out) { cursor->error = true; return; }
     if ((index_flags & DATABASE_INDEX_PROPERTY_FLAG_SIZE) != 0) {
         // size: size of file/folder
         int64_t size = 0;
@@ -281,7 +331,8 @@ database_file_load_folders(FILE *fp,
                            FsearchDatabaseIndexPropertyFlags index_flags,
                            DynamicArray *folders,
                            uint32_t num_folders,
-                           uint64_t folder_block_size) {
+                           uint64_t folder_block_size,
+                           SnapshotEntryArena *arena) {
     g_autoptr(GString) previous_entry_name = g_string_sized_new(1024);
 
     g_autofree uint8_t *folder_block = calloc(folder_block_size + 1, sizeof(uint8_t));
@@ -299,7 +350,7 @@ database_file_load_folders(FILE *fp,
     for (idx = 0; idx < num_folders; idx++) {
         g_autoptr(FsearchDatabaseEntry) folder = NULL;
 
-        database_file_load_entry(&cursor, index_flags, previous_entry_name, &folder, DATABASE_ENTRY_TYPE_FOLDER);
+        database_file_load_entry(&cursor, index_flags, previous_entry_name, &folder, DATABASE_ENTRY_TYPE_FOLDER, arena);
         // parent_idx: index of parent folder
         uint32_t parent_idx = 0;
         cursor_read(&cursor, &parent_idx, sizeof(parent_idx));
@@ -347,7 +398,9 @@ database_file_load_files(FILE *fp,
                          DynamicArray *folders,
                          DynamicArray *files,
                          uint32_t num_files,
-                         uint64_t file_block_size) {
+                         uint64_t file_block_size,
+                         bool snapshot_only,
+                         SnapshotEntryArena *arena) {
     g_autoptr(GString) previous_entry_name = g_string_sized_new(1024);
     g_autofree uint8_t *file_block = calloc(file_block_size + 1, sizeof(uint8_t));
     g_return_val_if_fail(file_block, false);
@@ -361,12 +414,18 @@ database_file_load_files(FILE *fp,
 
     // Initialize the cursor with the allocated block
     DatabaseFileReadCursor cursor = {file_block, file_block + file_block_size, false};
+    size_t page_size = 0;
+#if defined(__linux__)
+    long system_page_size = sysconf(_SC_PAGESIZE);
+    if (snapshot_only && system_page_size > 0) page_size = system_page_size;
+#endif
+    uintptr_t discarded = page_size ? ((uintptr_t)file_block / page_size + 1) * page_size : 0;
 
     // load files
     uint32_t idx = 0;
     for (idx = 0; idx < num_files; idx++) {
         g_autoptr(FsearchDatabaseEntry) entry = NULL;
-        database_file_load_entry(&cursor, index_flags, previous_entry_name, &entry, DATABASE_ENTRY_TYPE_FILE);
+        database_file_load_entry(&cursor, index_flags, previous_entry_name, &entry, DATABASE_ENTRY_TYPE_FILE, arena);
 
         // parent_idx: index of parent folder
         uint32_t parent_idx = 0;
@@ -386,6 +445,7 @@ database_file_load_files(FILE *fp,
         db_entry_set_parent_update_childcount(entry, parent);
 
         darray_add_item(files, g_steal_pointer(&entry));
+        if (snapshot_only) cursor_discard_consumed(&cursor, &discarded, page_size);
     }
     // fail if we didn't read the correct number of files
     if (idx != num_files) {
@@ -425,12 +485,49 @@ database_file_load_sorted_entries(FILE *fp, DynamicArray *src, uint32_t num_src_
     return true;
 }
 
+/* The saved PATH permutation is commonly the canonical stream order. Read
+ * bounded batches and share its pointer array only after checking every index.
+ * An arbitrary valid permutation still gets the original separate array. */
+static bool database_file_load_snapshot_path_entries(FILE *fp, DynamicArray *src, DynamicArray **out) {
+    uint32_t count = darray_get_num_items(src), indexes[4096];
+    g_autoptr(DynamicArray) copy = NULL;
+    for (uint32_t first = 0; first < count;) {
+        uint32_t batch = MIN(count - first, (uint32_t)G_N_ELEMENTS(indexes));
+        if (fread(indexes, sizeof(uint32_t), batch, fp) != batch) return false;
+        for (uint32_t j = 0; j < batch; ++j) {
+            uint32_t rank = first + j, idx = indexes[j];
+            if (idx >= count) return false;
+            if (!copy && idx != rank) {
+                copy = darray_new(count);
+                for (uint32_t prior = 0; prior < rank; ++prior) darray_add_item(copy, darray_get_item(src, prior));
+            }
+            if (copy) darray_add_item(copy, darray_get_item(src, idx));
+        }
+        first += batch;
+    }
+    *out = copy ? g_steal_pointer(&copy) : darray_ref(src);
+    return true;
+}
+
+static bool snapshot_discard_permutation(FILE *fp, uint32_t count) {
+    uint32_t indexes[4096];
+    for (uint32_t first = 0; first < count;) {
+        uint32_t batch = MIN(count - first, (uint32_t)G_N_ELEMENTS(indexes));
+        if (fread(indexes, sizeof(uint32_t), batch, fp) != batch) return false;
+        for (uint32_t i = 0; i < batch; ++i) if (indexes[i] >= count) return false;
+        first += batch;
+    }
+    return true;
+}
+
 static bool
 database_file_load_sorted_arrays(FILE *fp,
                                  DynamicArray **sorted_folders,
                                  DynamicArray **sorted_files,
                                  DynamicArray *folders,
-                                 DynamicArray *files) {
+                                 DynamicArray *files,
+                                 bool snapshot_only,
+                                 bool query_only) {
     uint32_t num_sorted_arrays = 0;
 
     if (!database_file_read_element(&num_sorted_arrays, 4, fp, NULL)) {
@@ -450,17 +547,25 @@ database_file_load_sorted_arrays(FILE *fp,
             return false;
         }
 
+        if (query_only && sorted_array_id != DATABASE_INDEX_PROPERTY_NAME) {
+            if (!snapshot_discard_permutation(fp, darray_get_num_items(folders))
+                || !snapshot_discard_permutation(fp, darray_get_num_items(files))) return false;
+            continue;
+        }
         const uint32_t num_folders = darray_get_num_items(folders);
-        g_autoptr(DynamicArray) sorted_folders_array = darray_new(num_folders);
-        if (!database_file_load_sorted_entries(fp, folders, num_folders, sorted_folders_array)) {
+        bool share_path = snapshot_only && sorted_array_id == DATABASE_INDEX_PROPERTY_PATH;
+        g_autoptr(DynamicArray) sorted_folders_array = share_path ? NULL : darray_new(num_folders);
+        if (!(share_path ? database_file_load_snapshot_path_entries(fp, folders, &sorted_folders_array)
+                        : database_file_load_sorted_entries(fp, folders, num_folders, sorted_folders_array))) {
             g_debug("[db_load] failed to load sorted folder indexes: %d", sorted_array_id);
             return false;
         }
         sorted_folders[sorted_array_id] = g_steal_pointer(&sorted_folders_array);
 
         const uint32_t num_files = darray_get_num_items(files);
-        g_autoptr(DynamicArray) sorted_files_array = darray_new(num_files);
-        if (!database_file_load_sorted_entries(fp, files, num_files, sorted_files_array)) {
+        g_autoptr(DynamicArray) sorted_files_array = share_path ? NULL : darray_new(num_files);
+        if (!(share_path ? database_file_load_snapshot_path_entries(fp, files, &sorted_files_array)
+                        : database_file_load_sorted_entries(fp, files, num_files, sorted_files_array))) {
             g_debug("[db_load] failed to load sorted file indexes: %d", sorted_array_id);
             return false;
         }
@@ -1221,22 +1326,31 @@ load_fail:
     return false;
 }
 
-bool
-fsearch_database_file_load(const char *file_path,
-                           void (*status_cb)(const char *),
-                           FsearchDatabaseIndexStore **store_out,
-                           FsearchDatabaseIncludeManager *config_include_manager,
-                           FsearchDatabaseExcludeManager *config_exclude_manager,
-                           FsearchDatabaseIndexStoreEventFunc event_func,
-                           void *event_func_user_data) {
-    g_return_val_if_fail(file_path, false);
-    g_return_val_if_fail(store_out, false);
+static bool snapshot_paths_have_root(DynamicArray *entries, const char *root) {
+    for (uint32_t i = 0; i < darray_get_num_items(entries); ++i)
+        if (g_strcmp0(db_entry_get_root_path(darray_get_item(entries, i)), root)) return false;
+    return true;
+}
 
-    g_autoptr(FILE) fp = file_open_locked(file_path, "rb");
+static bool
+database_file_load(FILE *stream,
+                    void (*status_cb)(const char *),
+                    FsearchDatabaseIndexStore **store_out,
+                    FsearchDatabaseIncludeManager *config_include_manager,
+                    FsearchDatabaseExcludeManager *config_exclude_manager,
+                    FsearchDatabaseIndexStoreEventFunc event_func,
+                    void *event_func_user_data,
+                    bool snapshot_only,
+                    bool query_only) {
+    g_autoptr(FILE) fp = stream;
+    g_return_val_if_fail(store_out, false);
     if (!fp) {
         return false;
     }
 
+    g_auto(SnapshotEntryArena) arena = {0};
+    if (snapshot_only) arena.blocks = g_ptr_array_new_with_free_func(g_free);
+    // Arrays are declared after the arena so failure destroys their entries first.
     g_autoptr(DynamicArray) folders = NULL;
     g_autoptr(DynamicArray) files = NULL;
     DynamicArray *sorted_folders[NUM_DATABASE_INDEX_PROPERTIES] = {NULL};
@@ -1337,7 +1451,7 @@ fsearch_database_file_load(const char *file_path,
         status_cb(_("Loading folders…"));
     }
     // load folders
-    if (!database_file_load_folders(fp, index_flags, folders, num_folders, folder_block_size)) {
+    if (!database_file_load_folders(fp, index_flags, folders, num_folders, folder_block_size, snapshot_only ? &arena : NULL)) {
         g_debug("[db_load] failed to load folders");
         goto load_fail;
     }
@@ -1354,25 +1468,49 @@ fsearch_database_file_load(const char *file_path,
     }
     // load files
     files = darray_new_full(num_files, (GDestroyNotify)db_entry_free_no_unparent);
-    if (!database_file_load_files(fp, index_flags, folders, files, num_files, file_block_size)) {
+    if (!database_file_load_files(fp, index_flags, folders, files, num_files, file_block_size, snapshot_only, snapshot_only ? &arena : NULL)) {
         g_debug("[db_load] failed to load files");
         goto load_fail;
     }
 
-    if (!database_file_load_sorted_arrays(fp, sorted_folders, sorted_files, folders, files)) {
+    if (!database_file_load_sorted_arrays(fp, sorted_folders, sorted_files, folders, files, snapshot_only, query_only)) {
         g_debug("[db_load] failed to load sorted arrays");
         goto load_fail;
     }
+    if (query_only && (!sorted_files[DATABASE_INDEX_PROPERTY_NAME] || !sorted_folders[DATABASE_INDEX_PROPERTY_NAME])) goto load_fail;
     darray_set_free_func(folders, NULL);
     darray_set_free_func(files, NULL);
+    if (snapshot_only) {
+        // Sorted arrays now retain every pointer needed below. Drop local refs
+        // before building index chunks; ownership will reside in those indices.
+        g_clear_pointer(&files, darray_unref);
+        g_clear_pointer(&folders, darray_unref);
+    }
 
+    if (query_only) {
+        // The literal worker needs NAME order and parent links, not GUI indexes.
+        // Arena storage owns all entries, so no per-root owning chunks are needed.
+        *store_out = fsearch_database_index_store_new_snapshot_take(indices, sorted_files, sorted_folders,
+                                                                    include_manager, exclude_manager, index_flags);
+        goto load_done;
+    }
     DynamicArray *folders_sorted_by_path = sorted_folders[DATABASE_INDEX_PROPERTY_PATH];
-    for (uint32_t i = 0; i < darray_get_num_items(folders_sorted_by_path); i++) {
+    DynamicArray *files_sorted_by_path = sorted_files[DATABASE_INDEX_PROPERTY_PATH];
+    bool alias_one_index = false;
+    if (snapshot_only && includes->len == 1) {
+        const char *root = fsearch_database_include_get_path(g_ptr_array_index(includes, 0));
+        alias_one_index = snapshot_paths_have_root(folders_sorted_by_path, root)
+                       && snapshot_paths_have_root(files_sorted_by_path, root);
+        if (alias_one_index) {
+            g_hash_table_insert(folder_index_arrays, (void *)root, darray_ref(folders_sorted_by_path));
+            g_hash_table_insert(file_index_arrays, (void *)root, darray_ref(files_sorted_by_path));
+        }
+    }
+    for (uint32_t i = 0; !alias_one_index && i < darray_get_num_items(folders_sorted_by_path); i++) {
         FsearchDatabaseEntry *folder = darray_get_item(folders_sorted_by_path, i);
         database_file_load_add_to_index_array(folder_index_arrays, folder);
     }
-    DynamicArray *files_sorted_by_path = sorted_files[DATABASE_INDEX_PROPERTY_PATH];
-    for (uint32_t i = 0; i < darray_get_num_items(files_sorted_by_path); i++) {
+    for (uint32_t i = 0; !alias_one_index && i < darray_get_num_items(files_sorted_by_path); i++) {
         FsearchDatabaseEntry *file = darray_get_item(files_sorted_by_path, i);
         database_file_load_add_to_index_array(file_index_arrays, file);
     }
@@ -1399,15 +1537,15 @@ fsearch_database_file_load(const char *file_path,
                                                                               index_flags);
         g_ptr_array_add(indices, index);
     }
-    *store_out = fsearch_database_index_store_new_with_content(indices,
-                                                               sorted_files,
-                                                               sorted_folders,
-                                                               include_manager,
-                                                               exclude_manager,
-                                                               index_flags,
-                                                               event_func,
-                                                               event_func_user_data);
+    *store_out = snapshot_only
+                     ? fsearch_database_index_store_new_snapshot_take(indices, sorted_files, sorted_folders,
+                                                                  include_manager, exclude_manager, index_flags)
+                     : fsearch_database_index_store_new_with_content(indices, sorted_files, sorted_folders,
+                                                                      include_manager, exclude_manager, index_flags,
+                                                                      event_func, event_func_user_data);
 
+load_done:
+    if (snapshot_only) fsearch_database_index_store_retain_snapshot_storage(*store_out, arena.blocks);
     for (uint32_t i = 0; i < NUM_DATABASE_INDEX_PROPERTIES; i++) {
         g_clear_pointer(&sorted_folders[i], darray_unref);
         g_clear_pointer(&sorted_files[i], darray_unref);
@@ -1424,4 +1562,47 @@ load_fail:
         g_clear_pointer(&sorted_files[i], darray_unref);
     }
     return false;
+}
+bool
+fsearch_database_file_load(const char *file_path,
+                           void (*status_cb)(const char *),
+                           FsearchDatabaseIndexStore **store_out,
+                           FsearchDatabaseIncludeManager *config_include_manager,
+                           FsearchDatabaseExcludeManager *config_exclude_manager,
+                           FsearchDatabaseIndexStoreEventFunc event_func,
+                           void *event_func_user_data) {
+    g_return_val_if_fail(file_path, false);
+    return database_file_load(file_open_locked(file_path, "rb"), status_cb, store_out,
+                               config_include_manager, config_exclude_manager, event_func,
+                               event_func_user_data, false, false);
+}
+
+static bool
+load_snapshot_fd(int fd, FsearchDatabaseIndexStore **store_out, bool query_only) {
+    // The caller owns and validates the original fd. Dup preserves that inode;
+    // no pathname reopen can race the ownership check or atomic replacement.
+    int copy = dup(fd);
+    if (copy < 0) {
+        return false;
+    }
+    FILE *stream = fdopen(copy, "rb");
+    if (!stream) {
+        close(copy);
+        return false;
+    }
+    if (flock(copy, LOCK_SH | LOCK_NB) < 0) {
+        fclose(stream);
+        return false;
+    }
+    return database_file_load(stream, NULL, store_out, NULL, NULL, NULL, NULL, true, query_only);
+}
+
+bool
+fsearch_database_file_load_snapshot_fd(int fd, FsearchDatabaseIndexStore **store_out) {
+    return load_snapshot_fd(fd, store_out, false);
+}
+
+bool
+fsearch_database_file_load_query_snapshot_fd(int fd, FsearchDatabaseIndexStore **store_out) {
+    return load_snapshot_fd(fd, store_out, true);
 }

@@ -1,0 +1,14 @@
+E.
+======================================================================
+ERROR: test_reports_observation_age_without_probing_the_root (__main__.HeadlessCLI.test_reports_observation_age_without_probing_the_root)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_headless.py", line 50, in test_reports_observation_age_without_probing_the_root
+    self.assertGreater(root['last_scan_unix'], 0)
+                       ~~~~^^^^^^^^^^^^^^^^^^
+KeyError: 'last_scan_unix'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.048s
+
+FAILED (errors=1)

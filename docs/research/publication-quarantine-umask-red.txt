@@ -1,0 +1,16 @@
+F
+======================================================================
+FAIL: test_monitor_cannot_bypass_refresh_quarantine (__main__.Monitor.test_monitor_cannot_bypass_refresh_quarantine)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-publication-20261004/src/tests/test_monitor.py", line 120, in test_monitor_cannot_bypass_refresh_quarantine
+    self.assertEqual(message['error']['code'], 'quarantined')
+AssertionError: 'unsafe_state' != 'quarantined'
+- unsafe_state
++ quarantined
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.103s
+
+FAILED (failures=1)

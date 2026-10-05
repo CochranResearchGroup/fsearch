@@ -1,0 +1,22 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+ninja: no work to do.
+ 1/15 fsearch:validate-metainfo           OK              0.07s
+ 2/15 fsearch:test_database               OK              0.06s
+ 3/15 fsearch:test_database_file          OK              0.06s
+ 4/15 fsearch:test_database_chunked_array OK              0.06s
+ 5/15 fsearch:test_database_index_store   OK              0.05s
+ 6/15 fsearch:test_database_include       OK              0.05s
+ 7/15 fsearch:test_database_exclude       OK              0.05s
+ 8/15 fsearch:test_database_entry         OK              0.04s
+ 9/15 fsearch:test_array                  OK              0.04s
+10/15 fsearch:test_size_utils             OK              0.03s
+11/15 fsearch:test_time_utils             OK              0.02s
+12/15 fsearch:test_query                  OK              0.04s
+13/15 fsearch:test_string_utils           OK              0.03s
+14/15 fsearch:headless_cli                OK              4.70s
+15/15 fsearch:warm_service                OK             14.00s
+
+Ok:                15  
+Fail:              0   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

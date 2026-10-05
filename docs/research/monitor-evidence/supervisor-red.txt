@@ -1,0 +1,67 @@
+FEFF
+======================================================================
+ERROR: test_missing_or_relative_root_rejected_before_state (__main__.Monitor.test_missing_or_relative_root_rejected_before_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 64, in test_missing_or_relative_root_rejected_before_state
+    self.assertEqual(json.loads(result.stdout)['error']['code'], 'invalid_request')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/decoder.py", line 356, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+======================================================================
+FAIL: test_create_rename_delete_reaches_accepted_snapshot (__main__.Monitor.test_create_rename_delete_reaches_accepted_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 68, in test_create_rename_delete_reaches_accepted_snapshot
+    process = self.start(); self.published(process)
+                            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 49, in published
+    message = reply(process)
+              ^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 21, in reply
+    if not byte: raise AssertionError('EOF: ' + data.decode(errors='replace'))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: EOF: 
+
+======================================================================
+FAIL: test_offline_root_preserves_snapshot (__main__.Monitor.test_offline_root_preserves_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 78, in test_offline_root_preserves_snapshot
+    (self.root/'invoice.pdf').touch(); process = self.start(); self.published(process)
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 49, in published
+    message = reply(process)
+              ^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 21, in reply
+    if not byte: raise AssertionError('EOF: ' + data.decode(errors='replace'))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: EOF: 
+
+======================================================================
+FAIL: test_shutdown_proves_worker_cleanup (__main__.Monitor.test_shutdown_proves_worker_cleanup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 89, in test_shutdown_proves_worker_cleanup
+    process = self.start(); self.published(process)
+                            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 49, in published
+    message = reply(process)
+              ^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_monitor.py", line 21, in reply
+    if not byte: raise AssertionError('EOF: ' + data.decode(errors='replace'))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: EOF: 
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.107s
+
+FAILED (failures=3, errors=1)
