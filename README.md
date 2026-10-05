@@ -109,3 +109,7 @@ with GTK development.
 ## Questions?
 
 Email: christian.boxdoerfer[AT]posteo.de
+
+## Fork headless search
+
+This fork adds an optional Linux private-snapshot JSON CLI. See [the CLI contract](docs/headless-cli.md) and [local acceptance evidence](docs/research/2026-10-04-cli-acceptance.md). An optional [warm private service](docs/warm-service.md) also keeps a snapshot loaded. Refresh, monitoring, safe replacement and file-searcher MCP integration remain separate work.

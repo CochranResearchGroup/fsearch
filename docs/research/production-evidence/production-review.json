@@ -1,0 +1,47 @@
+{
+  "source_commit": "f3e98fb06012ac8d250549d1cb0b491d93454c3e",
+  "fixed_point": "5ec26bab64c267768f22208f20689708e4006024",
+  "diff_command": "git diff 5ec26bab...HEAD",
+  "commits": [
+    "f3e98fb0 Accelerate bounded filename queries and repair Unicode lifetime (#10, #11, #12, #13)"
+  ],
+  "mode": "Separate serial primary Standards and Spec reviews; no delegation.",
+  "standards_sources": [
+    "AGENTS.md",
+    "CONTRIBUTING.md",
+    "docs/agents/codex-stack.md",
+    "docs/agents/runtime-proof.md",
+    "Fowler smell baseline from code-review skill"
+  ],
+  "spec_source": "docs/specs/0003-production-filename-acceleration.md; GitHub #9\u2013#13",
+  "standards_blocking": 0,
+  "spec_blocking": 0,
+  "findings": [
+    {
+      "axis": "Standards",
+      "classification": "nonblocking_backlog",
+      "location": "src/fsearch_database_entry.h:245",
+      "finding": "New ownership comment abuts the preceding cleanup macro on the same line.",
+      "evidence": "Valid C comment delimiter; clean compiler build and tests, no runtime effect. Improve readability in a later cleanup."
+    },
+    {
+      "axis": "Standards",
+      "classification": "nonblocking_backlog",
+      "location": "src/fsearch_database_file.c and src/fsearch_database_index_store.c",
+      "finding": "Possible speculative generality: PATH array sharing also optimizes the generic FD snapshot view; query-only worker does not need it.",
+      "evidence": "Generic view is exercised by exhaustive oracle; changes are guarded by snapshot_only and exact pointer-order checks. GUI loader remains original path. Consider simplifying separately."
+    },
+    {
+      "axis": "Spec",
+      "classification": "rejected",
+      "finding": "Broad result-limit measurements establish complete-search performance.",
+      "evidence": "Final qualification explicitly excludes them and uses complete probes with retained red measurements and unchanged numerical gates."
+    },
+    {
+      "axis": "Spec",
+      "classification": "nonblocking_backlog",
+      "finding": "Slash-containing path and very broad Unicode/short queries retain bounded fallback; they are not claimed to have universal sub-30ms completion.",
+      "evidence": "Approved spec allows unsupported bounded fallback and asks designated workload gates. Final receipts qualify specified complete probes, preserve truncation, and do not claim full Everything adoption."
+    }
+  ]
+}

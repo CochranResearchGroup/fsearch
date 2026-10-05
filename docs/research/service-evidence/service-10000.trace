@@ -1,0 +1,622 @@
+56201 execve("/tmp/fsearch-warm-release-build/src/fsearch-service", ["/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7ffddf995950 /* 258 vars */) = 0
+56201 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NAME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_NAME", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_PAPER", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_PAPER", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TIME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_TIME", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3
+56201 execve("/usr/lib/wsl/lib/python3", ["python3", "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7ffc368b84c0 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/ecochran76/.local/bin/python3", ["python3", "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7ffc368b84c0 /* 258 vars */) = 0
+56201 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NAME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_NAME", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_PAPER", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_PAPER", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TIME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_TIME", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3
+56201 execve("/usr/lib/wsl/lib/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/ecochran76/.local/bin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/ecochran76/.codex/packages/standalone/releases/0.160.0-x86_64-unknown-linux-musl/codex-path/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/ecochran76/.codex/tmp/arg0/codex-arg0nUyJmW/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/ecochran76/.codex/tmp/arg0/codex-arg0XlCntE/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/ecochran76/.grok/bin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/ecochran76/.cargo/bin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/ecochran76/.local/share/pnpm/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/linuxbrew/.linuxbrew/sbin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/linuxbrew/.linuxbrew/bin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/home/ecochran76/go/bin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/usr/local/go/bin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/usr/local/sbin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/usr/local/bin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/usr/sbin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = -1 ENOENT (No such file or directory)
+56201 execve("/usr/bin/bash", ["bash", "/home/ecochran76/.local/bin/pyth"..., "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x7fffc1e9ae48 /* 258 vars */) = 0
+56201 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libtinfo.so.6", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/dev/tty", O_RDWR|O_NONBLOCK) = -1 ENXIO (No such device or address)
+56201 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_IDENTIFICATION", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MEASUREMENT", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_TELEPHONE", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_ADDRESS", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NAME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_NAME", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_PAPER", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_PAPER", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MESSAGES/SYS_LC_MESSAGES", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_MONETARY", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_COLLATE", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_TIME", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_TIME", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_NUMERIC", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/workspace.local/fsearch", {st_mode=S_IFDIR|0700, st_size=4096, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, ".", {st_mode=S_IFDIR|0700, st_size=4096, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/home", {st_mode=S_IFDIR|0755, st_size=4096, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/home/ecochran76", {st_mode=S_IFDIR|0750, st_size=12288, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/workspace.local", {st_mode=S_IFDIR|0755, st_size=28672, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/workspace.local/fsearch", {st_mode=S_IFDIR|0700, st_size=4096, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/workspace.local/fsearch", {st_mode=S_IFDIR|0700, st_size=4096, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, ".", {st_mode=S_IFDIR|0700, st_size=4096, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/usr/lib/wsl/lib/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/bin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.codex/packages/standalone/releases/0.160.0-x86_64-unknown-linux-musl/codex-path/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.codex/tmp/arg0/codex-arg0nUyJmW/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.codex/tmp/arg0/codex-arg0XlCntE/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.grok/bin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.cargo/bin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/share/pnpm/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/linuxbrew/.linuxbrew/sbin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/linuxbrew/.linuxbrew/bin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/go/bin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/usr/local/go/bin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/usr/local/sbin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/usr/local/bin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/usr/sbin/bash", 0x7ffe54215ca0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/usr/bin/bash", {st_mode=S_IFREG|0755, st_size=1446024, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/usr/bin/bash", {st_mode=S_IFREG|0755, st_size=1446024, ...}, 0) = 0
+56201 access("/usr/bin/bash", X_OK)     = 0
+56201 newfstatat(AT_FDCWD, "/usr/bin/bash", {st_mode=S_IFREG|0755, st_size=1446024, ...}, 0) = 0
+56201 access("/usr/bin/bash", R_OK)     = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/bin/python3", O_RDONLY) = 3
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/bin/python3", {st_mode=S_IFREG|0777, st_size=135, ...}, 0) = 0
+56201 openat(AT_FDCWD, "/dev/null", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3
+56201 newfstatat(AT_FDCWD, ".", {st_mode=S_IFDIR|0700, st_size=4096, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/usr/lib/wsl/lib/python3.12", 0x7ffe542159a0, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/bin/python3.12", {st_mode=S_IFREG|0775, st_size=27770824, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/bin/python3.12", {st_mode=S_IFREG|0775, st_size=27770824, ...}, 0) = 0
+56201 access("/home/ecochran76/.local/bin/python3.12", X_OK) = 0
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/bin/python3.12", {st_mode=S_IFREG|0775, st_size=27770824, ...}, 0) = 0
+56201 access("/home/ecochran76/.local/bin/python3.12", R_OK) = 0
+56201 newfstatat(AT_FDCWD, ".", {st_mode=S_IFDIR|0700, st_size=4096, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/usr/lib/wsl/lib/python3.12", 0x7ffe54215900, 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/bin/python3.12", {st_mode=S_IFREG|0775, st_size=27770824, ...}, 0) = 0
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/bin/python3.12", {st_mode=S_IFREG|0775, st_size=27770824, ...}, 0) = 0
+56201 access("/home/ecochran76/.local/bin/python3.12", X_OK) = 0
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/bin/python3.12", {st_mode=S_IFREG|0775, st_size=27770824, ...}, 0) = 0
+56201 access("/home/ecochran76/.local/bin/python3.12", R_OK) = 0
+56201 execve("/home/ecochran76/.local/bin/python3.12", ["python3.12", "/tmp/fsearch-warm-release-build/"..., "serve", "--socket", "/tmp/fsearch-service-benchmark-5"..., "--database", "/tmp/fsearch-service-benchmark-5"...], 0x5beecd7b8610 /* 258 vars */) = 0
+56201 readlinkat(AT_FDCWD, "/proc/self/exe", "/home/ecochran76/.local/share/uv"..., 4096) = 87
+56201 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/glibc-hwcaps/x86-64-v4/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/glibc-hwcaps/x86-64-v4/", 0x7ffc787aae70, 0) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/glibc-hwcaps/x86-64-v3/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/glibc-hwcaps/x86-64-v3/", 0x7ffc787aae70, 0) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/glibc-hwcaps/x86-64-v2/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/glibc-hwcaps/x86-64-v2/", 0x7ffc787aae70, 0) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/libpthread.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 newfstatat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/", {st_mode=S_IFDIR|0775, st_size=4096, ...}, 0) = 0
+56201 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/libdl.so.2", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/libutil.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libutil.so.1", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/librt.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/librt.so.1", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/libm.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/../lib/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/share/locale/locale.alias", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.UTF-8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/usr/lib/locale/C.utf8/LC_CTYPE", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/gconv/gconv-modules.cache", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/dev/urandom", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/proc/self/maps", O_RDONLY) = 3
+56201 stat("/usr/lib/wsl/lib/python3.12", 0x7ffc787aa1e0) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/bin/python3.12", {st_mode=S_IFREG|0775, st_size=27770824, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/pyvenv.cfg", O_RDONLY) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/bin/pyvenv.cfg", O_RDONLY) = -1 ENOENT (No such file or directory)
+56201 readlink("/home/ecochran76/.local/bin/python3.12", "/home/ecochran76/.local/share/uv"..., 4096) = 87
+56201 readlink("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/python3.12", 0x7ffc787a5210, 4096) = -1 EINVAL (Invalid argument)
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/python3.12\n._pth", O_RDONLY) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/bin/python3.12._pth", O_RDONLY) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/python3.12._pth", O_RDONLY) = -1 ENOENT (No such file or directory)
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/pybuilddir.txt", O_RDONLY) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/Modules/Setup.local", 0x7ffc787aa1e8) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python312.zip", 0x7ffc787a9f18) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/lib/python312.zip", 0x7ffc787a9f48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/lib/python312.zip", 0x7ffc787a9f48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/lib/python312.zip", 0x7ffc787a9f48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/lib/python312.zip", 0x7ffc787a9f48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/lib/python312.zip", 0x7ffc787a9f48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/lib/python312.zip", 0x7ffc787a9f48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/os.py", {st_mode=S_IFREG|0664, st_size=40821, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/bin/lib/python3.12/lib-dynload", 0x7ffc787a9f48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/etc/localtime", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python312.zip", 0x7ffc787aa938) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python312.zip", 0x7ffc787aaca8) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/__init__.cpython-312-x86_64-linux-gnu.so", 0x7ffc787aaca8) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/__init__.abi3.so", 0x7ffc787aaca8) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/__init__.so", 0x7ffc787aaca8) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py", {st_mode=S_IFREG|0664, st_size=5884, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/__init__.py", {st_mode=S_IFREG|0664, st_size=5884, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/__init__.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py", {st_mode=S_IFREG|0664, st_size=15677, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/aliases.py", {st_mode=S_IFREG|0664, st_size=15677, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/aliases.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py", {st_mode=S_IFREG|0664, st_size=1005, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/utf_8.py", {st_mode=S_IFREG|0664, st_size=1005, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/encodings/__pycache__/utf_8.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/bin/pyvenv.cfg", 0x7ffc787aa7a8) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/pyvenv.cfg", 0x7ffc787aa7e8) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/lib/python3.12/site-packages", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/lib/python3.12/site-packages", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src/fsearch-service", {st_mode=S_IFREG|0700, st_size=23916, ...}) = 0
+56201 openat(AT_FDCWD, "/tmp/fsearch-warm-release-build/src/fsearch-service", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src/fsearch-service", {st_mode=S_IFREG|0700, st_size=23916, ...}) = 0
+56201 readlink("/tmp/fsearch-warm-release-build/src/fsearch-service", 0x7ffc7879a920, 4096) = -1 EINVAL (Invalid argument)
+56201 readlink("/tmp", 0x7ffc7879a4d0, 1023) = -1 EINVAL (Invalid argument)
+56201 readlink("/tmp/fsearch-warm-release-build", 0x7ffc7879a4d0, 1023) = -1 EINVAL (Invalid argument)
+56201 readlink("/tmp/fsearch-warm-release-build/src", 0x7ffc7879a4d0, 1023) = -1 EINVAL (Invalid argument)
+56201 readlink("/tmp/fsearch-warm-release-build/src/fsearch-service", 0x7ffc7879a4d0, 1023) = -1 EINVAL (Invalid argument)
+56201 openat(AT_FDCWD, "/tmp/fsearch-warm-release-build/src/fsearch-service", O_RDONLY) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/tmp/fsearch-warm-release-build/src", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py", {st_mode=S_IFREG|0664, st_size=101155, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/argparse.py", {st_mode=S_IFREG|0664, st_size=101155, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/argparse.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__init__.cpython-312-x86_64-linux-gnu.so", 0x7ffc787aa678) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__init__.abi3.so", 0x7ffc787aa678) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__init__.so", 0x7ffc787aa678) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__init__.py", {st_mode=S_IFREG|0664, st_size=16315, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__init__.py", {st_mode=S_IFREG|0664, st_size=16315, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__pycache__/__init__.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/enum.py", {st_mode=S_IFREG|0664, st_size=81540, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/enum.py", {st_mode=S_IFREG|0664, st_size=81540, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/enum.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/types.py", {st_mode=S_IFREG|0664, st_size=10993, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/types.py", {st_mode=S_IFREG|0664, st_size=10993, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/types.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/operator.py", {st_mode=S_IFREG|0664, st_size=10965, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/operator.py", {st_mode=S_IFREG|0664, st_size=10965, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/operator.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/functools.py", {st_mode=S_IFREG|0664, st_size=37940, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/functools.py", {st_mode=S_IFREG|0664, st_size=37940, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/functools.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections/__init__.cpython-312-x86_64-linux-gnu.so", 0x7ffc787a8e48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections/__init__.abi3.so", 0x7ffc787a8e48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections/__init__.so", 0x7ffc787a8e48) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections/__init__.py", {st_mode=S_IFREG|0664, st_size=52378, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections/__init__.py", {st_mode=S_IFREG|0664, st_size=52378, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections/__pycache__/__init__.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/keyword.py", {st_mode=S_IFREG|0664, st_size=1073, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/keyword.py", {st_mode=S_IFREG|0664, st_size=1073, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/keyword.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/reprlib.py", {st_mode=S_IFREG|0664, st_size=7148, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/reprlib.py", {st_mode=S_IFREG|0664, st_size=7148, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/reprlib.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/_compiler.py", {st_mode=S_IFREG|0664, st_size=26399, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/_compiler.py", {st_mode=S_IFREG|0664, st_size=26399, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__pycache__/_compiler.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/_parser.py", {st_mode=S_IFREG|0664, st_size=41201, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/_parser.py", {st_mode=S_IFREG|0664, st_size=41201, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__pycache__/_parser.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/_constants.py", {st_mode=S_IFREG|0664, st_size=5930, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/_constants.py", {st_mode=S_IFREG|0664, st_size=5930, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__pycache__/_constants.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/_casefix.py", {st_mode=S_IFREG|0664, st_size=5444, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/_casefix.py", {st_mode=S_IFREG|0664, st_size=5444, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/re/__pycache__/_casefix.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/copyreg.py", {st_mode=S_IFREG|0664, st_size=7614, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/copyreg.py", {st_mode=S_IFREG|0664, st_size=7614, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/copyreg.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/warnings.py", {st_mode=S_IFREG|0664, st_size=21909, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/warnings.py", {st_mode=S_IFREG|0664, st_size=21909, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/warnings.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/gettext.py", {st_mode=S_IFREG|0664, st_size=21320, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/gettext.py", {st_mode=S_IFREG|0664, st_size=21320, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/gettext.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/base64.py", {st_mode=S_IFREG|0775, st_size=20635, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/base64.py", {st_mode=S_IFREG|0775, st_size=20635, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/base64.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/struct.py", {st_mode=S_IFREG|0664, st_size=257, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/struct.py", {st_mode=S_IFREG|0664, st_size=257, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/struct.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__init__.cpython-312-x86_64-linux-gnu.so", 0x7ffc787aae88) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__init__.abi3.so", 0x7ffc787aae88) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__init__.so", 0x7ffc787aae88) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__init__.py", {st_mode=S_IFREG|0664, st_size=14020, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__init__.py", {st_mode=S_IFREG|0664, st_size=14020, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__pycache__/__init__.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/decoder.py", {st_mode=S_IFREG|0664, st_size=12525, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/decoder.py", {st_mode=S_IFREG|0664, st_size=12525, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__pycache__/decoder.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/scanner.py", {st_mode=S_IFREG|0664, st_size=2434, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/scanner.py", {st_mode=S_IFREG|0664, st_size=2434, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__pycache__/scanner.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/encoder.py", {st_mode=S_IFREG|0664, st_size=16075, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/encoder.py", {st_mode=S_IFREG|0664, st_size=16075, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/json/__pycache__/encoder.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/pathlib.py", {st_mode=S_IFREG|0664, st_size=51052, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/pathlib.py", {st_mode=S_IFREG|0664, st_size=51052, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/pathlib.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/fnmatch.py", {st_mode=S_IFREG|0664, st_size=5999, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/fnmatch.py", {st_mode=S_IFREG|0664, st_size=5999, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/fnmatch.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/__init__.cpython-312-x86_64-linux-gnu.so", 0x7ffc787aa118) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/__init__.abi3.so", 0x7ffc787aa118) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/__init__.so", 0x7ffc787aa118) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/__init__.py", {st_mode=S_IFREG|0664, st_size=0, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/__init__.py", {st_mode=S_IFREG|0664, st_size=0, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/__pycache__/__init__.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/parse.py", {st_mode=S_IFREG|0664, st_size=45676, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/parse.py", {st_mode=S_IFREG|0664, st_size=45676, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/urllib/__pycache__/parse.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/ipaddress.py", {st_mode=S_IFREG|0664, st_size=81414, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/ipaddress.py", {st_mode=S_IFREG|0664, st_size=81414, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/ipaddress.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/selectors.py", {st_mode=S_IFREG|0664, st_size=19671, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/selectors.py", {st_mode=S_IFREG|0664, st_size=19671, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/selectors.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections/abc.py", {st_mode=S_IFREG|0664, st_size=119, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections/abc.py", {st_mode=S_IFREG|0664, st_size=119, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/collections/__pycache__/abc.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/signal.py", {st_mode=S_IFREG|0664, st_size=2495, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/signal.py", {st_mode=S_IFREG|0664, st_size=2495, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/signal.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/socket.py", {st_mode=S_IFREG|0664, st_size=37815, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/socket.py", {st_mode=S_IFREG|0664, st_size=37815, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/socket.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", {st_mode=S_IFREG|0664, st_size=88747, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", {st_mode=S_IFREG|0664, st_size=88747, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/subprocess.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/locale.py", {st_mode=S_IFREG|0664, st_size=78599, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/locale.py", {st_mode=S_IFREG|0664, st_size=78599, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/locale.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/threading.py", {st_mode=S_IFREG|0664, st_size=60200, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/threading.py", {st_mode=S_IFREG|0664, st_size=60200, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/threading.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/_weakrefset.py", {st_mode=S_IFREG|0664, st_size=5893, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/_weakrefset.py", {st_mode=S_IFREG|0664, st_size=5893, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/_weakrefset.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/contextlib.py", {st_mode=S_IFREG|0664, st_size=27637, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/contextlib.py", {st_mode=S_IFREG|0664, st_size=27637, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/contextlib.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/uuid.py", {st_mode=S_IFREG|0664, st_size=29656, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/uuid.py", {st_mode=S_IFREG|0664, st_size=29656, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/uuid.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/platform.py", {st_mode=S_IFREG|0775, st_size=43388, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/platform.py", {st_mode=S_IFREG|0775, st_size=43388, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/platform.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lib-dynload", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/site-packages", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/share/locale/C.UTF-8/LC_MESSAGES/messages.mo", 0x7ffc787aafc8) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/share/locale/C.UTF-8/LC_MESSAGES/messages.mo", 0x7ffc787ab008) = -1 ENOENT (No such file or directory)
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/share/locale/C.UTF-8/LC_MESSAGES/messages.mo", 0x7ffc787ab008) = -1 ENOENT (No such file or directory)
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/shutil.py", {st_mode=S_IFREG|0664, st_size=56762, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/shutil.py", {st_mode=S_IFREG|0664, st_size=56762, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/shutil.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/bz2.py", {st_mode=S_IFREG|0664, st_size=11847, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/bz2.py", {st_mode=S_IFREG|0664, st_size=11847, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/bz2.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/_compression.py", {st_mode=S_IFREG|0664, st_size=5681, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/_compression.py", {st_mode=S_IFREG|0664, st_size=5681, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/_compression.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 stat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12", {st_mode=S_IFDIR|0775, st_size=4096, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lzma.py", {st_mode=S_IFREG|0664, st_size=13277, ...}) = 0
+56201 stat("/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/lzma.py", {st_mode=S_IFREG|0664, st_size=13277, ...}) = 0
+56201 openat(AT_FDCWD, "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/__pycache__/lzma.cpython-312.pyc", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/tmp/fsearch-service-benchmark-535lqjc9/instance-10000", O_RDONLY|O_NOFOLLOW|O_CLOEXEC|O_DIRECTORY) = 3
+56201 openat(3, "search.sock.lock", O_RDWR|O_CREAT|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC, 0600) = 4
+56201 openat(3, "search.sock.state", O_RDONLY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC) = 5
+56201 openat(AT_FDCWD, "/proc/56201/stat", O_RDONLY|O_CLOEXEC) = 6
+56201 openat(AT_FDCWD, "/proc/sys/kernel/random/boot_id", O_RDONLY|O_CLOEXEC) = 6
+56201 openat(AT_FDCWD, "/dev/urandom", O_RDONLY|O_CLOEXEC) = 6
+56201 openat(3, "search.sock.state.233560f2ea894c69bb123703c1995705", O_WRONLY|O_CREAT|O_EXCL|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC, 0600) = 7
+56201 renameat(3, "search.sock.state.233560f2ea894c69bb123703c1995705", 3, "search.sock.state") = 0
+56201 unlinkat(3, "search.sock.state.233560f2ea894c69bb123703c1995705", 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(3, "search.sock", 0x7ffc787aafc8, AT_SYMLINK_NOFOLLOW) = -1 ENOENT (No such file or directory)
+56201 newfstatat(3, "search.sock", {st_mode=S_IFSOCK|0700, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0
+56201 lstat("/tmp", {st_mode=S_IFDIR|S_ISVTX|0777, st_size=1257472, ...}) = 0
+56201 lstat("/tmp/fsearch-warm-release-build", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 lstat("/tmp/fsearch-warm-release-build/src", {st_mode=S_IFDIR|0700, st_size=4096, ...}) = 0
+56201 lstat("/tmp/fsearch-warm-release-build/src/fsearch-service", {st_mode=S_IFREG|0700, st_size=23916, ...}) = 0
+56201 stat("/tmp/fsearch-warm-release-build/src/fsearch-service", {st_mode=S_IFREG|0700, st_size=23916, ...}) = 0
+56201 openat(AT_FDCWD, "/dev/null", O_RDWR|O_CLOEXEC) = 13
+56226 openat(AT_FDCWD, "/proc/self/fd", O_RDONLY|O_CLOEXEC) = 10
+56226 execve("/tmp/fsearch-warm-release-build/src/fsearch-worker", ["/tmp/fsearch-warm-release-build/"..., "/tmp/fsearch-service-benchmark-5"..., "56201"], 0x7ffc787abe08 /* 258 vars */) = 0
+56201 openat(AT_FDCWD, "/proc/56226/stat", O_RDONLY|O_CLOEXEC) = 8
+56226 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+56226 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/proc/sys/kernel/random/boot_id", O_RDONLY|O_CLOEXEC) = 8
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgio-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/proc/56201/stat", O_RDONLY|O_CLOEXEC) = 8
+56201 openat(AT_FDCWD, "/proc/sys/kernel/random/boot_id", O_RDONLY|O_CLOEXEC <unfinished ...>
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgobject-2.0.so.0", O_RDONLY|O_CLOEXEC <unfinished ...>
+56201 <... openat resumed>)             = 8
+56226 <... openat resumed>)             = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libglib-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+56201 openat(3, "search.sock.state.88867c79e5dd453cb20a1f815478314d", O_WRONLY|O_CREAT|O_EXCL|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC, 0600) = 8
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpango-1.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libicuuc.so.74", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgmodule-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|O_CLOEXEC) = 3
+56201 renameat(3, "search.sock.state.88867c79e5dd453cb20a1f815478314d", 3, "search.sock.state") = 0
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libmount.so.1", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libffi.so.8", O_RDONLY|O_CLOEXEC) = 3
+56201 unlinkat(3, "search.sock.state.88867c79e5dd453cb20a1f815478314d", 0) = -1 ENOENT (No such file or directory)
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libfribidi.so.0", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libthai.so.0", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libharfbuzz.so.0", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libicudata.so.74", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libblkid.so.1", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdatrie.so.1", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libfreetype.so.6", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libgraphite2.so.3", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbz2.so.1.0", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpng16.so.16", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbrotlidec.so.1", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libbrotlicommon.so.1", O_RDONLY|O_CLOEXEC) = 3
+56226 statfs("/sys/fs/selinux", {f_type=SYSFS_MAGIC, f_bsize=4096, f_blocks=0, f_bfree=0, f_bavail=0, f_files=0, f_ffree=0, f_fsid={val=[0xdff19c14, 0x4f8e434f]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_NOSUID|ST_NODEV|ST_NOEXEC|ST_NOATIME}) = 0
+56226 statfs("/selinux", 0x7ffe88772be0) = -1 ENOENT (No such file or directory)
+56226 openat(AT_FDCWD, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3
+56226 openat(AT_FDCWD, "/proc/mounts", O_RDONLY|O_CLOEXEC) = 3
+56226 access("/etc/selinux/config", F_OK) = -1 ENOENT (No such file or directory)
+56226 openat(AT_FDCWD, "/tmp/fsearch-service-benchmark-535lqjc9/snapshot-10000.db", O_RDONLY|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC) = 3
+56201 openat(AT_FDCWD, "/proc/56201/stat", O_RDONLY|O_CLOEXEC) = 8
+56201 openat(AT_FDCWD, "/proc/sys/kernel/random/boot_id", O_RDONLY|O_CLOEXEC) = 8
+56201 openat(3, "search.sock.state.556d6686a1f249bfb431eb9244670b86", O_WRONLY|O_CREAT|O_EXCL|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC, 0600) = 8
+56201 renameat(3, "search.sock.state.556d6686a1f249bfb431eb9244670b86", 3, "search.sock.state") = 0
+56201 unlinkat(3, "search.sock.state.556d6686a1f249bfb431eb9244670b86", 0) = -1 ENOENT (No such file or directory)
+56226 +++ killed by SIGKILL +++
+56201 --- SIGCHLD {si_signo=SIGCHLD, si_code=CLD_KILLED, si_pid=56226, si_uid=1000, si_status=SIGKILL, si_utime=0, si_stime=2 /* 0.02 s */} ---
+56201 openat(AT_FDCWD, "/proc/56201/stat", O_RDONLY|O_CLOEXEC) = 8
+56201 openat(AT_FDCWD, "/proc/sys/kernel/random/boot_id", O_RDONLY|O_CLOEXEC) = 8
+56201 openat(3, "search.sock.state.7a71ed765fe14ca3abd221fe0999b03e", O_WRONLY|O_CREAT|O_EXCL|O_NONBLOCK|O_NOFOLLOW|O_CLOEXEC, 0600) = 8
+56201 renameat(3, "search.sock.state.7a71ed765fe14ca3abd221fe0999b03e", 3, "search.sock.state") = 0
+56201 unlinkat(3, "search.sock.state.7a71ed765fe14ca3abd221fe0999b03e", 0) = -1 ENOENT (No such file or directory)
+56201 newfstatat(3, "search.sock", {st_mode=S_IFSOCK|0700, st_size=0, ...}, AT_SYMLINK_NOFOLLOW) = 0
+56201 unlinkat(3, "search.sock", 0)     = 0
+56201 +++ exited with 0 +++

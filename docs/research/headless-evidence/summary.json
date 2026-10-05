@@ -1,0 +1,76 @@
+{
+  "source_sha": "d531eb3b50560fb7d9ba731787100d827f4e1e8a",
+  "display_variables_removed": true,
+  "fixture_root_deleted_before_queries": true,
+  "cases": [
+    {
+      "case": "names",
+      "response": {
+        "prototype": true,
+        "complete": true,
+        "total": 2,
+        "truncated": false,
+        "results": [
+          "<fixture>/PROTOTYPE-wipe-me-root/invoice-one.pdf",
+          "<fixture>/PROTOTYPE-wipe-me-root/invoice-two.pdf"
+        ]
+      },
+      "indexed_root_file_syscalls": 0
+    },
+    {
+      "case": "limited",
+      "response": {
+        "prototype": true,
+        "complete": true,
+        "total": 2,
+        "truncated": true,
+        "results": [
+          "<fixture>/PROTOTYPE-wipe-me-root/invoice-one.pdf"
+        ]
+      },
+      "indexed_root_file_syscalls": 0
+    },
+    {
+      "case": "extension",
+      "response": {
+        "prototype": true,
+        "complete": true,
+        "total": 4,
+        "truncated": false,
+        "results": [
+          "<fixture>/PROTOTYPE-wipe-me-root/invoice-one.pdf",
+          "<fixture>/PROTOTYPE-wipe-me-root/invoice-two.pdf",
+          "<fixture>/PROTOTYPE-wipe-me-root/line\nbreak.pdf",
+          "<fixture>/PROTOTYPE-wipe-me-root/quote\"file.pdf"
+        ]
+      },
+      "indexed_root_file_syscalls": 0
+    },
+    {
+      "case": "empty",
+      "response": {
+        "prototype": true,
+        "complete": true,
+        "total": 0,
+        "truncated": false,
+        "results": []
+      },
+      "indexed_root_file_syscalls": 0
+    },
+    {
+      "case": "cancelled",
+      "response": {
+        "prototype": true,
+        "complete": false,
+        "total": 0,
+        "truncated": false,
+        "results": []
+      },
+      "indexed_root_file_syscalls": 0
+    }
+  ],
+  "load_failure_no_fallback": true,
+  "gtk_dependency_removed": false,
+  "contenttype_negative_control_indexed_root_syscalls": 6,
+  "limits": "Output bounded, engine still collects all matches; short synthetic runs only."
+}

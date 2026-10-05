@@ -1,0 +1,1 @@
+Use AGENTS.md as the entrypoint. Prefer CodeGraph for structural discovery. Preserve unrelated work. Do not commit without explicit authorization. Use isolated synthetic fixtures for initial headless qualification. Keep source tests separate from installed runtime acceptance. Do not modify user MCP registration or index real roots without authorization.

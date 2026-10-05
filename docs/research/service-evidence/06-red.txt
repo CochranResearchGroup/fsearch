@@ -1,0 +1,31 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+ninja: no work to do.
+1/1 fsearch:warm_service FAIL            2.33s   exit status 1
+>>> MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/tmp/fsearch-warm-release-build/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=168 /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3 /tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py /tmp/fsearch-warm-release-build/src/fsearch-service /tmp/fsearch-warm-release-build/src/fsearch-cli /tmp/fsearch-warm-release-build/src/tests/snapshot_fixture /tmp/fsearch-warm-release-build/src/tests/libheadless_fault_fixture.so
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+...F...
+======================================================================
+FAIL: test_recovery_cannot_treat_missing_identity_as_absence (__main__.WarmService.test_recovery_cannot_treat_missing_identity_as_absence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 138, in test_recovery_cannot_treat_missing_identity_as_absence
+    self.assertNotEqual(result.returncode,0,result.stdout)
+AssertionError: 0 == 0 : {"status": "recovered"}
+
+
+----------------------------------------------------------------------
+Ran 7 tests in 2.273s
+
+FAILED (failures=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:warm_service FAIL            2.33s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

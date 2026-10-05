@@ -1,0 +1,30 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+[1/23] Compiling C object src/tests/snapshot_fixture.p/snapshot_fixture.c.o
+[2/23] Compiling C object src/tests/test_database_file.p/test_database_file.c.o
+[3/23] Compiling C object src/fsearch-cli.p/fsearch_cli.c.o
+[4/23] Compiling C object src/libfsearch.a.p/fsearch_headless.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_headless.c: In function ‘fsearch_headless_search’:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_headless.c:270:32: warning: pointer/integer type mismatch in conditional expression
+  270 |                                : options->match_case ? strstr(name, options->query)
+      |                                ^
+[5/23] Compiling C object src/libfsearch.a.p/fsearch_database.c.o
+[6/23] Compiling C object src/libfsearch.a.p/fsearch_database_file.c.o
+[7/23] Linking static target src/libfsearch.a
+[8/23] Linking target src/tests/test_size_utils
+[9/23] Linking target src/tests/test_time_utils
+[10/23] Linking target src/tests/test_string_utils
+[11/23] Linking target src/tests/test_database_include
+[12/23] Linking target src/tests/test_database_exclude
+[13/23] Linking target src/tests/test_database_entry
+[14/23] Linking target src/fsearch-cli
+[15/23] Linking target src/tests/test_database_index_store
+[16/23] Linking target src/tests/test_query
+[17/23] Linking target src/tests/test_database_chunked_array
+[18/23] Linking target src/tests/test_array
+[19/23] Linking target src/fsearch-worker
+[20/23] Linking target src/tests/snapshot_fixture
+[21/23] Linking target src/tests/test_database
+[22/23] Linking target src/tests/test_database_file
+[23/23] Linking target src/fsearch
+INFO: autodetecting backend as ninja
+INFO: calculating backend command to run: /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja -C /tmp/fsearch-warm-release-build

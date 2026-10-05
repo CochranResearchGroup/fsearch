@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_short_ascii_literal_rejects_nonmatching_unicode_before_verification_budget (__main__.WarmService.test_short_ascii_literal_rejects_nonmatching_unicode_before_verification_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 14, in test_short_ascii_literal_rejects_nonmatching_unicode_before_verification_budget
+    self.assertTrue(result['complete'],result)
+AssertionError: False is not true : {'schema_version': 1, 'status': 'work_limit', 'complete': False, 'truncated': True, 'visibility': 'cached', 'examined': 1, 'snapshot': {'identity': '2096:6609089:6773:1791165927:796039255:1791165927:804839256', 'mtime_unix': 1791165927, 'age_seconds': 0, 'roots': [{'path': '/tmp/fsearch-service-fixture-3cs7w9w6/owned', 'path_bytes_base64': None, 'last_scan_unix': 1791165927, 'age_seconds': 0, 'last_error_code': 0}]}, 'results': [{'path': '/tmp/fsearch-service-fixture-3cs7w9w6/owned/документ??.pdf', 'path_bytes_base64': None}], 'request_id': 'unicode-short-budget'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.232s
+
+FAILED (failures=1)

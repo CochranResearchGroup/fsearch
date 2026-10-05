@@ -1,0 +1,17 @@
+F..
+======================================================================
+FAIL: test_deadline_bounds_snapshot_open_and_reaps_worker (__main__.HeadlessCLI.test_deadline_bounds_snapshot_open_and_reaps_worker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_headless.py", line 60, in test_deadline_bounds_snapshot_open_and_reaps_worker
+    response = self.query('--query', 'invoice', '--timeout-ms', '50', expected_exit=1,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_headless.py", line 37, in query
+    self.assertEqual(result.returncode, expected_exit, result.stderr + result.stdout)
+AssertionError: 0 != 1 : {"schema_version":1,"status":"ok","complete":true,"truncated":false,"visibility":"cached","examined":4,"snapshot":{"mtime_unix":1791142840,"age_seconds":1,"roots":[{"path":"/tmp/fsearch-cli-test-hkdf902a/owned-index-root","path_bytes_base64":null,"last_scan_unix":1791142840,"age_seconds":1,"last_error_code":0}]},"results":[{"path":"/tmp/fsearch-cli-test-hkdf902a/owned-index-root/invoice-one.pdf","path_bytes_base64":null},{"path":"/tmp/fsearch-cli-test-hkdf902a/owned-index-root/invoice-two.pdf","path_bytes_base64":null}]}
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.572s
+
+FAILED (failures=1)

@@ -1,0 +1,16 @@
+F
+======================================================================
+FAIL: test_invalid_replacement_preserves_accepted_results_and_worker (__main__.WarmService.test_invalid_replacement_preserves_accepted_results_and_worker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 55, in test_invalid_replacement_preserves_accepted_results_and_worker
+    self.assertEqual(failed.get('error',{}).get('code'),'snapshot_unavailable',failed)
+AssertionError: 'invalid_request' != 'snapshot_unavailable'
+- invalid_request
++ snapshot_unavailable
+ : {'schema_version': 1, 'status': 'error', 'complete': False, 'error': {'code': 'invalid_request'}, 'results': [], 'request_id': None}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.208s
+
+FAILED (failures=1)

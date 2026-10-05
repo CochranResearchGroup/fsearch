@@ -1,0 +1,44 @@
+{
+  "source_commit": "3d0eb0c3ece55d3b62ddfb5c3cd0427f38093555",
+  "installed_fixture_performance_pass": true,
+  "production_filesystem_qualified": false,
+  "corpora": [
+    {
+      "corpus": "varied",
+      "rss_kib": 127820,
+      "worst_selective_p95_ms": 7.358199996815529
+    },
+    {
+      "corpus": "repetitive",
+      "rss_kib": 103244,
+      "worst_selective_p95_ms": 4.545502000837587
+    },
+    {
+      "corpus": "unicode-heavy",
+      "rss_kib": 122880,
+      "worst_selective_p95_ms": 4.830924000998493
+    }
+  ],
+  "remaining_fsearch_pids": [],
+  "artifact_sha256": {
+    "fsearch-cli": "21189c2009db9b4c0e7f5f81792a68d2c8154fbfa3031246d405233aefeed6fc",
+    "fsearch-worker": "45ed7365d856ec88b6ea726d9137ca8583845670d0856c108664d88d624dd625",
+    "fsearch-service": "63d1bd0c3957ee372901536a8006d6a33120cf14502573f1f843fc7d485eb816",
+    "fsearch-refresh": "a587ab37b8cfb62c1bc03ba22781cf77cd9e8b4d0fb487081a31deee864de4d3",
+    "fsearch-refresh-worker": "4759b13bd62938f0f08618c07aeba7079e0b238e9d6cb74d635d7c22cd804195"
+  },
+  "evidence_sha256": {
+    "docs/research/refresh-evidence/column-prefetch-installed/performance/installed-candidate-worker-entropy.json": "63649d2eaff02abf68888987e62de6d996dd07d090a6b531e3dbbb317c8eba1c",
+    "docs/research/refresh-evidence/column-prefetch-installed/performance/installed-candidate-worker-full.json": "125a7b67a8513825b59941350b7a9c2b369a0261bfcb279cffb9555fd9c81a46",
+    "docs/research/refresh-evidence/column-prefetch-installed/performance/installed-candidate-worker-unicode-heavy.json": "0c966646b809c290c0cbca22dc0cd399456d6518ad2e6febd70089d59528c1a3",
+    "docs/research/refresh-evidence/column-prefetch-installed/overlap/installed-replacement-overlap-repetitive.json": "1a390c465cffbcf67d07d3105131f9f49dce2f0ac3407e73491b0fda2974c069",
+    "docs/research/refresh-evidence/column-prefetch-installed/overlap/installed-replacement-overlap-unicode-heavy.json": "fde580a59971d1e54c58206e158d16e23f7f0f8e57dd0d59e6acd55967843332",
+    "docs/research/refresh-evidence/column-prefetch-installed/overlap/installed-replacement-overlap-varied.json": "a7bb28fd0119f9f33f27c90248fbbeb4b0c56391d62c7c32dc69f308b1222b98"
+  },
+  "limits": {
+    "single_worker_rss_kib": 131072,
+    "selective_p95_ms": 10,
+    "complete_short_unicode_path_p95_ms": 30,
+    "replacement_overlap_rss_kib": 262144
+  }
+}

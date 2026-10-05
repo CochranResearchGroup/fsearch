@@ -1,0 +1,45 @@
+84645 execve("/tmp/fsearch-warm-release-build/src/fsearch-refresh-worker", ["/tmp/fsearch-warm-release-build/"..., "--root", "/tmp/fsearch-move-race-owned-pkl"..., "--output", "/tmp/fsearch-move-race-owned-pkl"...], 0x7ffc0a7ca950 /* 261 vars */) = 0
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-warm-release-build/src/tests/librefresh_fault_fixture.so", O_RDONLY|O_CLOEXEC) = 3</tmp/fsearch-warm-release-build/src/tests/librefresh_fault_fixture.so>
+84645 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libm.so.6>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgio-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgobject-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libglib-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libpango-1.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libpango-1.0.so.0.5200.1>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libicuuc.so.74", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libicuuc.so.74.2>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libc.so.6>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgmodule-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.8000.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libz.so.1.3>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libmount.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libmount.so.1.1.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libselinux.so.1>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libffi.so.8", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libffi.so.8.1.4>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libfribidi.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libfribidi.so.0.4.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libthai.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libthai.so.0.3.1>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libharfbuzz.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libharfbuzz.so.0.60830.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libicudata.so.74", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libicudata.so.74.2>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgcc_s.so.1>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libblkid.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libblkid.so.1.1.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libdatrie.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libdatrie.so.1.4.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libfreetype.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libfreetype.so.6.20.1>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgraphite2.so.3", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgraphite2.so.3.2.1>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libbz2.so.1.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libbz2.so.1.0.4>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libpng16.so.16", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libpng16.so.16.43.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libbrotlidec.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libbrotlidec.so.1.1.0>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libbrotlicommon.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libbrotlicommon.so.1.1.0>
+84645 statfs("/sys/fs/selinux", {f_type=SYSFS_MAGIC, f_bsize=4096, f_blocks=0, f_bfree=0, f_bavail=0, f_files=0, f_ffree=0, f_fsid={val=[0xdff19c14, 0x4f8e434f]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_NOSUID|ST_NODEV|ST_NOEXEC|ST_NOATIME}) = 0
+84645 statfs("/selinux", 0x7ffed915c3e0) = -1 ENOENT (No such file or directory)
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3</proc/filesystems>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/proc/mounts", O_RDONLY|O_CLOEXEC) = 3</proc/84645/mounts>
+84645 access("/etc/selinux/config", F_OK) = -1 ENOENT (No such file or directory)
+84645 openat2(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-move-race-owned-pkljmi2t/approved", {flags=O_RDONLY|O_CLOEXEC|O_PATH|O_DIRECTORY, resolve=RESOLVE_NO_SYMLINKS}, 24) = 3</tmp/fsearch-move-race-owned-pkljmi2t/approved>
+84645 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-move-race-owned-pkljmi2t/stage", O_RDONLY|O_NOFOLLOW|O_CLOEXEC|O_PATH|O_DIRECTORY) = 4</tmp/fsearch-move-race-owned-pkljmi2t/stage>
+84645 openat2(3</tmp/fsearch-move-race-owned-pkljmi2t/approved>, ".", {flags=O_RDONLY|O_CLOEXEC|O_DIRECTORY, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 7</tmp/fsearch-move-race-owned-pkljmi2t/approved>
+84645 getdents64(7</tmp/fsearch-move-race-owned-pkljmi2t/approved>, 0x6041abaf09e0 /* 3 entries */, 32768) = 80
+84645 openat2(3</tmp/fsearch-move-race-owned-pkljmi2t/approved>, "nested", {flags=O_RDONLY|O_CLOEXEC|O_PATH, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 4</tmp/fsearch-move-race-owned-pkljmi2t/approved/nested>
+84645 openat2(3</tmp/fsearch-move-race-owned-pkljmi2t/approved>, "nested", {flags=O_RDONLY|O_CLOEXEC|O_DIRECTORY, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 8</tmp/fsearch-move-race-owned-pkljmi2t/approved/nested>
+84645 getdents64(8</tmp/fsearch-move-race-owned-pkljmi2t/approved/nested>, 0x6041abaf8a50 /* 3 entries */, 32768) = 88
+84645 openat2(3</tmp/fsearch-move-race-owned-pkljmi2t/approved>, "nested/race-probe.pdf", {flags=O_RDONLY|O_CLOEXEC|O_PATH, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = -1 ENOENT (No such file or directory)
+84645 +++ exited with 4 +++

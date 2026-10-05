@@ -1,0 +1,29 @@
+<!doctype html><meta charset="utf-8"><title>Prototype: cached search lifecycle</title>
+<style>body{font:17px system-ui;max-width:860px;margin:40px auto;padding:20px;color:#173042}button{padding:10px;margin:4px}pre{padding:20px;background:#eef3f6;white-space:pre-wrap}.tabs{border-bottom:1px solid #aaa}small{display:block}</style>
+<h1>Prototype: keep filename searches warm</h1>
+<p>Does this proposed lifecycle preserve accepted filename knowledge without accumulating workers after uncertain cleanup? This model simulates decisions. It does not run a service or prove filesystem containment.</p>
+<div class="tabs"><button onclick="walk('normal')">Normal search</button><button onclick="walk('failure')">Refresh fails</button><button onclick="walk('quarantine')">Cleanup uncertain</button><button onclick="reset()">Free play / reset</button></div>
+<div id="controls"></div><pre id="state"></pre><p id="explanation"></p>
+<script>
+// Pure proposed model: no timers, persistence, DOM or production effects.
+const initial=()=>({phase:'stopped',accepted:null,pending:[],active:null,cleanup:'proved',outcome:'none'});
+function transition(s,a){
+ if(a==='start'&&s.phase==='stopped')return {...s,phase:'ready',accepted:'snapshot A',outcome:'ready'};
+ if(a==='request'&&s.phase==='ready')return s.active?(s.pending.length<2?{...s,pending:[...s.pending,s.accepted],outcome:'queued'}:{...s,outcome:'busy'}):{...s,active:s.accepted,outcome:'searching accepted snapshot'};
+ if(a==='finish'&&s.phase==='ready'&&s.active)return {...s,active:s.pending[0]??null,pending:s.pending.slice(1),outcome:'complete'};
+ if(a==='refresh_failed'&&s.phase==='ready')return {...s,outcome:'update failed; accepted snapshot preserved'};
+ if(a==='replacement_ready'&&s.phase==='ready')return {...s,accepted:'snapshot B',outcome:'qualified replacement accepted (budget not modelled)'};
+ if(a==='deadline'&&s.phase==='ready')return {...s,phase:'stopped',active:null,pending:[],outcome:'deadline; worker reaped; restart permitted'};
+ if(a==='cleanup_uncertain'&&s.phase==='ready')return {...s,phase:'quarantined',cleanup:'unproved',active:null,pending:[],outcome:'use SQLite; no replacement worker'};
+ if(a==='recover'&&s.phase==='quarantined')return {...initial(),outcome:'explicit recovery after proving old worker absent'};
+ if(a==='request'&&s.phase==='quarantined')return {...s,outcome:'use SQLite; no replacement worker'};
+ return {...s,outcome:'action unavailable; state retained'};
+}
+let state=initial();
+const labels={start:'Start on demand',request:'Request search',finish:'Complete search',refresh_failed:'Fail refresh',replacement_ready:'Accept replacement',deadline:'Deadline; reap proved',cleanup_uncertain:'Cleanup unproved',recover:'Prove absence; recover'};
+function show(){document.getElementById('state').textContent=JSON.stringify(state,null,2);document.getElementById('explanation').textContent='Demo queue capacity is two pending requests. The production queue and replacement budget remain proposed ticket details.';}
+function act(a){state=transition(state,a);show();}
+function reset(){state=initial();show();}
+function walk(kind){state=initial();const steps=kind==='normal'?['start','request','finish']:kind==='failure'?['start','refresh_failed','request','finish']:['start','request','cleanup_uncertain','request'];for(const a of steps)state=transition(state,a);show();}
+for(const [action,label] of Object.entries(labels)){let b=document.createElement('button');b.textContent=label;b.onclick=()=>act(action);document.getElementById('controls').append(b);}show();
+</script><small>Throwaway model. No real roots, external services or user configuration are touched.</small>

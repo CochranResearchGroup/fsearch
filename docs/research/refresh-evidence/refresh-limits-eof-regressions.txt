@@ -1,0 +1,112 @@
+[0/1] Regenerating build files
+Cleaning... 0 files.
+The Meson build system
+Version: 1.12.1
+Source dir: /home/ecochran76/workspace.local/fsearch
+Build dir: /tmp/fsearch-warm-release-build
+Build type: native build
+Project name: fsearch
+Project version: 0.3
+C compiler for the host machine: /usr/bin/gcc (gcc 13.3.0 "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0")
+C linker for the host machine: /usr/bin/gcc ld.bfd 2.42
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Checking if "malloc_trim is supported on the build platform" runs: YES
+Checking if "fanotify is supported by the build platform and works without CAP_SYS_ADMIN capabilities" runs: YES
+Checking if "inotify is supported by the build platform" runs: YES
+Configuring io.github.cboxdoerfer.FSearch.desktop.in using configuration
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Program desktop-file-validate found: NO
+Program appstreamcli found: YES (/usr/bin/appstreamcli)
+Could not find file LINGUAS in /home/ecochran76/workspace.local/fsearch/help
+Program itstool found: YES (/home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/itstool)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Library m found: YES
+Dependency gio-unix-2.0 for host machine found: YES 2.80.0 (cached)
+Dependency gtk+-3.0 for host machine found: YES 3.24.41 (cached)
+Dependency libpcre2-8 for host machine found: YES 10.42 (cached)
+Dependency icu-uc for host machine found: YES 74.2 (cached)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Library dl found: YES
+Program python3 found: YES (/home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3)
+Library dl found: YES
+Program msginit found: YES (/usr/bin/msginit)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program xgettext found: YES (/usr/bin/xgettext)
+Configuring config.h using configuration
+Build targets in project: 75
+NOTICE: Future-deprecated features used:
+ * 0.56.0: {'meson.source_root'}
+
+fsearch 0.3
+
+  User defined options
+    buildtype: release
+
+Found ninja-1.13.2.git.kitware.jobserver-pipe-1 at /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja
+ninja: no work to do.
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+ninja: no work to do.
+ 1/16 fsearch:validate-metainfo           OK              0.08s
+ 2/16 fsearch:test_database               OK              0.07s
+ 3/16 fsearch:test_database_file          OK              0.07s
+ 4/16 fsearch:test_database_chunked_array OK              0.07s
+ 5/16 fsearch:test_database_index_store   OK              0.06s
+ 6/16 fsearch:test_database_include       OK              0.06s
+ 7/16 fsearch:test_database_exclude       OK              0.06s
+ 8/16 fsearch:test_database_entry         OK              0.05s
+ 9/16 fsearch:test_array                  OK              0.05s
+10/16 fsearch:test_size_utils             OK              0.04s
+11/16 fsearch:test_time_utils             OK              0.03s
+12/16 fsearch:test_query                  OK              0.05s
+13/16 fsearch:test_string_utils           OK              0.04s
+14/16 fsearch:headless_cli                OK              7.32s
+15/16 fsearch:refresh_worker              FAIL           10.14s   exit status 1
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/tmp/fsearch-warm-release-build/src/tests MESON_TEST_ITERATION=1 MALLOC_PERTURB_=233 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3 /tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py /tmp/fsearch-warm-release-build/src/fsearch-refresh-worker /tmp/fsearch-warm-release-build/src/fsearch-cli /tmp/fsearch-warm-release-build/src/tests/librefresh_fault_fixture.so /tmp/fsearch-warm-release-build/src/tests/libheadless_fault_fixture.so
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+.........E.
+======================================================================
+ERROR: test_unproved_cleanup_requires_explicit_recovery_after_worker_absence (__main__.RefreshWorker.test_unproved_cleanup_requires_explicit_recovery_after_worker_absence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py", line 63, in test_unproved_cleanup_requires_explicit_recovery_after_worker_absence
+    failed=subprocess.run(command,env=env,capture_output=True,text=True,timeout=8)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 2116, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+  File "/home/ecochran76/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py", line 1253, in _check_timeout
+    raise TimeoutExpired(
+subprocess.TimeoutExpired: Command '['python3', '/tmp/fsearch-warm-release-build/src/fsearch-refresh', 'refresh', '--root', '/tmp/fsearch-refresh-quarantine-j1_r17b5/approved', '--database', '/tmp/fsearch-refresh-quarantine-j1_r17b5/accepted.db']' timed out after 8 seconds
+
+----------------------------------------------------------------------
+Ran 11 tests in 10.072s
+
+FAILED (errors=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+16/16 fsearch:warm_service                OK             24.43s
+
+Summary of Failures:
+
+15/16 fsearch:refresh_worker              FAIL           10.14s   exit status 1
+
+Ok:                15  
+Fail:              1   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

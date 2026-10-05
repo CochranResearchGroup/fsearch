@@ -59,6 +59,17 @@ fsearch_query_new(const char *search_term,
     return q;
 }
 
+FsearchQuery *
+fsearch_query_new_literal(const char *search_term, FsearchQueryFlags flags) {
+    FsearchQuery *query = g_new0(FsearchQuery, 1);
+    query->search_term = g_strdup(search_term);
+    query->query_id = g_strdup("snapshot");
+    query->query_tree = g_node_new(fsearch_query_node_new_literal(search_term, flags));
+    query->flags = flags;
+    query->ref_count = 1;
+    return query;
+}
+
 static void
 fsearch_query_free(FsearchQuery *query) {
     g_clear_pointer(&query->query_id, free);

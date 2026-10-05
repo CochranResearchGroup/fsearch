@@ -1,0 +1,134 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+[0/1] Regenerating build files
+Cleaning... 0 files.
+The Meson build system
+Version: 1.12.1
+Source dir: /home/ecochran76/workspace.local/fsearch
+Build dir: /tmp/fsearch-warm-release-build
+Build type: native build
+Project name: fsearch
+Project version: 0.3
+C compiler for the host machine: /usr/bin/gcc (gcc 13.3.0 "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0")
+C linker for the host machine: /usr/bin/gcc ld.bfd 2.42
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Checking if "malloc_trim is supported on the build platform" runs: YES
+Checking if "fanotify is supported by the build platform and works without CAP_SYS_ADMIN capabilities" runs: YES
+Checking if "inotify is supported by the build platform" runs: YES
+Configuring io.github.cboxdoerfer.FSearch.desktop.in using configuration
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Program desktop-file-validate found: NO
+Program appstreamcli found: YES (/usr/bin/appstreamcli)
+Could not find file LINGUAS in /home/ecochran76/workspace.local/fsearch/help
+Program itstool found: YES (/home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/itstool)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Library m found: YES
+Dependency gio-unix-2.0 for host machine found: YES 2.80.0 (cached)
+Dependency gtk+-3.0 for host machine found: YES 3.24.41 (cached)
+Dependency libpcre2-8 for host machine found: YES 10.42 (cached)
+Dependency icu-uc for host machine found: YES 74.2 (cached)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Library dl found: YES
+Program python3 found: YES (/home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3)
+Program msginit found: YES (/usr/bin/msginit)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program xgettext found: YES (/usr/bin/xgettext)
+Configuring config.h using configuration
+Build targets in project: 74
+NOTICE: Future-deprecated features used:
+ * 0.56.0: {'meson.source_root'}
+
+fsearch 0.3
+
+  User defined options
+    buildtype: release
+
+Found ninja-1.13.2.git.kitware.jobserver-pipe-1 at /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja
+[1/60] Compiling C object src/libfsearch.a.p/fsearch_query_matchers.c.o
+[2/60] Compiling C object src/libfsearch.a.p/fsearch_database_scan.c.o
+[3/60] Compiling C object src/libfsearch.a.p/fsearch_listview_popup.c.o
+[4/60] Compiling C object src/libfsearch.a.p/fsearch_database_entry_info.c.o
+[5/60] Compiling C object src/libfsearch.a.p/fsearch_query_tree.c.o
+[6/60] Compiling C object src/libfsearch.a.p/fsearch_database_search_view.c.o
+[7/60] Compiling C object src/libfsearch.a.p/fsearch_query_match_data.c.o
+[8/60] Compiling C object src/libfsearch.a.p/fsearch_query_parser.c.o
+[9/60] Compiling C object src/libfsearch.a.p/fsearch_database_sort.c.o
+[10/60] Compiling C object src/libfsearch.a.p/fsearch.c.o
+[11/60] Compiling C object src/libfsearch.a.p/fsearch_database_index_store.c.o
+[12/60] Compiling C object src/libfsearch.a.p/fsearch_folder_monitor_event.c.o
+[13/60] Compiling C object src/libfsearch.a.p/fsearch_preview.c.o
+[14/60] Compiling C object src/libfsearch.a.p/fsearch_folder_monitor_inotify.c.o
+[15/60] Compiling C object src/libfsearch.a.p/fsearch_result_view.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_result_view.c:2: warning: "G_LOG_DOMAIN" redefined
+    2 | #define G_LOG_DOMAIN "fsearch-result-view"
+      | 
+In file included from /usr/include/glib-2.0/glib.h:64,
+                 from /usr/include/gtk-3.0/gdk/gdkconfig.h:8,
+                 from /usr/include/gtk-3.0/gdk/gdk.h:30,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_result_view.c:1:
+/usr/include/glib-2.0/glib/gmessages.h:320: note: this is the location of the previous definition
+  320 | #define G_LOG_DOMAIN    ((gchar*) 0)
+      | 
+[16/60] Compiling C object src/libfsearch.a.p/fsearch_database_entry.c.o
+[17/60] Compiling C object src/libfsearch.a.p/fsearch_database_chunked_array.c.o
+[18/60] Compiling C object src/libfsearch.a.p/fsearch_folder_monitor_fanotify.c.o
+[19/60] Compiling C object src/libfsearch.a.p/fsearch_database.c.o
+[20/60] Compiling C object src/fsearch-refresh-worker.p/meson-generated_.._icon_resources.c.o
+[21/60] Compiling C object src/libfsearch.a.p/fsearch_database_search_info.c.o
+[22/60] Compiling C object src/libfsearch.a.p/fsearch_query.c.o
+[23/60] Compiling C object src/libfsearch.a.p/fsearch_window.c.o
+[24/60] Compiling C object src/libfsearch.a.p/fsearch_query_node.c.o
+[25/60] Compiling C object src/libfsearch.a.p/fsearch_database_work.c.o
+[26/60] Compiling C object src/libfsearch.a.p/fsearch_statusbar.c.o
+[27/60] Compiling C object src/libfsearch.a.p/fsearch_database_index.c.o
+[28/60] Compiling C object src/fsearch-refresh-worker.p/meson-generated_.._ui_resources.c.o
+[29/60] Compiling C object src/fsearch.p/main.c.o
+[30/60] Compiling C object src/tests/test_database_index_store.p/test_database_index_store.c.o
+[31/60] Compiling C object src/fsearch-refresh-worker.p/fsearch_refresh_worker.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_refresh_worker.c:2: warning: "_GNU_SOURCE" redefined
+    2 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+[32/60] Compiling C object src/tests/test_query.p/test_query.c.o
+[33/60] Compiling C object src/tests/test_database.p/test_database.c.o
+[34/60] Compiling C object src/tests/test_database_file.p/test_database_file.c.o
+[35/60] Compiling C object src/libfsearch.a.p/fsearch_headless.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_headless.c: In function ‘fsearch_headless_search’:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_headless.c:322:32: warning: pointer/integer type mismatch in conditional expression
+  322 |                                : strcasestr(name, options->query))) continue;
+      |                                ^
+[36/60] Compiling C object src/tests/snapshot_fixture.p/snapshot_fixture.c.o
+[37/60] Compiling C object src/fsearch-cli.p/fsearch_cli.c.o
+[38/60] Compiling C object src/libfsearch.a.p/fsearch_window_actions.c.o
+[39/60] Compiling C object src/tests/test_database_chunked_array.p/test_database_chunked_array.c.o
+[40/60] Compiling C object src/libfsearch.a.p/fsearch_database_file.c.o
+[41/60] Compiling C object src/tests/test_database_entry.p/test_database_entry.c.o
+[42/60] Linking static target src/libfsearch.a
+[43/60] Linking target src/tests/test_size_utils
+[44/60] Linking target src/tests/test_time_utils
+[45/60] Linking target src/tests/test_string_utils
+[46/60] Linking target src/tests/test_database_exclude
+[47/60] Linking target src/tests/test_array
+[48/60] Linking target src/tests/test_database_entry
+[49/60] Linking target src/tests/test_database_include
+[50/60] Linking target src/tests/test_database_chunked_array
+[51/60] Linking target src/tests/test_database_index_store
+[52/60] Linking target src/tests/test_query
+[53/60] Linking target src/fsearch-refresh-worker
+[54/60] Linking target src/tests/test_database
+[55/60] Linking target src/fsearch-worker
+[56/60] Linking target src/tests/snapshot_fixture
+[57/60] Linking target src/fsearch-cli
+[58/60] Linking target src/tests/test_database_file
+[59/60] Linking target src/fsearch
+INFO: autodetecting backend as ninja
+INFO: calculating backend command to run: /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja -C /tmp/fsearch-warm-release-build

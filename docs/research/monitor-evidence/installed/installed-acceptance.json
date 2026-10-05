@@ -1,0 +1,49 @@
+{
+  "source_commit": "10170cfe7848754bd5c68a49685d62ff17f2308e",
+  "installed_qualified": true,
+  "fixture_scope": "owned fixtures only",
+  "test_counts": {
+    "supervisor": 20,
+    "worker": 10,
+    "refresh": 12,
+    "service": 34,
+    "cli": 15
+  },
+  "remaining_fsearch_pids": [],
+  "production_roots_admitted": false,
+  "default_activation_changed": false,
+  "user_mcp_registration_changed": false,
+  "artifact_sha256": {
+    "fsearch-cli": "21189c2009db9b4c0e7f5f81792a68d2c8154fbfa3031246d405233aefeed6fc",
+    "fsearch-worker": "45ed7365d856ec88b6ea726d9137ca8583845670d0856c108664d88d624dd625",
+    "fsearch-service": "63d1bd0c3957ee372901536a8006d6a33120cf14502573f1f843fc7d485eb816",
+    "fsearch-refresh": "a587ab37b8cfb62c1bc03ba22781cf77cd9e8b4d0fb487081a31deee864de4d3",
+    "fsearch-refresh-worker": "f6424ba73176fc049cdd088a20c819c9d67d0a439f61850c54373fb21a134274",
+    "fsearch-monitor": "01073100ad355accdfcb2573b4469e60d25c9cdf5896360bda3eb722e308a8db",
+    "fsearch-monitor-worker": "36fa3543d600a33a62a4a2ce9780c7eb830fec3e963d764f204d99a0c75fa420"
+  },
+  "evidence_sha256": {
+    "docs/research/monitor-evidence/installed/supervisor-tests.txt": "3dd7ae9965a5c12c95fb16f510e37a8c38ec3660487bdf22e4debd38b772d383",
+    "docs/research/monitor-evidence/installed/resource-readback.json": "c17c08d783888b2e74438328826c68507cfd7ff6be626431b3b67effb89ceb96",
+    "docs/research/monitor-evidence/installed/refresh-tests.txt": "0da55ad05c159eb36c8af7f25349eae0074e5882540a386b557a4086fa82f0ca",
+    "docs/research/monitor-evidence/installed/service-tests.txt": "dd5456de7ceaef6fb94c6e2f1276fc4d6cd2431cb2361c2a549b4f2b00d7d148",
+    "docs/research/monitor-evidence/installed/worker-tests.txt": "ad414e44cdea533bc4ec3c47f4ce178a5225ff66649a2deb9453f2d4ef3aedc1",
+    "docs/research/monitor-evidence/installed/cli-tests.txt": "544a61c92c3d361f78d40288bf69484b0978f9fc3e9c5b77adf92afbd771c79c",
+    "docs/research/monitor-evidence/installed/installed-manifest.json": "308b494e50b531f0139c7efa33861090d48f2238d1e9c59cf986fdfbb4d24a36",
+    "docs/research/monitor-evidence/installed/query-isolation.txt": "02c76ceddc026bac503a4a16d54824657194604b0402b8d88d91369eea0e77aa",
+    "docs/research/monitor-evidence/installed/move-race.txt": "da4bf6dd5c05e712eb1a7756a2e9ae8a90b91c8ca95bc3ca0fe8f970696e49a5",
+    "docs/research/monitor-evidence/installed/move-race/refresh.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/research/monitor-evidence/installed/move-race/refresh.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/research/monitor-evidence/installed/move-race/monitor.stdout.txt": "433ae05454e4bdf3d2177df1f353a55e560f83854dfeb32bf3401fd45a054db0",
+    "docs/research/monitor-evidence/installed/move-race/refresh.trace": "b216e2643e9a78bb9dc428036d5f882b92fed4980f129b9a6cf0ad67bb87bde8",
+    "docs/research/monitor-evidence/installed/move-race/monitor.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/research/monitor-evidence/installed/move-race/monitor.trace": "2db02b0d9126ac8c7cf3f6bb9a14da8ddcfc447591bdc257b65f7ec91c5bcdbc",
+    "docs/research/monitor-evidence/installed/move-race/verification.json": "aa7e22f038dac9a1d81f04f715187484dc5b2f01748d89f7824e63750e45bab8",
+    "docs/research/monitor-evidence/installed/query-isolation/after-root-removal.trace": "b3e2235519ff4d722c7c24c8ab4870f62510b1eda357726809b9cef7373d8a6f",
+    "docs/research/monitor-evidence/installed/query-isolation/before-monitor.trace": "fe1cf07e8159ef8bbbb00d0e9991e173e42dc279d9ec0380c44c48235a635bc3",
+    "docs/research/monitor-evidence/installed/query-isolation/query-service.trace": "6d9c16a01f1af543cb6e181ec4fe36c0c5c3a5be382d5702938bf2f836df269d",
+    "docs/research/monitor-evidence/installed/query-isolation/while-monitoring.trace": "62de197c49502e4feb5ad93a9a9362506e290cbe2afad5b2d1269b064cc37e40",
+    "docs/research/monitor-evidence/installed/query-isolation/root-probe-negative-control.trace": "d10888d63599ceb1d76e61c00ec3db23cf717f5304667f61ce14e475e2ab2ee7",
+    "docs/research/monitor-evidence/installed/query-isolation/query-isolation.json": "336d6c21503a78b829b77443ee79b71d6db209e8ccd2e2907a4c5658eb379a7f"
+  }
+}

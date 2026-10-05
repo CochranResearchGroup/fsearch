@@ -1,0 +1,939 @@
+{
+  "fixture": "1024 virtual files; first four identical basenames in different parents",
+  "cases": [
+    {
+      "mode": "linear",
+      "query": "duplicate-common",
+      "options": {},
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1089,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-01-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "linear",
+      "query": "DUPLICATE",
+      "options": {},
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1089,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-01-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "linear",
+      "query": "duplicate",
+      "options": {
+        "extension": "pdf"
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1089,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-01-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "linear",
+      "query": "duplicate",
+      "options": {
+        "limit": 1
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "result_limit",
+        "complete": false,
+        "truncated": true,
+        "visibility": "cached",
+        "examined": 386,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "linear",
+      "query": "duplicate",
+      "options": {
+        "max_bytes": 512
+      },
+      "response": {
+        "error": "coverage_size_limit"
+      }
+    },
+    {
+      "mode": "linear",
+      "query": "duplicate",
+      "options": {
+        "kind": 2
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 65,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": []
+      }
+    },
+    {
+      "mode": "linear",
+      "query": "department-03",
+      "options": {
+        "flags": 1
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1089,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000067-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000131-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000195-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000259-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000323-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000387-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000451-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000515-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000579-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000643-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000707-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000771-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000835-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000899-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000963-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "native",
+      "query": "duplicate-common",
+      "options": {},
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 9,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-01-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "native",
+      "query": "DUPLICATE",
+      "options": {},
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 9,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-01-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "native",
+      "query": "duplicate",
+      "options": {
+        "extension": "pdf"
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 9,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-01-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "native",
+      "query": "duplicate",
+      "options": {
+        "limit": 1
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "result_limit",
+        "complete": false,
+        "truncated": true,
+        "visibility": "cached",
+        "examined": 4,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "native",
+      "query": "duplicate",
+      "options": {
+        "max_bytes": 512
+      },
+      "response": {
+        "error": "coverage_size_limit"
+      }
+    },
+    {
+      "mode": "native",
+      "query": "duplicate",
+      "options": {
+        "kind": 2
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 0,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": []
+      }
+    },
+    {
+      "mode": "native",
+      "query": "department-03",
+      "options": {
+        "flags": 1
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1089,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000067-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000131-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000195-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000259-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000323-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000387-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000451-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000515-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000579-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000643-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000707-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000771-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000835-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000899-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000963-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "sqlite",
+      "query": "duplicate-common",
+      "options": {},
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 9,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-01-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "sqlite",
+      "query": "DUPLICATE",
+      "options": {},
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 9,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-01-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "sqlite",
+      "query": "duplicate",
+      "options": {
+        "extension": "pdf"
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 9,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-01-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "sqlite",
+      "query": "duplicate",
+      "options": {
+        "limit": 1
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "result_limit",
+        "complete": false,
+        "truncated": true,
+        "visibility": "cached",
+        "examined": 4,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    },
+    {
+      "mode": "sqlite",
+      "query": "duplicate",
+      "options": {
+        "max_bytes": 512
+      },
+      "response": {
+        "error": "coverage_size_limit"
+      }
+    },
+    {
+      "mode": "sqlite",
+      "query": "duplicate",
+      "options": {
+        "kind": 2
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 0,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": []
+      }
+    },
+    {
+      "mode": "sqlite",
+      "query": "department-03",
+      "options": {
+        "flags": 1
+      },
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1089,
+        "snapshot": {
+          "identity": "2096:6412189:31961:1791150202:376012958:1791150202:376012958",
+          "mtime_unix": 1791150202,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000067-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000131-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000195-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000259-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000323-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000387-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000451-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000515-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000579-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000643-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000707-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000771-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000835-common.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000899-common.csv",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/archive-0000963-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/duplicate-common.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path",
+            "path_bytes_base64": null
+          }
+        ]
+      }
+    }
+  ],
+  "generated_source_sha256": "0204999be2b5cc0a00f4b7d6ff1a884515976dc775ed91af367984ad807db623"
+}

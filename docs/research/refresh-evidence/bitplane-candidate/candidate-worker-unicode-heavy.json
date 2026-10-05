@@ -1,0 +1,3289 @@
+{
+  "runtime": "/tmp/fsearch-warm-release-build/src",
+  "fixture": "unicode-heavy",
+  "accepted": false,
+  "seam": "actual Unix socket and compiled resident worker",
+  "files": 1000000,
+  "samples": 100,
+  "frozen_rss_kib": 131072,
+  "queries": [
+    {
+      "label": "rare",
+      "query": "invoice-unique-zqx",
+      "path": false,
+      "first": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1,
+        "snapshot": {
+          "identity": "2096:6619341:56219817:1791166283:885878002:1791166283:965078002",
+          "mtime_unix": 1791166283,
+          "age_seconds": 1,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/invoice-unique-zqx.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "qualification"
+      },
+      "socket_ms": {
+        "p50_ms": 2.098169003147632,
+        "p95_ms": 2.56793500011554,
+        "p99_ms": 2.709959000640083
+      },
+      "raw_socket_ms": [
+        2.100731995597016,
+        2.0616590045392513,
+        1.9799930014414713,
+        2.0042489995830692,
+        1.9619520026026294,
+        1.982863999728579,
+        2.8880430036224425,
+        2.074716001516208,
+        2.5070490009966306,
+        2.4994250052259304,
+        2.098169003147632,
+        2.024777000769973,
+        2.364547995966859,
+        2.42323999555083,
+        2.709959000640083,
+        2.3898199942777865,
+        2.145600999938324,
+        2.324268003576435,
+        2.131879999069497,
+        2.0539260003715754,
+        2.387612003076356,
+        2.0708219963125885,
+        2.1141260003787465,
+        2.1586930015473627,
+        2.130233006027993,
+        2.277692998177372,
+        2.1004509981139563,
+        2.586458998848684,
+        2.342762003536336,
+        2.161204000003636,
+        2.4123740004142746,
+        2.273314996273257,
+        2.197422996687237,
+        2.0708899974124506,
+        2.5794230023166165,
+        2.2392760001821443,
+        2.188386002671905,
+        2.1280189976096153,
+        2.3384390005958267,
+        2.1586709990515374,
+        2.187768004660029,
+        2.1524399999179877,
+        2.0348190009826794,
+        2.3466989950975403,
+        2.0637840061681345,
+        2.1889980052947067,
+        2.5270889964303933,
+        2.035222998529207,
+        2.106068001012318,
+        2.4574599956395105,
+        2.244166003947612,
+        2.1338630031095818,
+        2.157570001145359,
+        2.2562369995284826,
+        2.6844869935302995,
+        2.2014520000084303,
+        2.142339995771181,
+        2.3056220015860163,
+        2.136724993761163,
+        2.005706999625545,
+        2.0557670068228617,
+        2.0464129993342794,
+        1.9889030008926056,
+        2.0055349959875457,
+        2.0376340034999885,
+        2.1594620047835633,
+        2.325034001842141,
+        2.0387879994814284,
+        2.18629799928749,
+        2.0054589986102656,
+        2.066015003947541,
+        1.950600002601277,
+        2.0096380030736327,
+        2.075915996101685,
+        2.0682589965872467,
+        2.0112880010856315,
+        2.019396000832785,
+        2.0792049981537275,
+        1.9918949983548373,
+        2.0050630046171136,
+        1.9539219938451424,
+        2.56793500011554,
+        2.056951001577545,
+        1.9881769985659048,
+        1.9978899945272133,
+        2.113679001922719,
+        1.9563759997254238,
+        1.9463760036160238,
+        1.9511170030455105,
+        2.044444001512602,
+        2.001481996558141,
+        1.9564690010156482,
+        1.9174889966961928,
+        1.9278179970569909,
+        1.913205000164453,
+        1.945083997270558,
+        1.9636129945865832,
+        1.9642410043161362,
+        2.0131580022280104,
+        1.9598299986682832
+      ]
+    },
+    {
+      "label": "late",
+      "query": "zz-last-rare-qvt",
+      "path": false,
+      "first": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1,
+        "snapshot": {
+          "identity": "2096:6619341:56219817:1791166283:885878002:1791166283:965078002",
+          "mtime_unix": 1791166283,
+          "age_seconds": 1,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/zz-last-rare-qvt.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "qualification"
+      },
+      "socket_ms": {
+        "p50_ms": 2.009740004723426,
+        "p95_ms": 2.3029049989418127,
+        "p99_ms": 2.491439001460094
+      },
+      "raw_socket_ms": [
+        1.958004002517555,
+        2.045553999778349,
+        1.9957780023105443,
+        1.931052996951621,
+        1.9423170015215874,
+        1.989849995879922,
+        2.009740004723426,
+        2.3487759972340427,
+        2.3029049989418127,
+        1.9500729977153242,
+        2.038833001279272,
+        2.1693929957109503,
+        2.1713230016757734,
+        2.080778001982253,
+        2.0443770044948906,
+        1.9639660022221506,
+        2.0255589988664724,
+        2.0785540036740713,
+        2.1329910014173947,
+        2.084676001686603,
+        1.979130000108853,
+        2.0116519954171963,
+        2.450150997901801,
+        2.131157998519484,
+        2.2754699966753833,
+        2.491439001460094,
+        2.5959310005418956,
+        2.177447997382842,
+        2.1362080005928874,
+        2.0282840050640516,
+        2.018241000769194,
+        1.9588389986893162,
+        1.9893319986294955,
+        2.017074999457691,
+        2.111842004524078,
+        1.921789997140877,
+        2.184883996960707,
+        2.0479800004977733,
+        1.9818740038317628,
+        1.9443960045464337,
+        1.9882000051438808,
+        2.0213530006003566,
+        2.041473999270238,
+        1.934473002620507,
+        1.991895005630795,
+        1.947140000993386,
+        2.0151720018475316,
+        1.910685998154804,
+        1.9232089980505407,
+        1.8954889965243638,
+        2.0498739977483638,
+        2.0235799966030754,
+        2.3459610019926913,
+        2.0821750003960915,
+        2.257100997667294,
+        2.04803999804426,
+        1.9985390026704408,
+        1.9813899998553097,
+        2.023367997026071,
+        2.12577899947064,
+        2.038459002505988,
+        2.0009810032206587,
+        1.9403920014156029,
+        1.9956190008088015,
+        1.9863780034938827,
+        2.028119000897277,
+        1.9696200033649802,
+        2.03997700009495,
+        2.0603610028047115,
+        2.080521997413598,
+        1.9812489990727045,
+        1.9599720035330392,
+        1.9821929963654839,
+        2.1358230005716905,
+        1.9383129983907565,
+        1.9746899997699074,
+        1.9307669936097227,
+        1.9644659987534396,
+        1.9484820004436187,
+        2.0381079957587644,
+        1.9164120021741837,
+        2.0551359993987717,
+        1.8976659994223155,
+        2.0198470010655,
+        2.097905002301559,
+        1.9526680043782108,
+        1.9519750057952479,
+        1.9375979973119684,
+        1.966560994333122,
+        1.9325050016050227,
+        1.943515999300871,
+        1.9393149996176362,
+        1.9504090014379472,
+        2.121400997566525,
+        2.022369997575879,
+        1.9371360031072982,
+        1.9321090003359132,
+        1.8757440047920682,
+        1.8973639962496236,
+        2.030401003139559
+      ]
+    },
+    {
+      "label": "absent",
+      "query": "never-exists-jkm",
+      "path": false,
+      "first": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 0,
+        "snapshot": {
+          "identity": "2096:6619341:56219817:1791166283:885878002:1791166283:965078002",
+          "mtime_unix": 1791166283,
+          "age_seconds": 2,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [],
+        "request_id": "qualification"
+      },
+      "socket_ms": {
+        "p50_ms": 1.9991549997939728,
+        "p95_ms": 2.9139809994376265,
+        "p99_ms": 3.947170996980276
+      },
+      "raw_socket_ms": [
+        1.9814340048469603,
+        1.9514580053510144,
+        2.0383769951877184,
+        1.9259759937995113,
+        2.4437040046905167,
+        2.0060629976796918,
+        1.993303005292546,
+        1.910450002469588,
+        1.9618759979493916,
+        1.8925189942819998,
+        1.9734359957510605,
+        1.8981510002049617,
+        1.9595769990701228,
+        1.9869230018230155,
+        1.9329999995534308,
+        1.8904940006905235,
+        1.960560999577865,
+        1.8995979989995249,
+        1.9571730008465238,
+        1.9359529978828505,
+        1.9926000022678636,
+        1.9679260003613308,
+        2.0408330019563437,
+        1.9857919978676364,
+        1.9967249972978607,
+        1.9106039981124923,
+        1.920909999171272,
+        2.050758004770614,
+        2.0456429992918856,
+        1.994045996980276,
+        1.954125997144729,
+        1.9991549997939728,
+        2.0061410032212734,
+        1.9410299937590025,
+        1.9864940040861256,
+        1.8896480032708496,
+        1.9891449992428534,
+        1.9068520050495863,
+        1.9346170010976493,
+        2.025417998083867,
+        1.9760549985221587,
+        1.931086000695359,
+        1.9203490010113455,
+        1.8985799979418516,
+        1.9372899987502024,
+        1.9219879977754317,
+        1.9331319999764673,
+        1.92219800374005,
+        2.196554996771738,
+        1.997515995753929,
+        1.9362829989404418,
+        2.1833489954588003,
+        2.0013390021631494,
+        2.1938880017842166,
+        1.9822600006591529,
+        2.0681099995272234,
+        3.694598999572918,
+        2.0133619982516393,
+        2.009600000747014,
+        2.0933470004820265,
+        2.068196998152416,
+        2.104758001223672,
+        2.0119710025028326,
+        1.9898600003216416,
+        2.00342400057707,
+        1.9428440064075403,
+        2.0377550026751123,
+        1.977177002117969,
+        2.071288996376097,
+        2.0127449970459566,
+        2.0465570050873794,
+        2.1103899998706765,
+        1.993776997551322,
+        2.0445320042199455,
+        2.043848995526787,
+        1.9015390062122606,
+        1.9648570014396682,
+        2.3607189941685647,
+        2.1166160004213452,
+        2.442971999698784,
+        2.060185004665982,
+        3.947170996980276,
+        2.4963460018625483,
+        2.165280995541252,
+        2.0238290017005056,
+        2.35143300233176,
+        2.2617590002482757,
+        3.870817003189586,
+        2.2263040009420365,
+        2.4603929996374063,
+        2.0584470039466396,
+        2.0028630024171434,
+        1.9975610048277304,
+        2.662036000401713,
+        2.0365759992273524,
+        2.2693460050504655,
+        3.85324600210879,
+        4.295972001273185,
+        2.191997002228163,
+        2.9139809994376265
+      ]
+    },
+    {
+      "label": "false_grams",
+      "query": "abcd",
+      "path": false,
+      "first": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 18,
+        "snapshot": {
+          "identity": "2096:6619341:56219817:1791166283:885878002:1791166283:965078002",
+          "mtime_unix": 1791166283,
+          "age_seconds": 2,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-10-invoice-path/0m5c6rf6tidizvziyabcdtwbj3dbiev3fo7qnn98-0144586.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-19-invoice-path/5k2vw7nfkvbaqpqlabcdvshu3178mu57l66gclu4-0895699.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-12-invoice-path/8pog8bcggxn8794abcdf8geccih62riqztw3uf21-0450444.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-57-invoice-path/9gwtvkcrvw8yca375o8oi3abcdv1m79rqsezwuoi-0279033.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-30-invoice-path/46e1trt68jenfbx3xhjqlabcdm48bvje1b50pc7v-0578974.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-48-invoice-path/abcd92xdpcp0tvzug6u4mzyrf4s1evuwxa952j45-0284784.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-45-invoice-path/eh37jlxm72xwhvbbyhrpqu1sl1abcdsn0y5oek83-0652717.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-10-invoice-path/gnykjabcd3msop3s8mq8o9tnucm1kgjm8hg4dx2y-0703818.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/htif3an74zriabcd5jxtknzfv0vox0dqin6uhzau-0281088.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-50-invoice-path/izajuajht5aq7rabcdq9gl2ucw4tmoprk1e5rtv4-0053938.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-12-invoice-path/lsdbc94k6k1crllhshq7rpof0r3xabcdhda8yh4l-0863436.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-59-invoice-path/ol3jbrv3cv3wqjnu5jabcd6gkiflvf1gwqzel2o3-0739323.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-49-invoice-path/s85u3rh9zabcd6adl3mabv7x1bvs0t5nhrahvxzt-0512433.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-04-invoice-path/u4ekz2iu5k2vw7nfkvbaqpqlabcdvshu3178mu57-0234244.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-26-invoice-path/vlebgcq90o950mdu3xh1turt4stwmu7zeabcd5lw-0949402.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-15-invoice-path/we87decle8tyzjdx2rngg7n130abcdbkh8m4gsc8-0949327.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-35-invoice-path/wsmm247mlabcdf0360n6ivxtv6chbzm743kif3nw-0618467.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-52-invoice-path/y41qeff1a0cpkapmwhuabcdf5hotehydu3mvoein-0810932.txt",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "qualification"
+      },
+      "socket_ms": {
+        "p50_ms": 7.138041000871453,
+        "p95_ms": 7.639877003384754,
+        "p99_ms": 7.7978190020076
+      },
+      "raw_socket_ms": [
+        7.686373995966278,
+        7.164615002693608,
+        6.983059000049252,
+        7.062775999656878,
+        7.174204998591449,
+        7.27374399866676,
+        7.3238670011051,
+        7.048568993923254,
+        6.868895994557533,
+        6.954851996852085,
+        7.013526999799069,
+        6.885429997055326,
+        7.104356998752337,
+        7.281054997292813,
+        6.795679000788368,
+        7.030599997960962,
+        7.478581996110734,
+        5.799211998237297,
+        3.749461997358594,
+        6.402128004992846,
+        6.910306998179294,
+        6.949153997993562,
+        7.512090000091121,
+        3.99512500007404,
+        4.09102800040273,
+        2.9395719975582324,
+        3.1264400022337213,
+        6.988733002799563,
+        4.27620700065745,
+        7.4184360055369325,
+        4.2836849970626645,
+        7.3118389991577715,
+        7.434282997564878,
+        7.280564997927286,
+        7.112662002327852,
+        3.2740759997977875,
+        7.589223998365924,
+        3.5476989942253567,
+        7.204711997474078,
+        7.138041000871453,
+        3.0634860013378784,
+        7.3223159997724,
+        7.433947001118213,
+        7.374216002062894,
+        7.428238001011778,
+        3.590024003642611,
+        7.591813999169972,
+        7.154868995712604,
+        7.36638400121592,
+        7.644908997463062,
+        7.2825169991119765,
+        4.1372220002813265,
+        3.5879130009561777,
+        7.387229998130351,
+        7.530100003350526,
+        7.322799996472895,
+        5.315406000590883,
+        7.431257996358909,
+        3.3522369994898327,
+        7.5928629958070815,
+        7.406440003251191,
+        7.4318339975434355,
+        7.409483005176298,
+        7.0919710051384754,
+        7.486527996661607,
+        7.383334996120539,
+        7.454550999682397,
+        6.952455005375668,
+        6.440568002290092,
+        7.038806004857179,
+        7.0881319988984615,
+        7.504023997171316,
+        6.862725997052621,
+        7.0836719969520345,
+        5.220834995270707,
+        7.074157001625281,
+        7.280320998688694,
+        7.071455002005678,
+        7.251481001731008,
+        7.181824999861419,
+        7.493762001104187,
+        4.594365003868006,
+        4.545727999357041,
+        7.3269799977424555,
+        2.9834549932274967,
+        7.751363998977467,
+        7.625902006111573,
+        7.069002000207547,
+        7.130395999411121,
+        7.536326003901195,
+        7.392178995360155,
+        4.342940002970863,
+        7.581278994621243,
+        7.7978190020076,
+        7.586779996927362,
+        7.639877003384754,
+        3.802571998676285,
+        7.174395999754779,
+        3.5124569985782728,
+        7.830754002497997
+      ]
+    },
+    {
+      "label": "two_char",
+      "query": "ab",
+      "path": false,
+      "first": {
+        "schema_version": 1,
+        "status": "result_limit",
+        "complete": false,
+        "truncated": true,
+        "visibility": "cached",
+        "examined": 101,
+        "snapshot": {
+          "identity": "2096:6619341:56219817:1791166283:885878002:1791166283:965078002",
+          "mtime_unix": 1791166283,
+          "age_seconds": 2,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-07-invoice-path/001prncr531yaf1k7dq7abwn8m76rfkd977jgd5a-0330503.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-21-invoice-path/007fhzm00lx1ju9fvmpwkab2ba015vw66n2sj9oj-0752981.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-11-invoice-path/00a4ljh71e2f982dv65huwp0fozzo8aby6lirym4-0336139.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-26-invoice-path/00c6ptz968g4svzamkfsr18xxny7kabedm5hhm70-0023514.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/00gob11jna7lbubab0h6anbza1hzjue5yy497z5u-0375939.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-51-invoice-path/00h67fcjcmfedbtxaaby102uyjwktbqdafa5t8ka-0142707.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-23-invoice-path/00i20vn7twjytntqccdgbeakrabsog4e6mok6tto-0458263.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-40-invoice-path/00poigohgpsry7clgutvb888ayfkr465lrabpyhk-0658856.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-39-invoice-path/00q3r8ud4i95ak0pj815ooab5qgxo3tb3yyoaoy4-0596007.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-30-invoice-path/00rgxkq10rnabxvbyjyr2m3sbtkge5xf1zy3b7yp-0119454.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-61-invoice-path/00zzb1m6i8httabdb94lea7l1hwjteihuxv6vgae-0924861.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-40-invoice-path/016icz11qp5ab2ojy7ccn4z9ul26nbggxq4mg7is-0257832.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-60-invoice-path/0175wsg8abyhpaqp7jrbs9f8c47tzdmv8xvjcmlk-0000892.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-06-invoice-path/017hv2ot339luf3xrlkgl7o3ejyklywdc30wabf2-0712006.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-24-invoice-path/017uz7s31bom0pmkowcuhlwrynjzabh7p6jul3oa-0880344.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-35-invoice-path/0193ab0t5e0rpwm9m7b46zd7zzp1nvzwuij2q9cc-0051619.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-21-invoice-path/01dabga3ndd8teek1rtpr8gi4a9yyvg0zjenmv5l-0169813.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-18-invoice-path/01dm3dic9abxxavm2qncb8d9rz4sdz8itpgufq9i-0124946.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-07-invoice-path/01dynab0k2fwhjgykcg7c8bvfl5kc36me2448cmx-0326791.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-44-invoice-path/01hjjcwqd0cu3dabz88gqfcb69r0dx66yslyzb48-0137708.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-54-invoice-path/01k4x7pvlvhtxjwqw0ypzd2p8abv4sjqzwuzeod3-0369206.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-31-invoice-path/01lomabfd60y5objyy4kj3bahmdfnyh7xa9jl109-0087519.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-41-invoice-path/01lta3uzabrc6zuzog02hqyf91zgpfu57ntptqeo-0898409.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-30-invoice-path/01mo1wypvncolelna8txuabdmnckjkmr50ulcf2o-0529054.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-57-invoice-path/01wa2hi0lpaggec30yquyszmhlp8w8lcabwv9nyq-0478713.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-12-invoice-path/01wjbz99rui2bpt0nncrfpzis5abrwtp6drogog4-0923468.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-54-invoice-path/021qo9iumab7cudtfeaxhm915nmdfj3sc65ss1ew-0788022.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-23-invoice-path/0237s652rt1byccxy5cizj3lrcn8w0hvopmab4x2-0478807.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-07-invoice-path/024ab6gbpy6oz6v6ya6jmjgfii7s9fjlz52pky2o-0351303.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-49-invoice-path/024ic25f9g0pkb42evif8hgcyo62ab22qnhe3qud-0978353.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-12-invoice-path/0257l88czi1jxobf29cj6ic6fbbmyab32rxy5ajx-0413708.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-28-invoice-path/026b2zrezutlo7hd9mntgab7ao80tpjedkia46bg-0384732.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-44-invoice-path/0275c0lpgsyiuu0lz3cab5xuye61mdrupwsx6wj3-0706412.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-12-invoice-path/0278379yw9akvgezfqm3jxr3sklo0hr7y416rabc-0443788.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-55-invoice-path/0278ecjexdsyh9unv5ldl89abbbdx2bh1a7zymis-0156599.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-59-invoice-path/0296iphiypanyahsj1sbavfm262x5rs3wab4d3tb-0176763.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/029vqlfki3rx8hrns838lsab2dtyxugrwg0znrgo-0895871.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-59-invoice-path/02d3s03c5s1u3kwa93gov72cdscayeig40sab03b-0732859.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-07-invoice-path/02gjabtkige5e5i2x4xblhba5f17m9149cqyvu1y-0819399.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-45-invoice-path/02hqqxuf8767mhl4thusmcy3q74lq5gn7ab7drv1-0360877.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-07-invoice-path/02ip5ie0gmo2bkgtcsfstp3iey7ab9z8ohzekxl6-0825607.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-32-invoice-path/02k3hrighn4ulag61qgabjab0wo80ud31f1klrs4-0682336.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-16-invoice-path/02uk91xa4cza4l3ac24t8n6u4xzmwt1d63abuxks-0912784.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-13-invoice-path/02zgcgqzczq6f0abydt2g0ukevnl37zs8h0i8orl-0092557.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-59-invoice-path/03228qj3ge99ioazh2abm8d8pf5ruozsb72e98mb-0183547.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-05-invoice-path/032qptg5psp5px4sujc3fq1rn4bcty1abwtqrgtu-0039557.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-20-invoice-path/032vvzvefvnjabi5vv628zt7m8buztuwpcna2d1q-0855764.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-61-invoice-path/034cih50rn4yfsanw5h85qv01dokfykfabqro98s-0498429.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-30-invoice-path/0396rh7cdm9uyr6s8z4p5abanpaf83wlsp8unqxr-0115742.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-54-invoice-path/03a5wky15kgeibqiowg6ab76th7g08nbny94xw0f-0338102.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-55-invoice-path/03bvjfqpja2ckmnonmfzzjxai8aw2wabvwbzz5ym-0241527.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-43-invoice-path/03ck3smwajqnkrgl5yabf2prtv1dpzwwkmgvv05c-0113067.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-59-invoice-path/03csdu24c53e4wbn4tzmmi6y36uyvdab1avu2m4o-0140923.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-45-invoice-path/03hanw4p0unuj3vz8yhyysiu91qq50h1rv3h6pab-0895533.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-49-invoice-path/03jrycozb9ryr5l7yr9no3bg7tq22mkabmyqexby-0506033.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-24-invoice-path/03jy64abyknh02id0t03qoll802em78vbcaz6qm4-0829912.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-61-invoice-path/03mabboqch00adxnm5hjiqnokttoywdu6r74qu30-0943293.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-47-invoice-path/03r3vpzpqaajqr5jixxth212ydlablmvf9unisd2-0253103.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-47-invoice-path/03rshiv3s624ye1kse5ifxabcc9uyrubxz6ygc51-0177071.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-20-invoice-path/03w0i5rt3qfcegz40qnla779wabr4ndaxjto2gdl-0386068.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-43-invoice-path/03xpp84tect8rabdy9jgdc43lc0n4v76jk09p6gx-0057707.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-62-invoice-path/03xweli2ab0ifshus5jibeotuqzb2kzytd8iirx4-0854654.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-40-invoice-path/040jlab5v3pnyys5olj5lhrfzjr1x278oiqdfg3c-0193064.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-59-invoice-path/045h3qo6sdkedx05lrkg4b9ndxab9j116y24tefe-0231163.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-18-invoice-path/045ohvz77ceabc0hpyf9bkqgkvmndkwxvkh1a26x-0610066.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-26-invoice-path/0468z35ml53a9vg4xk4cab6as0zvhjilfhj72mxa-0648666.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-60-invoice-path/0469ci52b623ckjqa34abw6g3j7l7227ixac8kcx-0095292.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-06-invoice-path/046o839hi9ya8839zpn8rqjpoabcqylrbutqdkvi-0134534.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-20-invoice-path/049gu31cknlozs3fz35ifd94rsl3whbxab20hc00-0848788.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-29-invoice-path/04gbfaeuu62s4e4u5axpodihabzt8bxvzi48ywhr-0667677.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-41-invoice-path/04h3qpmjzaxven2cf5904vl2fvci5rlizwlabhd0-0369961.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-45-invoice-path/04hpabzqll63qmyz0cvza3zs5z3mnu9akbw8inem-0370093.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-32-invoice-path/04nxcwdylot0hrwgnmmat8d6jgabyw8rca1ngfrt-0739552.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-28-invoice-path/04r7dx5xlsc5kdt5i7qy5jowjcxo2abxuy09i6yn-0903452.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-06-invoice-path/04r453870ab1u6jxunhtyhcbacduskba6es6a4s5-0238086.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-59-invoice-path/04ryvbkyf0q06y4hvuuxvr9kklj1zsevu6br5wab-0700667.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/04z72vrodjbg3wqm3kzfggbnskx5w898mfgabh7u-0145922.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-53-invoice-path/05007abd0ymbp6251k0ofuxqlye4n4mmx0yaj0jp-0475637.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-37-invoice-path/05434bwlzoeg6gc5u8hlu21s1t1wcmgijuzabesf-0797157.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-29-invoice-path/057oab405nr4b9hs2huikiw0v0ven5yv7gr87ile-0667933.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-38-invoice-path/0586o1h8k6rab71095o485w5tqa310k80wcpp8qi-0407846.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-00-invoice-path/05abfsk74dbmroqa06tpyzqebj8gc1o7s2guphks-0428736.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-51-invoice-path/05ea89jbvwth90cso6abv6fk49e1e3ia36d7q6z8-0735347.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-38-invoice-path/05fvdszjdnugrleheszb29ab5qz7ypgtas3tzw8o-0474278.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-32-invoice-path/05mprob7ocm6c0yep9gubwjqrh8p66s6tfabmktu-0701344.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-37-invoice-path/05pawmtcwiseuotpzkqtsh1lpabrgmftzyeqry7u-0795109.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-44-invoice-path/05qq3enpq16gwrlgz99opgab8rpq2whxkhkxfzbr-0221996.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-14-invoice-path/05rafiuvf24kjabdiag2toi7obif0x4ctywfvge9-0692558.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-38-invoice-path/05rnlp4b8xp4qu2eeu9ufa51tkraab4ifm69wqu0-0489638.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-20-invoice-path/05vvxnv6ts8mb73nqg8zhznlxk5i491rsab3fs0v-0850644.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-27-invoice-path/05xmalhn5bvm94f4lhnqnd3xb2x4b3dd92abst95-0931803.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-27-invoice-path/05ygq6ab9s9ff0kz6tzpchzdcmijg5mqp4rgm0bi-0401947.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-17-invoice-path/060r51x4rqmyjjon87sc1j4m0oablt2d3f0rfsya-0261009.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-06-invoice-path/0616s7f8f5a18gyavh8r8jyv1smio9fcd9aboje5-0691142.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-62-invoice-path/061h55ypy0wfwhr8aoz3abfb2m3wqtcum12vpt19-0353726.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-52-invoice-path/0629slotto3aboom1z1bu5qjr9a2eocfme83lhth-0598836.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-40-invoice-path/0631bi80abw1vhfhd429fsgs3rrtf3iuzk9lfrxn-0203688.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-13-invoice-path/06366dqe39lg1q7240020q6m91u0p32fsfabf0dh-0632141.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-60-invoice-path/06bc405mpv2fe8s68r8adyf3pabrivog845ivy00-0126908.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-02-invoice-path/06mnvrghjn3dypzmjnutjizivvrp3jypdmjab771-0233026.txt",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "qualification"
+      },
+      "socket_ms": {
+        "p50_ms": 0.5632320026052184,
+        "p95_ms": 0.7820140017429367,
+        "p99_ms": 0.8410529990214854
+      },
+      "raw_socket_ms": [
+        0.492746003146749,
+        0.5092360006528907,
+        0.5057369999121875,
+        0.5179369982215576,
+        0.5720039989682846,
+        0.5314320005709305,
+        0.5719639957533218,
+        0.47459499910473824,
+        0.5629989973385818,
+        0.7327619969146326,
+        0.6546419972437434,
+        0.6571929989149794,
+        0.5712280035368167,
+        0.7671200000913814,
+        0.5280350014800206,
+        0.4667190005420707,
+        0.49931399553315714,
+        0.6345279980450869,
+        0.5269789980957285,
+        0.4669499976444058,
+        0.5632320026052184,
+        0.7509479983127676,
+        0.47841200284892693,
+        0.4794689957634546,
+        0.4576879946398549,
+        0.5142899972270243,
+        0.6141730045783333,
+        0.6347369999275543,
+        0.5247349981800653,
+        0.4791610044776462,
+        0.5092790015623905,
+        0.5620930023724213,
+        0.5622879980364814,
+        0.5034380010329187,
+        0.4979599980288185,
+        0.6208660051925108,
+        0.47512400487903506,
+        0.4830209945794195,
+        0.5564489983953536,
+        0.5074639993836172,
+        0.4831650003325194,
+        0.4953139941790141,
+        0.7950500003062189,
+        0.4720700017060153,
+        0.6191890061018057,
+        0.5875900023966096,
+        0.6314429992926307,
+        0.5516469973372295,
+        0.486233999254182,
+        0.47270300274249166,
+        0.499434994708281,
+        0.5934750006417744,
+        0.5451399993035011,
+        0.4955949989380315,
+        0.7188340023276396,
+        0.599845006945543,
+        0.5266369989840314,
+        0.6057300051907077,
+        0.6434050010284409,
+        0.5302569988998584,
+        0.4962550010532141,
+        0.8410529990214854,
+        0.7998130022315308,
+        0.7277219992829487,
+        0.9124729986069724,
+        0.6953479969524778,
+        0.7181190012488514,
+        0.55395199888153,
+        0.5979630004731007,
+        0.6303819973254576,
+        0.6454959948314354,
+        0.56474899611203,
+        0.5175569967832416,
+        0.5814960022689775,
+        0.6818300025770441,
+        0.44821700430475175,
+        0.49053499969886616,
+        0.45808400318492204,
+        0.44326699571684003,
+        0.5303119978634641,
+        0.5097859975649044,
+        0.5109190024086274,
+        0.5769310009782203,
+        0.6377260069712065,
+        0.67905100149801,
+        0.5563829981838353,
+        0.7175380014814436,
+        0.7257980032591149,
+        0.68329199712025,
+        0.6482629978563637,
+        0.7820140017429367,
+        0.6966020009713247,
+        0.6283359980443493,
+        0.6542720002471469,
+        0.6277810025494546,
+        0.5999269997118972,
+        0.79667800309835,
+        0.7599579985253513,
+        0.6716759962728247,
+        0.6612260040128604
+      ]
+    },
+    {
+      "label": "unicode",
+      "query": "\u00e9cole",
+      "path": false,
+      "first": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 2,
+        "snapshot": {
+          "identity": "2096:6619341:56219817:1791166283:885878002:1791166283:965078002",
+          "mtime_unix": 1791166283,
+          "age_seconds": 3,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-03-invoice-path/CAF\u00c9-\u00c9COLE.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "qualification"
+      },
+      "socket_ms": {
+        "p50_ms": 2.0570819979184307,
+        "p95_ms": 2.3081139952410012,
+        "p99_ms": 2.587008995760698
+      },
+      "raw_socket_ms": [
+        2.271807999932207,
+        2.187402998970356,
+        2.0812289949390106,
+        2.066565000859555,
+        2.0535739968181588,
+        2.0284819984226488,
+        2.0570819979184307,
+        2.038733997324016,
+        2.117354000802152,
+        2.1285350012476556,
+        2.0967660020687617,
+        2.1598759994958527,
+        2.096792006341275,
+        2.12359000579454,
+        2.0487879955908284,
+        2.098741999361664,
+        2.198456997575704,
+        2.366300002904609,
+        2.0561819983413443,
+        2.074551004625391,
+        2.074684001854621,
+        2.1821120026288554,
+        2.1843340000486933,
+        2.1386609951150604,
+        2.3038189974613488,
+        2.587008995760698,
+        2.1333810000214726,
+        2.053552001598291,
+        2.1146150029380806,
+        2.154783003788907,
+        2.170336003473494,
+        2.2640239985776134,
+        2.060057995549869,
+        2.0692000034614466,
+        2.0965570001862943,
+        2.025490000960417,
+        1.946876996953506,
+        2.05840799753787,
+        1.9663310013129376,
+        2.0078669986105524,
+        1.9923130021197721,
+        2.017140999669209,
+        2.043046995822806,
+        2.114762995915953,
+        1.9960040008299984,
+        2.079445999697782,
+        2.0244340048520826,
+        2.041430001554545,
+        2.2740629938198254,
+        2.031743999395985,
+        2.0424589965841733,
+        2.1735749978688546,
+        2.0907209982397035,
+        2.0445799964363687,
+        2.4110219965223223,
+        1.9800699956249446,
+        2.117276999342721,
+        2.0139170010224916,
+        2.0243019971530885,
+        2.0167449984000996,
+        2.0032920001540333,
+        2.144530000805389,
+        2.0696339997812174,
+        2.159413001209032,
+        1.961011003004387,
+        2.040298997599166,
+        2.113232003466692,
+        1.984349000849761,
+        1.9311080031911843,
+        2.054932003375143,
+        2.3081139952410012,
+        2.2109290002845228,
+        2.4082689997158013,
+        2.6497660001041368,
+        2.0881480013486,
+        1.9309199997223914,
+        2.0715430000564083,
+        2.0396309992065653,
+        2.0578519979608245,
+        2.128476000507362,
+        2.271400997415185,
+        2.039361002971418,
+        2.0109370016143657,
+        1.9844970011035912,
+        1.9769299979088828,
+        1.9506780008669011,
+        1.9787490018643439,
+        2.011151002079714,
+        1.991988996451255,
+        1.9577449929784052,
+        1.9338140045874752,
+        1.9844940034090541,
+        2.0116719970246777,
+        1.9800919981207699,
+        1.9735030000447296,
+        1.99431499640923,
+        2.014165002037771,
+        2.057913996395655,
+        1.976614999875892,
+        1.9818020009552129
+      ]
+    },
+    {
+      "label": "path",
+      "query": "department-63-invoice-path",
+      "path": true,
+      "first": {
+        "schema_version": 1,
+        "status": "result_limit",
+        "complete": false,
+        "truncated": true,
+        "visibility": "cached",
+        "examined": 101,
+        "snapshot": {
+          "identity": "2096:6619341:56219817:1791166283:885878002:1791166283:965078002",
+          "mtime_unix": 1791166283,
+          "age_seconds": 3,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00aurs6ryxucr0g1csmxdadx6kyhiji44f89sq5x-0857663.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00clowi53yavi4lbife2du2qbdf5owl6g1ai4ysh-0916607.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00co5vz0k6i6nfb8za7cxr4kflb8r07or6rz489r-0322623.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00e9e8jmfd13xy7g2mj3nlqkip24am9lr7r4rtbw-0313919.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00gyfgu7h1moycpakwanu45b6yixcu9rtn0bc26v-0300991.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00hnxr7w0qe7gq9adunrai6ely1kh2ixm1wny8v2-0345919.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00r9mf6ni2ax88up286ony3zzhl5lxvgysphoahh-0309503.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00vv7wpxht63an8h7a2h29k5ftu6bciix7175bcb-0850367.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00yiugp1vm9cayn3ihekyjf8uxxufv6dnrar227w-0367167.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/00yo9525u0zrm34n79sx9hnit6n34mza7qb95hkq-0786943.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/0109b9przzafihtry5jbgusy51w8bnvdxl69ao6v-0833727.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/0120i9nr9orfocwkwhp0dcqq6wyluvqd85u5c5vk-0358719.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/01238bopuecw5awom8zqagepsnikv7qift7wlv5v-0283199.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/017l0l4yv43kgc3s0uma30j4bb9hezes4qmgyfdx-0809599.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/01a3sub93ovoodgrmmdz3bdvohetrxiduz60exr7-0267839.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/01afcymptv40f0ortubyrxthd18fy5le1yubixwf-0814399.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/01cfoaal6fcg6o9wxmzksjlz1jo7scipc2admpbh-0388287.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/01kcp91i087zio9161gkcuclj9czh9aj0r5ttmq0-0312191.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/01m6xo53u5yw7k3gytdsqwyq0vyu024xflrwjury-0301567.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/01rer0qsiuv7aa3mx32zpr7dne62n3l1rr12d9iz-0855743.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/01y1lgb7hlcaf52gf6nzvv9bwr5vla7ckq3yci4h-0791167.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/0200killgon00hpl846b1020ef4wn7aa79a5mcqa-0802687.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/024i8t5deckqzoofrfinfmnryy4g4if9ba45lxdt-0848703.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/026mtnvil5ib3y8mxht3o12c8cvoecna0mud24ed-0823551.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/028vcwy0amgfgk219433nje9wifin42eduybk1rm-0383167.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/029vqlfki3rx8hrns838lsab2dtyxugrwg0znrgo-0895871.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/029yjvc9eyfof0dby3iios7hfj74r8pdh0cxg7g2-0820287.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02hsmble5htf8sho7ozh3s41hck1gw71q1pjrxlb-0388927.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02ifgazpgwl2hg5253oqrp97y5jd8iak96eld4y3-0865919.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02j6mvygt9xhvye9yy3gs879es6adotp7677kshq-0797247.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02kttmzeqwklc5wmv0v27haf9oui8fkckazieafc-0370431.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02oy6t9d0naf1ue89yydec1k6cnwt0zftu4bgtth-0911231.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02tmfqimuodlub87clp2twqge1xwub2gkwwnxuul-0877503.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02tyl7xutdssxya72avpl9bpy565n7ilfq1t3s4p-0799487.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02vu1urmdos420j7xozzfmo3b1w288qmgpgsk6ur-0888191.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02yop87qzph5krd8aitni3bfsxj4xlypwhsl951e-0810431.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/02yz230dfxwjuhj63gaxnoomihs49u29i4jfbi07-0812607.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/035y30xoglvcghq6qygngna37d8l9aosoguywsye-0341759.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/03b1ijvnvlrjqk74i59ovmv901m7j68iq0xrrbzd-0385727.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/03detqgusze5x6nuh8gauo1htm755qvi8rr56u3u-0824447.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/03hwtpcyyv13yfqk6vsug60i5jv1ynq548pl1n01-0809023.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/03kgzbqbs1bw0wp98u7ysc0cgrntwospq5e28m04-0883647.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/03mjcisypopiwnxzozcxxwqec0k1zksqzb0fxbjj-0816767.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/03qtlu09ok4hcu9s6gr7qaxg379ed8dlfn12edt2-0878207.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/03qu2asryzcy82550jnqdkalmgcytux8qdnr2dn8-0265663.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/0431m3ycd1wsjd3ezolg77h2jl5apo7lhn0smxmy-0876927.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/0438c9ejucl07soj9f0x8osmywrv306ctzeiqx0h-0382591.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/045xk2pwxc1x9so1t7fhcs8trzqfedgzjh940nfg-0372927.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/049dxxozgrsc1tx8v7ei5yam19tai87847emcg1q-0792319.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/04htuetzwo1xczztqq0jlrcjr1h8nyk0mu0fn4s7-0883839.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/04jk3bo3nd3hvhq9k80htatt0ur42o9fiwxbqvno-0325887.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/04odg8nlphlnh55zd3wf10q0u9xbxk25bge1cmr1-0362367.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/04pjh3y3lm7uw2whb2eemlkpcmr1kb5ra7d5crnl-0320703.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/04tl0zafrdcc32h5s5m8delyjly96y8p94hhtuir-0797759.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/04u24801zq0hn9h0bkk73fl1jroon1xkammyz240-0849279.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/04wisjf0uldgcjeool7m24hf82usp5u2klrz5xwx-0795839.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/04y8xml3r88b3o3b1ocm7hdn6td04ujq3u3nxpsq-0821823.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/04yuwtqd8foddzhz4ms7q6ut69af6n6kw5jt4o10-0313983.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/05086uxam8hmof7w40c88du68pinxb64ln73mucd-0905983.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/05euu99pgzol97iiarja1g5asumw8qw9bfwcjovn-0870079.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/05gs0q4t13uu69o40tprl8uq9jbudgl0jd6rl9oi-0877631.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/05lavijqzj8vcn5acoeitkym59amg8tusc8duf05-0800767.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/05vnoolz4ypnvpsmn2htqqxnpv9ikd8e1tgwcnwp-0915839.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/066cvhx59c9djy2rq1ix2905lte4hot6rtot9wvt-0831103.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/067zpthus0lc1gf17kp087udrof36lkg3leikvej-0379327.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/068130zs4xy4erpuru92pchve3v4dvkhvcmycclc-0294783.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/068l4rm73tp4kki8rrwjl09vonrp4430iu9qpjnu-0838783.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/0697d7prglbhn1ky0ngk0rhl0n5ugrzd0cmnlaka-0351359.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/06eb3oltxlb75tnso0k6270wobrmxa9be1lo9y5i-0792831.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/06peke487jn8uitenlrwvxa8n6zprxt4qhqomanc-0819199.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/06siaezws7si85gj9jn3gfhm83ve4d85h0lryal2-0838719.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/06uj8940e7k7fq3h66fp145rpyx5sfalyhrmff1c-0288319.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/06wv2ummcbiaymvppep71e9pfty0qoqb20bvyv5y-0262207.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/06ytqu0cu85oudgwfsn7uo67dt2xuwz88a5g5q2v-0376383.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/070mgvqjotq3522epkzi6xjsjilxnjl5vaqco3ty-0305023.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/075fqye50c35v0o6c5xxxvn9afyvvkxi58ukvgu4-0268479.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/0795x6f5y31a9j3dun307o8v02m9hbbpbye9fdg6-0376703.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/07a23qf1jsn298ejma3z6pc42pz90u9lphphghtd-0819647.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/07gmiot2c5hjxeqmcog7xytjofsx2gtyudf1ngix-0844671.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/07hb9hmahnfxu2f0fwm1x9bftzc8n7hkrz9jqv7u-0315583.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/07p4nt49rrdfnktc5ajsl5cc9do2zkyaxvk6ekba-0300031.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/07u01hvyso8wbeolu8015klhy6wum84h4hi6c7xp-0295231.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/07wonl7teowg3dyqlxnhvdpxe27ll67l0ubzvopw-0380031.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/07xdrhd7n3vftru25nh4kk8vqzxsl1kcyrqmqlbu-0808959.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/08d4qwxnyl0911nkfo2cbzttaqk689pm39rywn1j-0853951.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/08frcvgqad5zo87nbjvsqxg1p5aba7pro9afg4y1-0281279.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/08g50sz2uqrym0o8gbj31x81e1hk1l6wkbj8uxku-0810751.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/08i75gz2rd40o0sznkf3l4tc9gc8dhsl2c7irkyq-0857599.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/08idbdfz0b3u2qli9h6nle1262t1jt1yyixj48ke-0383679.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/08lzuge8c5z6twnrgbday3w7raxmwcppswait0iz-0273599.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/08p8hcixpdl0etytjk2rlg576pcdc3t5uht2vjr2-0302847.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/08x3b8webhb2vrgptezqxouwq7on086bcton7s7q-0318399.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/08yxncd0s1d7n5ke379fci43jsvpuaqrjq9hx9e1-0277823.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/0908id7ri0r7p8570h9aqqe0eaqhgqdu9hivkx02-0850111.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/098erk0waadcwypf6sw1wzyklfnzm8cyc3iiwlgf-0896191.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/09c2g35bx6usudy5q1pskv2c7rfa33nj1t9qti2x-0335807.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/09er8d147wthlqmcyzkx9gh9myavqodzylro46bo-0343423.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/09u3yejqeczct6ffp7mdqwh9snlaumi6343f16g8-0842239.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/09w84hz34bdavib8i0xon803ys59hw1wv52htt8i-0912383.txt",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/09wo2k48spaq7akn9fo7zw7vq8e7wllofkuq9kt9-0353343.txt",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "qualification"
+      },
+      "socket_ms": {
+        "p50_ms": 0.5523789950530045,
+        "p95_ms": 0.7994719999260269,
+        "p99_ms": 0.9086229983950034
+      },
+      "raw_socket_ms": [
+        0.5183050016057678,
+        0.7201490006991662,
+        0.6505410055979155,
+        0.5868849984835833,
+        0.5253950002952479,
+        0.6131219997769222,
+        1.0529779974604025,
+        0.6991659975028597,
+        0.6886169940116815,
+        0.5946640012552962,
+        0.540078995982185,
+        0.6983089988352731,
+        0.5885030041099526,
+        0.5087729950901121,
+        0.4777750000357628,
+        0.5173750032554381,
+        0.513646999024786,
+        0.5651669998769648,
+        0.5165280017536134,
+        0.5597490016953088,
+        0.6233840031200089,
+        0.5491550036822446,
+        0.4895669990219176,
+        0.5143720045452937,
+        0.5125460011186078,
+        0.6345619985950179,
+        0.8678880039951764,
+        0.6659779974143021,
+        0.579649000428617,
+        0.5220070015639067,
+        0.5315219968906604,
+        0.5038560047978535,
+        0.6157509997137822,
+        0.6427789994631894,
+        0.5674600033671595,
+        0.48304400115739554,
+        0.5264170031296089,
+        0.48676200094632804,
+        0.5174859979888424,
+        0.48770800640340894,
+        0.4954960022587329,
+        0.5287390013108961,
+        0.6524700002046302,
+        0.6088640002417378,
+        0.5392230013967492,
+        0.5522569990716875,
+        0.5439849992399104,
+        0.6549450044985861,
+        0.5663260017172433,
+        0.546438001038041,
+        0.5078160029370338,
+        0.5792849988210946,
+        0.7647279999218881,
+        0.5548200060729869,
+        0.5225019995123148,
+        0.5081350027467124,
+        0.5563390004681423,
+        0.5177380007808097,
+        0.5332159998943098,
+        0.5203239998081699,
+        0.7980029986356385,
+        0.579571002162993,
+        0.9086229983950034,
+        0.6417439944925718,
+        0.5939379989285953,
+        0.5874350026715547,
+        0.563982997846324,
+        0.5212140022194944,
+        0.4873889993177727,
+        0.5344480014173314,
+        0.5448869997053407,
+        0.4926250039716251,
+        0.5590500004473142,
+        0.6674910036963411,
+        0.6598070031031966,
+        0.5374070024117827,
+        0.5116609972901642,
+        0.5930740007897839,
+        0.5016119976062328,
+        0.6524989948957227,
+        0.8518100003129803,
+        0.8891469988157041,
+        0.7994719999260269,
+        0.6870990036986768,
+        0.6343840068439022,
+        0.6828519981354475,
+        0.6301889952737838,
+        0.5774649980594404,
+        0.6844800009275787,
+        0.5523789950530045,
+        0.5268189997877926,
+        0.519548004376702,
+        0.4814380008610897,
+        0.5204109984333627,
+        0.587085000006482,
+        0.5447389994515106,
+        0.4935649994877167,
+        0.4869600015808828,
+        0.4975749980076216,
+        0.518991997523699
+      ]
+    },
+    {
+      "label": "short_complete",
+      "query": "??",
+      "path": false,
+      "first": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 0,
+        "snapshot": {
+          "identity": "2096:6619341:56219817:1791166283:885878002:1791166283:965078002",
+          "mtime_unix": 1791166283,
+          "age_seconds": 3,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [],
+        "request_id": "qualification"
+      },
+      "socket_ms": {
+        "p50_ms": 11.728957004379481,
+        "p95_ms": 14.38697300181957,
+        "p99_ms": 20.147872004599776
+      },
+      "raw_socket_ms": [
+        11.42741899820976,
+        11.324070001137443,
+        11.348986001394223,
+        11.078071998781525,
+        11.591002003115136,
+        11.542672997165937,
+        11.369782005203888,
+        11.278562997176778,
+        11.45785600238014,
+        11.957075003010686,
+        11.477649997686967,
+        11.407618003431708,
+        11.422719995607622,
+        11.628931999439374,
+        11.588845998630859,
+        11.694802000420168,
+        11.88334100152133,
+        13.240410000435077,
+        11.758865999581758,
+        11.648665000393521,
+        11.409675003960729,
+        11.672339001961518,
+        11.508422998304013,
+        11.608164000790566,
+        11.575117998290807,
+        11.743242997908965,
+        12.294287000258919,
+        11.787485003878828,
+        11.955018002481665,
+        11.57461299590068,
+        11.613392998697236,
+        11.758619999454822,
+        12.022773997159675,
+        11.615709998295642,
+        11.636543000349775,
+        11.929668005905114,
+        11.530753996339627,
+        11.78496600186918,
+        11.872351002239157,
+        11.351858003763482,
+        11.529385003086645,
+        11.409882004954852,
+        11.332452995702624,
+        11.401820003811736,
+        11.435712003731169,
+        11.247310001635924,
+        11.48270500561921,
+        11.362675002601463,
+        11.444349001976661,
+        11.663762001262512,
+        11.489195996546187,
+        11.728957004379481,
+        11.657533003017306,
+        11.890529000083916,
+        11.723197996616364,
+        11.830688003101386,
+        11.661452997941524,
+        11.71592999889981,
+        12.127960995712783,
+        12.213244001031853,
+        11.812438002380077,
+        12.623749003978446,
+        12.755187999573536,
+        12.075305996404495,
+        13.392695997026749,
+        13.377776005654596,
+        12.649857999349479,
+        13.699575996724889,
+        14.38697300181957,
+        11.843740998301655,
+        20.147872004599776,
+        11.613315997237805,
+        12.0810110020102,
+        11.859653997817077,
+        13.302216997544747,
+        11.650503001874313,
+        14.78810999833513,
+        13.714207001612522,
+        20.216280994645786,
+        14.42132700321963,
+        14.559337003447581,
+        12.783849997504149,
+        13.644197999383323,
+        12.219046002428513,
+        12.476502000936307,
+        12.989324000955094,
+        12.169319001259282,
+        12.451488997612614,
+        11.80182299867738,
+        11.752035999961663,
+        11.834210003144108,
+        11.882573999173474,
+        11.757976004446391,
+        11.776168998039793,
+        11.555671000678558,
+        11.503761001222301,
+        11.80126100371126,
+        11.316666998027358,
+        11.284427004284225,
+        11.6651880016434
+      ]
+    },
+    {
+      "label": "path_complete",
+      "query": "zz-last-rare-qvt",
+      "path": true,
+      "first": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1,
+        "snapshot": {
+          "identity": "2096:6619341:56219817:1791166283:885878002:1791166283:965078002",
+          "mtime_unix": 1791166283,
+          "age_seconds": 4,
+          "roots": [
+            {
+              "path": "/__fsearch_trigram_virtual_owned__",
+              "path_bytes_base64": null,
+              "last_scan_unix": 0,
+              "age_seconds": null,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/__fsearch_trigram_virtual_owned__/department-63-invoice-path/zz-last-rare-qvt.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "qualification"
+      },
+      "socket_ms": {
+        "p50_ms": 11.554630000318866,
+        "p95_ms": 12.563420998048969,
+        "p99_ms": 13.320436999492813
+      },
+      "raw_socket_ms": [
+        11.672173997794744,
+        12.151815004472155,
+        12.114170000131708,
+        11.923662001208868,
+        12.060733999533113,
+        12.016538006719202,
+        11.412881001888309,
+        11.579726000491064,
+        12.15882999531459,
+        12.182060003397055,
+        13.003214997297619,
+        12.338301006820984,
+        11.944365003728308,
+        11.61992599372752,
+        12.885466996522155,
+        11.728092002158519,
+        11.35264900221955,
+        11.489997996250167,
+        11.410594001063146,
+        12.474050003220327,
+        12.043932001688518,
+        11.484927003039047,
+        11.618172997259535,
+        11.375870999472681,
+        11.395054003514815,
+        11.356267998053227,
+        11.382195996702649,
+        12.563420998048969,
+        11.333601003570948,
+        11.425174001487903,
+        11.425427001086064,
+        11.414524997235276,
+        11.195530998520553,
+        12.08908400440123,
+        11.744698997063097,
+        11.615352996159345,
+        12.236975999257993,
+        11.83078100439161,
+        12.2321369999554,
+        11.790426004154142,
+        11.30327999999281,
+        11.63759899645811,
+        11.295669006358366,
+        11.459934001322836,
+        11.32617199618835,
+        11.284601001534611,
+        11.067996005294845,
+        11.568518006242812,
+        11.198690001037903,
+        11.844741005916148,
+        11.288462002994493,
+        11.26177500555059,
+        11.20666499627987,
+        11.24545199854765,
+        11.341748002450913,
+        11.600913996517193,
+        11.320814002829138,
+        12.252719003299717,
+        11.527335002028849,
+        11.943520003114827,
+        11.796245998993982,
+        11.405447003198788,
+        11.583558996790089,
+        12.438922996807378,
+        11.68645400321111,
+        11.053474998334423,
+        11.542238004039973,
+        11.51812200259883,
+        11.226877002627589,
+        11.409278005885426,
+        11.516257000039332,
+        11.3806610024767,
+        11.554630000318866,
+        13.320436999492813,
+        11.377109003660735,
+        12.600475005456246,
+        11.54818099894328,
+        11.80722400022205,
+        11.27137900039088,
+        11.592575996473897,
+        11.774509002862033,
+        11.62067100085551,
+        11.661844997433946,
+        11.34229399758624,
+        11.603017999732401,
+        11.249466995650437,
+        12.505411003076006,
+        11.425876000430435,
+        11.319990000629332,
+        11.312300004647113,
+        13.563469001383055,
+        11.636335999355651,
+        12.049955999827944,
+        11.362846002157312,
+        11.674973997287452,
+        11.540020997927058,
+        11.542988002474885,
+        11.523845998453908,
+        11.409651997382753,
+        11.85343500401359
+      ]
+    }
+  ],
+  "hashes": {
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_headless.c": "f4bf80028eb13d390b2c651d6f5bc520ac69e96a63cb92fcbe07981f9fe9303c",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_utf.c": "9b87edc8509d4c1221c237aa89ea0ab883b389a013f378dae2cf7630ac96ec52",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_database_file.c": "44c2da6e6edcf00ce0a027469660924f9a869f445380f31fd744580a00135119",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_database_index_store.c": "7ba35d1fca9f3ad5167440367876d4a529124b4af758ef530a76b1f45d9e7484",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.c": "59964c89a1093477b1c52e649f5c7b9b5c1f4ee3068f19e4dfecd717b4e06c09",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_database_entry.c": "92a2d7c0bb0e5615816c4aa6adfabbb3d18789d13b2005ee53d75ea4f4b8e901",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_database_entry.h": "df3644ea18e788b203648b4d8f3859538297b2cd86317863132f321f7f89bfbd",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_database_entry_flags.h": "906fba2ee77582d5f3896b681fd48c48369c03fbca504c198a77001ef214dbb1",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_database_file.h": "5189f3f37819450e821166a23dbf0ffebb832ff3b816128bd032d8fa7cccdc5b",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h": "5a4032d0871ae24268ce98f754ea6c79e8a149535007a540add115413b3d38bc",
+    "/home/ecochran76/workspace.local/fsearch/src/fsearch_database_index_store.h": "a55d93ce4342e0bfdaa2670245f827f3ce2c3d59deb150d7973da105a2a98785",
+    "/tmp/fsearch-warm-release-build/src/fsearch-worker": "9e99e6bc73bbadf4923828139d9f6f327c7cc0770bf64cbf3f4daee4b9ae5bfd",
+    "/tmp/fsearch-warm-release-build/src/fsearch-service": "63d1bd0c3957ee372901536a8006d6a33120cf14502573f1f843fc7d485eb816",
+    "/home/ecochran76/workspace.local/fsearch/src/prototypes/qualify_worker_candidates.py": "031e1279cea75e608b09c3c1297ff7b208bce7d6506ae0fd69cb2f2250277cc0"
+  },
+  "startup_request_ms": 559.7140889949515,
+  "same_worker": true,
+  "gate_readback": {
+    "rss_pass": true,
+    "selective_pass": true,
+    "complete_short_unicode_path_pass": true,
+    "broad_result_limits_qualify_complete_search": false
+  },
+  "steady_aggregate_rss_kib": 123796,
+  "conservative_sum_hwm_kib": 123796,
+  "sampled_peak_aggregate_rss_kib": 123796,
+  "rss_samples": 1976,
+  "service_returncode": 0,
+  "native_ready": {
+    "ready": true,
+    "load_ms": 547.242,
+    "build_ms": 0.001,
+    "peak_rss_kib": 105056,
+    "peak_vm_kib": 170320,
+    "posting_payload_bytes": 0,
+    "posting_keys": 0,
+    "sqlite_pages_bytes": 0
+  },
+  "native_queries": [
+    {
+      "label": "rare",
+      "native_ms": {
+        "p50_ms": 1.978,
+        "p95_ms": 2.338,
+        "p99_ms": 2.423
+      },
+      "raw_native_ms": [
+        2.04,
+        2.111,
+        2.001,
+        1.959,
+        2.044,
+        1.978,
+        2.423,
+        2.353,
+        2.2,
+        2.2,
+        2.064,
+        1.992,
+        2.212,
+        1.973,
+        2.191,
+        2.259,
+        1.978,
+        2.225,
+        2.045,
+        2.338,
+        2.21,
+        1.981,
+        2.293,
+        1.996,
+        2.049,
+        1.94,
+        1.976,
+        2.153,
+        2.113,
+        2.196,
+        2.342,
+        2.122,
+        2.062,
+        1.954,
+        1.927,
+        1.96,
+        2.374,
+        2.008,
+        1.984,
+        1.921,
+        1.933,
+        1.873,
+        2.214,
+        2.027,
+        2.022,
+        1.998,
+        2.316,
+        2.061,
+        1.951,
+        1.967,
+        2.046,
+        2.3,
+        2.066,
+        1.942,
+        1.939,
+        1.884,
+        1.945,
+        1.999,
+        1.973,
+        1.884,
+        2.058,
+        1.966,
+        1.915,
+        1.944,
+        1.923,
+        1.972,
+        1.885,
+        1.927,
+        1.968,
+        1.976,
+        1.916,
+        2.154,
+        2.256,
+        2.087,
+        2.004,
+        1.981,
+        1.932,
+        1.874,
+        1.96,
+        1.865,
+        1.928,
+        1.887,
+        1.926,
+        1.858,
+        2.448,
+        2.017,
+        1.909,
+        1.895,
+        1.914,
+        1.931,
+        1.868,
+        2.005,
+        1.885,
+        1.962,
+        1.883,
+        1.937,
+        1.968,
+        1.965,
+        1.869,
+        2.294
+      ]
+    },
+    {
+      "label": "late",
+      "native_ms": {
+        "p50_ms": 2.054,
+        "p95_ms": 2.6,
+        "p99_ms": 3.101
+      },
+      "raw_native_ms": [
+        2.435,
+        3.989,
+        2.292,
+        2.152,
+        2.345,
+        1.999,
+        2.24,
+        2.026,
+        2.008,
+        1.945,
+        2.066,
+        1.951,
+        2.029,
+        1.983,
+        1.881,
+        2.264,
+        1.988,
+        1.975,
+        2.449,
+        2.004,
+        2.098,
+        1.96,
+        1.99,
+        1.994,
+        1.962,
+        2.057,
+        1.963,
+        2.005,
+        1.985,
+        1.983,
+        1.95,
+        1.97,
+        1.918,
+        2.176,
+        1.969,
+        2.43,
+        2.172,
+        1.994,
+        2.239,
+        2.32,
+        2.075,
+        1.987,
+        2.003,
+        2.013,
+        2.046,
+        2.054,
+        2.089,
+        2.178,
+        2.143,
+        2.142,
+        2.028,
+        2.083,
+        2.035,
+        2.122,
+        2.013,
+        2.065,
+        2.022,
+        2.135,
+        2.216,
+        2.024,
+        2.009,
+        2.167,
+        2.258,
+        2.175,
+        2.279,
+        2.036,
+        1.983,
+        2.074,
+        2.042,
+        2.065,
+        1.963,
+        2.804,
+        2.678,
+        2.121,
+        2.6,
+        3.101,
+        2.068,
+        2.022,
+        2.439,
+        2.005,
+        2.049,
+        1.977,
+        2.103,
+        2.08,
+        2.095,
+        2.037,
+        2.054,
+        2.013,
+        2.706,
+        2.352,
+        1.969,
+        2.058,
+        2.04,
+        1.985,
+        2.218,
+        2.093,
+        2.24,
+        2.436,
+        2.035,
+        1.947
+      ]
+    },
+    {
+      "label": "absent",
+      "native_ms": {
+        "p50_ms": 2.04,
+        "p95_ms": 2.37,
+        "p99_ms": 2.555
+      },
+      "raw_native_ms": [
+        2.18,
+        2.148,
+        2.153,
+        1.968,
+        2.071,
+        2.069,
+        2.04,
+        2.026,
+        2.012,
+        2.081,
+        2.0,
+        2.012,
+        2.222,
+        2.044,
+        2.473,
+        2.364,
+        2.105,
+        2.124,
+        2.021,
+        2.147,
+        2.083,
+        2.14,
+        2.118,
+        1.99,
+        2.01,
+        1.958,
+        2.263,
+        2.022,
+        1.993,
+        2.222,
+        1.998,
+        1.98,
+        2.135,
+        2.252,
+        2.057,
+        1.993,
+        2.033,
+        2.282,
+        1.984,
+        1.97,
+        2.088,
+        1.97,
+        2.015,
+        2.014,
+        2.149,
+        1.969,
+        1.987,
+        2.057,
+        1.989,
+        1.988,
+        3.454,
+        2.026,
+        1.982,
+        1.946,
+        2.308,
+        2.195,
+        2.365,
+        2.247,
+        2.093,
+        2.038,
+        2.255,
+        1.958,
+        2.016,
+        1.998,
+        2.016,
+        1.935,
+        2.389,
+        1.952,
+        2.014,
+        2.089,
+        2.338,
+        2.244,
+        2.037,
+        2.197,
+        1.973,
+        1.943,
+        1.952,
+        2.015,
+        2.318,
+        1.93,
+        2.131,
+        1.998,
+        2.37,
+        2.112,
+        1.964,
+        2.167,
+        1.985,
+        1.981,
+        2.555,
+        2.041,
+        1.999,
+        2.321,
+        2.056,
+        2.168,
+        2.223,
+        2.013,
+        1.956,
+        2.124,
+        2.009,
+        2.371
+      ]
+    },
+    {
+      "label": "false_grams",
+      "native_ms": {
+        "p50_ms": 6.332,
+        "p95_ms": 7.299,
+        "p99_ms": 7.399
+      },
+      "raw_native_ms": [
+        6.976,
+        6.04,
+        6.842,
+        7.186,
+        6.83,
+        5.286,
+        6.732,
+        5.317,
+        3.307,
+        6.568,
+        7.31,
+        7.125,
+        7.127,
+        6.048,
+        7.399,
+        7.27,
+        4.769,
+        3.884,
+        5.107,
+        7.363,
+        6.988,
+        6.904,
+        7.168,
+        7.299,
+        6.097,
+        4.926,
+        6.682,
+        3.928,
+        6.535,
+        6.641,
+        6.631,
+        6.449,
+        6.681,
+        6.466,
+        4.159,
+        6.854,
+        3.054,
+        6.267,
+        6.712,
+        7.655,
+        6.789,
+        6.154,
+        6.398,
+        3.432,
+        6.697,
+        6.61,
+        6.549,
+        6.361,
+        6.619,
+        6.247,
+        3.427,
+        6.55,
+        5.843,
+        3.228,
+        6.773,
+        6.325,
+        6.436,
+        6.332,
+        6.009,
+        6.751,
+        6.604,
+        6.335,
+        6.515,
+        6.681,
+        7.33,
+        3.332,
+        6.875,
+        7.103,
+        3.909,
+        6.697,
+        4.04,
+        6.402,
+        5.916,
+        5.931,
+        5.478,
+        5.475,
+        5.85,
+        6.014,
+        6.49,
+        6.527,
+        6.242,
+        6.284,
+        6.0,
+        6.097,
+        3.903,
+        5.873,
+        5.643,
+        6.196,
+        5.933,
+        5.787,
+        5.485,
+        5.348,
+        5.935,
+        5.917,
+        5.784,
+        5.747,
+        5.628,
+        5.655,
+        6.56,
+        6.857
+      ]
+    },
+    {
+      "label": "two_char",
+      "native_ms": {
+        "p50_ms": 0.099,
+        "p95_ms": 0.174,
+        "p99_ms": 0.185
+      },
+      "raw_native_ms": [
+        0.1,
+        0.112,
+        0.106,
+        0.098,
+        0.099,
+        0.099,
+        0.098,
+        0.178,
+        0.135,
+        0.1,
+        0.094,
+        0.214,
+        0.1,
+        0.109,
+        0.096,
+        0.1,
+        0.178,
+        0.153,
+        0.095,
+        0.097,
+        0.097,
+        0.098,
+        0.099,
+        0.097,
+        0.097,
+        0.098,
+        0.097,
+        0.099,
+        0.096,
+        0.098,
+        0.097,
+        0.097,
+        0.099,
+        0.099,
+        0.096,
+        0.098,
+        0.147,
+        0.107,
+        0.098,
+        0.108,
+        0.11,
+        0.101,
+        0.174,
+        0.151,
+        0.101,
+        0.099,
+        0.098,
+        0.092,
+        0.097,
+        0.098,
+        0.099,
+        0.098,
+        0.102,
+        0.097,
+        0.097,
+        0.098,
+        0.099,
+        0.098,
+        0.098,
+        0.098,
+        0.17,
+        0.136,
+        0.103,
+        0.099,
+        0.1,
+        0.129,
+        0.098,
+        0.098,
+        0.099,
+        0.098,
+        0.094,
+        0.098,
+        0.185,
+        0.139,
+        0.167,
+        0.142,
+        0.1,
+        0.097,
+        0.098,
+        0.093,
+        0.098,
+        0.097,
+        0.097,
+        0.132,
+        0.175,
+        0.14,
+        0.14,
+        0.098,
+        0.099,
+        0.1,
+        0.1,
+        0.113,
+        0.174,
+        0.152,
+        0.099,
+        0.099,
+        0.102,
+        0.099,
+        0.097,
+        0.117
+      ]
+    },
+    {
+      "label": "unicode",
+      "native_ms": {
+        "p50_ms": 1.94,
+        "p95_ms": 2.225,
+        "p99_ms": 2.35
+      },
+      "raw_native_ms": [
+        1.891,
+        2.225,
+        1.932,
+        1.897,
+        1.888,
+        1.975,
+        2.236,
+        1.93,
+        1.968,
+        1.917,
+        1.949,
+        1.93,
+        1.915,
+        1.886,
+        2.015,
+        1.887,
+        2.35,
+        1.941,
+        1.964,
+        1.88,
+        2.199,
+        2.015,
+        2.019,
+        1.95,
+        1.895,
+        1.94,
+        1.866,
+        1.885,
+        1.871,
+        1.955,
+        1.887,
+        2.058,
+        1.927,
+        1.944,
+        1.886,
+        1.894,
+        2.085,
+        1.973,
+        1.943,
+        1.932,
+        1.878,
+        1.964,
+        1.876,
+        1.904,
+        1.988,
+        1.883,
+        1.921,
+        1.886,
+        1.955,
+        1.877,
+        1.892,
+        2.019,
+        1.975,
+        1.999,
+        1.986,
+        1.909,
+        2.051,
+        2.08,
+        2.132,
+        2.006,
+        1.934,
+        1.928,
+        1.935,
+        1.944,
+        1.953,
+        1.928,
+        1.918,
+        1.957,
+        1.896,
+        1.943,
+        2.033,
+        1.922,
+        1.885,
+        1.944,
+        1.885,
+        2.364,
+        1.964,
+        1.955,
+        1.958,
+        1.888,
+        1.952,
+        1.872,
+        1.919,
+        1.864,
+        1.911,
+        1.859,
+        1.942,
+        1.859,
+        2.313,
+        1.869,
+        1.937,
+        2.283,
+        1.962,
+        1.95,
+        1.941,
+        2.02,
+        1.955,
+        1.93,
+        1.94,
+        1.953
+      ]
+    },
+    {
+      "label": "path",
+      "native_ms": {
+        "p50_ms": 0.13,
+        "p95_ms": 0.2,
+        "p99_ms": 0.261
+      },
+      "raw_native_ms": [
+        0.14,
+        0.131,
+        0.134,
+        0.131,
+        0.127,
+        0.129,
+        0.151,
+        0.13,
+        0.133,
+        0.131,
+        0.135,
+        0.135,
+        0.261,
+        0.176,
+        0.128,
+        0.191,
+        0.2,
+        0.133,
+        0.13,
+        0.124,
+        0.133,
+        0.13,
+        0.131,
+        0.129,
+        0.131,
+        0.129,
+        0.205,
+        0.157,
+        0.132,
+        0.127,
+        0.128,
+        0.13,
+        0.127,
+        0.127,
+        0.131,
+        0.128,
+        0.122,
+        0.128,
+        0.129,
+        0.13,
+        0.166,
+        0.129,
+        0.128,
+        0.129,
+        0.131,
+        0.138,
+        0.131,
+        0.128,
+        0.131,
+        0.125,
+        0.131,
+        0.132,
+        0.169,
+        0.13,
+        0.129,
+        0.124,
+        0.13,
+        0.124,
+        0.13,
+        0.127,
+        0.284,
+        0.173,
+        0.131,
+        0.159,
+        0.127,
+        0.128,
+        0.128,
+        0.129,
+        0.128,
+        0.142,
+        0.138,
+        0.137,
+        0.127,
+        0.126,
+        0.136,
+        0.128,
+        0.147,
+        0.125,
+        0.128,
+        0.131,
+        0.128,
+        0.127,
+        0.13,
+        0.222,
+        0.201,
+        0.173,
+        0.144,
+        0.129,
+        0.131,
+        0.128,
+        0.128,
+        0.131,
+        0.131,
+        0.128,
+        0.13,
+        0.129,
+        0.132,
+        0.138,
+        0.131,
+        0.128
+      ]
+    },
+    {
+      "label": "short_complete",
+      "native_ms": {
+        "p50_ms": 11.126,
+        "p95_ms": 12.054,
+        "p99_ms": 13.533
+      },
+      "raw_native_ms": [
+        10.935,
+        10.875,
+        10.823,
+        10.925,
+        11.069,
+        10.881,
+        11.138,
+        11.082,
+        10.929,
+        10.996,
+        11.127,
+        11.002,
+        11.28,
+        11.612,
+        11.074,
+        11.31,
+        11.449,
+        11.134,
+        11.774,
+        11.854,
+        11.304,
+        11.175,
+        11.284,
+        11.177,
+        11.202,
+        11.293,
+        10.984,
+        11.099,
+        11.101,
+        10.941,
+        10.896,
+        11.106,
+        11.234,
+        11.189,
+        10.949,
+        11.08,
+        12.19,
+        11.547,
+        10.938,
+        10.988,
+        11.106,
+        10.982,
+        13.533,
+        11.764,
+        12.802,
+        11.179,
+        11.573,
+        11.016,
+        11.154,
+        11.201,
+        11.154,
+        11.129,
+        11.096,
+        11.049,
+        10.953,
+        10.883,
+        12.002,
+        11.177,
+        10.922,
+        10.957,
+        11.006,
+        11.718,
+        11.094,
+        11.28,
+        11.402,
+        10.942,
+        11.156,
+        11.042,
+        11.448,
+        11.28,
+        11.065,
+        11.162,
+        11.126,
+        11.664,
+        11.104,
+        11.066,
+        11.065,
+        12.054,
+        13.927,
+        12.111,
+        11.988,
+        11.128,
+        11.171,
+        11.047,
+        11.092,
+        11.639,
+        11.078,
+        11.25,
+        11.241,
+        10.919,
+        10.976,
+        11.166,
+        11.031,
+        11.245,
+        11.228,
+        10.93,
+        11.026,
+        10.992,
+        10.865,
+        11.018
+      ]
+    },
+    {
+      "label": "path_complete",
+      "native_ms": {
+        "p50_ms": 10.936,
+        "p95_ms": 11.864,
+        "p99_ms": 13.052
+      },
+      "raw_native_ms": [
+        10.818,
+        11.469,
+        10.877,
+        10.761,
+        10.873,
+        10.918,
+        10.704,
+        10.588,
+        10.851,
+        11.494,
+        11.278,
+        10.991,
+        10.824,
+        10.674,
+        10.839,
+        10.653,
+        11.06,
+        10.752,
+        10.969,
+        11.022,
+        10.846,
+        10.699,
+        10.961,
+        11.065,
+        11.0,
+        10.696,
+        10.7,
+        10.622,
+        10.606,
+        10.584,
+        10.807,
+        10.669,
+        10.788,
+        10.922,
+        10.828,
+        10.698,
+        10.71,
+        11.415,
+        10.769,
+        10.969,
+        10.71,
+        10.638,
+        10.843,
+        11.47,
+        10.919,
+        10.904,
+        10.97,
+        11.022,
+        10.905,
+        11.027,
+        10.936,
+        11.347,
+        12.384,
+        11.148,
+        13.416,
+        11.864,
+        11.151,
+        10.863,
+        11.191,
+        10.744,
+        11.179,
+        11.132,
+        10.819,
+        11.321,
+        12.755,
+        11.086,
+        10.628,
+        11.259,
+        11.179,
+        11.005,
+        12.109,
+        13.052,
+        11.173,
+        11.282,
+        10.835,
+        11.622,
+        10.907,
+        10.902,
+        11.285,
+        10.869,
+        11.294,
+        10.961,
+        11.551,
+        10.87,
+        10.527,
+        10.977,
+        11.01,
+        10.893,
+        10.664,
+        11.471,
+        10.751,
+        10.738,
+        11.196,
+        11.253,
+        11.191,
+        10.923,
+        11.117,
+        11.717,
+        11.271,
+        10.956
+      ]
+    }
+  ],
+  "fresh_cli_queries": [
+    {
+      "label": "rare",
+      "samples": 3,
+      "cold_cli_ms": {
+        "p50_ms": 546.2458099937066,
+        "p95_ms": 552.044179996301,
+        "p99_ms": 552.044179996301
+      },
+      "raw_cold_cli_ms": [
+        536.8460649988265,
+        552.044179996301,
+        546.2458099937066
+      ]
+    },
+    {
+      "label": "late",
+      "samples": 3,
+      "cold_cli_ms": {
+        "p50_ms": 550.4863390015089,
+        "p95_ms": 563.4367390011903,
+        "p99_ms": 563.4367390011903
+      },
+      "raw_cold_cli_ms": [
+        563.4367390011903,
+        546.3856799979112,
+        550.4863390015089
+      ]
+    },
+    {
+      "label": "absent",
+      "samples": 3,
+      "cold_cli_ms": {
+        "p50_ms": 582.0728999970015,
+        "p95_ms": 611.1297649986227,
+        "p99_ms": 611.1297649986227
+      },
+      "raw_cold_cli_ms": [
+        538.3809640043182,
+        582.0728999970015,
+        611.1297649986227
+      ]
+    },
+    {
+      "label": "false_grams",
+      "samples": 3,
+      "cold_cli_ms": {
+        "p50_ms": 551.1377090006135,
+        "p95_ms": 559.3973630020628,
+        "p99_ms": 559.3973630020628
+      },
+      "raw_cold_cli_ms": [
+        559.3973630020628,
+        551.1377090006135,
+        548.0804019971401
+      ]
+    },
+    {
+      "label": "two_char",
+      "samples": 3,
+      "cold_cli_ms": {
+        "p50_ms": 566.2586190010188,
+        "p95_ms": 627.1153929992579,
+        "p99_ms": 627.1153929992579
+      },
+      "raw_cold_cli_ms": [
+        542.5446900044335,
+        627.1153929992579,
+        566.2586190010188
+      ]
+    },
+    {
+      "label": "unicode",
+      "samples": 3,
+      "cold_cli_ms": {
+        "p50_ms": 559.7982410035911,
+        "p95_ms": 575.8481669981848,
+        "p99_ms": 575.8481669981848
+      },
+      "raw_cold_cli_ms": [
+        575.8481669981848,
+        559.7982410035911,
+        558.2233520035516
+      ]
+    },
+    {
+      "label": "path",
+      "samples": 3,
+      "cold_cli_ms": {
+        "p50_ms": 586.2992640031734,
+        "p95_ms": 586.9389669969678,
+        "p99_ms": 586.9389669969678
+      },
+      "raw_cold_cli_ms": [
+        586.9389669969678,
+        586.2992640031734,
+        583.6858940019738
+      ]
+    },
+    {
+      "label": "short_complete",
+      "samples": 3,
+      "cold_cli_ms": {
+        "p50_ms": 569.1863499960164,
+        "p95_ms": 569.7615629978827,
+        "p99_ms": 569.7615629978827
+      },
+      "raw_cold_cli_ms": [
+        560.276693002379,
+        569.7615629978827,
+        569.1863499960164
+      ]
+    },
+    {
+      "label": "path_complete",
+      "samples": 3,
+      "cold_cli_ms": {
+        "p50_ms": 573.2119579988648,
+        "p95_ms": 584.8373970002285,
+        "p99_ms": 584.8373970002285
+      },
+      "raw_cold_cli_ms": [
+        556.9154600016191,
+        573.2119579988648,
+        584.8373970002285
+      ]
+    }
+  ]
+}

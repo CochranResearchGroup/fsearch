@@ -1,0 +1,31 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+[1/6] Compiling C object src/tests/librefresh_fault_fixture.so.p/refresh_fault_fixture.c.o
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c: In function ‘syscall’:
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c:25:13: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   25 |             write(STDOUT_FILENO, reply, strlen(reply)); _exit(0);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c:40:13: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   40 |             write(atoi(notify), &gate, 1);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c:44:13: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   44 |             write(STDERR_FILENO, "injected_EXDEV\n", 15); errno = EXDEV; result = -1;
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c: In function ‘fstatat’:
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c:66:9: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   66 |         write(STDERR_FILENO, "FORBIDDEN_METADATA\n", 19);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[2/6] Linking target src/tests/librefresh_fault_fixture.so
+[3/6] Compiling C object src/fsearch-monitor-worker.p/fsearch_monitor_worker.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_monitor_worker.c:2: warning: "_GNU_SOURCE" redefined
+    2 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+[4/6] Linking target src/fsearch-monitor-worker
+[5/6] Compiling C object src/fsearch-refresh-worker.p/fsearch_refresh_worker.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_refresh_worker.c:2: warning: "_GNU_SOURCE" redefined
+    2 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+[6/6] Linking target src/fsearch-refresh-worker
+INFO: autodetecting backend as ninja
+INFO: calculating backend command to run: /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja -C /tmp/fsearch-warm-release-build

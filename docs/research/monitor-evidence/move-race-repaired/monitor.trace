@@ -1,0 +1,15 @@
+84639 execve("/tmp/fsearch-warm-release-build/src/fsearch-monitor-worker", ["/tmp/fsearch-warm-release-build/"..., "--root", "/tmp/fsearch-move-race-owned-ru_"...], 0x7ffd07e019d0 /* 261 vars */) = 0
+84639 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-warm-release-build/src/tests/librefresh_fault_fixture.so", O_RDONLY|O_CLOEXEC) = 3</tmp/fsearch-warm-release-build/src/tests/librefresh_fault_fixture.so>
+84639 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+84639 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
+84639 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libc.so.6>
+84639 openat2(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-move-race-owned-ru_104x8/approved", {flags=O_RDONLY|O_CLOEXEC|O_PATH|O_DIRECTORY, resolve=RESOLVE_NO_SYMLINKS}, 24) = 3</tmp/fsearch-move-race-owned-ru_104x8/approved>
+84639 openat2(3</tmp/fsearch-move-race-owned-ru_104x8/approved>, ".", {flags=O_RDONLY|O_CLOEXEC|O_DIRECTORY, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 7</tmp/fsearch-move-race-owned-ru_104x8/approved>
+84639 inotify_add_watch(4<anon_inode:inotify>, "/proc/self/fd/7", IN_ATTRIB|IN_MOVED_FROM|IN_MOVED_TO|IN_CREATE|IN_DELETE|IN_DELETE_SELF|IN_MOVE_SELF|IN_UNMOUNT|IN_ONLYDIR) = 1
+84639 getdents64(7</tmp/fsearch-move-race-owned-ru_104x8/approved>, 0x558b8cda42d0 /* 3 entries */, 32768) = 80
+84639 openat2(3</tmp/fsearch-move-race-owned-ru_104x8/approved>, "nested", {flags=O_RDONLY|O_CLOEXEC|O_PATH, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 8</tmp/fsearch-move-race-owned-ru_104x8/approved/nested>
+84639 openat2(3</tmp/fsearch-move-race-owned-ru_104x8/approved>, "nested", {flags=O_RDONLY|O_CLOEXEC|O_DIRECTORY, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 9</tmp/fsearch-move-race-owned-ru_104x8/approved/nested>
+84639 inotify_add_watch(4<anon_inode:inotify>, "/proc/self/fd/9", IN_ATTRIB|IN_MOVED_FROM|IN_MOVED_TO|IN_CREATE|IN_DELETE|IN_DELETE_SELF|IN_MOVE_SELF|IN_UNMOUNT|IN_ONLYDIR) = 2
+84639 getdents64(9</tmp/fsearch-move-race-owned-ru_104x8/approved/nested>, 0x558b8cdac310 /* 3 entries */, 32768) = 88
+84639 openat2(3</tmp/fsearch-move-race-owned-ru_104x8/approved>, "nested/race-probe.pdf", {flags=O_RDONLY|O_CLOEXEC|O_PATH, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = -1 ENOENT (No such file or directory)
+84639 +++ exited with 3 +++

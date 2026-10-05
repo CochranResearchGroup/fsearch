@@ -1,0 +1,653 @@
+Log of Meson test suite run on 2026-10-04T13:53:50.013364
+
+Inherited test environment: [REDACTED before publication; private original retained]
+
+==================================== 1/13 ====================================
+test:         fsearch:validate-metainfo
+start time:   18:53:50
+duration:     0.05s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=240 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 /usr/bin/appstreamcli validate --no-net /tmp/fsearch-headless-baseline-build/data/io.github.cboxdoerfer.FSearch.metainfo.xml
+----------------------------------- stdout -----------------------------------
+I: io.github.cboxdoerfer.FSearch:632: developer-name-tag-deprecated
+
+✔ Validation was successful: infos: 1, pedantic: 1
+==============================================================================
+
+==================================== 2/13 ====================================
+test:         fsearch:test_database
+start time:   18:53:50
+duration:     0.05s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=39 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_database
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S9ec68965939a089e0f55d8e7b8b25dd4
+1..1
+# Start of FSearch tests
+# Start of database tests
+# GLib-GIO-DEBUG: _g_io_module_get_default: Found default implementation local (GLocalVfs) for ?gio-vfs?
+# fsearch-database-rescan-manager-DEBUG: [rescan-manager] Include manager updated. Rescheduling.
+# fsearch-database-scan-DEBUG: [db_scan] scan path: /tmp/fsearch-test-database-GATOW3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-query-tree-DEBUG: [QueryParser]
+# fsearch-query-tree-DEBUG:  * global_flags: 
+# fsearch-query-tree-DEBUG:  * input: file_
+# fsearch-query-tree-DEBUG:  * output: [ascii_icase:'file_':] 
+# fsearch-database-index-store-DEBUG: [index_store] search "file_": 3 of 4 matched (0 folders, 3 files) in 0.619 ms
+# fsearch-database-file-DEBUG: [db_save] saving database to file...
+# fsearch-database-file-DEBUG: [db_save] trying to open temporary database file: /tmp/fsearch-test-database-GATOW3/fsearch-test.db.tmp
+# fsearch-database-file-DEBUG: [db_save] saving database header...
+# fsearch-database-file-DEBUG: [db_save] saving database index flags...
+# fsearch-database-file-DEBUG: [db_save] saving database fast sort flags...
+# fsearch-database-file-DEBUG: [db_save] saving indices...
+# fsearch-database-file-DEBUG: [db_save] saving excludes...
+# fsearch-database-file-DEBUG: [db_save] saving folder block size...
+# fsearch-database-file-DEBUG: [db_save] saving file block size...
+# fsearch-database-file-DEBUG: [db_save] saving folders...
+# fsearch-database-file-DEBUG: [db_save] saving files...
+# fsearch-database-file-DEBUG: [db_save] saving sorted arrays...
+# fsearch-database-file-DEBUG: [db_save] updating file and folder block size: 57, 92
+# fsearch-database-file-DEBUG: [db_save] removing current database file...
+# fsearch-database-file-DEBUG: [db_save] renaming temporary database file: /tmp/fsearch-test-database-GATOW3/fsearch-test.db.tmp -> /tmp/fsearch-test-database-GATOW3/fsearch-test.db
+# fsearch-database-file-DEBUG: [db_save] database file saved in: 0.128000 ms
+ok 1 /FSearch/database/get_item_info_for_stale_index_still_signals
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 3/13 ====================================
+test:         fsearch:test_database_file
+start time:   18:53:50
+duration:     0.05s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=46 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_database_file
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S7725edcb1596f5677fa3624b2ba720a0
+1..1
+# Start of FSearch tests
+# Start of database tests
+# Start of file tests
+# fsearch-database-scan-DEBUG: [db_scan] scan path: /tmp/fsearch-test-database-file-RSUOW3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-database-file-DEBUG: [db_save] saving database to file...
+# fsearch-database-file-DEBUG: [db_save] trying to open temporary database file: /tmp/fsearch-test-database-file-RSUOW3/test.db.tmp
+# fsearch-database-file-DEBUG: [db_save] saving database header...
+# fsearch-database-file-DEBUG: [db_save] saving database index flags...
+# fsearch-database-file-DEBUG: [db_save] saving database fast sort flags...
+# fsearch-database-file-DEBUG: [db_save] saving indices...
+# fsearch-database-file-DEBUG: [db_save] saving excludes...
+# fsearch-database-file-DEBUG: [db_save] saving folder block size...
+# fsearch-database-file-DEBUG: [db_save] saving file block size...
+# fsearch-database-file-DEBUG: [db_save] saving folders...
+# fsearch-database-file-DEBUG: [db_save] saving files...
+# fsearch-database-file-DEBUG: [db_save] saving sorted arrays...
+# fsearch-database-file-DEBUG: [db_save] updating file and folder block size: 92, 87
+# fsearch-database-file-DEBUG: [db_save] removing current database file...
+# fsearch-database-file-DEBUG: [db_save] renaming temporary database file: /tmp/fsearch-test-database-file-RSUOW3/test.db.tmp -> /tmp/fsearch-test-database-file-RSUOW3/test.db
+# fsearch-database-file-DEBUG: [db_save] database file saved in: 0.140000 ms
+# fsearch-database-file-DEBUG: [db_load] load 2 folders, 3 files
+# fsearch-database-file-DEBUG: [db_load] folder size: 92, file size: 87
+ok 1 /FSearch/database/file/save_load_roundtrip_preserves_hierarchy_and_sort_orders
+# End of file tests
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 4/13 ====================================
+test:         fsearch:test_database_index_store
+start time:   18:53:50
+duration:     0.04s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests MALLOC_PERTURB_=29 G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_database_index_store
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sc1e457bcd78719562fb4e8a9f952dba8
+1..1
+# Start of FSearch tests
+# Start of database tests
+# Start of index_store tests
+# fsearch-query-tree-DEBUG: [QueryParser]
+# fsearch-query-tree-DEBUG:  * global_flags: 
+# fsearch-query-tree-DEBUG:  * input: apple
+# fsearch-query-tree-DEBUG:  * output: [ascii_icase:'apple':] 
+# fsearch-database-index-store-DEBUG: [index_store] search "apple": 100 of 100 matched (0 folders, 100 files) in 0.248 ms
+# fsearch-query-tree-DEBUG: [QueryParser]
+# fsearch-query-tree-DEBUG:  * global_flags: 
+# fsearch-query-tree-DEBUG:  * input: banana
+# fsearch-query-tree-DEBUG:  * output: [ascii_icase:'banana':] 
+# fsearch-database-index-store-DEBUG: [index_store] search "banana": 0 of 100 matched (0 folders, 0 files) in 0.243 ms, cancelled
+ok 1 /FSearch/database/index_store/cancelled_search_keeps_partial_results_marked_incomplete
+# End of index_store tests
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 5/13 ====================================
+test:         fsearch:test_database_include
+start time:   18:53:50
+duration:     0.04s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=118 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_database_include
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S990cee15d931589253e10878e2d0ef99
+1..2
+# Start of FSearch tests
+# Start of database tests
+ok 1 /FSearch/database/include
+ok 2 /FSearch/database/include_manager
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 6/13 ====================================
+test:         fsearch:test_database_exclude
+start time:   18:53:50
+duration:     0.03s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=253 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_database_exclude
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S862b4ab5f71b0512145a5a4637b9eb4b
+1..3
+# Start of FSearch tests
+# Start of database tests
+ok 1 /FSearch/database/exclude
+ok 2 /FSearch/database/exclude_manager
+ok 3 /FSearch/database/exclude_matching
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 7/13 ====================================
+test:         fsearch:test_database_entry
+start time:   18:53:50
+duration:     0.03s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=53 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_database_entry
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S19d33bbce8d92c3e4cc6c8ae0951e028
+1..97
+# Start of FSearch tests
+# Start of database tests
+# Start of entry tests
+ok 1 /FSearch/database/entry/new_file_type
+ok 2 /FSearch/database/entry/new_folder_type
+ok 3 /FSearch/database/entry/new_stores_name_without_flag
+ok 4 /FSearch/database/entry/new_folder_forces_childcount_flags
+ok 5 /FSearch/database/entry/new_file_no_childcount_flags
+ok 6 /FSearch/database/entry/new_empty_name
+ok 7 /FSearch/database/entry/new_with_attributes_stores_values
+ok 8 /FSearch/database/entry/new_with_attributes_no_varargs
+ok 9 /FSearch/database/entry/new_with_attributes_folder_counts
+ok 10 /FSearch/database/entry/attribute_flags_null
+ok 11 /FSearch/database/entry/attribute_get_missing_flag
+ok 12 /FSearch/database/entry/attribute_set_missing_flag
+ok 13 /FSearch/database/entry/attribute_size_roundtrip
+ok 14 /FSearch/database/entry/creation_time_never_stored
+ok 15 /FSearch/database/entry/attribute_offset_full_layout
+ok 16 /FSearch/database/entry/attribute_offset_none_fails
+ok 17 /FSearch/database/entry/attribute_offsets_computed_properties_absent
+ok 18 /FSearch/database/entry/attribute_name_for_offset
+ok 19 /FSearch/database/entry/attribute_for_offset_roundtrip
+ok 20 /FSearch/database/entry/name_raw
+ok 21 /FSearch/database/entry/name_raw_for_display
+ok 22 /FSearch/database/entry/name_raw_for_display_empty_is_separator
+ok 23 /FSearch/database/entry/name_raw_for_display_null
+ok 24 /FSearch/database/entry/name_for_display_gstring
+ok 25 /FSearch/database/entry/extension_regular
+ok 26 /FSearch/database/entry/extension_no_dot
+ok 27 /FSearch/database/entry/extension_hidden_file
+ok 28 /FSearch/database/entry/extension_trailing_dot
+ok 29 /FSearch/database/entry/extension_folder_null
+ok 30 /FSearch/database/entry/extension_null_entry
+ok 31 /FSearch/database/entry/mark_default_unset
+ok 32 /FSearch/database/entry/mark_set_clear
+ok 33 /FSearch/database/entry/mark_null_entry
+ok 34 /FSearch/database/entry/set_name_noop
+ok 35 /FSearch/database/entry/depth_root_zero
+ok 36 /FSearch/database/entry/depth_nesting
+ok 37 /FSearch/database/entry/parent_of_root_null
+ok 38 /FSearch/database/entry/parent_null_entry
+ok 39 /FSearch/database/entry/parent_returns_actual
+ok 40 /FSearch/database/entry/sibling_same_parent
+ok 41 /FSearch/database/entry/sibling_different_parent
+ok 42 /FSearch/database/entry/sibling_two_roots_false
+ok 43 /FSearch/database/entry/descendant_direct_child
+ok 44 /FSearch/database/entry/descendant_deeply_nested
+ok 45 /FSearch/database/entry/descendant_unrelated
+ok 46 /FSearch/database/entry/descendant_not_self
+ok 47 /FSearch/database/entry/set_parent_updates_childcount
+ok 48 /FSearch/database/entry/set_parent_reparent_childcount
+ok 49 /FSearch/database/entry/set_parent_folder_num_folders
+ok 50 /FSearch/database/entry/set_parent_size_propagates_all_ancestors
+ok 51 /FSearch/database/entry/set_parent_size_stops_without_flag
+ok 52 /FSearch/database/entry/set_parent_reparent_size_both_sides
+ok 53 /FSearch/database/entry/set_parent_no_update_no_counts
+ok 54 /FSearch/database/entry/set_parent_update_childcount_no_size
+ok 55 /FSearch/database/entry/set_parent_update_childcount_reparent
+ok 56 /FSearch/database/entry/increment_childcount_file_folder
+ok 57 /FSearch/database/entry/increment_childcount_null_safe
+ok 58 /FSearch/database/entry/root_path_single_level
+ok 59 /FSearch/database/entry/root_path_nested
+ok 60 /FSearch/database/entry/root_path_null
+ok 61 /FSearch/database/entry/path_of_root_is_empty
+ok 62 /FSearch/database/entry/path_full_of_root_is_name
+ok 63 /FSearch/database/entry/path_excludes_own_name
+ok 64 /FSearch/database/entry/path_full_includes_own_name
+ok 65 /FSearch/database/entry/paths_root_is_separator
+ok 66 /FSearch/database/entry/append_path_preserves_prefix
+# GLib-GIO-DEBUG: _g_io_module_get_default: Found default implementation local (GLocalVfs) for ?gio-vfs?
+ok 67 /FSearch/database/entry/content_type_nonexistent_is_unknown
+ok 68 /FSearch/database/entry/compare_by_name_natural_order
+ok 69 /FSearch/database/entry/compare_by_name_null_entries
+ok 70 /FSearch/database/entry/compare_by_size
+ok 71 /FSearch/database/entry/compare_by_size_no_flag_zero
+ok 72 /FSearch/database/entry/compare_by_modification_time
+ok 73 /FSearch/database/entry/compare_by_extension
+ok 74 /FSearch/database/entry/compare_by_extension_folder_empty
+ok 75 /FSearch/database/entry/compare_by_position_always_zero
+ok 76 /FSearch/database/entry/compare_by_type_folders_always_equal
+ok 77 /FSearch/database/entry/compare_by_type_folder_file_differ
+ok 78 /FSearch/database/entry/compare_by_chain_type_then_name
+ok 79 /FSearch/database/entry/compare_by_path_siblings_name_order
+ok 80 /FSearch/database/entry/compare_by_path_different_depth
+ok 81 /FSearch/database/entry/compare_by_full_path_ancestor_order
+ok 82 /FSearch/database/entry/path_sort_keeps_descendant_files_contiguous
+ok 83 /FSearch/database/entry/path_compare_has_no_name_collisions
+ok 84 /FSearch/database/entry/dummy_does_not_change_parent_child_counts
+ok 85 /FSearch/database/entry/dummy_sorts_before_every_child
+ok 86 /FSearch/database/entry/deep_copy_root
+ok 87 /FSearch/database/entry/deep_copy_independent
+ok 88 /FSearch/database/entry/deep_copy_parent_chain
+ok 89 /FSearch/database/entry/free_updates_parent_state
+ok 90 /FSearch/database/entry/free_no_unparent_leaves_parent_untouched
+ok 91 /FSearch/database/entry/free_full_frees_chain
+ok 92 /FSearch/database/entry/monitored_fanotify_roundtrip
+ok 93 /FSearch/database/entry/monitored_inotify_roundtrip
+ok 94 /FSearch/database/entry/monitored_failed_folder
+ok 95 /FSearch/database/entry/monitored_flags_file_redirect
+ok 96 /FSearch/database/entry/monitored_flags_rootless_file_false
+ok 97 /FSearch/database/entry/get_flags_type_and_mark
+# End of entry tests
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 8/13 ====================================
+test:         fsearch:test_array
+start time:   18:53:50
+duration:     0.03s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=195 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_array
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S87dc13e012a23e280ec30e5c486067a6
+1..10
+# Start of FSearch tests
+# Start of array tests
+# fsearch-dynamic-array-DEBUG: [sort] merge sort: 128
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+# 0:0
+# 1:1
+# 2:2
+# 3:3
+# 4:4
+# 5:5
+# 6:6
+# 7:7
+# 8:8
+# 9:9
+# 10:10
+# 11:11
+# 12:12
+# 13:13
+# 14:14
+# 15:15
+# 16:16
+# 17:17
+# 18:18
+# 19:19
+# 20:20
+# 21:21
+# 22:22
+# 23:23
+# 24:24
+# 25:25
+# 26:26
+# 27:27
+# 28:28
+# 29:29
+# 30:30
+# 31:31
+# 32:32
+# 33:33
+# 34:34
+# 35:35
+# 36:36
+# 37:37
+# 38:38
+# 39:39
+# 40:40
+# 41:41
+# 42:42
+# 43:43
+# 44:44
+# 45:45
+# 46:46
+# 47:47
+# 48:48
+# 49:49
+# 50:50
+# 51:51
+# 52:52
+# 53:53
+# 54:54
+# 55:55
+# 56:56
+# 57:57
+# 58:58
+# 59:59
+# 60:60
+# 61:61
+# 62:62
+# 63:63
+# 64:64
+# 65:65
+# 66:66
+# 67:67
+# 68:68
+# 69:69
+# 70:70
+# 71:71
+# 72:72
+# 73:73
+# 74:74
+# 75:75
+# 76:76
+# 77:77
+# 78:78
+# 79:79
+# 80:80
+# 81:81
+# 82:82
+# 83:83
+# 84:84
+# 85:85
+# 86:86
+# 87:87
+# 88:88
+# 89:89
+# 90:90
+# 91:91
+# 92:92
+# 93:93
+# 94:94
+# 95:95
+# 96:96
+# 97:97
+# 98:98
+# 99:99
+# 100:100
+# 101:101
+# 102:102
+# 103:103
+# 104:104
+# 105:105
+# 106:106
+# 107:107
+# 108:108
+# 109:109
+# 110:110
+# 111:111
+# 112:112
+# 113:113
+# 114:114
+# 115:115
+# 116:116
+# 117:117
+# 118:118
+# 119:119
+# 120:120
+# 121:121
+# 122:122
+# 123:123
+# 124:124
+# 125:125
+# 126:126
+# 127:127
+ok 1 /FSearch/array/main
+ok 2 /FSearch/array/insert
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 16
+ok 3 /FSearch/array/insert_sorted
+# 1
+ok 4 /FSearch/array/remove
+ok 5 /FSearch/array/steal
+ok 6 /FSearch/array/steal_items_func
+ok 7 /FSearch/array/range
+ok 8 /FSearch/array/copy_ref
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 16
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+# 0.7 / 0.7
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 1.4 / 1.4
+# 1.5 / 1.5
+# 1.9 / 1.9
+# 2.6 / 2.6
+# 2.8 / 2.8
+# 3.0 / 3.0
+# 4.1 / 4.1
+# 4.2 / 4.2
+# 4.3 / 4.3
+ok 9 /FSearch/array/sort
+ok 10 /FSearch/array/search
+# End of array tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 9/13 ====================================
+test:         fsearch:test_size_utils
+start time:   18:53:50
+duration:     0.02s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=20 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_size_utils
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S14ebaa36816260af8ab5eab10fcb9ffa
+1..1
+# Start of FSearch tests
+# Start of size_utils tests
+ok 1 /FSearch/size_utils/parse_size
+# End of size_utils tests
+# End of FSearch tests
+==============================================================================
+
+=================================== 10/13 ====================================
+test:         fsearch:test_query
+start time:   18:53:50
+duration:     0.02s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=42 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_query
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sdc9af6882dd3eb8e2c9170cc18c21830
+1..3
+# Start of FSearch tests
+# Start of query tests
+ok 1 /FSearch/query/main
+ok 2 /FSearch/query/mappings_turkic
+ok 3 /FSearch/query/mappings_german
+# End of query tests
+# End of FSearch tests
+----------------------------------- stderr -----------------------------------
+Failed to set locale to en_US.UTF-8. Skipping test.
+Failed to set locale to tr_TR.UTF-8. Skipping test.
+Failed to set locale to de_DE.UTF-8. Skipping test.
+==============================================================================
+
+=================================== 11/13 ====================================
+test:         fsearch:test_string_utils
+start time:   18:53:50
+duration:     0.02s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=13 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_string_utils
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S48e60b0e3fc496391f82c5d397217ef7
+1..7
+# Start of FSearch tests
+# Start of string_utils tests
+ok 1 /FSearch/string_utils/get_extension
+ok 2 /FSearch/string_utils/is_empty
+ok 3 /FSearch/string_utils/has_upper
+ok 4 /FSearch/string_utils/has_upper_utf8
+ok 5 /FSearch/string_utils/is_ascii_icase
+ok 6 /FSearch/string_utils/convert_wildcard_to_regex
+ok 7 /FSearch/string_utils/starts_with_interval
+# End of string_utils tests
+# End of FSearch tests
+----------------------------------- stderr -----------------------------------
+Failed to set locale to en_US.UTF-8. Skipping test.
+Failed to set locale to en_US.UTF-8. Skipping test.
+Failed to set locale to en_US.UTF-8. Skipping test.
+==============================================================================
+
+=================================== 12/13 ====================================
+test:         fsearch:test_time_utils
+start time:   18:53:50
+duration:     0.01s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=47 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_time_utils
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S74455cd9290ef15b739796386bf90616
+1..1
+# Start of FSearch tests
+# Start of time_utils tests
+ok 1 /FSearch/time_utils/parse_time_interval
+# End of time_utils tests
+# End of FSearch tests
+==============================================================================
+
+=================================== 13/13 ====================================
+test:         fsearch:test_database_chunked_array
+start time:   18:53:50
+duration:     0.06s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/workspace.local/fsearch/src/tests MALLOC_PERTURB_=189 G_TEST_BUILDDIR=/tmp/fsearch-headless-baseline-build/src/tests /tmp/fsearch-headless-baseline-build/src/tests/test_database_chunked_array
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sa7353bd1a52d974466b46f1098b5dc11
+1..53
+# Start of FSearch tests
+# Start of database tests
+# Start of chunked_array tests
+ok 1 /FSearch/database/chunked_array/new_empty
+ok 2 /FSearch/database/chunked_array/new_small_single_chunk
+ok 3 /FSearch/database/chunked_array/new_large_splits_at_construction
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 4 /FSearch/database/chunked_array/new_unsorted_input_gets_sorted
+ok 5 /FSearch/database/chunked_array/new_claiming_sorted_is_trusted
+ok 6 /FSearch/database/chunked_array/ref_unref_roundtrip
+ok 7 /FSearch/database/chunked_array/get_type_registered
+ok 8 /FSearch/database/chunked_array/get_entry_out_of_bounds
+ok 9 /FSearch/database/chunked_array/get_entry_first_last
+ok 10 /FSearch/database/chunked_array/get_entry_crosses_chunk_boundary
+ok 11 /FSearch/database/chunked_array/get_chunks_total_matches_num_entries
+ok 12 /FSearch/database/chunked_array/get_joined_matches_get_entry
+ok 13 /FSearch/database/chunked_array/insert_into_empty
+ok 14 /FSearch/database/chunked_array/insert_maintains_sort_order
+ok 15 /FSearch/database/chunked_array/insert_no_split_below_2x_threshold
+ok 16 /FSearch/database/chunked_array/insert_splits_at_2x_threshold
+ok 17 /FSearch/database/chunked_array/insert_wrong_type_rejected
+ok 18 /FSearch/database/chunked_array/insert_with_size_sort_order
+ok 19 /FSearch/database/chunked_array/insert_array_empty_noop
+ok 20 /FSearch/database/chunked_array/insert_array_small_individual_path
+# fsearch-dynamic-array-DEBUG: [sort] merge sort: 8192
+ok 21 /FSearch/database/chunked_array/insert_array_bulk_path_at_threshold
+# fsearch-dynamic-array-DEBUG: [sort] merge sort: 8192
+ok 22 /FSearch/database/chunked_array/insert_array_bulk_interleaves_correctly
+# fsearch-dynamic-array-DEBUG: [sort] merge sort: 8192
+ok 23 /FSearch/database/chunked_array/insert_array_bulk_into_empty_self
+ok 24 /FSearch/database/chunked_array/find_existing
+ok 25 /FSearch/database/chunked_array/find_missing_null
+# fsearch-database-chunked-array-DEBUG: [chunks] empty
+ok 26 /FSearch/database/chunked_array/find_empty_array_null
+ok 27 /FSearch/database/chunked_array/find_slow_existing_and_missing
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 28 /FSearch/database/chunked_array/find_duplicate_keys
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 29 /FSearch/database/chunked_array/find_duplicates_across_chunk_boundary
+ok 30 /FSearch/database/chunked_array/steal_existing
+ok 31 /FSearch/database/chunked_array/steal_missing_null
+ok 32 /FSearch/database/chunked_array/steal_all_keeps_one_chunk
+ok 33 /FSearch/database/chunked_array/steal_does_not_merge_shrunken_chunks
+ok 34 /FSearch/database/chunked_array/steal_removes_emptied_chunk
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+ok 35 /FSearch/database/chunked_array/steal_descendants_direct_children
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+ok 36 /FSearch/database/chunked_array/steal_descendants_deeply_nested
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+ok 37 /FSearch/database/chunked_array/steal_descendants_none_returns_empty
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 38 /FSearch/database/chunked_array/steal_descendants_known_count_fast_path
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 39 /FSearch/database/chunked_array/steal_descendants_known_count_path_fast_path
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 6
+ok 40 /FSearch/database/chunked_array/steal_descendants_known_count_name_order
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 41 /FSearch/database/chunked_array/steal_descendants_unknown_count_stops_at_end_of_run
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 4
+ok 42 /FSearch/database/chunked_array/steal_descendants_empty_subtree_stops_immediately
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 43 /FSearch/database/chunked_array/remove_marked_exact_count_scattered
+ok 44 /FSearch/database/chunked_array/steal_descendants_unknown_count_generic_scan
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 45 /FSearch/database/chunked_array/steal_descendants_spanning_multiple_chunks
+ok 46 /FSearch/database/chunked_array/remove_marked_none_noop
+ok 47 /FSearch/database/chunked_array/remove_marked_contiguous_block
+ok 48 /FSearch/database/chunked_array/remove_marked_non_contiguous_blocks
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+ok 49 /FSearch/database/chunked_array/remove_marked_files_inherit_from_parent
+ok 50 /FSearch/database/chunked_array/remove_marked_spans_chunk_boundary
+ok 51 /FSearch/database/chunked_array/remove_marked_all_keeps_one_chunk
+ok 52 /FSearch/database/chunked_array/remove_marked_exact_count_across_chunks
+ok 53 /FSearch/database/chunked_array/remove_marked_zero_count_is_noop
+# End of chunked_array tests
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+
+Ok:                13  
+Fail:              0   

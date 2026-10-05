@@ -70,3 +70,6 @@ bool
 fsearch_query_highlight(FsearchQuery *query, FsearchQueryMatchData *match_data);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC(FsearchQuery, fsearch_query_unref)
+// Unlike GUI query syntax, metacharacters are always literal.
+FsearchQuery *
+fsearch_query_new_literal(const char *search_term, FsearchQueryFlags flags);

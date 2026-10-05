@@ -9,6 +9,7 @@
 #include <gio/gio.h>
 #include <glib-object.h>
 #include <glib.h>
+#include "fsearch_database_chunked_array.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <sys/types.h>
@@ -93,3 +94,8 @@ bool
 fsearch_database_index_remove_path(FsearchDatabaseIndex *self, const char *path, bool *root_removed);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC(FsearchDatabaseIndex, fsearch_database_index_unref)
+/* Borrow immutable snapshot content through a counted chunk reference. */
+FsearchDatabaseChunkedArray *
+fsearch_database_index_get_snapshot_chunks(FsearchDatabaseIndex *self, bool files);
+
+G_END_DECLS

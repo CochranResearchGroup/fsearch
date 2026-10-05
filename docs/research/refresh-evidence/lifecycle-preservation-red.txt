@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_failed_refresh_preserves_last_accepted_results (__main__.RefreshWorker.test_failed_refresh_preserves_last_accepted_results)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py", line 23, in test_failed_refresh_preserves_last_accepted_results
+    self.assertEqual(initial.returncode,0,initial.stdout+initial.stderr)
+AssertionError: 2 != 0 : python3.12: can't open file '/tmp/fsearch-warm-release-build/src/fsearch-refresh': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.028s
+
+FAILED (failures=1)

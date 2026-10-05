@@ -1,0 +1,17 @@
+# Installed contained monitoring acceptance
+
+Seven local commands resolve to source `10170cfe7848754bd5c68a49685d62ff17f2308e` under the versioned runtime directory. Exact qualified artifact hashes were checked before adoption and read back after acceptance. Source review is `monitor-evidence/source-review.md`; frozen inputs are `monitor-evidence/installation-input-qualification.json`; installed manifest and acceptance are under `monitor-evidence/installed/`.
+
+Installed tests pass: 20 monitor-supervisor, 10 native-watch, 12 refresh, 34 service and 15 direct CLI cases (91 total). Source qualification also passes all 19 Meson targets. Installed query/client/service tracing during monitoring and after root removal finds no indexed-root probes, and its negative control detects an explicit probe. Both installed native workers reject a directory moved outside the approved root before descendant admission, show no outside-child descriptor access, and create no candidate. Public monitor/refresh race tests preserve accepted bytes.
+
+This review found and repaired a missing containment case in the earlier refresh scanner as well as the new watcher. Descendant opens now resolve from the approved root FD, and directory re-opens compare inode/device identity. Red traces remain intact; earlier scanner acceptance is not presented as proof of this previously untested race. Last accepted snapshots remain private cached observations, not current permission or storage-health checks.
+
+Direct executable monitor startup, address-space readback and orderly shutdown pass. The one-file idle fixture observes supervisor plus one native watcher, 17760 KiB aggregate RSS, and proved watcher absence after shutdown. This small-fixture RSS measurement is not a million-file or kernel-watch-memory budget claim. Installed fault tests verify a 64 MiB supervisor soft/256 MiB hard ceiling, 256 MiB children, and exactly two owned children during a delayed refresh. A fresh final census reports zero FSearch processes.
+
+Optional `--socket` uses the existing private client without starting a missing service. Publication and serving replacement are separate acknowledgements; the latter requires the acknowledged identity to match the accepted snapshot. Refresh admission stays locked through replacement. Failed/uncertain cleanup retains quarantine until explicit recovery, including a second shutdown signal during cleanup. Overflow reconciliation is bounded and preserves accepted bytes on failure.
+
+The CLI, query worker and service hashes are unchanged from the installed three-corpus query/replacement performance qualification in `refresh-evidence/column-prefetch-installed/performance-qualification.json`. Those unchanged-artifact results are reused explicitly; no new indexing-throughput measurement or production-root qualification is claimed.
+
+The previous version is retained with five old link targets and two previously absent monitor links recorded in the manifest. Stop instances from the new version before restoring those targets/removing new links. The old scanner predates the moved-parent repair, so rollback is not a claim that its refresh containment covers this race.
+
+No production roots, continuously running production service, default activation or user MCP registration were added. File-searcher MCP integration and publication/tracker reconciliation remain open. Memory disposition is forbidden: no explicit user request authorizes personal memory writes.

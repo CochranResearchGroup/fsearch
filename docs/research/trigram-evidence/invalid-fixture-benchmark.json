@@ -1,0 +1,80 @@
+{
+  "source_commit": "5ec26bab64c267768f22208f20689708e4006024",
+  "samples": 100,
+  "prototype_only": true,
+  "boundaries": "Virtual filename records only; 256 MiB AS; 64 MiB snapshot; 500k verification and separate posting-operation cap. Matcher/stdio latency, not public socket or installed acceptance.",
+  "cases": [],
+  "resources": [],
+  "failures": [
+    {
+      "files": 100000,
+      "mode": "linear",
+      "stage": "bounded_execution",
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "files": 100000,
+      "mode": "native",
+      "stage": "bounded_execution",
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "files": 100000,
+      "mode": "sqlite",
+      "stage": "bounded_execution",
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "files": 1000000,
+      "mode": "linear",
+      "stage": "bounded_execution",
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "files": 1000000,
+      "mode": "native",
+      "stage": "bounded_execution",
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    },
+    {
+      "files": 1000000,
+      "mode": "sqlite",
+      "stage": "bounded_execution",
+      "error": "Expecting value: line 1 column 1 (char 0)"
+    }
+  ],
+  "hashes": {
+    "src/fsearch_headless.c": "681b8f6d0f5bef3f52c98e15dcfe48c1a7f60ec96e46aadc5a798ca7e69752a1",
+    "src/prototypes/trigram_probe.c": "7517282fa652491281fbf397596674692d21b0447fea50bd7ac1fb270652dfb0",
+    "src/prototypes/benchmark_trigram.py": "0f6648dd734af1b49f0b2db0465e974a8e1fff39c373aacf7161914615d75e95",
+    "docs/research/trigram-evidence/trigram-probe.generated.c": "af69dec36c652a18af6b267c67b120d99f0c2168769895993318a2698b78ae58",
+    "docs/research/trigram-evidence/trigram-probe": "b4825d6c1e5469858e8923d75b021ef68311587d2f0349deb720d9bab82afc42"
+  },
+  "fixtures": [
+    {
+      "files": 100000,
+      "snapshot_bytes": 2492748,
+      "build_ms": 90.6079780033906,
+      "sha256": "6842134a81a778d73950a1c03f39880703e5be2bc2f1e11213843adf5d0bef43"
+    },
+    {
+      "files": 1000000,
+      "snapshot_bytes": 24908646,
+      "build_ms": 1074.16379300048,
+      "sha256": "c02a6af3151bff717c652d1136c214a2e12e41992200e7a4db026e4488302a7a"
+    }
+  ],
+  "isolation": [
+    {
+      "files": 100000,
+      "returncode": -6,
+      "indexed_root_file_syscalls": 0
+    },
+    {
+      "files": 1000000,
+      "returncode": -6,
+      "indexed_root_file_syscalls": 0
+    }
+  ],
+  "completed": true
+}

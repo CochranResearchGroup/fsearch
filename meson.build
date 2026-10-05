@@ -2,7 +2,7 @@ project(
   'fsearch',
   'c',
   version : '0.3',
-  meson_version : '>= 0.45.0',
+  meson_version : '>= 0.50.0',
   default_options : [
     'c_std=gnu11',
     'channel=other',

@@ -1,0 +1,32 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+ninja: no work to do.
+1/1 fsearch:refresh_worker FAIL            0.08s   exit status 1
+>>> MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=138 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3 /tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py /tmp/fsearch-warm-release-build/src/fsearch-refresh-worker /tmp/fsearch-warm-release-build/src/fsearch-cli
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+F
+======================================================================
+FAIL: test_owned_root_produces_searchable_candidate_without_following_symlink (__main__.RefreshWorker.test_owned_root_produces_searchable_candidate_without_following_symlink)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py", line 12, in test_owned_root_produces_searchable_candidate_without_following_symlink
+    self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+AssertionError: 4 != 0 : 
+(process:34974): fsearch-database-file-WARNING **: 00:54:23.983: [db_save] saving failed
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+FAILED (failures=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:refresh_worker FAIL            0.08s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

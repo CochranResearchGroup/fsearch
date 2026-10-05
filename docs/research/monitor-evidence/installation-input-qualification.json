@@ -1,0 +1,34 @@
+{
+  "source_commit": "10170cfe7848754bd5c68a49685d62ff17f2308e",
+  "source_qualified": true,
+  "installed_qualified": false,
+  "regression_targets": 19,
+  "supervisor_tests": 20,
+  "native_monitor_tests": 10,
+  "unchanged_query_artifacts": {
+    "fsearch-cli": true,
+    "fsearch-worker": true,
+    "fsearch-service": true
+  },
+  "query_performance_reuse_evidence": "docs/research/refresh-evidence/column-prefetch-installed/performance-qualification.json",
+  "production_roots_admitted": false,
+  "artifact_sha256": {
+    "fsearch-cli": "21189c2009db9b4c0e7f5f81792a68d2c8154fbfa3031246d405233aefeed6fc",
+    "fsearch-worker": "45ed7365d856ec88b6ea726d9137ca8583845670d0856c108664d88d624dd625",
+    "fsearch-service": "63d1bd0c3957ee372901536a8006d6a33120cf14502573f1f843fc7d485eb816",
+    "fsearch-refresh": "a587ab37b8cfb62c1bc03ba22781cf77cd9e8b4d0fb487081a31deee864de4d3",
+    "fsearch-refresh-worker": "f6424ba73176fc049cdd088a20c819c9d67d0a439f61850c54373fb21a134274",
+    "fsearch-monitor": "01073100ad355accdfcb2573b4469e60d25c9cdf5896360bda3eb722e308a8db",
+    "fsearch-monitor-worker": "36fa3543d600a33a62a4a2ce9780c7eb830fec3e963d764f204d99a0c75fa420"
+  },
+  "evidence_sha256": {
+    "docs/research/monitor-evidence/source-review.md": "8651a99c2de992fc8ea15c49c91e795b6686281ac381d9a051f411e9d270afa9",
+    "docs/research/monitor-evidence/issue-4-review.json": "b6fc4aa22a01bf8007e9c946beeb81099393e5b5368eab6feafd85cbeceff91a",
+    "docs/research/monitor-evidence/installation-source-regressions.txt": "b459de7c3ce87d8bebecb76c1776ba71ab914f1ee52a093bfb2a8954eacba8d7",
+    "docs/research/monitor-evidence/monitor_supervisor-review-green.txt": "3de544ab1264c698cf22be01f23f9e987703415a6e2d8471a65a1ef9fb3546bd",
+    "docs/research/monitor-evidence/monitor_worker-review-green.txt": "82c525cfba4ca3d81889d156469e372f2eafff06b5ddfbd659324bb1c4f5ed59",
+    "docs/research/monitor-evidence/move-race-repaired/verification.json": "67e680b37287a52e767cf8d15a889511d8039aab674cd5a66205e160bdad4f75",
+    "docs/research/monitor-evidence/query-isolation/query-isolation.json": "435a856b89d9fbf4efd496cf9675c241a8eb20a49aa542eebafe67cf18342a58",
+    "docs/research/monitor-evidence/review-process-census.json": "3a76f50c72b3c0f31379a0f0d14cf25d816453e43fd8575a55fea5cd2915932f"
+  }
+}

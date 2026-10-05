@@ -1,0 +1,31 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+ninja: no work to do.
+1/1 fsearch:warm_service FAIL           14.48s   exit status 1
+>>> LD_LIBRARY_PATH=/tmp/fsearch-warm-release-build/src/tests ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=115 /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3 /tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py /tmp/fsearch-warm-release-build/src/fsearch-service /tmp/fsearch-warm-release-build/src/fsearch-cli /tmp/fsearch-warm-release-build/src/tests/snapshot_fixture /tmp/fsearch-warm-release-build/src/tests/libheadless_fault_fixture.so
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+F............
+======================================================================
+FAIL: test_client_cannot_silently_retarget_an_existing_service_snapshot (__main__.WarmService.test_client_cannot_silently_retarget_an_existing_service_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 228, in test_client_cannot_silently_retarget_an_existing_service_snapshot
+    self.assertNotEqual(result.returncode,0,result.stdout)
+AssertionError: 0 == 0 : {"schema_version":1,"status":"ok","complete":true,"truncated":false,"visibility":"cached","examined":2,"snapshot":{"identity":"2096:6152549:326:1791146573:175872214:1791146573:202272213","mtime_unix":1791146573,"age_seconds":0,"roots":[{"path":"/tmp/fsearch-service-fixture-7z011pop/owned","path_bytes_base64":null,"last_scan_unix":1791146573,"age_seconds":0,"last_error_code":0}]},"results":[{"path":"/tmp/fsearch-service-fixture-7z011pop/owned/invoice.pdf","path_bytes_base64":null}],"request_id":"9229f8f624814c7da62730aef267049f"}
+
+
+----------------------------------------------------------------------
+Ran 13 tests in 14.425s
+
+FAILED (failures=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:warm_service FAIL           14.48s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

@@ -1,0 +1,46 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+[1/2] Compiling C object src/tests/librefresh_fault_fixture.so.p/refresh_fault_fixture.c.o
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c: In function ‘syscall’:
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c:25:13: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   25 |             write(STDOUT_FILENO, reply, strlen(reply)); _exit(0);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c:35:13: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   35 |             write(STDERR_FILENO, "injected_EXDEV\n", 15); errno = EXDEV; result = -1;
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c: In function ‘fstatat’:
+../../home/ecochran76/workspace.local/fsearch/src/tests/refresh_fault_fixture.c:57:9: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   57 |         write(STDERR_FILENO, "FORBIDDEN_METADATA\n", 19);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[2/2] Linking target src/tests/librefresh_fault_fixture.so
+1/1 fsearch:refresh_worker FAIL            2.93s   exit status 1
+>>> MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/tmp/fsearch-warm-release-build/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=104 /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3 /tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py /tmp/fsearch-warm-release-build/src/fsearch-refresh-worker /tmp/fsearch-warm-release-build/src/fsearch-cli /tmp/fsearch-warm-release-build/src/tests/librefresh_fault_fixture.so /tmp/fsearch-warm-release-build/src/tests/libheadless_fault_fixture.so
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+....F.......
+======================================================================
+FAIL: test_malformed_worker_reply_is_structured_and_preserves_snapshot (__main__.RefreshWorker.test_malformed_worker_reply_is_structured_and_preserves_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py", line 17, in test_malformed_worker_reply_is_structured_and_preserves_snapshot
+    self.assertEqual(json.loads(failed.stdout)['error']['code'],'worker_protocol_failed',failed.stdout+failed.stderr)
+AssertionError: 'refresh_failed' != 'worker_protocol_failed'
+- refresh_failed
++ worker_protocol_failed
+ : {"schema_version": 1, "status": "error", "error": {"code": "refresh_failed"}}
+
+
+----------------------------------------------------------------------
+Ran 12 tests in 2.877s
+
+FAILED (failures=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:refresh_worker FAIL            2.93s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

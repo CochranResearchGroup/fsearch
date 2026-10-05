@@ -245,14 +245,14 @@ db_entry_get_type(FsearchDatabaseEntry *entry) {
 void
 db_entry_free_no_unparent(FsearchDatabaseEntry *entry) {
     g_return_if_fail(entry);
-    g_clear_pointer(&entry, free);
+    if (!(entry->flags & FSEARCH_DATABASE_ENTRY_FLAG_SNAPSHOT_STORAGE)) g_clear_pointer(&entry, free);
 }
 
 void
 db_entry_free(FsearchDatabaseEntry *entry) {
     g_return_if_fail(entry);
     db_entry_set_parent(entry, NULL);
-    g_clear_pointer(&entry, free);
+    if (!(entry->flags & FSEARCH_DATABASE_ENTRY_FLAG_SNAPSHOT_STORAGE)) g_clear_pointer(&entry, free);
 }
 
 void
@@ -273,6 +273,7 @@ db_entry_get_deep_copy(FsearchDatabaseEntry *entry) {
     g_assert_nonnull(copy);
 
     memcpy(copy, entry, entry_size);
+    copy->flags &= ~FSEARCH_DATABASE_ENTRY_FLAG_SNAPSHOT_STORAGE;
 
     copy->parent = entry->parent ? db_entry_get_deep_copy(entry->parent) : NULL;
     return copy;
@@ -849,18 +850,25 @@ entry_get_size_for_flags(FsearchDatabaseIndexPropertyFlags attribute_flags, cons
     return size;
 }
 
-FsearchDatabaseEntry *
-db_entry_new(FsearchDatabaseIndexPropertyFlags attribute_flags,
-             const char *name,
-             FsearchDatabaseEntry *parent,
-             FsearchDatabaseEntryType type) {
+static FsearchDatabaseEntry *
+entry_new(FsearchDatabaseIndexPropertyFlags attribute_flags,
+          const char *name,
+          FsearchDatabaseEntry *parent,
+          FsearchDatabaseEntryType type,
+          FsearchEntryAllocator allocator,
+          void *context) {
     if (type == DATABASE_ENTRY_TYPE_FOLDER) {
         attribute_flags = attribute_flags | DATABASE_INDEX_PROPERTY_FLAG_FOLDER_DEFAULTS;
     }
     const size_t name_len = name ? strlen(name) : 0;
     const size_t entry_size = entry_get_size_for_flags(attribute_flags, name, name_len);
-    FsearchDatabaseEntry *entry = calloc(1, entry_size);
-    g_assert_nonnull(entry);
+    FsearchDatabaseEntry *entry = allocator ? allocator(entry_size, context) : calloc(1, entry_size);
+    if (allocator) {
+        if (!entry) return NULL;
+        memset(entry, 0, entry_size);
+        entry->flags |= FSEARCH_DATABASE_ENTRY_FLAG_SNAPSHOT_STORAGE;
+    }
+    else g_assert_nonnull(entry);
 
     if (type == DATABASE_ENTRY_TYPE_FOLDER) {
         entry->flags |= FSEARCH_DATABASE_ENTRY_FLAG_TYPE_FOLDER;
@@ -884,6 +892,18 @@ db_entry_new(FsearchDatabaseIndexPropertyFlags attribute_flags,
         db_entry_set_parent(entry, parent);
     }
     return entry;
+}
+
+FsearchDatabaseEntry *
+db_entry_new(FsearchDatabaseIndexPropertyFlags flags, const char *name, FsearchDatabaseEntry *parent, FsearchDatabaseEntryType type) {
+    return entry_new(flags, name, parent, type, NULL, NULL);
+}
+
+FsearchDatabaseEntry *
+db_entry_new_in_snapshot_storage(FsearchDatabaseIndexPropertyFlags flags, const char *name,
+                                 FsearchDatabaseEntryType type, FsearchEntryAllocator allocator, void *context) {
+    g_return_val_if_fail(allocator, NULL);
+    return entry_new(flags, name, NULL, type, allocator, context);
 }
 
 FsearchDatabaseEntry *

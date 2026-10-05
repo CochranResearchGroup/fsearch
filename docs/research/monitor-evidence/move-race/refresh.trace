@@ -1,0 +1,50 @@
+64276 execve("/tmp/fsearch-warm-release-build/src/fsearch-refresh-worker", ["/tmp/fsearch-warm-release-build/"..., "--root", "/tmp/fsearch-move-race-owned-i4p"..., "--output", "/tmp/fsearch-move-race-owned-i4p"...], 0x7fff9d0966d0 /* 261 vars */) = 0
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-warm-release-build/src/tests/librefresh_fault_fixture.so", O_RDONLY|O_CLOEXEC) = 3</tmp/fsearch-warm-release-build/src/tests/librefresh_fault_fixture.so>
+64276 access("/etc/ld.so.preload", R_OK) = -1 ENOENT (No such file or directory)
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3</etc/ld.so.cache>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libm.so.6>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgio-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgio-2.0.so.0.8000.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgobject-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgobject-2.0.so.0.8000.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libglib-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.8000.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libpango-1.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libpango-1.0.so.0.5200.1>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libpcre2-8.so.0.11.2>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libicuuc.so.74", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libicuuc.so.74.2>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libc.so.6>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgmodule-2.0.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgmodule-2.0.so.0.8000.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libz.so.1.3>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libmount.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libmount.so.1.1.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libselinux.so.1>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libffi.so.8", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libffi.so.8.1.4>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libfribidi.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libfribidi.so.0.4.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libthai.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libthai.so.0.3.1>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libharfbuzz.so.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libharfbuzz.so.0.60830.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libicudata.so.74", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libicudata.so.74.2>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.33>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgcc_s.so.1>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libblkid.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libblkid.so.1.1.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libdatrie.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libdatrie.so.1.4.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libfreetype.so.6", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libfreetype.so.6.20.1>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libgraphite2.so.3", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libgraphite2.so.3.2.1>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libbz2.so.1.0", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libbz2.so.1.0.4>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libpng16.so.16", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libpng16.so.16.43.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libbrotlidec.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libbrotlidec.so.1.1.0>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/lib/x86_64-linux-gnu/libbrotlicommon.so.1", O_RDONLY|O_CLOEXEC) = 3</usr/lib/x86_64-linux-gnu/libbrotlicommon.so.1.1.0>
+64276 statfs("/sys/fs/selinux", {f_type=SYSFS_MAGIC, f_bsize=4096, f_blocks=0, f_bfree=0, f_bavail=0, f_files=0, f_ffree=0, f_fsid={val=[0xdff19c14, 0x4f8e434f]}, f_namelen=255, f_frsize=4096, f_flags=ST_VALID|ST_NOSUID|ST_NODEV|ST_NOEXEC|ST_NOATIME}) = 0
+64276 statfs("/selinux", 0x7ffe1ec3dca0) = -1 ENOENT (No such file or directory)
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3</proc/filesystems>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/proc/mounts", O_RDONLY|O_CLOEXEC) = 3</proc/64276/mounts>
+64276 access("/etc/selinux/config", F_OK) = -1 ENOENT (No such file or directory)
+64276 openat2(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-move-race-owned-i4p5hczs/approved", {flags=O_RDONLY|O_CLOEXEC|O_PATH|O_DIRECTORY, resolve=RESOLVE_NO_SYMLINKS}, 24) = 3</tmp/fsearch-move-race-owned-i4p5hczs/approved>
+64276 openat(AT_FDCWD</home/ecochran76/workspace.local/fsearch>, "/tmp/fsearch-move-race-owned-i4p5hczs/stage", O_RDONLY|O_NOFOLLOW|O_CLOEXEC|O_PATH|O_DIRECTORY) = 4</tmp/fsearch-move-race-owned-i4p5hczs/stage>
+64276 openat2(3</tmp/fsearch-move-race-owned-i4p5hczs/approved>, ".", {flags=O_RDONLY|O_CLOEXEC|O_DIRECTORY, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 7</tmp/fsearch-move-race-owned-i4p5hczs/approved>
+64276 getdents64(7</tmp/fsearch-move-race-owned-i4p5hczs/approved>, 0x5fc9c95729e0 /* 3 entries */, 32768) = 80
+64276 openat2(7</tmp/fsearch-move-race-owned-i4p5hczs/approved>, "nested", {flags=O_RDONLY|O_CLOEXEC|O_PATH, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 3</tmp/fsearch-move-race-owned-i4p5hczs/approved/nested>
+64276 openat2(3</tmp/fsearch-move-race-owned-i4p5hczs/approved/nested>, ".", {flags=O_RDONLY|O_CLOEXEC|O_DIRECTORY, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 4</tmp/fsearch-move-race-owned-i4p5hczs/approved/nested>
+64276 getdents64(4</tmp/fsearch-move-race-owned-i4p5hczs/approved/nested>, 0x5fc9c957aa50 /* 3 entries */, 32768) = 88
+64276 openat2(4</tmp/fsearch-move-race-owned-i4p5hczs/outside>, "race-probe.pdf", {flags=O_RDONLY|O_CLOEXEC|O_PATH, resolve=RESOLVE_NO_XDEV|RESOLVE_NO_SYMLINKS|RESOLVE_BENEATH}, 24) = 3</tmp/fsearch-move-race-owned-i4p5hczs/outside/race-probe.pdf>
+64276 getdents64(4</tmp/fsearch-move-race-owned-i4p5hczs/outside>, 0x5fc9c957aa50 /* 0 entries */, 32768) = 0
+64276 getdents64(7</tmp/fsearch-move-race-owned-i4p5hczs/approved>, 0x5fc9c95729e0 /* 0 entries */, 32768) = 0
+64276 openat(AT_FDCWD</tmp/fsearch-move-race-owned-i4p5hczs/stage>, "candidate.db.tmp", O_WRONLY|O_CREAT|O_TRUNC, 0666) = 3</tmp/fsearch-move-race-owned-i4p5hczs/stage/candidate.db.tmp>
+64276 unlink("candidate.db")            = -1 ENOENT (No such file or directory)
+64276 rename("candidate.db.tmp", "candidate.db") = 0
+64276 +++ exited with 0 +++

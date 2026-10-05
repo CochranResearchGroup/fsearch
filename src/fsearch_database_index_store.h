@@ -167,4 +167,25 @@ fsearch_database_index_store_selection_foreach(FsearchDatabaseIndexStore *store,
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC(FsearchDatabaseIndexStore, fsearch_database_index_store_unref)
 
+/* Retains immutable entry arena blocks through index and view destruction. */
+void
+fsearch_database_index_store_retain_snapshot_storage(FsearchDatabaseIndexStore *store, GPtrArray *storage);
+
 G_END_DECLS
+// Immutable snapshot use: getters only; no search views, scans or monitoring.
+FsearchDatabaseIndexStore *
+fsearch_database_index_store_new_snapshot(GPtrArray *indices,
+                                          DynamicArray **files,
+                                          DynamicArray **folders,
+                                          FsearchDatabaseIncludeManager *include_manager,
+                                          FsearchDatabaseExcludeManager *exclude_manager,
+                                          FsearchDatabaseIndexPropertyFlags flags);
+
+/* Consumes and clears the supplied temporary pointer arrays. */
+FsearchDatabaseIndexStore *
+fsearch_database_index_store_new_snapshot_take(GPtrArray *indices,
+                                          DynamicArray **files,
+                                          DynamicArray **folders,
+                                          FsearchDatabaseIncludeManager *include_manager,
+                                          FsearchDatabaseExcludeManager *exclude_manager,
+                                          FsearchDatabaseIndexPropertyFlags flags);

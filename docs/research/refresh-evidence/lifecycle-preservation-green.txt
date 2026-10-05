@@ -1,0 +1,31 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+ninja: no work to do.
+1/1 fsearch:refresh_worker FAIL            0.23s   exit status 1
+>>> MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=76 MESON_TEST_ITERATION=1 /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3 /tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py /tmp/fsearch-warm-release-build/src/fsearch-refresh-worker /tmp/fsearch-warm-release-build/src/fsearch-cli
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+F.
+======================================================================
+FAIL: test_failed_refresh_preserves_last_accepted_results (__main__.RefreshWorker.test_failed_refresh_preserves_last_accepted_results)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-warm-release-build/../../home/ecochran76/workspace.local/fsearch/src/tests/test_refresh.py", line 23, in test_failed_refresh_preserves_last_accepted_results
+    self.assertEqual(initial.returncode,0,initial.stdout+initial.stderr)
+AssertionError: 1 != 0 : {"schema_version": 1, "status": "error", "error": {"code": "refresh_failed"}}
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.177s
+
+FAILED (failures=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:refresh_worker FAIL            0.23s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

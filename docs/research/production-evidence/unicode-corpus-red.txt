@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_unicode_corpus_selects_normalized_literal_candidates (__main__.WarmService.test_unicode_corpus_selects_normalized_literal_candidates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/workspace.local/fsearch/src/tests/test_service.py", line 96, in test_unicode_corpus_selects_normalized_literal_candidates
+    self.assertTrue(payload['complete'],payload)
+AssertionError: False is not true : {'schema_version': 1, 'status': 'work_limit', 'complete': False, 'truncated': True, 'visibility': 'cached', 'examined': 2, 'snapshot': {'identity': '2096:6558096:201568:1791158833:460022962:1791158833:464422962', 'mtime_unix': 1791158833, 'age_seconds': 0, 'roots': [{'path': '/tmp/fsearch-service-fixture-mw4q681x/owned', 'path_bytes_base64': None, 'last_scan_unix': 1791158833, 'age_seconds': 0, 'last_error_code': 0}]}, 'results': [], 'request_id': 'unicode-corpus'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.488s
+
+FAILED (failures=1)

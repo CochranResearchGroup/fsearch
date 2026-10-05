@@ -990,6 +990,13 @@ fsearch_database_index_new_with_content(FsearchDatabaseInclude *include,
     return self;
 }
 
+FsearchDatabaseChunkedArray *
+fsearch_database_index_get_snapshot_chunks(FsearchDatabaseIndex *self, bool files) {
+    g_return_val_if_fail(self, NULL);
+    FsearchDatabaseChunkedArray *chunks = files ? self->file_chunks : self->folder_chunks;
+    return chunks ? fsearch_database_chunked_array_ref(chunks) : NULL;
+}
+
 FsearchDatabaseIndex *
 fsearch_database_index_ref(FsearchDatabaseIndex *self) {
     g_return_val_if_fail(self != NULL, NULL);

@@ -1,0 +1,157 @@
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+[1/36] Compiling C object src/libfsearch.a.p/fsearch_preview.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch_preview.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch_preview.c.o -MF src/libfsearch.a.p/fsearch_preview.c.o.d -o src/libfsearch.a.p/fsearch_preview.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_preview.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch.h:22,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_preview.c:20:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[2/36] Compiling C object src/libfsearch.a.p/fsearch_database_work.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch_database_work.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch_database_work.c.o -MF src/libfsearch.a.p/fsearch_database_work.c.o.d -o src/libfsearch.a.p/fsearch_database_work.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.c:1:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[3/36] Compiling C object src/libfsearch.a.p/fsearch.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch.c.o -MF src/libfsearch.a.p/fsearch.c.o.d -o src/libfsearch.a.p/fsearch.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch.h:22,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch.c:21:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[4/36] Compiling C object src/fsearch.p/main.c.o
+FAILED: [code=1] src/fsearch.p/main.c.o 
+/usr/bin/gcc -Isrc/fsearch.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -pthread -MD -MQ src/fsearch.p/main.c.o -MF src/fsearch.p/main.c.o.d -o src/fsearch.p/main.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/main.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch.h:22,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/main.c:23:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[5/36] Compiling C object src/libfsearch.a.p/fsearch_database.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch_database.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch_database.c.o -MF src/libfsearch.a.p/fsearch_database.c.o.d -o src/libfsearch.a.p/fsearch_database.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.c:3:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[6/36] Compiling C object src/libfsearch.a.p/fsearch_result_view.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch_result_view.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch_result_view.c.o -MF src/libfsearch.a.p/fsearch_result_view.c.o.d -o src/libfsearch.a.p/fsearch_result_view.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_result_view.c
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_result_view.c:2: warning: "G_LOG_DOMAIN" redefined
+    2 | #define G_LOG_DOMAIN "fsearch-result-view"
+      | 
+In file included from /usr/include/glib-2.0/glib.h:64,
+                 from /usr/include/gtk-3.0/gdk/gdkconfig.h:8,
+                 from /usr/include/gtk-3.0/gdk/gdk.h:30,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_result_view.c:1:
+/usr/include/glib-2.0/glib/gmessages.h:320: note: this is the location of the previous definition
+  320 | #define G_LOG_DOMAIN    ((gchar*) 0)
+      | 
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_result_view.h:3,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_result_view.c:4:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[7/36] Compiling C object src/tests/test_database_index_store.p/test_database_index_store.c.o
+[8/36] Compiling C object src/libfsearch.a.p/fsearch_database_index.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch_database_index.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch_database_index.c.o -MF src/libfsearch.a.p/fsearch_database_index.c.o.d -o src/libfsearch.a.p/fsearch_database_index.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.c:3:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseScanReason’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseScanReason
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.c:994:1: error: conflicting types for ‘fsearch_database_index_get_snapshot_chunks’; have ‘FsearchDatabaseChunkedArray *(FsearchDatabaseIndex *, _Bool)’ {aka ‘struct _FsearchDatabaseChunkedArray *(struct _FsearchDatabaseIndex *, _Bool)’}
+  994 | fsearch_database_index_get_snapshot_chunks(FsearchDatabaseIndex *self, bool files) {
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:98:1: note: previous declaration of ‘fsearch_database_index_get_snapshot_chunks’ with type ‘int *(FsearchDatabaseIndex *, _Bool)’ {aka ‘int *(struct _FsearchDatabaseIndex *, _Bool)’}
+   98 | fsearch_database_index_get_snapshot_chunks(FsearchDatabaseIndex *self, bool files);
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[9/36] Compiling C object src/tests/test_database_file.p/test_database_file.c.o
+[10/36] Compiling C object src/libfsearch.a.p/fsearch_window.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch_window.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch_window.c.o -MF src/libfsearch.a.p/fsearch_window.c.o.d -o src/libfsearch.a.p/fsearch_window.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_window.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_window.c:26:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[11/36] Compiling C object src/libfsearch.a.p/fsearch_statusbar.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch_statusbar.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch_statusbar.c.o -MF src/libfsearch.a.p/fsearch_statusbar.c.o.d -o src/libfsearch.a.p/fsearch_statusbar.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_statusbar.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch.h:22,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_statusbar.c:4:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[12/36] Compiling C object src/tests/snapshot_fixture.p/snapshot_fixture.c.o
+[13/36] Compiling C object src/libfsearch.a.p/fsearch_listview_popup.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch_listview_popup.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch_listview_popup.c.o -MF src/libfsearch.a.p/fsearch_listview_popup.c.o.d -o src/libfsearch.a.p/fsearch_listview_popup.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_listview_popup.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch.h:22,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_listview_popup.c:26:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[14/36] Compiling C object src/fsearch-cli.p/fsearch_cli.c.o
+[15/36] Compiling C object src/libfsearch.a.p/fsearch_headless.c.o
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_headless.c: In function ‘fsearch_headless_search’:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_headless.c:247:32: warning: pointer/integer type mismatch in conditional expression
+  247 |                                : options->match_case ? strstr(name, options->query)
+      |                                ^
+[16/36] Compiling C object src/libfsearch.a.p/fsearch_window_actions.c.o
+FAILED: [code=1] src/libfsearch.a.p/fsearch_window_actions.c.o 
+/usr/bin/gcc -Isrc/libfsearch.a.p -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I. -I../../home/ecochran76/workspace.local/fsearch -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -fPIC -pthread -MD -MQ src/libfsearch.a.p/fsearch_window_actions.c.o -MF src/libfsearch.a.p/fsearch_window_actions.c.o.d -o src/libfsearch.a.p/fsearch_window_actions.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/fsearch_window_actions.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch.h:22,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_window.h:25,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_window_actions.h:21,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_window_actions.c:19:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[17/36] Compiling C object src/tests/test_database.p/test_database.c.o
+FAILED: [code=1] src/tests/test_database.p/test_database.c.o 
+/usr/bin/gcc -Isrc/tests/test_database.p -Isrc/tests -I../../home/ecochran76/workspace.local/fsearch/src/tests -I. -I../../home/ecochran76/workspace.local/fsearch -Isrc -I../../home/ecochran76/workspace.local/fsearch/src -I/usr/include/gio-unix-2.0 -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/gtk-3.0 -I/usr/include/pango-1.0 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/x86_64-linux-gnu -I/usr/include/webp -I/usr/include/atk-1.0 -I/usr/include/at-spi2-atk/2.0 -I/usr/include/at-spi-2.0 -I/usr/include/dbus-1.0 -I/usr/lib/x86_64-linux-gnu/dbus-1.0/include -fdiagnostics-color=always -Wall -Winvalid-pch -std=gnu11 -O3 -DHAVE_CONFIG_H -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -pthread -MD -MQ src/tests/test_database.p/test_database.c.o -MF src/tests/test_database.p/test_database.c.o.d -o src/tests/test_database.p/test_database.c.o -c ../../home/ecochran76/workspace.local/fsearch/src/tests/test_database.c
+In file included from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_work.h:7,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/fsearch_database.h:8,
+                 from ../../home/ecochran76/workspace.local/fsearch/src/tests/test_database.c:19:
+../../home/ecochran76/workspace.local/fsearch/src/fsearch_database_index.h:97:1: error: unknown type name ‘FsearchDatabaseChunkedArray’; did you mean ‘FsearchDatabaseEntry’?
+   97 | FsearchDatabaseChunkedArray *
+      | ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+      | FsearchDatabaseEntry
+[18/36] Compiling C object src/libfsearch.a.p/fsearch_database_index_store.c.o
+[19/36] Compiling C object src/libfsearch.a.p/fsearch_database_file.c.o
+ninja: build stopped: subcommand failed.
+INFO: autodetecting backend as ninja
+INFO: calculating backend command to run: /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja -C /tmp/fsearch-warm-release-build

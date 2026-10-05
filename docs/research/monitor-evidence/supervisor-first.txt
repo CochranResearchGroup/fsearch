@@ -1,0 +1,65 @@
+[0/1] Regenerating build files
+Cleaning... 0 files.
+The Meson build system
+Version: 1.12.1
+Source dir: /home/ecochran76/workspace.local/fsearch
+Build dir: /tmp/fsearch-warm-release-build
+Build type: native build
+Project name: fsearch
+Project version: 0.3
+C compiler for the host machine: /usr/bin/gcc (gcc 13.3.0 "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0")
+C linker for the host machine: /usr/bin/gcc ld.bfd 2.42
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Checking if "malloc_trim is supported on the build platform" runs: YES
+Checking if "fanotify is supported by the build platform and works without CAP_SYS_ADMIN capabilities" runs: YES
+Checking if "inotify is supported by the build platform" runs: YES
+Configuring io.github.cboxdoerfer.FSearch.desktop.in using configuration
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Program desktop-file-validate found: NO
+Program appstreamcli found: YES (/usr/bin/appstreamcli)
+Could not find file LINGUAS in /home/ecochran76/workspace.local/fsearch/help
+Program itstool found: YES (/home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/itstool)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Library m found: YES
+Dependency gio-unix-2.0 for host machine found: YES 2.80.0 (cached)
+Dependency gtk+-3.0 for host machine found: YES 3.24.41 (cached)
+Dependency libpcre2-8 for host machine found: YES 10.42 (cached)
+Dependency icu-uc for host machine found: YES 74.2 (cached)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Library dl found: YES
+Program python3 found: YES (/home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/python3)
+Library dl found: YES
+Library dl found: YES
+Program msginit found: YES (/usr/bin/msginit)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program xgettext found: YES (/usr/bin/xgettext)
+Configuring config.h using configuration
+Build targets in project: 77
+NOTICE: Future-deprecated features used:
+ * 0.56.0: {'meson.source_root'}
+
+fsearch 0.3
+
+  User defined options
+    buildtype: release
+
+Found ninja-1.13.2.git.kitware.jobserver-pipe-1 at /home/ecochran76/.cache/uv/archive-v0/V2pL_Mg_L7yTHi-3AbS8g/bin/ninja
+ninja: no work to do.
+ninja: Entering directory `/tmp/fsearch-warm-release-build'
+ninja: no work to do.
+1/1 fsearch:monitor_supervisor OK              1.33s
+
+Ok:                1   
+Fail:              0   
+
+Full log written to /tmp/fsearch-warm-release-build/meson-logs/testlog.txt

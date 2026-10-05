@@ -392,6 +392,11 @@ query_node_new_string_comparison(const char *search_term, FsearchQueryFlags flag
 }
 
 FsearchQueryNode *
+fsearch_query_node_new_literal(const char *search_term, FsearchQueryFlags flags) {
+    return query_node_new_string_comparison(search_term, flags & (QUERY_FLAG_MATCH_CASE | QUERY_FLAG_SEARCH_IN_PATH));
+}
+
+FsearchQueryNode *
 fsearch_query_node_new_contenttype(const char *search_term, FsearchQueryFlags flags) {
     FsearchQueryNode *res = NULL;
     if (flags & QUERY_FLAG_REGEX) {
