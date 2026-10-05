@@ -36,3 +36,11 @@ Interpretation pending user clarification: a half-decade is a factor of sqrt(10)
 Keep cold/warm timing separate. Retain failures, stop expansion on quarantine/unproved cleanup, and preserve the last accepted snapshot. Physical storage admission remains independent of performance evidence. This pilot does not close broader #5 adoption or parent #1.
 
 Memory disposition: forbidden; no personal memory write authorized.
+
+## Query diversity and concurrency executed
+
+The same accepted snapshot passed literal filename, selective full-path, folder, Unicode-zero and literal-punctuation-zero queries. Broad Python-extension filtering returned exactly the 1,000-entry cap with `result_limit` and `complete=false`; this is truthful bounded behavior. The first harness incorrectly required every diversity request to complete, failed on broad-query truncation, and its private receipt is retained as `complexity-first.json`. The corrected harness validates truncation explicitly rather than changing production bounds.
+
+Concurrent client stages 1, 3, 10 and 32 all returned correct completed README hits. Observed maximum end-to-end request latency was 6.43, 6.75, 9.89 and 28.31 ms respectively. Client starts were scheduled through a thread pool; this does not establish that all requests occupied the queue simultaneously or qualify queue saturation. Existing fault/queue tests remain the relevant saturation evidence. Service exited zero and its recorded worker was absent afterward. Private details: `complexity.json`.
+
+Next complexity step is explicit refresh and serving-snapshot replacement on this same approved root, followed by bounded monitoring. No root expansion follows from these request-count stages.
