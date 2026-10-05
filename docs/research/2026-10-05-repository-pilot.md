@@ -44,3 +44,11 @@ The same accepted snapshot passed literal filename, selective full-path, folder,
 Concurrent client stages 1, 3, 10 and 32 all returned correct completed README hits. Observed maximum end-to-end request latency was 6.43, 6.75, 9.89 and 28.31 ms respectively. Client starts were scheduled through a thread pool; this does not establish that all requests occupied the queue simultaneously or qualify queue saturation. Existing fault/queue tests remain the relevant saturation evidence. Service exited zero and its recorded worker was absent afterward. Private details: `complexity.json`.
 
 Next complexity step is explicit refresh and serving-snapshot replacement on this same approved root, followed by bounded monitoring. No root expansion follows from these request-count stages.
+
+## Refresh, replacement and monitoring executed
+
+A second explicit contained refresh of the same approved repository completed in 0.175 seconds, again excluding four symlinks and no descendant mounts. The warm service acknowledged explicit candidate replacement with its accepted snapshot identity, and subsequent cached README lookup succeeded.
+
+The installed monitor then armed 627 directory watches and acknowledged both publication and serving replacement. Three uniquely owned empty sentinel create/delete cycles within the approved repository became visible through the warm query service: creates in 0.238, 0.398 and 0.400 seconds; deletes in 0.230, 0.230 and 0.289 seconds. The sentinel was removed. Dirty-generation reconciliation occurred; its event history is retained rather than hidden. This small pilot establishes exercised freshness, not a guaranteed latency SLA or larger-root watch-resource bound.
+
+Observed supervisor RSS was 18,240 KiB for query and 17,120 KiB for monitor; these are supervisor-only figures, not aggregate indexing memory. Both exited zero, and all 26 recorded worker identities were absent after shutdown. Private evidence: `freshness.json`, `monitor-events.jsonl`, `freshness.py`. The accepted pilot snapshots remain private; no background service, default routing change or broader-root indexing was enabled.
