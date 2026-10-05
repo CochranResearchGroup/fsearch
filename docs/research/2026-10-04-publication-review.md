@@ -38,3 +38,15 @@ installed MCP runtime is qualified without changing registration/default routing
 No blocking source finding; native remote CI and tracker reconciliation remain.
 
 Memory disposition: forbidden; no personal memory write authorized.
+
+## CI fixture correction
+
+Run 37261080847 built successfully but failed one monitor case: the fixture wrote
+refresh quarantine with the process umask, producing 0644 on CI and receiving the
+correct unsafe_state refusal instead of exercising quarantine. An explicit 022
+umask reproduces the failure locally. The fixture now creates the file with mode
+0600 before writing it. Production private-state validation is unchanged.
+Red/green receipts are publication-quarantine-umask-red.txt and
+publication-quarantine-umask-green.txt. This test-only correction supersedes the
+original publication test bytes, while qualified installed product bytes remain
+unchanged. A new exact-head CI run is required before merging.

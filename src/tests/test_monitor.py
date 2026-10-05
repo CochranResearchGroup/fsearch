@@ -112,7 +112,9 @@ class Monitor(unittest.TestCase):
 
     def test_monitor_cannot_bypass_refresh_quarantine(self):
         state = {'phase': 'quarantined', 'reason': 'owned_fault', 'worker': None}
-        Path(str(self.database)+'.refresh.state').write_text(json.dumps(state))
+        state_path = Path(str(self.database)+'.refresh.state')
+        state_path.touch(mode=0o600)
+        state_path.write_text(json.dumps(state))
         process = self.start()
         while True:
             message = reply(process)
