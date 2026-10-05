@@ -1,0 +1,214 @@
+ninja: Entering directory `/tmp/fsearch-publication-repair-build'
+[1/137] Generating src/ui_resources_h with a custom command
+[2/137] Generating src/ui_resources_c with a custom command
+[3/137] Generating src/icon_resources_h with a custom command
+[4/137] Generating src/icon_resources_c with a custom command
+[5/137] Generating GObject enum file src/fsearch_enums.h (wrapped by meson because command contains newlines, to capture output)
+[6/137] Generating GObject enum file src/fsearch_enums.c (wrapped by meson because command contains newlines, to capture output)
+[7/137] Compiling C object src/tests/librefresh_fault_fixture.so.p/refresh_fault_fixture.c.o
+../fsearch-publication-20261004/src/tests/refresh_fault_fixture.c: In function ‘syscall’:
+../fsearch-publication-20261004/src/tests/refresh_fault_fixture.c:36:13: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   36 |             write(STDOUT_FILENO, reply, strlen(reply)); _exit(0);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../fsearch-publication-20261004/src/tests/refresh_fault_fixture.c:52:13: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   52 |             write(atoi(notify), &gate, 1);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../fsearch-publication-20261004/src/tests/refresh_fault_fixture.c:56:13: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   56 |             write(STDERR_FILENO, "injected_EXDEV\n", 15); errno = EXDEV; result = -1;
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../fsearch-publication-20261004/src/tests/refresh_fault_fixture.c: In function ‘fstatat’:
+../fsearch-publication-20261004/src/tests/refresh_fault_fixture.c:78:9: warning: ignoring return value of ‘write’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   78 |         write(STDERR_FILENO, "FORBIDDEN_METADATA\n", 19);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[8/137] Compiling C object src/tests/libmonitor_fault_fixture.so.p/monitor_fault_fixture.c.o
+../fsearch-publication-20261004/src/tests/monitor_fault_fixture.c:1: warning: "_GNU_SOURCE" redefined
+    1 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+[9/137] Compiling C object src/tests/libheadless_fault_fixture.so.p/headless_fault_fixture.c.o
+[10/137] Compiling C object src/libfsearch.a.p/meson-generated_.._fsearch_enums.c.o
+[11/137] Compiling C object src/fsearch-monitor-worker.p/fsearch_monitor_worker.c.o
+../fsearch-publication-20261004/src/fsearch_monitor_worker.c:2: warning: "_GNU_SOURCE" redefined
+    2 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+[12/137] Compiling C object src/libfsearch.a.p/meson-generated_.._icon_resources.c.o
+[13/137] Compiling C object src/libfsearch.a.p/meson-generated_.._ui_resources.c.o
+[14/137] Compiling C object src/fsearch-worker.p/fsearch_worker.c.o
+[15/137] Compiling C object src/fsearch-cli.p/meson-generated_.._ui_resources.c.o
+[16/137] Compiling C object src/fsearch-refresh-worker.p/meson-generated_.._ui_resources.c.o
+[17/137] Compiling C object src/tests/test_size_utils.p/meson-generated_.._.._ui_resources.c.o
+[18/137] Compiling C object src/tests/test_size_utils.p/test_size_utils.c.o
+[19/137] Compiling C object src/tests/test_string_utils.p/test_string_utils.c.o
+[20/137] Compiling C object src/tests/test_query.p/meson-generated_.._.._ui_resources.c.o
+[21/137] Compiling C object src/fsearch-worker.p/meson-generated_.._ui_resources.c.o
+[22/137] Compiling C object src/tests/test_string_utils.p/meson-generated_.._.._ui_resources.c.o
+[23/137] Compiling C object src/tests/test_array.p/meson-generated_.._.._ui_resources.c.o
+[24/137] Compiling C object src/tests/test_time_utils.p/meson-generated_.._.._ui_resources.c.o
+[25/137] Compiling C object src/tests/test_array.p/test_array.c.o
+[26/137] Compiling C object src/fsearch-cli.p/meson-generated_.._icon_resources.c.o
+[27/137] Compiling C object src/libfsearch.a.p/fsearch_config.c.o
+[28/137] Compiling C object src/libfsearch.a.p/fsearch_array.c.o
+[29/137] Compiling C object src/libfsearch.a.p/fsearch_database_chunked_array.c.o
+[30/137] Compiling C object src/libfsearch.a.p/fsearch_database_exclude.c.o
+[31/137] Compiling C object src/libfsearch.a.p/fsearch_database_exclude_manager.c.o
+[32/137] Compiling C object src/fsearch-refresh-worker.p/fsearch_refresh_worker.c.o
+../fsearch-publication-20261004/src/fsearch_refresh_worker.c:2: warning: "_GNU_SOURCE" redefined
+    2 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+[33/137] Compiling C object src/fsearch-cli.p/fsearch_cli.c.o
+[34/137] Compiling C object src/libfsearch.a.p/fsearch_database_include_manager.c.o
+[35/137] Compiling C object src/libfsearch.a.p/fsearch_clipboard.c.o
+[36/137] Compiling C object src/libfsearch.a.p/fsearch.c.o
+[37/137] Compiling C object src/libfsearch.a.p/fsearch_database_index_event.c.o
+[38/137] Compiling C object src/tests/test_query.p/test_query.c.o
+[39/137] Compiling C object src/libfsearch.a.p/fsearch_database_rescan_manager.c.o
+[40/137] Compiling C object src/libfsearch.a.p/fsearch_database_scan.c.o
+[41/137] Compiling C object src/libfsearch.a.p/fsearch_filter.c.o
+[42/137] Compiling C object src/libfsearch.a.p/fsearch_database.c.o
+[43/137] Compiling C object src/libfsearch.a.p/fsearch_database_entry_info.c.o
+[44/137] Compiling C object src/libfsearch.a.p/fsearch_database_include.c.o
+[45/137] Compiling C object src/libfsearch.a.p/fsearch_filter_manager.c.o
+[46/137] Compiling C object src/libfsearch.a.p/fsearch_database_info.c.o
+[47/137] Compiling C object src/libfsearch.a.p/fsearch_database_sort.c.o
+[48/137] Compiling C object src/libfsearch.a.p/fsearch_database_entry.c.o
+[49/137] Compiling C object src/libfsearch.a.p/fsearch_folder_monitor_event.c.o
+[50/137] Compiling C object src/libfsearch.a.p/fsearch_main_context_utils.c.o
+[51/137] Compiling C object src/libfsearch.a.p/fsearch_database_index.c.o
+[52/137] Compiling C object src/libfsearch.a.p/fsearch_database_preferences_widget.c.o
+[53/137] Compiling C object src/libfsearch.a.p/fsearch_database_search_info.c.o
+[54/137] Compiling C object src/libfsearch.a.p/fsearch_database_file.c.o
+[55/137] Compiling C object src/libfsearch.a.p/fsearch_database_index_store.c.o
+[56/137] Compiling C object src/libfsearch.a.p/fsearch_query_lexer.c.o
+[57/137] Compiling C object src/libfsearch.a.p/fsearch_database_search_view.c.o
+[58/137] Compiling C object src/libfsearch.a.p/fsearch_filter_editor.c.o
+[59/137] Compiling C object src/libfsearch.a.p/fsearch_database_work.c.o
+[60/137] Compiling C object src/libfsearch.a.p/fsearch_filter_preferences_widget.c.o
+[61/137] Compiling C object src/libfsearch.a.p/fsearch_query_match_data.c.o
+[62/137] Compiling C object src/libfsearch.a.p/fsearch_size_utils.c.o
+[63/137] Compiling C object src/libfsearch.a.p/fsearch_file_utils.c.o
+[64/137] Compiling C object src/libfsearch.a.p/fsearch_query_matchers.c.o
+[65/137] Compiling C object src/libfsearch.a.p/fsearch_selection.c.o
+[66/137] Compiling C object src/libfsearch.a.p/fsearch_string_utils.c.o
+[67/137] Compiling C object src/libfsearch.a.p/fsearch_query_node.c.o
+[68/137] Compiling C object src/libfsearch.a.p/fsearch_query_tree.c.o
+[69/137] Compiling C object src/libfsearch.a.p/fsearch_time_utils.c.o
+[70/137] Compiling C object src/libfsearch.a.p/fsearch_query_parser.c.o
+[71/137] Compiling C object src/libfsearch.a.p/fsearch_listview_popup.c.o
+[72/137] Compiling C object src/libfsearch.a.p/fsearch_utf.c.o
+[73/137] Compiling C object src/fsearch-refresh-worker.p/meson-generated_.._icon_resources.c.o
+[74/137] Compiling C object src/fsearch-worker.p/meson-generated_.._icon_resources.c.o
+[75/137] Compiling C object src/libfsearch.a.p/fsearch_query.c.o
+[76/137] Compiling C object src/tests/test_array.p/meson-generated_.._.._icon_resources.c.o
+[77/137] Compiling C object src/libfsearch.a.p/fsearch_preferences_dialog.c.o
+[78/137] Compiling C object src/tests/test_size_utils.p/meson-generated_.._.._icon_resources.c.o
+[79/137] Compiling C object src/tests/test_time_utils.p/test_time_utils.c.o
+[80/137] Compiling C object src/tests/test_query.p/meson-generated_.._.._icon_resources.c.o
+[81/137] Compiling C object src/tests/test_string_utils.p/meson-generated_.._.._icon_resources.c.o
+[82/137] Compiling C object src/libfsearch.a.p/fsearch_folder_monitor_inotify.c.o
+[83/137] Compiling C object src/tests/test_time_utils.p/meson-generated_.._.._icon_resources.c.o
+[84/137] Compiling C object src/libfsearch.a.p/fsearch_list_view.c.o
+[85/137] Compiling C object src/libfsearch.a.p/fsearch_folder_monitor_fanotify.c.o
+[86/137] Compiling C object src/tests/test_database_entry.p/meson-generated_.._.._ui_resources.c.o
+[87/137] Compiling C object src/tests/test_database_entry.p/meson-generated_.._.._icon_resources.c.o
+[88/137] Compiling C object src/tests/test_database_include.p/meson-generated_.._.._ui_resources.c.o
+[89/137] Compiling C object src/tests/test_database_include.p/meson-generated_.._.._icon_resources.c.o
+[90/137] Compiling C object src/tests/test_database_exclude.p/meson-generated_.._.._ui_resources.c.o
+[91/137] Compiling C object src/tests/test_database_exclude.p/meson-generated_.._.._icon_resources.c.o
+[92/137] Compiling C object src/tests/test_database_chunked_array.p/meson-generated_.._.._icon_resources.c.o
+[93/137] Compiling C object src/libfsearch.a.p/fsearch_result_view.c.o
+../fsearch-publication-20261004/src/fsearch_result_view.c:2: warning: "G_LOG_DOMAIN" redefined
+    2 | #define G_LOG_DOMAIN "fsearch-result-view"
+      | 
+In file included from /usr/include/glib-2.0/glib.h:64,
+                 from /usr/include/gtk-3.0/gdk/gdkconfig.h:8,
+                 from /usr/include/gtk-3.0/gdk/gdk.h:30,
+                 from ../fsearch-publication-20261004/src/fsearch_result_view.c:1:
+/usr/include/glib-2.0/glib/gmessages.h:320: note: this is the location of the previous definition
+  320 | #define G_LOG_DOMAIN    ((gchar*) 0)
+      | 
+[94/137] Compiling C object src/tests/test_database_chunked_array.p/meson-generated_.._.._ui_resources.c.o
+[95/137] Compiling C object src/libfsearch.a.p/fsearch_statusbar.c.o
+[96/137] Compiling C object src/tests/test_database_index_store.p/meson-generated_.._.._ui_resources.c.o
+[97/137] Linking target src/fsearch-monitor-worker
+[98/137] Compiling C object src/libfsearch.a.p/fsearch_ui_utils.c.o
+[99/137] Linking target src/tests/libheadless_fault_fixture.so
+[100/137] Linking target src/tests/librefresh_fault_fixture.so
+[101/137] Compiling C object src/tests/test_database_index_store.p/meson-generated_.._.._icon_resources.c.o
+[102/137] Linking target src/tests/libmonitor_fault_fixture.so
+[103/137] Compiling C object src/tests/test_database.p/meson-generated_.._.._ui_resources.c.o
+[104/137] Compiling C object src/tests/test_database_include.p/test_database_include.c.o
+[105/137] Compiling C object src/tests/test_database.p/meson-generated_.._.._icon_resources.c.o
+[106/137] Compiling C object src/tests/test_database_exclude.p/test_database_exclude.c.o
+[107/137] Compiling C object src/libfsearch.a.p/fsearch_preview.c.o
+[108/137] Compiling C object src/tests/snapshot_fixture.p/meson-generated_.._.._icon_resources.c.o
+[109/137] Compiling C object src/tests/test_database_file.p/meson-generated_.._.._ui_resources.c.o
+[110/137] Compiling C object src/tests/test_database_file.p/meson-generated_.._.._icon_resources.c.o
+[111/137] Compiling C object src/tests/snapshot_fixture.p/meson-generated_.._.._ui_resources.c.o
+[112/137] Compiling C object src/libfsearch.a.p/fsearch_window_actions.c.o
+[113/137] Compiling C object src/libfsearch.a.p/fsearch_window.c.o
+[114/137] Compiling C object src/tests/test_database_entry.p/test_database_entry.c.o
+[115/137] Compiling C object src/libfsearch.a.p/fsearch_headless.c.o
+../fsearch-publication-20261004/src/fsearch_headless.c: In function ‘fsearch_headless_search’:
+../fsearch-publication-20261004/src/fsearch_headless.c:353:32: warning: pointer/integer type mismatch in conditional expression
+  353 |                                : strcasestr(name, options->query))) continue;
+      |                                ^
+[116/137] Linking static target src/libfsearch.a
+[117/137] Linking target src/tests/test_size_utils
+[118/137] Linking target src/tests/test_string_utils
+[119/137] Linking target src/tests/test_database_include
+[120/137] Linking target src/tests/test_database_exclude
+[121/137] Linking target src/tests/test_time_utils
+[122/137] Linking target src/tests/test_array
+[123/137] Linking target src/tests/test_database_entry
+[124/137] Compiling C object src/tests/test_database_index_store.p/test_database_index_store.c.o
+[125/137] Linking target src/fsearch-cli
+[126/137] Linking target src/tests/test_query
+[127/137] Linking target src/fsearch-refresh-worker
+[128/137] Linking target src/fsearch-worker
+[129/137] Compiling C object src/tests/test_database.p/test_database.c.o
+[130/137] Compiling C object src/tests/snapshot_fixture.p/snapshot_fixture.c.o
+[131/137] Compiling C object src/tests/test_database_chunked_array.p/test_database_chunked_array.c.o
+[132/137] Linking target src/tests/test_database_index_store
+[133/137] Compiling C object src/tests/test_database_file.p/test_database_file.c.o
+[134/137] Linking target src/tests/test_database_chunked_array
+[135/137] Linking target src/tests/test_database
+[136/137] Linking target src/tests/snapshot_fixture
+[137/137] Linking target src/tests/test_database_file
+ 1/19 fsearch:test_database               OK              0.09s
+ 2/19 fsearch:test_database_file          OK              0.08s
+ 3/19 fsearch:test_database_chunked_array OK              0.08s
+ 4/19 fsearch:test_database_index_store   OK              0.08s
+ 5/19 fsearch:test_database_include       OK              0.07s
+ 6/19 fsearch:test_database_exclude       OK              0.07s
+ 7/19 fsearch:test_database_entry         OK              0.07s
+ 8/19 fsearch:test_array                  OK              0.06s
+ 9/19 fsearch:test_size_utils             OK              0.06s
+10/19 fsearch:test_time_utils             OK              0.05s
+11/19 fsearch:validate-metainfo           FAIL            0.10s   exit status 3
+>>> MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=166 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /usr/bin/appstreamcli validate --no-net /tmp/fsearch-publication-repair-build/data/io.github.cboxdoerfer.FSearch.metainfo.xml
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stdout:
+✘ Validation failed: 
+stderr:
+File '/tmp/fsearch-publication-repair-build/data/io.github.cboxdoerfer.FSearch.metainfo.xml' does not exist.
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+12/19 fsearch:test_query                  OK              0.06s
+13/19 fsearch:test_string_utils           OK              0.05s
+14/19 fsearch:approved_root_move_race     OK              0.17s
+15/19 fsearch:monitor_worker              OK              0.43s
+16/19 fsearch:refresh_worker              OK              2.67s
+17/19 fsearch:headless_cli                OK              7.43s
+18/19 fsearch:monitor_supervisor          OK              9.49s
+19/19 fsearch:warm_service                OK             20.46s
+
+Summary of Failures:
+
+11/19 fsearch:validate-metainfo           FAIL            0.10s   exit status 3
+
+Ok:                18  
+Fail:              1   
+
+Full log written to /tmp/fsearch-publication-repair-build/meson-logs/testlog.txt

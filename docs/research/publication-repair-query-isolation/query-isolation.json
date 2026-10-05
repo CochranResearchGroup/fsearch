@@ -1,0 +1,123 @@
+{
+  "owned_fixtures_only": true,
+  "runtime": "/home/ecochran76/.local/share/fsearch/runtimes/eda902627bc96e626887b06f69f66bc3c43499e3/bin",
+  "queries": [
+    {
+      "label": "before-monitor",
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 1,
+        "snapshot": {
+          "identity": "2096:6692841:272:1791172966:827049538:1791172966:857849537",
+          "mtime_unix": 1791172966,
+          "age_seconds": 1,
+          "roots": [
+            {
+              "path": "/tmp/fsearch-monitor-query-owned-xx_3fcmc/approved",
+              "path_bytes_base64": null,
+              "last_scan_unix": 1791172966,
+              "age_seconds": 1,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-xx_3fcmc/approved/invoice.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "86217-53316668737-487564701"
+      }
+    },
+    {
+      "label": "while-monitoring",
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 2,
+        "snapshot": {
+          "identity": "2096:6692841:296:1791172967:663049538:1791172967:689449538",
+          "mtime_unix": 1791172967,
+          "age_seconds": 0,
+          "roots": [
+            {
+              "path": "/tmp/fsearch-monitor-query-owned-xx_3fcmc/approved",
+              "path_bytes_base64": null,
+              "last_scan_unix": 1791172967,
+              "age_seconds": 0,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-xx_3fcmc/approved/invoice-new.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-xx_3fcmc/approved/invoice.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "86455-53317245163-15298650"
+      }
+    },
+    {
+      "label": "after-root-removal",
+      "response": {
+        "schema_version": 1,
+        "status": "ok",
+        "complete": true,
+        "truncated": false,
+        "visibility": "cached",
+        "examined": 2,
+        "snapshot": {
+          "identity": "2096:6692841:296:1791172967:663049538:1791172967:689449538",
+          "mtime_unix": 1791172967,
+          "age_seconds": 1,
+          "roots": [
+            {
+              "path": "/tmp/fsearch-monitor-query-owned-xx_3fcmc/approved",
+              "path_bytes_base64": null,
+              "last_scan_unix": 1791172967,
+              "age_seconds": 1,
+              "last_error_code": 0
+            }
+          ]
+        },
+        "results": [
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-xx_3fcmc/approved/invoice-new.pdf",
+            "path_bytes_base64": null
+          },
+          {
+            "path": "/tmp/fsearch-monitor-query-owned-xx_3fcmc/approved/invoice.pdf",
+            "path_bytes_base64": null
+          }
+        ],
+        "request_id": "86769-53318342457-3040960942"
+      }
+    }
+  ],
+  "offline_failure": {
+    "schema_version": 1,
+    "status": "error",
+    "reason": "root_offline",
+    "root": "/tmp/fsearch-monitor-query-owned-xx_3fcmc/approved",
+    "snapshot_id": "2096:6692841:296:1791172967:663049538:1791172967:689449538",
+    "error": {
+      "code": "root_offline"
+    }
+  },
+  "all_query_process_root_probes": 0,
+  "negative_control_detected": true,
+  "service_exit": 0
+}
