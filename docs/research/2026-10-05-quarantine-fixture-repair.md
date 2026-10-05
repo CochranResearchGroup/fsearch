@@ -23,7 +23,7 @@ Evidence: quarantine-lazy-load-red.txt reproduces queue expiry; the first warmup
 attempt consumed the adapter's shared one-shot marker (quarantine-warmup-first.txt),
 so distinct fault-stage markers were added. quarantine-lazy-load-green.txt proves
 the repaired public case against installed source eda902627bc96e626887b06f69f66bc3c43499e3.
-All 34 service cases pass with the revised adapter (quarantine-armed-service-suite.txt). Full source/CI proof remains required before re-closing #7 and final plan closure.
+All 34 service cases pass with the revised adapter (quarantine-armed-service-suite.txt). All 19 source Meson targets also pass (quarantine-armed-full-suite.txt). Exact-head CI and post-merge readback remain required before re-closing #7 and final plan closure.
 User production-root selection remains pending; production indexing stays disabled.
 
 Memory disposition: forbidden; no personal memory write authorized.
