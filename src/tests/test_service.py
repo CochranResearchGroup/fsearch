@@ -1,11 +1,18 @@
 """Public service/client tests; owned synthetic snapshots only."""
 import base64, json, os, subprocess, sys, tempfile, unittest, signal, time, socket, struct
 from contextlib import contextmanager
-import shutil, ctypes
+import shutil, ctypes, uuid
 ctypes.CDLL(None).prctl(36,1,0,0,0)  # Test-harness subreaper: own detached fixture services and orphaned workers.
 from pathlib import Path
 SERVICE, CLI, FIXTURE, FAULT = sys.argv[1:5]
 class WarmService(unittest.TestCase):
+    def test_previous_boot_startup_serves_cached_snapshot(self):
+        with self.owned_service(previous_boot=True) as (_,root,_,sock,_):
+            shutil.rmtree(root)
+            with self.request(sock) as connection: result=self.receive(connection)
+            self.assertEqual(result['status'],'ok')
+            self.assertEqual(len(result['results']),1)
+
     def test_short_ascii_literal_rejects_nonmatching_unicode_before_verification_budget(self):
         names=[f'обычный-{i:04d}.txt' for i in range(128)]+['документ??.pdf','полноширинный？？.pdf']
         with self.owned_service(names=names) as (work,root,snapshot,sock,server):
@@ -374,12 +381,16 @@ class WarmService(unittest.TestCase):
             finally:
                 self.stop_owned_service(sock)
     @contextmanager
-    def owned_service(self, injected=None, names=()):
+    def owned_service(self, injected=None, names=(), previous_boot=False):
         with tempfile.TemporaryDirectory(prefix='fsearch-service-fixture-') as temporary:
             work=Path(temporary); root=work/'owned'; root.mkdir(); (root/'invoice.pdf').touch()
             for name in names: (root/name).touch()
             snapshot=work/'snapshot.db'; sock=work/'search.sock'
             subprocess.run([FIXTURE,'build',str(snapshot),str(root)],check=True,capture_output=True,timeout=10); snapshot.chmod(0o600)
+            if previous_boot:
+                record={'pid':os.getpid(),'start':'1','boot':str(uuid.uuid4())}
+                state=Path(str(sock)+'.state')
+                state.write_text(json.dumps({'phase':'ready','worker':record,'supervisor':record,'database':str(snapshot)}));state.chmod(0o600)
             env=dict(os.environ)
             if injected: env.update(LD_PRELOAD=FAULT,**injected)
             server=subprocess.Popen([SERVICE,'serve','--socket',str(sock),'--database',str(snapshot)],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)

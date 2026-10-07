@@ -9,6 +9,7 @@ import sys
 import tempfile
 import time
 import unittest
+import uuid
 
 ctypes.CDLL(None).prctl(36, 1, 0, 0, 0)  # Adopt owned workers for fault teardown.
 
@@ -29,6 +30,14 @@ def reply(process):
 
 
 class Monitor(unittest.TestCase):
+    def test_previous_boot_startup_publishes_approved_fixture(self):
+        record={'pid':os.getpid(),'start':'1','boot':str(uuid.uuid4())}
+        state=Path(str(self.database)+'.monitor.state')
+        state.write_text(json.dumps({'phase':'ready','worker':record,'supervisor':record}));state.chmod(0o600)
+        (self.root/'boot-recovery.txt').touch()
+        process=self.start(); self.published(process)
+        self.assertEqual(len(self.query('boot-recovery')['results']),1)
+
     def setUp(self):
         temporary = tempfile.TemporaryDirectory(prefix='fsearch-monitor-supervisor-')
         self.addCleanup(temporary.cleanup)
@@ -195,12 +204,19 @@ class Monitor(unittest.TestCase):
         initial = self.start(); self.published(initial); self.stop(initial)
         before = self.database.read_bytes()
         fault = str(Path(FAULT_DIR)/'libmonitor_fault_fixture.so')
-        env = dict(os.environ, LD_PRELOAD=fault, FSEARCH_MONITOR_FIXTURE_OVERFLOW='1')
+        scanner_fault = str(Path(FAULT_DIR)/'librefresh_fault_fixture.so')
+        env = dict(os.environ, LD_PRELOAD=fault+':'+scanner_fault,
+                   FSEARCH_MONITOR_FIXTURE_OVERFLOW='1',
+                   FSEARCH_REFRESH_FIXTURE_ROOT_DELAY_MS='250')
         process = self.start(env); overflows = 0
-        for _ in range(20):
+        # Each generation may emit armed/starting in addition to overflow.
+        # Bound terminal observation by time, not an undersized frame budget.
+        deadline = time.monotonic() + 5
+        while time.monotonic() < deadline:
             message = reply(process)
             if message['status'] == 'overflow': overflows += 1
             if message['status'] == 'error': break
+        else: self.fail('overflow reconciliation did not terminate within 5 seconds')
         self.assertEqual(message['error']['code'], 'reconciliation_limit')
         self.assertEqual(overflows, 8)
         self.assertNotEqual(process.wait(timeout=3), 0)

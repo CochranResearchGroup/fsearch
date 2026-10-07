@@ -102,6 +102,7 @@ if host_machine.system() == 'linux'
     headless_fault_fixture = shared_library('headless_fault_fixture', 'headless_fault_fixture.c',
         dependencies: cc.find_library('dl'), install: false)
     python = find_program('python3')
+    test('boot_recovery', python, args: files('test_boot_recovery.py'), timeout: 10)
     refresh_fault_fixture = shared_library('refresh_fault_fixture', 'refresh_fault_fixture.c', dependencies: cc.find_library('dl'), install: false)
     monitor_fault_fixture = shared_library('monitor_fault_fixture', 'monitor_fault_fixture.c', dependencies: cc.find_library('dl'), install: false)
     test('monitor_supervisor', python, args: [files('test_monitor.py'), fsearch_monitor, fsearch_cli.full_path(), meson.current_build_dir()],
