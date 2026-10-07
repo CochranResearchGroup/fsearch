@@ -1,6 +1,6 @@
 # Previous-boot startup recovery
 
-Owner: ecochran76. State: OPEN. Issue: #18. Parent: #5.
+Owner: ecochran76. State: CLOSED. Issue: #18. Parent: #5.
 
 ## Scope
 
@@ -21,3 +21,7 @@ One serialized lifecycle change: add validated previous-boot recovery; add posit
 ## Qualification findings
 
 Direct-compiler two-job build succeeded; compiler-cache build stalled before compilation and was stopped with owned process cleanup. Initial comprehensive lane: 19/20 groups passed; overflow fixture failed. Unchanged baseline lifecycle also failed overflow snapshot preservation, proving pre-existing fixture timing sensitivity. Deterministic scanner delay and terminal deadline repair retain eight-overflow, failure-exit and byte-identical snapshot assertions. Corrected baseline overflow test passes. Public previous-boot query/monitor startup tests pass; corrected comprehensive lane passes all 20/20 Meson groups (serial, no exclusions). Original failure receipts retained privately under /tmp/fsearch-boot-*.txt.
+
+## Installed acceptance
+
+Source PR #19 and both CI checkpoints passed; versioned installed package and public/production-shaped prior-boot startup accepted. See [installed acceptance](../../research/2026-10-07-installed-boot-recovery.md). Documentation publication completes custody; physical storage remains #5.
