@@ -108,6 +108,25 @@ def proved_absent(record):
     except FileNotFoundError as exc: return exc.filename == f"/proc/{record['pid']}/stat"
     except (OSError, ValueError, IndexError, AttributeError): return False
 
+def previous_boot_generation(previous, workers):
+    # A verified boot change proves these processes cannot survive in this kernel.
+    # Never use PID absence, elapsed time, or partial identity as boot evidence.
+    try:
+        current = Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+        if str(uuid.UUID(current)) != current: return False
+        records = workers + [previous.get('supervisor')]
+        boots = set()
+        for record in records:
+            if not isinstance(record, dict) or set(record) != {'pid', 'start', 'boot'}: return False
+            if type(record['pid']) is not int or record['pid'] <= 0: return False
+            start = record['start']
+            if not isinstance(start, str) or not start.isdigit() or str(int(start)) != start: return False
+            boot = record['boot']
+            if not isinstance(boot, str) or str(uuid.UUID(boot)) != boot: return False
+            boots.add(boot)
+        return bool(workers) and len(boots) == 1 and current not in boots
+    except (OSError, ValueError, AttributeError): return False
+
 def reconcile(directory, recover=False):
     previous = directory.state()
     if not previous: return
@@ -115,12 +134,13 @@ def reconcile(directory, recover=False):
     if phase not in ('stopped', 'ready', 'starting', 'quarantined'): raise BoundaryError('unsafe_state')
     workers = [previous.get(key) for key in ('worker','candidate_worker','retiring_worker') if previous.get(key) is not None]
     if phase == 'stopped' and workers: raise BoundaryError('quarantined')
-    if phase != 'stopped' and (not workers or any(not proved_absent(worker) for worker in workers)):
+    prior_boot = phase != 'stopped' and previous_boot_generation(previous, workers)
+    if phase != 'stopped' and not prior_boot and (not workers or any(not proved_absent(worker) for worker in workers)):
         raise BoundaryError('quarantined')
-    if phase != 'stopped' and not recover: raise BoundaryError('quarantined')
-    if recover:
+    if phase != 'stopped' and not recover and not prior_boot: raise BoundaryError('quarantined')
+    if recover or prior_boot:
         recovered={key:previous[key] for key in ('database','accepted_database','snapshot_id') if key in previous}
-        recovered.update({'phase':'stopped','worker':None,'reason':'explicit_recovery'})
+        recovered.update({'phase':'stopped','worker':None,'reason':'previous_boot_recovery' if prior_boot and not recover else 'explicit_recovery'})
         directory.save(recovered)
 
 def validate_request(request):
