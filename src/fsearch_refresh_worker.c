@@ -18,8 +18,8 @@
 #include <sys/syscall.h>
 #include <unistd.h>
 
-#define ENTRY_LIMIT 1000000u
-static unsigned excluded_symlinks, excluded_mounts;
+#define ENTRY_LIMIT 10000000u
+static unsigned excluded_symlinks, excluded_mounts, excluded_permissions;
 static int confined_open(int parent, const char *name, int flags) {
     struct open_how how = {.flags = flags | O_CLOEXEC,
         .resolve = RESOLVE_BENEATH | RESOLVE_NO_SYMLINKS | RESOLVE_NO_XDEV};
@@ -63,6 +63,7 @@ static bool walk(int fd, FsearchDatabaseEntry *parent, DynamicArray *folders, Dy
         if (child < 0) {
             if (errno == ELOOP) { excluded_symlinks++; continue; }
             if (errno == EXDEV) { excluded_mounts++; continue; }
+            if (errno == EACCES || errno == EPERM) { excluded_permissions++; continue; }
             ok = false; break;
         }
         struct stat info;
@@ -72,6 +73,7 @@ static bool walk(int fd, FsearchDatabaseEntry *parent, DynamicArray *folders, Dy
         if (S_ISDIR(info.st_mode)) {
             int contents = confined_open(root, child_path, O_RDONLY | O_DIRECTORY);
             close(child);
+            if (contents < 0 && (errno == EACCES || errno == EPERM)) { excluded_permissions++; continue; }
             struct stat pinned;
             if (contents < 0 || fstat(contents, &pinned)
                 || pinned.st_dev != info.st_dev || pinned.st_ino != info.st_ino) {
@@ -119,8 +121,8 @@ int main(int argc, char **argv) {
     if (prctl(PR_SET_PDEATHSIG, SIGKILL) || getppid() != parent_pid) return 3;
     char gate;
     if (read(STDIN_FILENO, &gate, 1) != 1 || gate != 'G') return 2;
-    struct rlimit memory = {256u * 1024u * 1024u, 256u * 1024u * 1024u};
-    struct rlimit size = {64u * 1024u * 1024u, 64u * 1024u * 1024u};
+    struct rlimit memory = {2048u * 1024u * 1024u, 2048u * 1024u * 1024u};
+    struct rlimit size = {512u * 1024u * 1024u, 512u * 1024u * 1024u};
     struct rlimit core = {0, 0};
     if (setrlimit(RLIMIT_CORE, &core) || setrlimit(RLIMIT_AS, &memory) || setrlimit(RLIMIT_FSIZE, &size)) return 3;
     if (syscall(SYS_landlock_create_ruleset, NULL, 0, LANDLOCK_CREATE_RULESET_VERSION) < 3) return 3;
@@ -144,6 +146,6 @@ int main(int argc, char **argv) {
     bool complete = contents >= 0 && walk(contents, entry, folders, files, 0, root, "");
     close(root);
     if (!complete || !save_candidate(argv[2], output_name, folders, files)) return 4;
-    printf("{\"status\":\"candidate\",\"excluded_symlinks\":%u,\"excluded_mounts\":%u}\n", excluded_symlinks, excluded_mounts);
+    printf("{\"status\":\"candidate\",\"excluded_symlinks\":%u,\"excluded_mounts\":%u,\"excluded_permissions\":%u,\"files\":%u,\"directories\":%u}\n", excluded_symlinks, excluded_mounts, excluded_permissions, darray_get_num_items(files), darray_get_num_items(folders));
     return 0;
 }

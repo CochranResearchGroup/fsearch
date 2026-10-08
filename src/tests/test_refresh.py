@@ -5,6 +5,18 @@ WORKER=Path(sys.argv.pop(1));CLI=Path(sys.argv.pop(1));REFRESH=WORKER.with_name(
 SNAPSHOT_FAULT=sys.argv.pop(1)
 ctypes.CDLL(None).prctl(36,1,0,0,0)  # Own orphaned fault-fixture workers.
 class RefreshWorker(unittest.TestCase):
+    def test_permission_exclusion_is_reported_without_losing_readable_siblings(self):
+        with tempfile.TemporaryDirectory(prefix='fsearch-permission-') as temporary:
+            root=Path(temporary)/'root';root.mkdir();(root/'unreadable').mkdir();(root/'visible.pdf').touch()
+            database=Path(temporary)/'snapshot.db'
+            env=dict(os.environ,LD_PRELOAD=FAULT,FSEARCH_REFRESH_FIXTURE_PERMISSION='1')
+            result=subprocess.run(['python3',str(REFRESH),'refresh','--root',str(root),'--database',str(database)],env=env,capture_output=True,text=True,timeout=8)
+            self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+            self.assertEqual(json.loads(result.stdout)['scan']['excluded_permissions'],1)
+            query=subprocess.run([str(CLI),'--database',str(database),'--query','visible.pdf'],capture_output=True,text=True,timeout=5)
+            self.assertEqual(query.returncode,0,query.stdout+query.stderr)
+            self.assertEqual(len(json.loads(query.stdout)['results']),1)
+
     def test_malformed_worker_reply_is_structured_and_preserves_snapshot(self):
         with tempfile.TemporaryDirectory(prefix='fsearch-refresh-protocol-') as temporary:
             work=Path(temporary);root=work/'approved';root.mkdir();(root/'invoice.pdf').touch();database=work/'accepted.db'
@@ -172,7 +184,7 @@ class RefreshWorker(unittest.TestCase):
                     time.sleep(.005)
                 else:self.fail('refresh never reached its durable starting state')
                 state=json.loads(state_path.read_text())
-                for pid,ceiling in ((first.pid,64*1024*1024),(state['worker']['pid'],256*1024*1024)):
+                for pid,ceiling in ((first.pid,64*1024*1024),(state['worker']['pid'],2048*1024*1024)):
                     limits=Path('/proc',str(pid),'limits').read_text().splitlines()
                     address=next(line for line in limits if line.startswith('Max address space'))
                     self.assertLessEqual(int(address.split()[3]),ceiling)

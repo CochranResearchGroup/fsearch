@@ -87,7 +87,7 @@ class Refresh:
             if built.get('status')!='candidate':raise BoundaryError('refresh_failed')
             self.cleanup()
             self.spawn([str(base/'fsearch-worker'),candidate,str(os.getpid())])
-            accepted=self.read_frame(2,True)
+            accepted=self.read_frame(30,True)
             if accepted.get('status')!='ready':raise BoundaryError(accepted.get('error',{}).get('code','candidate_rejected'))
             self.cleanup()
             fd=os.open(candidate_name,os.O_RDONLY|os.O_NOFOLLOW,dir_fd=stage_fd)
@@ -119,13 +119,13 @@ def main():
     parser.add_argument('--root');parser.add_argument('--database',required=True);parser.add_argument('--timeout-ms',type=int,default=10000)
     args=parser.parse_args();directory=None
     try:
-        if not 1<=args.timeout_ms<=60000 or (args.command=='refresh' and (not args.root or not os.path.isabs(args.root))):raise BoundaryError('invalid_request')
+        if not 1<=args.timeout_ms<=300000 or (args.command=='refresh' and (not args.root or not os.path.isabs(args.root))):raise BoundaryError('invalid_request')
         directory=lifecycle.PrivateDirectory(args.database+'.refresh');directory.lock()
         lifecycle.reconcile(directory,args.command=='recover')
         if args.command=='recover':payload={'schema_version':1,'status':'recovered'}
         else:
             soft,hard=resource.getrlimit(resource.RLIMIT_AS)
-            maximum=256*1024*1024 if hard==resource.RLIM_INFINITY else min(hard,256*1024*1024)
+            maximum=2048*1024*1024 if hard==resource.RLIM_INFINITY else min(hard,2048*1024*1024)
             current=64*1024*1024 if soft==resource.RLIM_INFINITY else min(soft,64*1024*1024)
             resource.setrlimit(resource.RLIMIT_AS,(min(current,maximum),maximum))
             resource.setrlimit(resource.RLIMIT_CORE,(0,0))

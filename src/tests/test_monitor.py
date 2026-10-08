@@ -302,10 +302,10 @@ class Monitor(unittest.TestCase):
         scanner_pid = state['worker']['pid']
         children = set(map(int, Path('/proc', str(monitor.pid), 'task', str(monitor.pid), 'children').read_text().split()))
         self.assertEqual(children, {watch_pid, scanner_pid})
-        for pid, soft in ((monitor.pid, 64), (watch_pid, 256), (scanner_pid, 256)):
+        for pid, soft, hard in ((monitor.pid, 64, 2048), (watch_pid, 256, 256), (scanner_pid, 2048, 2048)):
             limits = Path('/proc', str(pid), 'limits').read_text()
             address = next(line.split() for line in limits.splitlines() if line.startswith('Max address space'))
-            self.assertEqual(address[-3:-1], [str(soft*1024*1024), str(256*1024*1024)])
+            self.assertEqual(address[-3:-1], [str(soft*1024*1024), str(hard*1024*1024)])
         self.published(monitor)
 
     def test_monitor_cannot_overlap_an_admitted_explicit_refresh(self):

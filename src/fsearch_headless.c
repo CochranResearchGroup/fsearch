@@ -31,7 +31,7 @@ struct FsearchHeadlessSnapshot {
     size_t signature_stride[2];
 };
 
-#define SIGNATURE_MAX_BYTES (32u * 1024u * 1024u)
+#define SIGNATURE_MAX_BYTES (256u * 1024u * 1024u)
 #define CANDIDATE_BLOCK_BUDGET 500000u
 #define SIGNATURE_NONASCII (UINT64_C(1) << 63)
 #define SIGNATURE_UPPERCASE (UINT64_C(1) << 62)

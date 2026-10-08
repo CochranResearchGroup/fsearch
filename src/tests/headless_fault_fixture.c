@@ -44,7 +44,7 @@ static int fixture_open(const char *symbol, const char *path, int flags, mode_t 
         pause_fixture("FSEARCH_FIXTURE_OPEN_DELAY_MS");
         const char *memory_marker = getenv("FSEARCH_FIXTURE_MEMORY_MARKER");
         if (memory_marker) {
-            void *allocation = malloc(600ul * 1024 * 1024);
+            void *allocation = malloc(3072ul * 1024 * 1024);
             FILE *fp = fopen(memory_marker, "w");
             if (fp) { fputs(allocation ? "allowed" : "denied", fp); fclose(fp); }
             free(allocation);

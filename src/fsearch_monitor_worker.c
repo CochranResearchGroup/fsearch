@@ -17,8 +17,8 @@
 #include <sys/syscall.h>
 #include <unistd.h>
 
-#define ENTRY_LIMIT 1000000u
-#define WATCH_LIMIT 65536u
+#define ENTRY_LIMIT 10000000u
+#define WATCH_LIMIT 800000u
 static unsigned entries, watches;
 static int notifications, root_watch;
 
@@ -71,7 +71,7 @@ static bool watch_tree(int fd, unsigned depth, int root, const char *relative) {
         // from the approved root, rather than treating that parent as authority.
         int child = beneath(root, child_path, O_PATH);
         if (child < 0) {
-            if (errno == ELOOP || errno == EXDEV) continue;
+            if (errno == ELOOP || errno == EXDEV || errno == EACCES || errno == EPERM) continue;
             ok = false; break;
         }
         struct stat info;
@@ -80,6 +80,7 @@ static bool watch_tree(int fd, unsigned depth, int root, const char *relative) {
         bool directory_entry = S_ISDIR(info.st_mode);
         close(child);
         if (directory_entry) {
+            if (contents < 0 && (errno == EACCES || errno == EPERM)) continue;
             struct stat pinned;
             if (contents < 0 || fstat(contents, &pinned)
                 || pinned.st_dev != info.st_dev || pinned.st_ino != info.st_ino) {

@@ -132,7 +132,7 @@ class HeadlessCLI(unittest.TestCase):
 
     def test_sparse_oversize_snapshot_is_rejected_before_load(self):
         with self.database.open('wb') as stream:
-            stream.truncate(64 * 1024 * 1024 + 1)
+            stream.truncate(512 * 1024 * 1024 + 1)
         self.assertEqual(self.query('--query', 'invoice', expected_exit=1)['error']['code'], 'snapshot_size_limit')
 
     def test_request_and_response_limits(self):

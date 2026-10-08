@@ -175,7 +175,7 @@ class WarmService(unittest.TestCase):
             with self.request(sock,query) as connection:before=self.receive(connection)
             worker=json.loads(Path(str(sock)+'.state').read_text())['worker']
             candidate=work/'oversize.db'
-            with candidate.open('wb') as stream:stream.truncate(64*1024*1024+1)
+            with candidate.open('wb') as stream:stream.truncate(512*1024*1024+1)
             candidate.chmod(0o600)
             replacement={'schema_version':1,'request_id':'oversize-candidate','op':'replace','candidate_database_b64':base64.b64encode(os.fsencode(candidate)).decode()}
             with self.request(sock,replacement) as connection:failed=self.receive(connection)
@@ -220,7 +220,7 @@ class WarmService(unittest.TestCase):
                 self.assertEqual(state['worker'],old)
                 for record in (state['worker'],state['candidate_worker']):
                     line=next(line for line in Path(f"/proc/{record['pid']}/limits").read_text().splitlines() if line.startswith('Max address space'))
-                    self.assertLessEqual(int(line.split()[3]),256*1024*1024)
+                    self.assertLessEqual(int(line.split()[3]),2048*1024*1024)
                 with self.request(sock,request) as overlap:rejected=self.receive(overlap)
                 self.assertEqual(rejected.get('error',{}).get('code'),'replacement_busy')
                 started=time.monotonic()
@@ -333,7 +333,7 @@ class WarmService(unittest.TestCase):
                 result=subprocess.run([CLI,'--socket',str(sock),'--database',str(snapshot),'--query','invoice'],capture_output=True,text=True,timeout=5)
                 self.assertEqual(result.returncode,0,result.stdout+result.stderr)
                 state=json.loads((work/'search.sock.state').read_text())
-                for key,ceiling in [('supervisor',64*1024*1024),('worker',256*1024*1024)]:
+                for key,ceiling in [('supervisor',64*1024*1024),('worker',2048*1024*1024)]:
                     line=next(line for line in Path(f"/proc/{state[key]['pid']}/limits").read_text().splitlines() if line.startswith('Max address space'))
                     self.assertLessEqual(int(line.split()[3]),ceiling)
             finally:
