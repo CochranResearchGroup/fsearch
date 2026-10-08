@@ -187,7 +187,7 @@ def main():
     parser.add_argument('--timeout-ms', type=int, default=10000)
     args = parser.parse_args(); directory = None
     try:
-        if not 1 <= args.timeout_ms <= 60000 or (args.command == 'watch'
+        if not 1 <= args.timeout_ms <= 300000 or (args.command == 'watch'
                 and (not args.root or not os.path.isabs(args.root))):
             raise BoundaryError('invalid_request')
         if args.root is not None and (len(os.fsencode(args.root)) > 4096 or '\0' in args.root):
@@ -198,7 +198,7 @@ def main():
         lifecycle.reconcile(directory, args.command == 'recover')
         if args.command == 'recover': emit('recovered'); return 0
         soft, hard = resource.getrlimit(resource.RLIMIT_AS)
-        maximum = min(hard, 256*1024*1024) if hard != resource.RLIM_INFINITY else 256*1024*1024
+        maximum = min(hard, 2048*1024*1024) if hard != resource.RLIM_INFINITY else 2048*1024*1024
         current = min(soft, 64*1024*1024) if soft != resource.RLIM_INFINITY else 64*1024*1024
         resource.setrlimit(resource.RLIMIT_AS, (min(current, maximum), maximum))
         resource.setrlimit(resource.RLIMIT_CORE, (0, 0))

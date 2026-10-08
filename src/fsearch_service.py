@@ -180,14 +180,23 @@ def validate_request(request):
         if type(request[key]) is not int or not low <= request[key] <= high: raise BoundaryError('invalid_request')
     return request
 
+def worker_startup_timeout():
+    try:
+        milliseconds = int(os.environ.get('FSEARCH_WORKER_STARTUP_TIMEOUT_MS', '2000'))
+    except ValueError:
+        raise BoundaryError('invalid_request') from None
+    if not 1 <= milliseconds <= 30000: raise BoundaryError('invalid_request')
+    return milliseconds / 1000
+
 def worker_limits():
-    for key, ceiling in ((resource.RLIMIT_AS, 256*1024*1024), (resource.RLIMIT_CORE, 0)):
+    for key, ceiling in ((resource.RLIMIT_AS, 2048*1024*1024), (resource.RLIMIT_CORE, 0)):
         soft, hard = resource.getrlimit(key)
         limit = ceiling if hard == resource.RLIM_INFINITY else min(hard, ceiling)
         resource.setrlimit(key, (limit, limit))
 
 class Supervisor:
     def __init__(self, directory, database):
+        self.startup_timeout = worker_startup_timeout()
         self.directory, self.database = directory, database
         self.selector = selectors.DefaultSelector()
         self.clients = {}
@@ -299,7 +308,7 @@ class Supervisor:
         os.set_blocking(self.worker.stdout.fileno(), False)
         os.set_blocking(self.worker.stdin.fileno(), False)
         self.selector.register(self.worker.stdout, selectors.EVENT_READ, 'worker')
-        self.start_deadline = time.monotonic() + 2
+        self.start_deadline = time.monotonic() + self.startup_timeout
         self.worker_read.clear(); self.worker_ready = False
     def abort_worker(self, code):
         if self.candidate:self.abort_candidate(code)
@@ -349,7 +358,7 @@ class Supervisor:
         executable=str(Path(__file__).resolve().with_name('fsearch-worker'))
         try:
             process=subprocess.Popen([executable,path,str(os.getpid())],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,close_fds=True,preexec_fn=worker_limits)
-            self.candidate={'process':process,'client':client,'path':path,'input':bytearray(),'ready':False,'deadline':time.monotonic()+2}
+            self.candidate={'process':process,'client':client,'path':path,'input':bytearray(),'ready':False,'deadline':time.monotonic()+self.startup_timeout}
             self.candidate_record=identity(process.pid)
             self.save('ready','candidate_loading')
             process.stdin.write(b'G');process.stdin.flush()
@@ -537,7 +546,7 @@ def main():
         if args.command == 'recover': print(json.dumps({'status': 'recovered'})); return 0
         if not args.database: raise BoundaryError('invalid_request')
         soft, hard = resource.getrlimit(resource.RLIMIT_AS)
-        maximum = 256*1024*1024 if hard == resource.RLIM_INFINITY else min(hard, 256*1024*1024)
+        maximum = 2048*1024*1024 if hard == resource.RLIM_INFINITY else min(hard, 2048*1024*1024)
         current = 64*1024*1024 if soft == resource.RLIM_INFINITY else min(soft, 64*1024*1024)
         resource.setrlimit(resource.RLIMIT_AS, (min(current, maximum), maximum))
         resource.setrlimit(resource.RLIMIT_CORE, (0, 0))

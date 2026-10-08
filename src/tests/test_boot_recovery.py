@@ -7,6 +7,16 @@ lifecycle = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(lifecycle)
 
 class BootRecovery(unittest.TestCase):
+    def test_startup_override_remains_bounded_and_default_is_unchanged(self):
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(lifecycle.worker_startup_timeout(), 2)
+        for value, expected in [('1',.001),('30000',30)]:
+            with patch.dict(os.environ, FSEARCH_WORKER_STARTUP_TIMEOUT_MS=value):
+                self.assertEqual(lifecycle.worker_startup_timeout(), expected)
+        for value in ('0','30001','invalid'):
+            with patch.dict(os.environ, FSEARCH_WORKER_STARTUP_TIMEOUT_MS=value):
+                with self.assertRaises(lifecycle.BoundaryError): lifecycle.worker_startup_timeout()
+
     def generation(self):
         record = lifecycle.identity(os.getpid())
         record['boot'] = str(uuid.uuid4())

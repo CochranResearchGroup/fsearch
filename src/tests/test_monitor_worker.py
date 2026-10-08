@@ -44,6 +44,15 @@ class MonitorWorker(unittest.TestCase):
         for stream in (worker.stdin, worker.stdout, worker.stderr):
             stream.close()
 
+    def test_permission_exclusion_keeps_readable_sibling_watched(self):
+        with tempfile.TemporaryDirectory(prefix='fsearch-watch-permission-') as temporary:
+            root=Path(temporary);(root/'unreadable').mkdir()
+            env=dict(os.environ,LD_PRELOAD=REFRESH_FAULT,FSEARCH_REFRESH_FIXTURE_PERMISSION='1')
+            worker=subprocess.Popen([WORKER,'--root',str(root)],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env)
+            self.addCleanup(self.stop,worker);worker.stdin.write(b'G');worker.stdin.flush()
+            self.assertEqual(reply(worker)['status'],'ready')
+            (root/'visible.pdf').touch();self.assertEqual(reply(worker)['status'],'dirty')
+
     def test_missing_or_relative_root_is_structured(self):
         for arguments in ([], ['--root', 'relative']):
             result = subprocess.run([WORKER, *arguments], input=b'G', capture_output=True, timeout=3)

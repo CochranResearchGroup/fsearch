@@ -87,7 +87,7 @@ supervise_search(const Options *options) {
         close(channel[1]);
         close(STDERR_FILENO);
         g_log_set_default_handler(discard_worker_log, NULL);
-        if (!set_worker_limit(RLIMIT_AS, 512 * 1024 * 1024)
+        if (!set_worker_limit(RLIMIT_AS, 2048UL * 1024 * 1024)
             || !set_worker_limit(RLIMIT_CPU, options->timeout_ms / 1000 + 1)
             || !set_worker_limit(RLIMIT_CORE, 0)) {
             failure("containment_unavailable");

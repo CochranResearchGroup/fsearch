@@ -52,7 +52,8 @@ long syscall(long number, ...) {
             write(atoi(notify), &gate, 1);
             if (read(atoi(resume), &gate, 1) != 1 || gate != 'G') _exit(91);
         }
-        if (getenv("FSEARCH_REFRESH_FIXTURE_MOUNT") && !strcmp(basename, "excluded-mount")) {
+        if (getenv("FSEARCH_REFRESH_FIXTURE_PERMISSION") && !strcmp(basename, "unreadable")) { errno = EACCES; result = -1; }
+        else if (getenv("FSEARCH_REFRESH_FIXTURE_MOUNT") && !strcmp(basename, "excluded-mount")) {
             write(STDERR_FILENO, "injected_EXDEV\n", 15); errno = EXDEV; result = -1;
         }
         else result = real_call(number, fd, path, how, size);

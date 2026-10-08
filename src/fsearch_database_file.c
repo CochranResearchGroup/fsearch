@@ -184,7 +184,7 @@ typedef struct {
     size_t remaining;
     size_t reserved;
 } SnapshotEntryArena;
-#define SNAPSHOT_ENTRY_ARENA_LIMIT (96u * 1024u * 1024u)
+#define SNAPSHOT_ENTRY_ARENA_LIMIT (1024u * 1024u * 1024u)
 static void snapshot_entry_arena_clear(SnapshotEntryArena *arena) {
     g_clear_pointer(&arena->blocks, g_ptr_array_unref);
 }

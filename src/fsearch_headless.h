@@ -2,7 +2,7 @@
 #pragma once
 #include <glib.h>
 #include <stdbool.h>
-#define MAX_SNAPSHOT_BYTES (64 * 1024 * 1024)
+#define MAX_SNAPSHOT_BYTES (512 * 1024 * 1024)
 #define MAX_RESPONSE_BYTES (1024 * 1024)
 #define MAX_CANDIDATES 500000
 typedef struct {
