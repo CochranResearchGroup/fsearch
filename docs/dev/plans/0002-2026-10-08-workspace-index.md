@@ -1,11 +1,11 @@
 # Workspace filename index
 
-State: OPEN
+State: CLOSED
 Owner: Codex
 Issue: https://github.com/CochranResearchGroup/fsearch/issues/21
 
 ## Current State
-User authorized /home/ecochran76/workspace.local. A contained inventory found 6,761,264 entries, 617,919 readable directories, 34,223 symlinks and 45 permission-denied directories. Existing two-root services remain serving. The first candidate failed under existing prototype limits.
+User authorized /home/ecochran76/workspace.local. A contained inventory found 6,761,264 entries, 617,919 readable directories, 34,223 symlinks and 45 permission-denied directories. The first candidate failed under existing prototype limits. The accepted workspace snapshot now serves normal CLI/MCP routing; old two-root units are stopped and retained for rollback.
 
 ## Scope and acceptance
 Index all readable regular files and directories beneath the workspace, including hidden/generated trees. Never follow symlinks, cross descendant mounts, read file contents, change permissions, or start SysRAG. Report permission exclusions. Keep bounded memory, snapshot size and build deadlines. Qualify synthetic exclusion tests, then build a separate candidate and verify live CLI/MCP routing. Preserve rollback copies. Monitoring must be independently qualified; do not represent cached snapshot coverage as live monitoring.
@@ -18,3 +18,6 @@ Ten-million-entry cap; 512 MiB snapshot cap; 2 GiB worker address-space cap; 256
 
 ## Loader capacity correction
 The first complete scan reached validation at 104.42 seconds, then failed safely at the independent 96 MiB snapshot-entry arena cap. Increase that bounded arena to 1 GiB, still within the worker's 2 GiB address-space cap. Failed candidates were removed; production routing was unchanged. Successful refresh output records exact file/directory counts and exclusions.
+
+## Acceptance
+Installed snapshot/query routing accepted; see docs/research/2026-10-08-workspace-index.md. Continuous monitoring remains explicitly unqualified follow-up, with manual bounded refresh provided. No storage investigation gate is inferred.
