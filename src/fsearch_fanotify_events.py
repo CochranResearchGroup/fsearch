@@ -182,3 +182,112 @@ class ExportFilter:
             self.fail(str(error))
         except Exception:
             self.fail('admission_failed')
+
+
+class BootstrapSession:
+    """Conservative clean-baseline cut and bounded admitted replay controller.
+
+    A source adapter must supply ordered read-batch numbers and drain barriers.
+    This controller cannot manufacture a kernel drain proof. Dirty bootstrap is
+    rejected instead of retaining filesystem-wide raw events. No automatic retry.
+    """
+    def __init__(self, generation, *, max_pending=1024):
+        if type(max_pending) is not int or max_pending < 1:
+            raise ValueError('configuration_invalid')
+        self.filter = ExportFilter(generation, max_exports=max_pending)
+        self.max_pending = max_pending
+        self.state = 'reconciling'
+        self.source_sequence = 0
+        self.pending = []
+        self.applied_sequence = 0
+        self.baseline_finished = False
+        self.inventory_work = set()
+
+    def fail(self, reason):
+        self.state = 'deferred'
+        self.pending.clear()
+        self.inventory_work.clear()
+        self.filter.fail(reason)
+
+    def receive(self, data, generation, source_sequence, validate):
+        if self.state == 'deferred':
+            raise Gap(self.filter.reason)
+        if type(source_sequence) is not int or source_sequence != self.source_sequence + 1:
+            self.fail('source_sequence_gap')
+        try:
+            # Decode before treating a batch as dirty: retain original gap reason.
+            events = decode(data)
+            if self.state == 'reconciling' and events:
+                self.fail('bootstrap_dirty')
+            exports = self.filter.consume(data, generation, validate)
+            if len(exports) + len(self.pending) > self.max_pending:
+                self.fail('pending_limit')
+            self.pending.extend(exports)
+            self.source_sequence = source_sequence
+            if self.pending:
+                self.state = 'pending'
+            return exports
+        except Gap as error:
+            self.fail(str(error))
+
+    def finish_baseline(self, generation):
+        if self.state != 'reconciling' or generation != self.filter.generation:
+            self.fail('baseline_identity_invalid')
+        self.baseline_finished = True
+
+    def drained(self, generation, source_sequence, now):
+        if self.state == 'deferred':
+            raise Gap(self.filter.reason)
+        if generation != self.filter.generation or type(source_sequence) is not int or source_sequence != self.source_sequence:
+            self.fail('drain_identity_invalid')
+        try:
+            self.filter.check_lease(now)
+        except Gap as error:
+            self.fail(str(error))
+        if self.state == 'reconciling' and not self.baseline_finished:
+            self.fail('baseline_not_finished')
+        if self.pending or self.inventory_work:
+            self.state = 'pending'
+        else:
+            self.state = 'watching'
+
+    def applied(self, sequence):
+        if self.state == 'deferred':
+            raise Gap(self.filter.reason)
+        if not self.pending or type(sequence) is not int or sequence != self.pending[0].sequence:
+            self.fail('apply_sequence_gap')
+        self.pending.pop(0)
+        self.applied_sequence = sequence
+        # Even after application, a fresh drain proof is required for watching.
+        self.state = 'pending'
+
+    def progress(self, now):
+        try:
+            self.filter.progress(now)
+        except Gap as error:
+            self.fail(str(error))
+
+    def check_lease(self, now):
+        try:
+            self.filter.check_lease(now)
+        except Gap as error:
+            self.fail(str(error))
+
+    def inventory_started(self, token, generation):
+        if self.state == 'deferred':
+            raise Gap(self.filter.reason)
+        if generation != self.filter.generation or type(token) is not int or token < 1 or token in self.inventory_work:
+            self.fail('inventory_identity_invalid')
+        if len(self.inventory_work) >= self.max_pending:
+            self.fail('inventory_limit')
+        self.inventory_work.add(token)
+        if self.state != 'reconciling':
+            self.state = 'pending'
+
+    def inventory_finished(self, token, generation):
+        if self.state == 'deferred':
+            raise Gap(self.filter.reason)
+        if generation != self.filter.generation or token not in self.inventory_work:
+            self.fail('inventory_identity_invalid')
+        self.inventory_work.remove(token)
+        # Completion alone does not prove the source queue is drained.

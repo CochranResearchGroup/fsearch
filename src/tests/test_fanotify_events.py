@@ -113,4 +113,86 @@ class Fixtures(unittest.TestCase):
         with self.assertRaisesRegex(f.Gap, 'clock_regressed'): broker.progress(9)
 
 
+class BootstrapFixtures(unittest.TestCase):
+    def session(self, **kwargs):
+        session = f.BootstrapSession(1, **kwargs)
+        session.progress(10)
+        return session
+
+    def ready(self, **kwargs):
+        session = self.session(**kwargs)
+        session.finish_baseline(1)
+        session.drained(1, 0, 10)
+        return session
+
+    def test_clean_cut_then_mutation_and_ack(self):
+        session = self.ready()
+        self.assertEqual(session.state, 'watching')
+        exports = session.receive(event(), 1, 1, lambda *args: 7)
+        self.assertEqual(session.state, 'pending')
+        session.drained(1, 1, 10)
+        self.assertEqual(session.state, 'pending')
+        session.applied(exports[0].sequence)
+        self.assertEqual(session.state, 'pending')
+        session.drained(1, 1, 10)
+        self.assertEqual(session.state, 'watching')
+
+    def test_dirty_inventory_never_calls_admission(self):
+        for finish_first in (False, True):
+            session = self.session()
+            if finish_first: session.finish_baseline(1)
+            def forbidden(*args): self.fail('dirty bootstrap must not probe')
+            with self.assertRaisesRegex(f.Gap, 'bootstrap_dirty'):
+                session.receive(event(), 1, 1, forbidden)
+            self.assertEqual(session.state, 'deferred')
+            self.assertEqual(session.pending, [])
+            with self.assertRaises(f.Gap): session.drained(1, 1, 10)
+
+    def test_cut_and_source_identity_failures(self):
+        session = self.session()
+        with self.assertRaisesRegex(f.Gap, 'baseline_not_finished'): session.drained(1, 0, 10)
+        session = self.ready()
+        with self.assertRaisesRegex(f.Gap, 'source_sequence_gap'):
+            session.receive(event(), 1, 2, lambda *args: 7)
+        session = self.ready()
+        with self.assertRaisesRegex(f.Gap, 'drain_identity_invalid'): session.drained(2, 0, 10)
+        session = self.ready()
+        with self.assertRaisesRegex(f.Gap, 'drain_identity_invalid'): session.drained(1, 1, 10)
+
+    def test_backpressure_and_out_of_order_ack(self):
+        session = self.ready(max_pending=1)
+        session.receive(event(), 1, 1, lambda *args: 7)
+        with self.assertRaisesRegex(f.Gap, 'pending_limit'):
+            session.receive(event(), 1, 2, lambda *args: 7)
+        self.assertEqual(session.pending, [])
+        session = self.ready()
+        session.receive(event(), 1, 1, lambda *args: 7)
+        with self.assertRaisesRegex(f.Gap, 'apply_sequence_gap'): session.applied(2)
+
+    def test_inventory_blocks_freshness_until_completion_and_cut(self):
+        session = self.ready()
+        session.inventory_started(42, 1)
+        session.drained(1, 0, 10)
+        self.assertEqual(session.state, 'pending')
+        session.inventory_finished(42, 1)
+        self.assertEqual(session.state, 'pending')
+        session.drained(1, 0, 10)
+        self.assertEqual(session.state, 'watching')
+        session = self.ready(max_pending=1)
+        session.inventory_started(1, 1)
+        with self.assertRaisesRegex(f.Gap, 'inventory_limit'): session.inventory_started(2, 1)
+        self.assertEqual(session.inventory_work, set())
+
+    def test_outside_churn_and_failure_after_ready(self):
+        session = self.ready()
+        self.assertEqual(session.receive(event(), 1, 1, lambda *args: None), ())
+        self.assertEqual(session.source_sequence, 1)
+        with self.assertRaisesRegex(f.Gap, 'queue_overflow'):
+            session.receive(event(f.OVERFLOW, []), 1, 2, lambda *args: None)
+        self.assertEqual(session.state, 'deferred')
+        session = self.ready()
+        with self.assertRaisesRegex(f.Gap, 'source_progress_timeout'): session.check_lease(13)
+        self.assertEqual(session.state, 'deferred')
+
+
 if __name__ == '__main__': unittest.main()
