@@ -1,0 +1,36 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-9.1.1, pluggy-1.6.0
+rootdir: /tmp/file-searcher-mount-discovery
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.15.1
+collected 439 items
+
+tests/test_cli.py ...................................................... [ 12%]
+.........                                                                [ 14%]
+tests/test_concurrency.py .............................................. [ 24%]
+........................................................................ [ 41%]
+.......                                                                  [ 42%]
+tests/test_config_mutation.py .......                                    [ 44%]
+tests/test_discovery.py ..                                               [ 44%]
+tests/test_everything.py ............                                    [ 47%]
+tests/test_everything_native_helper.py .......                           [ 49%]
+tests/test_fsearch.py ...........................                        [ 55%]
+tests/test_fsearch_installed.py .......                                  [ 56%]
+tests/test_index.py ........                                             [ 58%]
+tests/test_install.py ............                                       [ 61%]
+tests/test_isolation.py ..............................                   [ 68%]
+tests/test_locate.py ....................                                [ 72%]
+tests/test_lookup.py ...................                                 [ 77%]
+tests/test_managed_backends.py ....................                      [ 81%]
+tests/test_mcp.py ......                                                 [ 83%]
+tests/test_mount_discovery.py .                                          [ 83%]
+tests/test_pathmap.py ...........                                        [ 85%]
+tests/test_rank.py ............                                          [ 88%]
+tests/test_repair.py ...                                                 [ 89%]
+tests/test_resolve.py ...........                                        [ 91%]
+tests/test_resolver_quality_corpus.py ..                                 [ 92%]
+tests/test_state_export.py ..................                            [ 96%]
+tests/test_suggest.py ................                                   [100%]
+
+============================= 439 passed in 31.48s =============================

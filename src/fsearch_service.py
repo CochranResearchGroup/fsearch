@@ -145,11 +145,34 @@ def reconcile(directory, recover=False):
 
 def validate_request(request):
     if not isinstance(request, dict): raise BoundaryError('invalid_request')
-    allowed = {'schema_version', 'request_id', 'query', 'extension', 'kind', 'path', 'match_case', 'limit', 'max_candidates', 'max_bytes', 'timeout_ms', 'op', 'expected_database_b64', 'candidate_database_b64'}
+    allowed = {'schema_version', 'request_id', 'query', 'extension', 'kind', 'path', 'match_case', 'limit', 'max_candidates', 'max_bytes', 'timeout_ms', 'op', 'expected_database_b64', 'candidate_database_b64', 'expected_snapshot_id', 'sequence', 'entry_id', 'parent_id', 'entry_kind', 'name_b64', 'path_b64'}
     if set(request) - allowed or type(request.get('schema_version')) is not int or request.get('schema_version') != 1: raise BoundaryError('invalid_request')
     request_id = request.get('request_id')
     if not isinstance(request_id, str) or len(request_id.encode('utf-8')) > 64: raise BoundaryError('invalid_request')
-    if request.get('op') not in (None, 'query', 'stop', 'replace'): raise BoundaryError('invalid_request')
+    if request.get('op') not in (None, 'query', 'stop', 'replace', 'catalog_apply', 'catalog_lookup', 'catalog_compact', 'catalog_status'): raise BoundaryError('invalid_request')
+    if (request.get('op') or '').startswith('catalog_'):
+        op=request['op'];keys={'schema_version','request_id','op','timeout_ms','expected_snapshot_id'}
+        if op=='catalog_apply':keys|={'sequence','entry_id','parent_id','entry_kind','name_b64'}
+        if op=='catalog_lookup':keys.add('path_b64')
+        if set(request)-keys:raise BoundaryError('invalid_request')
+        expected=request.get('expected_snapshot_id')
+        if expected is not None and (not isinstance(expected,str) or not expected or len(expected)>256):raise BoundaryError('invalid_request')
+        if op in ('catalog_apply','catalog_compact') and expected is None:raise BoundaryError('invalid_request')
+        timeout=request.setdefault('timeout_ms',2000)
+        if type(timeout) is not int or not 1<=timeout<=10000:raise BoundaryError('invalid_request')
+        if op=='catalog_apply':
+            for key,minimum,maximum in (('sequence',1,2**64-1),('parent_id',0,2**32-1),('entry_kind',0,2)):
+                value=request.get(key)
+                if type(value) is not int or not minimum<=value<=maximum:raise BoundaryError('invalid_request')
+            if 'entry_id' in request and (type(request['entry_id']) is not int or not 0<=request['entry_id']<=2**32-1):raise BoundaryError('invalid_request')
+            if request['entry_kind']==0 and 'entry_id' not in request:raise BoundaryError('invalid_request')
+        if op in ('catalog_apply','catalog_lookup'):
+            key='name_b64' if op=='catalog_apply' else 'path_b64';value=request.get(key)
+            if not isinstance(value,str) or len(value)>5464:raise BoundaryError('invalid_request')
+            try:raw=base64.b64decode(value,validate=True)
+            except ValueError:raise BoundaryError('invalid_request')
+            if len(raw)>4096 or b'\0' in raw or (op=='catalog_lookup' and (not raw or not raw.startswith(b'/'))) or (op=='catalog_apply' and request['entry_kind'] and not raw):raise BoundaryError('invalid_request')
+        return request
     if request.get('op') == 'stop': return request
     if request.get('op') == 'replace':
         if set(request)-{'schema_version','request_id','op','candidate_database_b64','timeout_ms'}:raise BoundaryError('invalid_request')
@@ -428,6 +451,21 @@ class Supervisor:
             return
         if not self.worker_ready: return
         self.active = self.queue.popleft(); request = self.active['request']
+        if (request.get('op') or '').startswith('catalog_'):
+            expected=request.get('expected_snapshot_id')
+            if expected is not None and expected!=self.accepted_identity:
+                client=self.active;self.active=None;self.reply(client,error('snapshot_conflict'));return
+            op=request['op'];body=b''
+            if op=='catalog_apply':
+                body=base64.b64decode(request['name_b64']);sequence=request['sequence']
+                command=0x101 if 'entry_id' in request else 0x100
+                words=(command,request['entry_kind'],request['parent_id'],request.get('entry_id',0),sequence>>32,sequence&0xffffffff,len(body))
+            else:
+                command={'catalog_compact':0x102,'catalog_status':0x103,'catalog_lookup':0x104}[op]
+                if op=='catalog_lookup':body=base64.b64decode(request['path_b64'])
+                words=(command,0,0,0,0,0,len(body))
+            self.worker_write=struct.pack('!7I',*words)+body
+            self.selector.register(self.worker.stdin,selectors.EVENT_WRITE,'worker_write');return
         query = request['query'].encode(); extension = (request['extension'] or '').encode()
         flags = int(request['path']) | (int(request['match_case']) << 1) | (4 if request['extension'] is not None else 0)
         self.worker_write = struct.pack('!7I', flags, ('all', 'files', 'folders').index(request['kind']), request['limit'], request['max_candidates'], request['max_bytes'], len(query), len(extension)) + query + extension

@@ -1,0 +1,3853 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.1.1, pluggy-1.6.0
+rootdir: /home/ecochran76/workspace.local/file-searcher
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.15.1
+collected 438 items
+
+tests/test_cli.py F.FF.F..FFFF.....FFFFFFFFFFFFFFFFFFFFFFFFFFF.......... [ 12%]
+......FFF                                                                [ 14%]
+tests/test_concurrency.py .............................................. [ 24%]
+........................................................................ [ 41%]
+.......                                                                  [ 42%]
+tests/test_config_mutation.py FFFFFFF                                    [ 44%]
+tests/test_discovery.py ..                                               [ 44%]
+tests/test_everything.py ............                                    [ 47%]
+tests/test_everything_native_helper.py .......                           [ 49%]
+tests/test_fsearch.py ...........................                        [ 55%]
+tests/test_fsearch_installed.py F.....F                                  [ 57%]
+tests/test_index.py ........                                             [ 58%]
+tests/test_install.py .FF....F....                                       [ 61%]
+tests/test_isolation.py ..............................                   [ 68%]
+tests/test_locate.py ....................                                [ 73%]
+tests/test_lookup.py ........F..........                                 [ 77%]
+tests/test_managed_backends.py ....................                      [ 81%]
+tests/test_mcp.py ......                                                 [ 83%]
+tests/test_pathmap.py ...........                                        [ 85%]
+tests/test_rank.py ............                                          [ 88%]
+tests/test_repair.py ...                                                 [ 89%]
+tests/test_resolve.py ...........                                        [ 91%]
+tests/test_resolver_quality_corpus.py ..                                 [ 92%]
+tests/test_state_export.py FF.FFFFF..F..FFF.F                            [ 96%]
+tests/test_suggest.py ................                                   [100%]
+
+=================================== FAILURES ===================================
+_________________ test_configure_everything_writes_user_config _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_configure_everything_writ0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cb95910>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb0a150>
+
+    def test_configure_everything_writes_user_config(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        fake = write_fake_es(tmp_path / "es.exe")
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+    
+>       exit_code = main(["configure", "everything", "--command", str(fake)])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1273: in cmd_configure_everything
+    change = set_everything_command(command)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:368: in set_everything_command
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_______________________ test_configure_everything_clear ________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_configure_everything_clea0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cbfbe10>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cbfbc10>
+
+    def test_configure_everything_clear(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        fake = write_fake_es(tmp_path / "es.exe")
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+>       assert main(["configure", "everything", "--command", str(fake)]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1273: in cmd_configure_everything
+    change = set_everything_command(command)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:368: in set_everything_command
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_____________ test_configure_everything_helper_writes_user_config ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_configure_everything_help0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2ca9fd90>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2ca9ded0>
+
+    def test_configure_everything_helper_writes_user_config(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        helper = tmp_path / "helper"
+        helper.write_text("#!/bin/sh\nprintf '%s\\n' '{\"ok\": true, \"backend\": \"fake\", \"protocol\": \"file-searcher-everything-helper-v1\"}'\n")
+        helper.chmod(0o755)
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+    
+>       exit_code = main(["configure", "everything-helper", "--command", str(helper)])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:67: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1296: in cmd_configure_everything_helper
+    change = set_everything_helper_command(command)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:381: in set_everything_helper_command
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+___________ test_resolve_intent_only_errors_without_explicit_intent ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_resolve_intent_only_error0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2ca28150>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2ca29290>
+
+    def test_resolve_intent_only_errors_without_explicit_intent(tmp_path: Path, monkeypatch, capsys):
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(tmp_path / "config.json"))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(tmp_path / "index.sqlite3"))
+    
+>       exit_code = main(["resolve", "in my downloads", "--intent-only"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1146: in cmd_resolve
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________________ test_doctor_timings_reports_probe_elapsed_ms _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_doctor_timings_reports_pr0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c2f5050>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c2f5ad0>
+
+    def test_doctor_timings_reports_probe_elapsed_ms(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        seen_timeouts = []
+        monkeypatch.setattr(cli, "status", lambda config: {"entries": 0, "last_run": None, "roots": []})
+        monkeypatch.setattr(
+            cli,
+            "everything_status",
+            lambda command, timeout=3.0: seen_timeouts.append(("everything", timeout)) or {"available": True, "ok": True},
+        )
+        monkeypatch.setattr(
+            cli,
+            "helper_status",
+            lambda command, timeout=3.0: seen_timeouts.append(("helper", timeout)) or {"available": True, "ok": True},
+        )
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": True, "ok": True})
+    
+>       exit_code = main(["doctor", "--timings", "--timeout", "7.5"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:156: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:842: in cmd_doctor
+    payload = doctor_payload(timings=timings, timeout=args.timeout)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:792: in doctor_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+________________ test_doctor_reports_sqlite_fts_safety_failure _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_doctor_reports_sqlite_fts0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cb08250>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb09dd0>
+
+    def test_doctor_reports_sqlite_fts_safety_failure(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(cli, "status", lambda config: {"entries": 0, "last_run": None, "roots": []})
+        monkeypatch.setattr(cli, "everything_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "search", lambda db_path, query, limit=20: (_ for _ in ()).throw(RuntimeError("bad fts query")))
+    
+>       exit_code = main(["doctor"])
+                    ^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:179: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:842: in cmd_doctor
+    payload = doctor_payload(timings=timings, timeout=args.timeout)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:792: in doctor_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_____________________ test_doctor_surfaces_symlink_status ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_doctor_surfaces_symlink_s0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cb08fd0>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2ca135d0>
+
+    def test_doctor_surfaces_symlink_status(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(
+            cli,
+            "status",
+            lambda config: {
+                "entries": 0,
+                "last_run": None,
+                "roots": [],
+                "symlinks": {"roots": [{"id": "syncthing"}], "aliases": [], "counts": {"roots": 1, "aliases": 0}},
+            },
+        )
+        monkeypatch.setattr(cli, "everything_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": True, "ok": True})
+    
+>       exit_code = main(["doctor"])
+                    ^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:207: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:842: in cmd_doctor
+    payload = doctor_payload(timings=timings, timeout=args.timeout)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:792: in doctor_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_____________________ test_doctor_summary_emits_human_text _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_doctor_summary_emits_huma0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cbb1b90>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cbb2290>
+
+    def test_doctor_summary_emits_human_text(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(
+            cli,
+            "status",
+            lambda config: {
+                "entries": 7,
+                "last_run": None,
+                "roots": [],
+                "symlinks": {"roots": [], "aliases": [], "counts": {"roots": 2, "aliases": 3}},
+            },
+        )
+        monkeypatch.setattr(cli, "everything_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": True, "ok": True})
+    
+>       exit_code = main(["doctor", "--summary"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:233: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:842: in cmd_doctor
+    payload = doctor_payload(timings=timings, timeout=args.timeout)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:792: in doctor_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_______________ test_status_symlinks_only_emits_compact_payload ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_status_symlinks_only_emit0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c64a6d0>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c649390>
+
+    def test_status_symlinks_only_emits_compact_payload(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(
+            cli,
+            "status",
+            lambda config: {
+                "db_path": str(db_path),
+                "entries": 42,
+                "roots": [{"id": "root"}],
+                "last_run": None,
+                "symlinks": {"roots": [{"id": "syncthing"}], "aliases": [{"phrase": "screenshots"}], "counts": {"roots": 1, "aliases": 1}},
+            },
+        )
+    
+>       exit_code = main(["status", "--symlinks-only"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:419: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:736: in cmd_status
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________ test_status_symlinks_only_summary_emits_human_text ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_status_symlinks_only_summ0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2e189010>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb05790>
+
+    def test_status_symlinks_only_summary_emits_human_text(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(
+            cli,
+            "status",
+            lambda config: {
+                "db_path": str(db_path),
+                "entries": 42,
+                "roots": [{"id": "root"}],
+                "last_run": None,
+                "symlinks": {
+                    "roots": [
+                        {
+                            "id": "syncthing",
+                            "label": "SyncThing",
+                            "logical_path": "/home/example/SyncThing",
+                            "symlink_hub": True,
+                            "symlinked_children": [
+                                {"name": "Pictures", "physical_path": "/mnt/x/SyncThing/Pictures"},
+                            ],
+                        }
+                    ],
+                    "aliases": [
+                        {
+                            "phrase": "screenshots",
+                            "logical_path": "/home/example/SyncThing/Pictures/Screenshots",
+                            "physical_path": "/mnt/x/SyncThing/Pictures/Screenshots",
+                        }
+                    ],
+                    "counts": {"roots": 1, "aliases": 1},
+                },
+            },
+        )
+    
+>       exit_code = main(["status", "--symlinks-only", "--summary"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:463: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:736: in cmd_status
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______ test_status_symlinks_only_match_filters_roots_children_and_aliases ______
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_status_symlinks_only_matc0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cb73010>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb70b90>
+
+    def test_status_symlinks_only_match_filters_roots_children_and_aliases(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(
+            cli,
+            "status",
+            lambda config: {
+                "db_path": str(db_path),
+                "entries": 42,
+                "roots": [{"id": "root"}],
+                "last_run": None,
+                "symlinks": {
+                    "roots": [
+                        {
+                            "id": "syncthing",
+                            "label": "SyncThing",
+                            "logical_path": "/home/example/SyncThing",
+                            "symlink_hub": True,
+                            "symlinked_children": [
+                                {"name": "Pictures", "physical_path": "/mnt/x/SyncThing/Pictures"},
+                                {"name": "Documents", "physical_path": "/mnt/x/SyncThing/Documents"},
+                            ],
+                        }
+                    ],
+                    "aliases": [
+                        {
+                            "phrase": "screenshots",
+                            "logical_path": "/home/example/SyncThing/Pictures/Screenshots",
+                            "physical_path": "/mnt/x/SyncThing/Pictures/Screenshots",
+                        },
+                        {
+                            "phrase": "scanner folder",
+                            "logical_path": "/home/example/SyncThing/Scanner",
+                            "physical_path": "/mnt/x/SyncThing/Scanner",
+                        },
+                    ],
+                    "counts": {"roots": 1, "aliases": 2},
+                },
+            },
+        )
+    
+>       exit_code = main(["status", "--symlinks-only", "--match", "pictures"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:516: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:736: in cmd_status
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+__________________ test_doctor_json_lines_emits_single_record __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_doctor_json_lines_emits_s0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c511150>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c510290>
+
+    def test_doctor_json_lines_emits_single_record(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(cli, "status", lambda config: {"entries": 0, "last_run": None, "roots": []})
+        monkeypatch.setattr(cli, "everything_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": True, "ok": True})
+    
+>       exit_code = main(["doctor", "--json-lines"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:536: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:838: in cmd_doctor
+    print(json.dumps(doctor_payload(timings=timings, timeout=args.timeout, cycle=cycle), sort_keys=True), flush=True)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:792: in doctor_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+___________________ test_doctor_json_lines_watch_is_bounded ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_doctor_json_lines_watch_i0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cad3e50>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cad1f50>
+
+    def test_doctor_json_lines_watch_is_bounded(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(cli, "status", lambda config: {"entries": 0, "last_run": None, "roots": []})
+        monkeypatch.setattr(cli, "everything_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": True, "ok": True})
+        sleeps = []
+        monkeypatch.setattr(cli.time, "sleep", lambda interval: sleeps.append(interval))
+    
+>       exit_code = main(["doctor", "--json-lines", "--watch", "--cycles", "3", "--interval", "0.25"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:559: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:838: in cmd_doctor
+    print(json.dumps(doctor_payload(timings=timings, timeout=args.timeout, cycle=cycle), sort_keys=True), flush=True)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:792: in doctor_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_____________________ test_doctor_watch_implies_json_lines _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_doctor_watch_implies_json0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2ca9de10>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2ca9e490>
+
+    def test_doctor_watch_implies_json_lines(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(cli, "status", lambda config: {"entries": 0, "last_run": None, "roots": []})
+        monkeypatch.setattr(cli, "everything_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command, timeout=3.0: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": True, "ok": True})
+    
+>       exit_code = main(["doctor", "--watch", "--cycles", "1"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:578: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:838: in cmd_doctor
+    print(json.dumps(doctor_payload(timings=timings, timeout=args.timeout, cycle=cycle), sort_keys=True), flush=True)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:792: in doctor_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+___________________ test_export_state_writes_private_backup ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_export_state_writes_priva0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2ca9f850>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2ca9c3d0>
+
+    def test_export_state_writes_private_backup(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        state_dir = tmp_path / "state"
+        output_path = tmp_path / "backup.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(state_dir))
+>       assert main(["learn", "private downloads", "/mnt/c/Users/example/Downloads", "--allow-missing"]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:594: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1181: in cmd_learn
+    change = learn_alias(args.phrase, target, kind=args.kind, keywords=getattr(args, "keyword", None))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_______________ test_export_state_stdout_redacts_private_values ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_export_state_stdout_redac0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cb488d0>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb4a9d0>
+
+    def test_export_state_stdout_redacts_private_values(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        state_dir = tmp_path / "state"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(state_dir))
+>       assert main(["learn", "private downloads", "/mnt/c/Users/example/Downloads", "--allow-missing"]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:613: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1181: in cmd_learn
+    change = learn_alias(args.phrase, target, kind=args.kind, keywords=getattr(args, "keyword", None))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+___________________ test_import_state_preflight_reports_plan ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_preflight_re0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2ca84190>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2ca84050>
+
+    def test_import_state_preflight_reports_plan(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["learn", "private downloads", "/mnt/c/Users/example/Downloads", "--allow-missing"]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:632: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1181: in cmd_learn
+    change = learn_alias(args.phrase, target, kind=args.kind, keywords=getattr(args, "keyword", None))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________ test_import_state_preflight_merge_mode_reports_no_write_plan _________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_preflight_me0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c920710>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c922c50>
+
+    def test_import_state_preflight_merge_mode_reports_no_write_plan(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["learn", "shared downloads", "/tmp/source-shared", "--allow-missing"]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:658: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1181: in cmd_learn
+    change = learn_alias(args.phrase, target, kind=args.kind, keywords=getattr(args, "keyword", None))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+__________________ test_import_state_preflight_summary_format __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_preflight_su0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c274150>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c277d50>
+
+    def test_import_state_preflight_summary_format(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["learn", "shared downloads", "/tmp/source-shared", "--allow-missing"]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:709: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1181: in cmd_learn
+    change = learn_alias(args.phrase, target, kind=args.kind, keywords=getattr(args, "keyword", None))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________ test_import_state_preflight_writes_summary_output _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_preflight_wr0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c6e34d0>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c6e1b50>
+
+    def test_import_state_preflight_writes_summary_output(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        output_path = tmp_path / "review" / "preflight.txt"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["learn", "shared downloads", "/tmp/source-shared", "--allow-missing"]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:750: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1181: in cmd_learn
+    change = learn_alias(args.phrase, target, kind=args.kind, keywords=getattr(args, "keyword", None))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+________________ test_import_state_preflight_writes_json_output ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_preflight_wr1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2e036150>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2e037550>
+
+    def test_import_state_preflight_writes_json_output(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        output_path = tmp_path / "review" / "preflight.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["export", "state", "--include-private", "--output", str(export_path)]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:792: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1079: in cmd_export_state
+    payload = state_export_payload(include_private=args.include_private)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/state_export.py:45: in state_export_payload
+    config_path, config_data = read_config_data()
+                               ^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+__ test_import_state_preflight_output_refuses_existing_file_without_overwrite __
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_preflight_ou0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cbfa050>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cbfa990>
+
+    def test_import_state_preflight_output_refuses_existing_file_without_overwrite(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        output_path = tmp_path / "review" / "preflight.json"
+        output_path.parent.mkdir(parents=True)
+        output_path.write_text("keep me\n")
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["export", "state", "--include-private", "--output", str(export_path)]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:816: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1079: in cmd_export_state
+    payload = state_export_payload(include_private=args.include_private)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/state_export.py:45: in state_export_payload
+    config_path, config_data = read_config_data()
+                               ^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________ test_import_state_preflight_output_overwrite_gate _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_preflight_ou1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c2eb190>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb32d10>
+
+    def test_import_state_preflight_output_overwrite_gate(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        output_path = tmp_path / "review" / "preflight.json"
+        output_path.parent.mkdir(parents=True)
+        output_path.write_text("old packet\n")
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["export", "state", "--include-private", "--output", str(export_path)]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:839: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1079: in cmd_export_state
+    payload = state_export_payload(include_private=args.include_private)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/state_export.py:45: in state_export_payload
+    config_path, config_data = read_config_data()
+                               ^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________ test_import_state_preflight_save_output_uses_user_state_dir __________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_preflight_sa0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cb310d0>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb31510>
+
+    def test_import_state_preflight_save_output_uses_user_state_dir(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        target_config = tmp_path / "target-config.json"
+        target_state = tmp_path / "target-state"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["export", "state", "--include-private", "--output", str(export_path)]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:871: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1079: in cmd_export_state
+    payload = state_export_payload(include_private=args.include_private)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/state_export.py:45: in state_export_payload
+    config_path, config_data = read_config_data()
+                               ^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________ test_import_reviews_lists_saved_preflight_packets _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_reviews_lists_save0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cbbf410>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cbbe9d0>
+
+    def test_import_reviews_lists_saved_preflight_packets(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        target_config = tmp_path / "target-config.json"
+        target_state = tmp_path / "target-state"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["export", "state", "--include-private", "--output", str(export_path)]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:897: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1079: in cmd_export_state
+    payload = state_export_payload(include_private=args.include_private)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/state_export.py:45: in state_export_payload
+    config_path, config_data = read_config_data()
+                               ^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________ test_import_state_apply_rejects_output_packet_path ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_apply_reject0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c9d4350>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c9d4410>
+
+    def test_import_state_apply_rejects_output_packet_path(tmp_path: Path, monkeypatch, capsys):
+        export_path = tmp_path / "backup.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(tmp_path / "config.json"))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(tmp_path / "state"))
+>       assert main(["export", "state", "--include-private", "--output", str(export_path)]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:920: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1079: in cmd_export_state
+    payload = state_export_payload(include_private=args.include_private)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/state_export.py:45: in state_export_payload
+    config_path, config_data = read_config_data()
+                               ^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________________ test_import_state_apply_rejects_save_output __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_apply_reject1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c13b990>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c13bf50>
+
+    def test_import_state_apply_rejects_save_output(tmp_path: Path, monkeypatch, capsys):
+        export_path = tmp_path / "backup.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(tmp_path / "config.json"))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(tmp_path / "state"))
+>       assert main(["export", "state", "--include-private", "--output", str(export_path)]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:947: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1079: in cmd_export_state
+    payload = state_export_payload(include_private=args.include_private)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/state_export.py:45: in state_export_payload
+    config_path, config_data = read_config_data()
+                               ^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________ test_import_state_apply_restores_with_backup_gate _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_apply_restor0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c624c90>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c6275d0>
+
+    def test_import_state_apply_restores_with_backup_gate(tmp_path: Path, monkeypatch, capsys):
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        export_path = tmp_path / "backup.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["learn", "private downloads", "/mnt/c/Users/example/Downloads", "--allow-missing"]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:975: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1181: in cmd_learn
+    change = learn_alias(args.phrase, target, kind=args.kind, keywords=getattr(args, "keyword", None))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+________________ test_import_state_apply_requires_confirmation _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_apply_requir0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c624490>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c627650>
+
+    def test_import_state_apply_requires_confirmation(tmp_path: Path, monkeypatch, capsys):
+        export_path = tmp_path / "backup.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(tmp_path / "config.json"))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(tmp_path / "state"))
+>       assert main(["export", "state", "--include-private", "--output", str(export_path)]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:1003: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1079: in cmd_export_state
+    payload = state_export_payload(include_private=args.include_private)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/state_export.py:45: in state_export_payload
+    config_path, config_data = read_config_data()
+                               ^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______ test_import_state_apply_merge_mode_preserves_current_only_entries _______
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_apply_merge_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2ce72c50>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2ce70d50>
+
+    def test_import_state_apply_merge_mode_preserves_current_only_entries(tmp_path: Path, monkeypatch, capsys):
+        export_path = tmp_path / "backup.json"
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["learn", "source only", "/tmp/source", "--allow-missing"]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:1020: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1181: in cmd_learn
+    change = learn_alias(args.phrase, target, kind=args.kind, keywords=getattr(args, "keyword", None))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______ test_import_state_apply_merge_keep_current_preserves_cli_conflicts ______
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_import_state_apply_merge_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c30b690>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c30aad0>
+
+    def test_import_state_apply_merge_keep_current_preserves_cli_conflicts(tmp_path: Path, monkeypatch, capsys):
+        export_path = tmp_path / "backup.json"
+        source_config = tmp_path / "source-config.json"
+        source_state = tmp_path / "source-state"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       assert main(["learn", "shared downloads", "/tmp/source-shared", "--allow-missing"]) == 0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:1061: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1181: in cmd_learn
+    change = learn_alias(args.phrase, target, kind=args.kind, keywords=getattr(args, "keyword", None))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_______________ test_find_uses_cli_hits_without_helper_fallback ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_find_uses_cli_hits_withou0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c308cd0>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c30ad90>
+
+    def test_find_uses_cli_hits_without_helper_fallback(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(cli, "everything_status", lambda command: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": False, "ok": False})
+        helper_calls = []
+        monkeypatch.setattr(cli, "search_everything_helper", lambda command, query, limit: helper_calls.append(query) or [])
+        monkeypatch.setattr(
+            cli,
+            "search_everything",
+            lambda query, command, limit, **kwargs: [
+                {
+                    "path": "/mnt/c/Users/example/Downloads/report.pdf",
+                    "windows_path": "C:\\Users\\example\\Downloads\\report.pdf",
+                    "source": "everything",
+                    "confidence": 0.9,
+                }
+            ],
+        )
+        monkeypatch.setattr(cli, "search_locate", lambda query, limit: [])
+    
+>       exit_code = main(["find", "report", "--limit", "5"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:1127: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:609: in cmd_find
+    emit(find_payload(args))
+         ^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:458: in find_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+________ test_find_skips_helper_fallback_when_cli_has_no_filtered_hits _________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_find_skips_helper_fallbac0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cb14150>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb14350>
+
+    def test_find_skips_helper_fallback_when_cli_has_no_filtered_hits(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(cli, "everything_status", lambda command: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": False, "ok": False})
+        helper_calls = []
+        monkeypatch.setattr(cli, "search_everything_helper", lambda command, query, limit: helper_calls.append(query) or [])
+        monkeypatch.setattr(cli, "search_everything", lambda query, command, limit, **kwargs: [])
+        monkeypatch.setattr(cli, "search_locate", lambda query, limit: [])
+    
+>       exit_code = main(["find", "report", "--limit", "5"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:1157: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:609: in cmd_find
+    emit(find_payload(args))
+         ^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:458: in find_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_____________ test_find_uses_helper_fallback_when_cli_unavailable ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_find_uses_helper_fallback0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cb16090>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb17550>
+
+    def test_find_uses_helper_fallback_when_cli_unavailable(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(cli, "everything_status", lambda command: {"available": False, "ok": False})
+        monkeypatch.setattr(cli, "helper_status", lambda command: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": False, "ok": False})
+        monkeypatch.setattr(
+            cli,
+            "search_everything_helper",
+            lambda command, query, limit: [
+                {
+                    "path": "/mnt/c/Users/example/Downloads/report.pdf",
+                    "windows_path": "C:\\Users\\example\\Downloads\\report.pdf",
+                    "source": "everything_helper",
+                    "confidence": 0.92,
+                }
+            ],
+        )
+        monkeypatch.setattr(cli, "search_everything", lambda query, command, limit, **kwargs: [])
+        monkeypatch.setattr(cli, "search_locate", lambda query, limit: [])
+    
+>       exit_code = main(["find", "report", "--limit", "5"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:1190: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:609: in cmd_find
+    emit(find_payload(args))
+         ^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:458: in find_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________________ test_find_reports_recency_ranking _______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_find_reports_recency_rank0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c52dfd0>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c52e090>
+
+    def test_find_reports_recency_ranking(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(cli, "everything_status", lambda command: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": False, "ok": False})
+        monkeypatch.setattr(cli, "search_everything_helper", lambda command, query, limit: [])
+        monkeypatch.setattr(
+            cli,
+            "search_everything",
+            lambda query, command, limit, **kwargs: [
+                {"path": f"/tmp/{query}-old.pdf", "source": "everything", "confidence": 0.95, "mtime": 100.0}
+            ],
+        )
+        monkeypatch.setattr(
+            cli,
+            "search_locate",
+            lambda query, limit: [
+                {"path": "/tmp/new.pdf", "source": "locate", "confidence": 0.62, "mtime": 200.0}
+            ],
+        )
+    
+>       exit_code = main(["find", "latest report", "--limit", "5"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:1223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:609: in cmd_find
+    emit(find_payload(args))
+         ^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:458: in find_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________ test_suggestions_apply_alias_learns_exact_observed_candidate _________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_suggestions_apply_alias_l0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c9caf50>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c2d3010>
+
+    def test_suggestions_apply_alias_learns_exact_observed_candidate(tmp_path: Path, monkeypatch, capsys):
+        state_dir = tmp_path / "state"
+        config_path = tmp_path / "config.json"
+        folder = tmp_path / "Downloads"
+        folder.mkdir()
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(state_dir))
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        suggestion = {"phrase": "report pdf in my downloads", "path": str(folder), "kind": "directory", "confidence": 0.92}
+        cli.record_alias_suggestions([suggestion], query="report pdf in my downloads", source="find", now=10.0)
+        cli.record_alias_suggestions([suggestion], query="report pdf in my downloads", source="find", now=20.0)
+    
+>       exit_code = main(["suggestions", "apply-alias", "--phrase", "report pdf in my downloads", "--path", str(folder), "--min-count", "2"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:1691: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1236: in cmd_suggestions_apply_alias
+    change = learn_alias(phrase, resolved_target, kind=args.kind, source="learned")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________ test_suggestions_apply_alias_accepts_windows_equivalent_path _________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_suggestions_apply_alias_a0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cb97990>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2cb96110>
+
+    def test_suggestions_apply_alias_accepts_windows_equivalent_path(tmp_path: Path, monkeypatch, capsys):
+        state_dir = tmp_path / "state"
+        config_path = tmp_path / "config.json"
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(state_dir))
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        suggestion = {
+            "phrase": "report pdf in my downloads",
+            "path": "/mnt/c/Users/example/Downloads",
+            "kind": "directory",
+            "confidence": 0.92,
+        }
+        cli.record_alias_suggestions([suggestion], query="report pdf in my downloads", source="find", now=10.0)
+        cli.record_alias_suggestions([suggestion], query="report pdf in my downloads", source="find", now=20.0)
+    
+>       exit_code = main(
+            [
+                "suggestions",
+                "apply-alias",
+                "--phrase",
+                "report pdf in my downloads",
+                "--path",
+                r"C:\Users\example\Downloads",
+                "--min-count",
+                "2",
+                "--allow-missing",
+            ]
+        )
+
+tests/test_cli.py:1716: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1236: in cmd_suggestions_apply_alias
+    change = learn_alias(phrase, resolved_target, kind=args.kind, source="learned")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________________ test_find_includes_gdrive_handoff _______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_find_includes_gdrive_hand0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c2d5890>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c2d4b50>
+
+    def test_find_includes_gdrive_handoff(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        db_path = tmp_path / "index.sqlite3"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DB", str(db_path))
+        monkeypatch.setattr(cli, "everything_status", lambda command: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "helper_status", lambda command: {"available": True, "ok": True})
+        monkeypatch.setattr(cli, "locate_status", lambda: {"available": False, "ok": False})
+        monkeypatch.setattr(cli, "search_everything_helper", lambda command, query, limit: [])
+        monkeypatch.setattr(cli, "search_locate", lambda query, limit: [])
+        monkeypatch.setattr(
+            cli,
+            "search_everything",
+            lambda query, command, limit, **kwargs: [
+                {
+                    "path": "/mnt/x/Shared drives/Team Docs/Folder/report.pdf",
+                    "windows_path": "X:\\Shared drives\\Team Docs\\Folder\\report.pdf",
+                    "source": "everything",
+                    "confidence": 0.9,
+                }
+            ],
+        )
+    
+>       exit_code = main(["find", "report", "--limit", "5"])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_cli.py:1760: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:609: in cmd_find
+    emit(find_payload(args))
+         ^^^^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:458: in find_payload
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_____________________ test_learn_alias_writes_user_config ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_learn_alias_writes_user_c0')
+
+    def test_learn_alias_writes_user_config(tmp_path: Path):
+        config_path = tmp_path / "config.json"
+        target = tmp_path / "Scanner"
+        target.mkdir()
+>       write_default_config(config_path)
+
+tests/test_config_mutation.py:17: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:325: in write_default_config
+    return write_config_data(_default_config_data(), config_path)
+                             ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________________ test_learn_alias_overwrites_previous_phrase __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_learn_alias_overwrites_pr0')
+
+    def test_learn_alias_overwrites_previous_phrase(tmp_path: Path):
+        config_path = tmp_path / "config.json"
+        first = tmp_path / "first"
+        second = tmp_path / "second"
+        first.mkdir()
+        second.mkdir()
+    
+>       learn_alias("work inbox", str(first), config_path=config_path)
+
+tests/test_config_mutation.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_______________________ test_forget_alias_removes_phrase _______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_forget_alias_removes_phra0')
+
+    def test_forget_alias_removes_phrase(tmp_path: Path):
+        config_path = tmp_path / "config.json"
+        target = tmp_path / "drop"
+        target.mkdir()
+>       learn_alias("temporary folder", str(target), config_path=config_path)
+
+tests/test_config_mutation.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+____________________ test_forget_alias_missing_returns_none ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_forget_alias_missing_retu0')
+
+    def test_forget_alias_missing_returns_none(tmp_path: Path):
+>       assert forget_alias("missing", config_path=tmp_path / "config.json") is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_config_mutation.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:357: in forget_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________________________ test_set_everything_command __________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_set_everything_command0')
+
+    def test_set_everything_command(tmp_path: Path):
+        config_path = tmp_path / "config.json"
+    
+>       change = set_everything_command("/tools/es.exe", config_path=config_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_config_mutation.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:368: in set_everything_command
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+________________________ test_clear_everything_command _________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_clear_everything_command0')
+
+    def test_clear_everything_command(tmp_path: Path):
+        config_path = tmp_path / "config.json"
+>       set_everything_command("/tools/es.exe", config_path=config_path)
+
+tests/test_config_mutation.py:77: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:368: in set_everything_command
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________________ test_set_everything_helper_command ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_set_everything_helper_com0')
+
+    def test_set_everything_helper_command(tmp_path: Path):
+        config_path = tmp_path / "config.json"
+    
+>       change = set_everything_helper_command("/tools/helper.exe", config_path=config_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_config_mutation.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:381: in set_everything_helper_command
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+____________________ test_installed_warm_backend_over_stdio ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_installed_warm_backend_ov0')
+
+    def test_installed_warm_backend_over_stdio(tmp_path):
+        selected = os.environ.get('FSEARCH_ACCEPTANCE_RUNTIME')
+        if not selected:
+            pytest.skip('select an installed native runtime explicitly')
+        runtime = Path(selected)
+        root = tmp_path/'owned'; root.mkdir()
+        names = [b'invoice.pdf', b'invoice-\xff.pdf', b'invoice-a\\b.pdf', b'invoice-[x];$(literal).pdf']
+        for name in names:
+            descriptor = os.open(os.fsencode(root)+b'/'+name, os.O_CREAT | os.O_WRONLY, 0o600)
+            os.close(descriptor)
+        snapshot = tmp_path/'snapshot'
+>       refreshed = subprocess.run([str(runtime/'fsearch-refresh'), 'refresh', '--root', str(root),
+            '--database', str(snapshot)], capture_output=True, text=True, timeout=10)
+
+tests/test_fsearch_installed.py:31: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/subprocess.py:548: in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/subprocess.py:1026: in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Popen: returncode: 255 args: ['/tmp/fsearch-generations-build/src/fsearch-r...>
+args = ['/tmp/fsearch-generations-build/src/fsearch-refresh', 'refresh', '--root', '/tmp/pytest-of-ecochran76/pytest-134/test...warm_backend_ov0/owned', '--database', '/tmp/pytest-of-ecochran76/pytest-134/test_installed_warm_backend_ov0/snapshot']
+executable = b'/tmp/fsearch-generations-build/src/fsearch-refresh'
+preexec_fn = None, close_fds = True, pass_fds = (), cwd = None, env = None
+startupinfo = None, creationflags = 0, shell = False, p2cread = -1
+p2cwrite = -1, c2pread = 12, c2pwrite = 13, errread = 14, errwrite = 15
+restore_signals = True, gid = None, gids = None, uid = None, umask = -1
+start_new_session = False, process_group = -1
+
+    def _execute_child(self, args, executable, preexec_fn, close_fds,
+                       pass_fds, cwd, env,
+                       startupinfo, creationflags, shell,
+                       p2cread, p2cwrite,
+                       c2pread, c2pwrite,
+                       errread, errwrite,
+                       restore_signals,
+                       gid, gids, uid, umask,
+                       start_new_session, process_group):
+        """Execute program (POSIX version)"""
+    
+        if isinstance(args, (str, bytes)):
+            args = [args]
+        elif isinstance(args, os.PathLike):
+            if shell:
+                raise TypeError('path-like args is not allowed when '
+                                'shell is true')
+            args = [args]
+        else:
+            args = list(args)
+    
+        if shell:
+            # On Android the default shell is at '/system/bin/sh'.
+            unix_shell = ('/system/bin/sh' if
+                      hasattr(sys, 'getandroidapilevel') else '/bin/sh')
+            args = [unix_shell, "-c"] + args
+            if executable:
+                args[0] = executable
+    
+        if executable is None:
+            executable = args[0]
+    
+        sys.audit("subprocess.Popen", executable, args, cwd, env)
+    
+        if (_USE_POSIX_SPAWN
+                and os.path.dirname(executable)
+                and preexec_fn is None
+                and not close_fds
+                and not pass_fds
+                and cwd is None
+                and (p2cread == -1 or p2cread > 2)
+                and (c2pwrite == -1 or c2pwrite > 2)
+                and (errwrite == -1 or errwrite > 2)
+                and not start_new_session
+                and process_group == -1
+                and gid is None
+                and gids is None
+                and uid is None
+                and umask < 0):
+            self._posix_spawn(args, executable, env, restore_signals,
+                              p2cread, p2cwrite,
+                              c2pread, c2pwrite,
+                              errread, errwrite)
+            return
+    
+        orig_executable = executable
+    
+        # For transferring possible exec failure from child to parent.
+        # Data format: "exception name:hex errno:description"
+        # Pickle is not used; it is complex and involves memory allocation.
+        errpipe_read, errpipe_write = os.pipe()
+        # errpipe_write must not be in the standard io 0, 1, or 2 fd range.
+        low_fds_to_close = []
+        while errpipe_write < 3:
+            low_fds_to_close.append(errpipe_write)
+            errpipe_write = os.dup(errpipe_write)
+        for low_fd in low_fds_to_close:
+            os.close(low_fd)
+        try:
+            try:
+                # We must avoid complex work that could involve
+                # malloc or free in the child process to avoid
+                # potential deadlocks, thus we do all this here.
+                # and pass it to fork_exec()
+    
+                if env is not None:
+                    env_list = []
+                    for k, v in env.items():
+                        k = os.fsencode(k)
+                        if b'=' in k:
+                            raise ValueError("illegal environment variable name")
+                        env_list.append(k + b'=' + os.fsencode(v))
+                else:
+                    env_list = None  # Use execv instead of execve.
+                executable = os.fsencode(executable)
+                if os.path.dirname(executable):
+                    executable_list = (executable,)
+                else:
+                    # This matches the behavior of os._execvpe().
+                    executable_list = tuple(
+                        os.path.join(os.fsencode(dir), executable)
+                        for dir in os.get_exec_path(env))
+                fds_to_keep = set(pass_fds)
+                fds_to_keep.add(errpipe_write)
+                self.pid = _fork_exec(
+                        args, executable_list,
+                        close_fds, tuple(sorted(map(int, fds_to_keep))),
+                        cwd, env_list,
+                        p2cread, p2cwrite, c2pread, c2pwrite,
+                        errread, errwrite,
+                        errpipe_read, errpipe_write,
+                        restore_signals, start_new_session,
+                        process_group, gid, gids, uid, umask,
+                        preexec_fn, _USE_VFORK)
+                self._child_created = True
+            finally:
+                # be sure the FD is closed no matter what
+                os.close(errpipe_write)
+    
+            self._close_pipe_fds(p2cread, p2cwrite,
+                                 c2pread, c2pwrite,
+                                 errread, errwrite)
+    
+            # Wait for exec to fail or succeed; possibly raising an
+            # exception (limited in size)
+            errpipe_data = bytearray()
+            while True:
+                part = os.read(errpipe_read, 50000)
+                errpipe_data += part
+                if not part or len(errpipe_data) > 50000:
+                    break
+        finally:
+            # be sure the FD is closed no matter what
+            os.close(errpipe_read)
+    
+        if errpipe_data:
+            try:
+                pid, sts = os.waitpid(self.pid, 0)
+                if pid == self.pid:
+                    self._handle_exitstatus(sts)
+                else:
+                    self.returncode = sys.maxsize
+            except ChildProcessError:
+                pass
+    
+            try:
+                exception_name, hex_errno, err_msg = (
+                        errpipe_data.split(b':', 2))
+                # The encoding here should match the encoding
+                # written in by the subprocess implementations
+                # like _posixsubprocess
+                err_msg = err_msg.decode()
+            except ValueError:
+                exception_name = b'SubprocessError'
+                hex_errno = b'0'
+                err_msg = 'Bad exception data from child: {!r}'.format(
+                              bytes(errpipe_data))
+            child_exception_type = getattr(
+                    builtins, exception_name.decode('ascii'),
+                    SubprocessError)
+            if issubclass(child_exception_type, OSError) and hex_errno:
+                errno_num = int(hex_errno, 16)
+                if err_msg == "noexec:chdir":
+                    err_msg = ""
+                    # The error must be from chdir(cwd).
+                    err_filename = cwd
+                elif err_msg == "noexec":
+                    err_msg = ""
+                    err_filename = None
+                else:
+                    err_filename = orig_executable
+                if errno_num != 0:
+                    err_msg = os.strerror(errno_num)
+                if err_filename is not None:
+>                   raise child_exception_type(errno_num, err_msg, err_filename)
+E                   PermissionError: [Errno 13] Permission denied: '/tmp/fsearch-generations-build/src/fsearch-refresh'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/subprocess.py:1955: PermissionError
+___________________ test_two_installed_snapshots_over_stdio ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_two_installed_snapshots_o0')
+
+    def test_two_installed_snapshots_over_stdio(tmp_path):
+        selected=os.environ.get('FSEARCH_ACCEPTANCE_RUNTIME')
+        if not selected:pytest.skip('select an installed native runtime explicitly')
+        runtime=Path(selected);services=[];sources=[];expected=[]
+        try:
+            for i in range(2):
+                parent=tmp_path/str(i);parent.mkdir(mode=0o700)
+                root=parent/'owned';root.mkdir();file=root/'invoice.pdf';file.touch();expected.append(str(file))
+                database=parent/'snapshot';socket=parent/'query.sock'
+>               r=subprocess.run([str(runtime/'fsearch-refresh'),'refresh','--root',str(root),'--database',str(database)],capture_output=True,text=True,timeout=10)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_fsearch_installed.py:153: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/subprocess.py:548: in run
+    with Popen(*popenargs, **kwargs) as process:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/subprocess.py:1026: in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Popen: returncode: 255 args: ['/tmp/fsearch-generations-build/src/fsearch-r...>
+args = ['/tmp/fsearch-generations-build/src/fsearch-refresh', 'refresh', '--root', '/tmp/pytest-of-ecochran76/pytest-134/test...snapshots_o0/0/owned', '--database', '/tmp/pytest-of-ecochran76/pytest-134/test_two_installed_snapshots_o0/0/snapshot']
+executable = b'/tmp/fsearch-generations-build/src/fsearch-refresh'
+preexec_fn = None, close_fds = True, pass_fds = (), cwd = None, env = None
+startupinfo = None, creationflags = 0, shell = False, p2cread = -1
+p2cwrite = -1, c2pread = 12, c2pwrite = 13, errread = 14, errwrite = 15
+restore_signals = True, gid = None, gids = None, uid = None, umask = -1
+start_new_session = False, process_group = -1
+
+    def _execute_child(self, args, executable, preexec_fn, close_fds,
+                       pass_fds, cwd, env,
+                       startupinfo, creationflags, shell,
+                       p2cread, p2cwrite,
+                       c2pread, c2pwrite,
+                       errread, errwrite,
+                       restore_signals,
+                       gid, gids, uid, umask,
+                       start_new_session, process_group):
+        """Execute program (POSIX version)"""
+    
+        if isinstance(args, (str, bytes)):
+            args = [args]
+        elif isinstance(args, os.PathLike):
+            if shell:
+                raise TypeError('path-like args is not allowed when '
+                                'shell is true')
+            args = [args]
+        else:
+            args = list(args)
+    
+        if shell:
+            # On Android the default shell is at '/system/bin/sh'.
+            unix_shell = ('/system/bin/sh' if
+                      hasattr(sys, 'getandroidapilevel') else '/bin/sh')
+            args = [unix_shell, "-c"] + args
+            if executable:
+                args[0] = executable
+    
+        if executable is None:
+            executable = args[0]
+    
+        sys.audit("subprocess.Popen", executable, args, cwd, env)
+    
+        if (_USE_POSIX_SPAWN
+                and os.path.dirname(executable)
+                and preexec_fn is None
+                and not close_fds
+                and not pass_fds
+                and cwd is None
+                and (p2cread == -1 or p2cread > 2)
+                and (c2pwrite == -1 or c2pwrite > 2)
+                and (errwrite == -1 or errwrite > 2)
+                and not start_new_session
+                and process_group == -1
+                and gid is None
+                and gids is None
+                and uid is None
+                and umask < 0):
+            self._posix_spawn(args, executable, env, restore_signals,
+                              p2cread, p2cwrite,
+                              c2pread, c2pwrite,
+                              errread, errwrite)
+            return
+    
+        orig_executable = executable
+    
+        # For transferring possible exec failure from child to parent.
+        # Data format: "exception name:hex errno:description"
+        # Pickle is not used; it is complex and involves memory allocation.
+        errpipe_read, errpipe_write = os.pipe()
+        # errpipe_write must not be in the standard io 0, 1, or 2 fd range.
+        low_fds_to_close = []
+        while errpipe_write < 3:
+            low_fds_to_close.append(errpipe_write)
+            errpipe_write = os.dup(errpipe_write)
+        for low_fd in low_fds_to_close:
+            os.close(low_fd)
+        try:
+            try:
+                # We must avoid complex work that could involve
+                # malloc or free in the child process to avoid
+                # potential deadlocks, thus we do all this here.
+                # and pass it to fork_exec()
+    
+                if env is not None:
+                    env_list = []
+                    for k, v in env.items():
+                        k = os.fsencode(k)
+                        if b'=' in k:
+                            raise ValueError("illegal environment variable name")
+                        env_list.append(k + b'=' + os.fsencode(v))
+                else:
+                    env_list = None  # Use execv instead of execve.
+                executable = os.fsencode(executable)
+                if os.path.dirname(executable):
+                    executable_list = (executable,)
+                else:
+                    # This matches the behavior of os._execvpe().
+                    executable_list = tuple(
+                        os.path.join(os.fsencode(dir), executable)
+                        for dir in os.get_exec_path(env))
+                fds_to_keep = set(pass_fds)
+                fds_to_keep.add(errpipe_write)
+                self.pid = _fork_exec(
+                        args, executable_list,
+                        close_fds, tuple(sorted(map(int, fds_to_keep))),
+                        cwd, env_list,
+                        p2cread, p2cwrite, c2pread, c2pwrite,
+                        errread, errwrite,
+                        errpipe_read, errpipe_write,
+                        restore_signals, start_new_session,
+                        process_group, gid, gids, uid, umask,
+                        preexec_fn, _USE_VFORK)
+                self._child_created = True
+            finally:
+                # be sure the FD is closed no matter what
+                os.close(errpipe_write)
+    
+            self._close_pipe_fds(p2cread, p2cwrite,
+                                 c2pread, c2pwrite,
+                                 errread, errwrite)
+    
+            # Wait for exec to fail or succeed; possibly raising an
+            # exception (limited in size)
+            errpipe_data = bytearray()
+            while True:
+                part = os.read(errpipe_read, 50000)
+                errpipe_data += part
+                if not part or len(errpipe_data) > 50000:
+                    break
+        finally:
+            # be sure the FD is closed no matter what
+            os.close(errpipe_read)
+    
+        if errpipe_data:
+            try:
+                pid, sts = os.waitpid(self.pid, 0)
+                if pid == self.pid:
+                    self._handle_exitstatus(sts)
+                else:
+                    self.returncode = sys.maxsize
+            except ChildProcessError:
+                pass
+    
+            try:
+                exception_name, hex_errno, err_msg = (
+                        errpipe_data.split(b':', 2))
+                # The encoding here should match the encoding
+                # written in by the subprocess implementations
+                # like _posixsubprocess
+                err_msg = err_msg.decode()
+            except ValueError:
+                exception_name = b'SubprocessError'
+                hex_errno = b'0'
+                err_msg = 'Bad exception data from child: {!r}'.format(
+                              bytes(errpipe_data))
+            child_exception_type = getattr(
+                    builtins, exception_name.decode('ascii'),
+                    SubprocessError)
+            if issubclass(child_exception_type, OSError) and hex_errno:
+                errno_num = int(hex_errno, 16)
+                if err_msg == "noexec:chdir":
+                    err_msg = ""
+                    # The error must be from chdir(cwd).
+                    err_filename = cwd
+                elif err_msg == "noexec":
+                    err_msg = ""
+                    err_filename = None
+                else:
+                    err_filename = orig_executable
+                if errno_num != 0:
+                    err_msg = os.strerror(errno_num)
+                if err_filename is not None:
+>                   raise child_exception_type(errno_num, err_msg, err_filename)
+E                   PermissionError: [Errno 13] Permission denied: '/tmp/fsearch-generations-build/src/fsearch-refresh'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/subprocess.py:1955: PermissionError
+_________________ test_install_everything_helper_to_target_dir _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_install_everything_helper0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c69cbd0>
+
+    def test_install_everything_helper_to_target_dir(tmp_path: Path, monkeypatch):
+        config_path = tmp_path / "config.json"
+        target_dir = tmp_path / "install"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_DISABLE_WINGET_DISCOVERY", "1")
+    
+>       result = install_everything_helper(target_dir=target_dir)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_install.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/install.py:100: in install_everything_helper
+    change = set_everything_helper_command(str(target))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:381: in set_everything_helper_command
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______________________ test_cli_install_everything_helper ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_cli_install_everything_he0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c978550>
+capsys = <_pytest.capture.CaptureFixture object at 0x780a2c97ac90>
+
+    def test_cli_install_everything_helper(tmp_path: Path, monkeypatch, capsys):
+        config_path = tmp_path / "config.json"
+        target_dir = tmp_path / "install"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+    
+>       exit_code = main(["install", "everything-helper", "--target-dir", str(target_dir)])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_install.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/cli.py:1569: in main
+    return args.func(args)
+           ^^^^^^^^^^^^^^^
+src/file_searcher/cli.py:1312: in cmd_install_everything_helper
+    install = install_everything_helper(target_dir=target_dir, configure=not args.no_configure, backend=args.backend)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/install.py:100: in install_everything_helper
+    change = set_everything_helper_command(str(target))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:381: in set_everything_helper_command
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________________ test_smoke_native_sdk_configures_only_on_ok __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_smoke_native_sdk_configur0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c2eea90>
+
+    def test_smoke_native_sdk_configures_only_on_ok(tmp_path: Path, monkeypatch):
+        config_path = tmp_path / "config.json"
+        target_dir = tmp_path / "install"
+        sdk_zip_source = tmp_path / "source.zip"
+        with zipfile.ZipFile(sdk_zip_source, "w") as archive:
+            archive.writestr("dll/Everything64.dll", b"x64")
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setattr(install, "download_everything_sdk", lambda target_dir, url: sdk_zip_source)
+        monkeypatch.setattr(
+            install,
+            "native_helper_health",
+            lambda helper_path, dll_path=None, windows_python=None: {"ok": True, "dll": str(dll_path), "reason": "ok"},
+        )
+        monkeypatch.setattr(install, "find_windows_python", lambda: "/mnt/c/Windows/py.exe")
+        monkeypatch.setattr(install, "write_native_launcher", lambda helper_path, dll_path, windows_python: target_dir / "everything-native-helper-wsl.sh")
+        monkeypatch.setattr(install, "helper_status", lambda command: {"ok": True, "command": command})
+    
+>       result = smoke_native_sdk_helper(target_dir=target_dir, configure=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_install.py:136: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/install.py:226: in smoke_native_sdk_helper
+    change = set_everything_helper_command(str(launcher_path))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:381: in set_everything_helper_command
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_____________________ test_unknown_location_requires_hint ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_unknown_location_requires0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c9cb910>
+
+    def test_unknown_location_requires_hint(tmp_path, monkeypatch):
+        path = tmp_path / "config.json"
+        path.write_text(json.dumps({"aliases": [{"phrase": "work", "path": str(tmp_path)}]}))
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(path))
+>       result = local_lookup("that screenshot I just took")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lookup.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lookup.py:38: in local_lookup
+    return lookup(intent, use_everything=False, use_locate=False, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/lookup.py:96: in lookup
+    config = load_config()
+             ^^^^^^^^^^^^^
+src/file_searcher/config.py:257: in load_config
+    roots = [Root(**item) for item in data["roots"]] if "roots" in data else built_in_roots()
+                                                                             ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+___________________ test_state_export_redacts_private_values ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_export_redacts_priv0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c6e0610>
+
+    def test_state_export_redacts_private_values(tmp_path: Path, monkeypatch):
+        config_path = tmp_path / "config.json"
+        state_dir = tmp_path / "state"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(state_dir))
+>       learn_alias("private downloads", "/mnt/c/Users/example/Downloads")
+
+tests/test_state_export.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+__________ test_state_export_include_private_preserves_backup_values ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_export_include_priv0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c853c90>
+
+    def test_state_export_include_private_preserves_backup_values(tmp_path: Path, monkeypatch):
+        config_path = tmp_path / "config.json"
+        state_dir = tmp_path / "state"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(config_path))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(state_dir))
+>       learn_alias("private downloads", "/mnt/c/Users/example/Downloads")
+
+tests/test_state_export.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+___________ test_state_import_preflight_reports_private_export_plan ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_import_preflight_re0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c95ab90>
+
+    def test_state_import_preflight_reports_private_export_plan(tmp_path: Path, monkeypatch):
+        source_config = tmp_path / "source" / "config.json"
+        source_state = tmp_path / "source" / "state"
+        export_path = tmp_path / "state-export.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       learn_alias("private downloads", "/mnt/c/Users/example/Downloads")
+
+tests/test_state_export.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________ test_state_import_preflight_merge_mode_reports_merge_counts __________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_import_preflight_me0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c2ae490>
+
+    def test_state_import_preflight_merge_mode_reports_merge_counts(tmp_path: Path, monkeypatch):
+        source_config = tmp_path / "source" / "config.json"
+        source_state = tmp_path / "source" / "state"
+        export_path = tmp_path / "state-export.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       learn_alias("shared downloads", "/mnt/c/Users/example/NewDownloads")
+
+tests/test_state_export.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+________ test_state_import_preflight_merge_conflict_details_are_bounded ________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_import_preflight_me1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c6e3190>
+
+    def test_state_import_preflight_merge_conflict_details_are_bounded(tmp_path: Path, monkeypatch):
+        source_config = tmp_path / "source" / "config.json"
+        source_state = tmp_path / "source" / "state"
+        export_path = tmp_path / "state-export.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       learn_alias("shared a", "/tmp/new-a")
+
+tests/test_state_export.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+__________ test_state_import_preflight_summary_renders_review_packet ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_import_preflight_su0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c6ee390>
+
+    def test_state_import_preflight_summary_renders_review_packet(tmp_path: Path, monkeypatch):
+        source_config = tmp_path / "source" / "config.json"
+        source_state = tmp_path / "source" / "state"
+        export_path = tmp_path / "state-export.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       learn_alias("shared downloads", "/tmp/new-downloads")
+
+tests/test_state_export.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_______ test_write_state_import_preflight_writes_selected_packet_format ________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_write_state_import_prefli0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2cad2010>
+
+    def test_write_state_import_preflight_writes_selected_packet_format(tmp_path: Path, monkeypatch):
+        source_config = tmp_path / "source" / "config.json"
+        source_state = tmp_path / "source" / "state"
+        export_path = tmp_path / "state-export.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       learn_alias("shared downloads", "/tmp/new-downloads")
+
+tests/test_state_export.py:223: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+____________ test_state_import_preflight_warns_for_redacted_export _____________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_import_preflight_wa0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c30ae90>
+
+    def test_state_import_preflight_warns_for_redacted_export(tmp_path: Path, monkeypatch):
+        export_path = tmp_path / "state-export.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(tmp_path / "config.json"))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(tmp_path / "state"))
+>       learn_alias("private downloads", "/mnt/c/Users/example/Downloads")
+
+tests/test_state_export.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+______ test_state_import_apply_restores_private_export_and_writes_backup _______
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_import_apply_restor0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2ca9e610>
+
+    def test_state_import_apply_restores_private_export_and_writes_backup(tmp_path: Path, monkeypatch):
+        source_config = tmp_path / "source" / "config.json"
+        source_state = tmp_path / "source" / "state"
+        export_path = tmp_path / "state-export.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       learn_alias("private downloads", "/mnt/c/Users/example/Downloads")
+
+tests/test_state_export.py:328: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_________ test_state_import_apply_merge_preserves_current_only_entries _________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_import_apply_merge_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c815750>
+
+    def test_state_import_apply_merge_preserves_current_only_entries(tmp_path: Path, monkeypatch):
+        source_config = tmp_path / "source" / "config.json"
+        source_state = tmp_path / "source" / "state"
+        export_path = tmp_path / "state-export.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       learn_alias("shared downloads", "/mnt/c/Users/example/NewDownloads")
+
+tests/test_state_export.py:355: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+___ test_state_import_apply_merge_keep_current_preserves_conflicting_entries ___
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_import_apply_merge_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c52e6d0>
+
+    def test_state_import_apply_merge_keep_current_preserves_conflicting_entries(tmp_path: Path, monkeypatch):
+        source_config = tmp_path / "source" / "config.json"
+        source_state = tmp_path / "source" / "state"
+        export_path = tmp_path / "state-export.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(source_config))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(source_state))
+>       learn_alias("shared downloads", "/mnt/c/Users/example/NewDownloads")
+
+tests/test_state_export.py:397: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+_______________ test_state_import_apply_rejects_redacted_export ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-ecochran76/pytest-134/test_state_import_apply_reject1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x780a2c2a5f50>
+
+    def test_state_import_apply_rejects_redacted_export(tmp_path: Path, monkeypatch):
+        export_path = tmp_path / "redacted.json"
+        monkeypatch.setenv("FILE_SEARCHER_CONFIG", str(tmp_path / "config.json"))
+        monkeypatch.setenv("FILE_SEARCHER_STATE_DIR", str(tmp_path / "state"))
+>       learn_alias("private downloads", "/mnt/c/Users/example/Downloads")
+
+tests/test_state_export.py:460: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/file_searcher/config.py:341: in learn_alias
+    resolved_config_path, data = read_config_data(config_path)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:292: in read_config_data
+    return config_path, _default_config_data()
+                        ^^^^^^^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:283: in _default_config_data
+    "roots": [root.__dict__ for root in built_in_roots()],
+                                        ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:143: in built_in_roots
+    for path, label in _gdrive_mounts():
+                       ^^^^^^^^^^^^^^^^
+src/file_searcher/config.py:123: in _gdrive_mounts
+    if not drive.is_dir() or len(drive.name) != 1:
+           ^^^^^^^^^^^^^^
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1250: in is_dir
+    return S_ISDIR(self.stat().st_mode)
+                   ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/mnt/h'), follow_symlinks = True
+
+    def stat(self, *, follow_symlinks=True):
+        """
+        Return the result of the stat() system call on this path, like
+        os.stat() does.
+        """
+>       return os.stat(self, follow_symlinks=follow_symlinks)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 19] No such device: '/mnt/h'
+
+../../.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/pathlib.py:1013: OSError
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_configure_everything_writes_user_config - OSEr...
+FAILED tests/test_cli.py::test_configure_everything_clear - OSError: [Errno 1...
+FAILED tests/test_cli.py::test_configure_everything_helper_writes_user_config
+FAILED tests/test_cli.py::test_resolve_intent_only_errors_without_explicit_intent
+FAILED tests/test_cli.py::test_doctor_timings_reports_probe_elapsed_ms - OSEr...
+FAILED tests/test_cli.py::test_doctor_reports_sqlite_fts_safety_failure - OSE...
+FAILED tests/test_cli.py::test_doctor_surfaces_symlink_status - OSError: [Err...
+FAILED tests/test_cli.py::test_doctor_summary_emits_human_text - OSError: [Er...
+FAILED tests/test_cli.py::test_status_symlinks_only_emits_compact_payload - O...
+FAILED tests/test_cli.py::test_status_symlinks_only_summary_emits_human_text
+FAILED tests/test_cli.py::test_status_symlinks_only_match_filters_roots_children_and_aliases
+FAILED tests/test_cli.py::test_doctor_json_lines_emits_single_record - OSErro...
+FAILED tests/test_cli.py::test_doctor_json_lines_watch_is_bounded - OSError: ...
+FAILED tests/test_cli.py::test_doctor_watch_implies_json_lines - OSError: [Er...
+FAILED tests/test_cli.py::test_export_state_writes_private_backup - OSError: ...
+FAILED tests/test_cli.py::test_export_state_stdout_redacts_private_values - O...
+FAILED tests/test_cli.py::test_import_state_preflight_reports_plan - OSError:...
+FAILED tests/test_cli.py::test_import_state_preflight_merge_mode_reports_no_write_plan
+FAILED tests/test_cli.py::test_import_state_preflight_summary_format - OSErro...
+FAILED tests/test_cli.py::test_import_state_preflight_writes_summary_output
+FAILED tests/test_cli.py::test_import_state_preflight_writes_json_output - OS...
+FAILED tests/test_cli.py::test_import_state_preflight_output_refuses_existing_file_without_overwrite
+FAILED tests/test_cli.py::test_import_state_preflight_output_overwrite_gate
+FAILED tests/test_cli.py::test_import_state_preflight_save_output_uses_user_state_dir
+FAILED tests/test_cli.py::test_import_reviews_lists_saved_preflight_packets
+FAILED tests/test_cli.py::test_import_state_apply_rejects_output_packet_path
+FAILED tests/test_cli.py::test_import_state_apply_rejects_save_output - OSErr...
+FAILED tests/test_cli.py::test_import_state_apply_restores_with_backup_gate
+FAILED tests/test_cli.py::test_import_state_apply_requires_confirmation - OSE...
+FAILED tests/test_cli.py::test_import_state_apply_merge_mode_preserves_current_only_entries
+FAILED tests/test_cli.py::test_import_state_apply_merge_keep_current_preserves_cli_conflicts
+FAILED tests/test_cli.py::test_find_uses_cli_hits_without_helper_fallback - O...
+FAILED tests/test_cli.py::test_find_skips_helper_fallback_when_cli_has_no_filtered_hits
+FAILED tests/test_cli.py::test_find_uses_helper_fallback_when_cli_unavailable
+FAILED tests/test_cli.py::test_find_reports_recency_ranking - OSError: [Errno...
+FAILED tests/test_cli.py::test_suggestions_apply_alias_learns_exact_observed_candidate
+FAILED tests/test_cli.py::test_suggestions_apply_alias_accepts_windows_equivalent_path
+FAILED tests/test_cli.py::test_find_includes_gdrive_handoff - OSError: [Errno...
+FAILED tests/test_config_mutation.py::test_learn_alias_writes_user_config - O...
+FAILED tests/test_config_mutation.py::test_learn_alias_overwrites_previous_phrase
+FAILED tests/test_config_mutation.py::test_forget_alias_removes_phrase - OSEr...
+FAILED tests/test_config_mutation.py::test_forget_alias_missing_returns_none
+FAILED tests/test_config_mutation.py::test_set_everything_command - OSError: ...
+FAILED tests/test_config_mutation.py::test_clear_everything_command - OSError...
+FAILED tests/test_config_mutation.py::test_set_everything_helper_command - OS...
+FAILED tests/test_fsearch_installed.py::test_installed_warm_backend_over_stdio
+FAILED tests/test_fsearch_installed.py::test_two_installed_snapshots_over_stdio
+FAILED tests/test_install.py::test_install_everything_helper_to_target_dir - ...
+FAILED tests/test_install.py::test_cli_install_everything_helper - OSError: [...
+FAILED tests/test_install.py::test_smoke_native_sdk_configures_only_on_ok - O...
+FAILED tests/test_lookup.py::test_unknown_location_requires_hint - OSError: [...
+FAILED tests/test_state_export.py::test_state_export_redacts_private_values
+FAILED tests/test_state_export.py::test_state_export_include_private_preserves_backup_values
+FAILED tests/test_state_export.py::test_state_import_preflight_reports_private_export_plan
+FAILED tests/test_state_export.py::test_state_import_preflight_merge_mode_reports_merge_counts
+FAILED tests/test_state_export.py::test_state_import_preflight_merge_conflict_details_are_bounded
+FAILED tests/test_state_export.py::test_state_import_preflight_summary_renders_review_packet
+FAILED tests/test_state_export.py::test_write_state_import_preflight_writes_selected_packet_format
+FAILED tests/test_state_export.py::test_state_import_preflight_warns_for_redacted_export
+FAILED tests/test_state_export.py::test_state_import_apply_restores_private_export_and_writes_backup
+FAILED tests/test_state_export.py::test_state_import_apply_merge_preserves_current_only_entries
+FAILED tests/test_state_export.py::test_state_import_apply_merge_keep_current_preserves_conflicting_entries
+FAILED tests/test_state_export.py::test_state_import_apply_rejects_redacted_export
+======================= 63 failed, 375 passed in 31.69s ========================

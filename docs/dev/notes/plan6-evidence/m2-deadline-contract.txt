@@ -1,0 +1,70 @@
+ninja: Entering directory `/tmp/fsearch-generations-build'
+[1/23] Compiling C object src/libfsearch.a.p/fsearch_catalog.c.o
+../fsearch-incremental-generations/src/fsearch_catalog.c: In function ‘child’:
+../fsearch-incremental-generations/src/fsearch_catalog.c:549:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  549 |     if(lo==b->count)return false;Packed*r=&b->entries[b->namespace_order[lo]];
+      |     ^~
+../fsearch-incremental-generations/src/fsearch_catalog.c:549:34: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  549 |     if(lo==b->count)return false;Packed*r=&b->entries[b->namespace_order[lo]];
+      |                                  ^~~~~~
+[2/23] Linking static target src/libfsearch.a
+[3/23] Compiling C object src/tests/test_catalog_faults.p/test_catalog_faults.c.o
+In file included from ../fsearch-incremental-generations/src/tests/test_catalog_faults.c:20:
+../fsearch-incremental-generations/src/tests/../fsearch_catalog.c: In function ‘child’:
+../fsearch-incremental-generations/src/tests/../fsearch_catalog.c:549:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  549 |     if(lo==b->count)return false;Packed*r=&b->entries[b->namespace_order[lo]];
+      |     ^~
+../fsearch-incremental-generations/src/tests/../fsearch_catalog.c:549:34: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  549 |     if(lo==b->count)return false;Packed*r=&b->entries[b->namespace_order[lo]];
+      |                                  ^~~~~~
+[4/23] Linking target src/fsearch-refresh-worker
+[5/23] Linking target src/fsearch-cli
+[6/23] Linking target src/tests/test_array
+[7/23] Linking target src/fsearch-worker
+[8/23] Linking target src/tests/test_size_utils
+[9/23] Linking target src/tests/test_query
+[10/23] Linking target src/tests/test_string_utils
+[11/23] Linking target src/tests/test_time_utils
+[12/23] Linking target src/tests/test_database_include
+[13/23] Linking target src/tests/test_database_entry
+[14/23] Linking target src/tests/test_database_exclude
+[15/23] Linking target src/tests/test_database_chunked_array
+[16/23] Linking target src/tests/test_database_index_store
+[17/23] Linking target src/tests/test_database
+[18/23] Linking target src/tests/test_database_file
+[19/23] Linking target src/tests/snapshot_fixture
+[20/23] Linking target src/tests/test_catalog
+[21/23] Linking target src/tests/test_catalog_faults
+[22/23] Linking target src/tests/catalog_oracle_worker
+[23/23] Linking target src/tests/catalog_fixture
+ 1/26 fsearch:validate-metainfo           OK              0.18s
+ 2/26 fsearch:test_database               OK              0.17s
+ 3/26 fsearch:test_database_file          OK              0.17s
+ 4/26 fsearch:test_database_index_store   OK              0.16s
+ 5/26 fsearch:test_database_include       OK              0.12s
+ 6/26 fsearch:test_database_exclude       OK              0.11s
+ 7/26 fsearch:test_database_entry         OK              0.11s
+ 8/26 fsearch:test_array                  OK              0.11s
+ 9/26 fsearch:test_size_utils             OK              0.10s
+10/26 fsearch:test_time_utils             OK              0.09s
+11/26 fsearch:test_query                  OK              0.39s
+12/26 fsearch:test_string_utils           OK              0.38s
+13/26 fsearch:test_database_chunked_array OK              0.45s
+14/26 fsearch:immutable_catalog           OK              0.29s
+15/26 fsearch:immutable_catalog_faults    OK              0.21s
+16/26 fsearch:boot_recovery               OK              0.68s
+17/26 fsearch:approved_root_move_race     OK              0.77s
+18/26 fsearch:catalog_worker_transport    OK              0.90s
+19/26 fsearch:monitor_worker              OK              1.20s
+20/26 fsearch:catalog_multiroot           OK              1.21s
+21/26 fsearch:pressure_guard_controls     OK              1.50s
+22/26 fsearch:refresh_worker              OK              4.31s
+23/26 fsearch:catalog_native_parity       OK              4.63s
+24/26 fsearch:headless_cli                OK              7.91s
+25/26 fsearch:monitor_supervisor          OK             13.28s
+26/26 fsearch:warm_service                OK             23.82s
+
+Ok:                26  
+Fail:              0   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt

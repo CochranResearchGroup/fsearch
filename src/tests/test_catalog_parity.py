@@ -50,10 +50,10 @@ with tempfile.TemporaryDirectory(prefix='fsearch-catalog-parity-') as tmp:
                     answer=send(f'Q\t{path}\t{case}\t{kind}\t{extension}\t{b64(text.encode())}\t{limit}')
                     ext=b'' if extension=='-' else extension.encode();flags=path|case*2|(4 if ext else 0);encoded=text.encode()
                     gold.stdin.write(struct.pack('!7I',flags,['all','files','folders'].index(kind),limit,500000,1048576,len(encoded),len(ext))+encoded+ext);gold.stdin.flush();expected=receive(gold)
-                    actual=[base64.b64decode(x) for x in answer['paths_b64']]
+                    actual=[base64.b64decode(x['path_bytes_base64']) if x.get('path_bytes_base64') else os.fsencode(x['path']) for x in answer['results']]
                     reference=[base64.b64decode(x['path_bytes_base64']) if x.get('path_bytes_base64') else os.fsencode(x['path']) for x in expected['results']]
                     return answer,expected,actual,reference
-                answer,expected,actual,reference=query(1000);assert expected['status']=='ok'
+                answer,expected,actual,reference=query(1000);assert expected['status']=='ok' and answer['status']=='ok'
                 assert sorted(actual)==sorted(reference),(label,text,path,case,kind,extension)
                 offset=0
                 for n in answer['groups']:
@@ -78,4 +78,4 @@ with tempfile.TemporaryDirectory(prefix='fsearch-catalog-parity-') as tmp:
         fresh=create(0,2,b'moved-2');create(fresh,1,b'fresh.txt');parity('recreate-new-identity')
         assert send('B')['accepted'] and send('P')['accepted'];parity('post-delete-compaction')
     finally:p.stdin.close();p.wait(timeout=5);assert p.returncode==0
-print(json.dumps({'result':'pass','comparisons':checks,'limited_prefix_checks':prefixes,'phases':phases,'oracle':'independent owned filesystem rebuilt through native snapshot builder and resident worker','scope':'catalog view/native-matcher adapter; production accelerated query integration remains M2'},indent=2))
+print(json.dumps({'result':'pass','comparisons':checks,'limited_prefix_checks':prefixes,'phases':phases,'oracle':'independent owned filesystem rebuilt through native snapshot builder and resident worker','scope':'production bounded catalog query loop against independent legacy native snapshot worker'},indent=2))

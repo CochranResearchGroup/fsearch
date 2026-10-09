@@ -131,10 +131,23 @@ if host_machine.system() == 'linux'
     test('immutable_catalog_faults', test_catalog_faults, timeout: 30)
 endif
 if host_machine.system() == 'linux'
+    catalog_oracle_worker = executable('catalog_oracle_worker', '../fsearch_worker.c', c_args: ['-DFSEARCH_WORKER_ORACLE'], dependencies: libfsearch_dep)
     catalog_fixture = executable('catalog_fixture', 'catalog_fixture.c', dependencies: libfsearch_dep)
-    test('catalog_native_parity', python, args: [files('test_catalog_parity.py'), catalog_fixture.full_path(), snapshot_fixture.full_path(), fsearch_worker.full_path()],
-        depends: [catalog_fixture, snapshot_fixture, fsearch_worker], timeout: 60)
+    test('catalog_native_parity', python, args: [files('test_catalog_parity.py'), catalog_fixture.full_path(), snapshot_fixture.full_path(), catalog_oracle_worker.full_path()],
+        depends: [catalog_fixture, snapshot_fixture, catalog_oracle_worker], timeout: 60)
 endif
 if host_machine.system() == 'linux'
     test('pressure_guard_controls', python, args: [files('test_pressure_guard.py'), files('run_pressure_guard.py')], timeout: 15)
+endif
+if host_machine.system() == 'linux'
+    test('catalog_worker_transport', python, args: [files('test_catalog_transport.py'), fsearch_service, snapshot_fixture.full_path()],
+        depends: [fsearch_worker, snapshot_fixture], timeout: 30)
+endif
+
+if host_machine.system() == 'linux'
+    test('catalog_multiroot', python, args: [files('test_catalog_multiroot.py'), snapshot_fixture.full_path(), fsearch_worker.full_path(), catalog_oracle_worker.full_path()],
+        depends: [snapshot_fixture, fsearch_worker, catalog_oracle_worker], timeout: 30)
+endif
+if host_machine.system() == 'linux'
+    catalog_query_benchmark = executable('catalog_query_benchmark', 'catalog_query_benchmark.c', dependencies: libfsearch_dep)
 endif

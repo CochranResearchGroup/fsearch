@@ -1,0 +1,6 @@
+{
+  "result": "invalid_source_measurement",
+  "affected": "m2-query-fixed-*",
+  "reason": "meson test rebuilt test dependencies but not non-test benchmark target; benchmark remained linked to initial engine",
+  "correction": "explicit meson compile catalog_query_benchmark followed by m2-query-rebuilt-*; stale results retained"
+}

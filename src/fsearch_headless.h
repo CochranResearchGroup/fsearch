@@ -20,6 +20,9 @@ typedef struct {
 } Options;
 
 typedef struct FsearchHeadlessSnapshot FsearchHeadlessSnapshot;
+typedef struct FsearchCatalog FsearchCatalog;
+FsearchHeadlessSnapshot *fsearch_headless_open_catalog(const char *path, const char **error);
+FsearchCatalog *fsearch_headless_catalog(FsearchHeadlessSnapshot *snapshot);
 FsearchHeadlessSnapshot *fsearch_headless_open(const char *path, const char **error);
 void fsearch_headless_close(FsearchHeadlessSnapshot *snapshot);
 const char *fsearch_headless_identity(FsearchHeadlessSnapshot *snapshot);

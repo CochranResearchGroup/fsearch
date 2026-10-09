@@ -2,22 +2,31 @@
  * faults without shipping a testing backdoor in the library. GPL-2.0-or-later. */
 #include <glib.h>
 #include <stdlib.h>
+#include <stdbool.h>
 static gint allocation_failure=-1;
 static void *fault_calloc(size_t n,size_t bytes) {
     if(allocation_failure==0)return NULL;
     if(allocation_failure>0)allocation_failure--;
     return calloc(n,bytes);
 }
+static bool clock_failure;
+static gint64 clock_tick;
+static gint64 fault_monotonic(void) {
+    if(clock_failure)return clock_tick+=10000;
+    return g_get_monotonic_time();
+}
+#define g_get_monotonic_time fault_monotonic
 #define calloc fault_calloc
 #include "../fsearch_catalog.c"
 #undef calloc
+#undef g_get_monotonic_time
 
 static const FsearchCatalogEntry seed[]={
     {0,0,FSEARCH_CATALOG_FOLDER,"/__fault_owned__"},
     {1,0,FSEARCH_CATALOG_FOLDER,"alpha"},
     {2,1,FSEARCH_CATALOG_FILE,"before.txt"}
 };
-static const FsearchCatalogLimits limits={1024*1024,64,64,8};
+static const FsearchCatalogLimits limits={16*1024*1024,64,64,8};
 static void unchanged(FsearchCatalog*c) {
     FsearchCatalogStatus s;fsearch_catalog_status(c,&s);g_assert_cmpuint(s.sequence,==,0);g_assert_cmpuint(s.generation,==,0);
     g_autoptr(FsearchCatalogView)v=fsearch_catalog_acquire(c);g_autofree char*p=fsearch_catalog_view_path(v,2);
@@ -55,7 +64,18 @@ static void test_corruption(void) {
     g_assert_false(fsearch_catalog_compact_publish(c,t,&error));unchanged(c);
     fsearch_catalog_compact_free(c,t);fsearch_catalog_free(c);
 }
+static void test_deadline(void) {
+    const char *error=NULL;
+    g_autoptr(FsearchCatalog)c=fsearch_catalog_new(seed,3,&limits,&error);
+    g_autoptr(FsearchCatalogView)v=fsearch_catalog_acquire(c);
+    Options o={.query="before",.kind="files",.limit=1000,.max_candidates=500000,.max_bytes=1048576,.timeout_ms=1};
+    FsearchCatalogQueryResult r;clock_failure=true;clock_tick=0;
+    g_assert_true(fsearch_catalog_query(v,&o,&r,&error));clock_failure=false;
+    g_assert_cmpstr(r.stop,==,"deadline");g_assert_cmpuint(r.returned,==,0);
+    fsearch_catalog_query_clear(&r);unchanged(c);
+}
 int main(int argc,char**argv) {
     g_test_init(&argc,&argv,NULL);g_test_add_func("/catalog-faults/allocation",test_allocations);
-    g_test_add_func("/catalog-faults/candidate-corruption",test_corruption);return g_test_run();
+    g_test_add_func("/catalog-faults/candidate-corruption",test_corruption);
+    g_test_add_func("/catalog-faults/query-deadline",test_deadline);return g_test_run();
 }

@@ -17,6 +17,7 @@
 #include <unistd.h>
 
 #include "fsearch_headless.h"
+#include "fsearch_catalog_query.h"
 #include <stdint.h>
 #include <unicode/ustring.h>
 #if defined(__GLIBC__)
@@ -24,6 +25,8 @@
 #endif
 struct FsearchHeadlessSnapshot {
     FsearchDatabaseIndexStore *store;
+    FsearchCatalog *catalog;
+    FsearchDatabaseIncludeManager *root_metadata;
     struct stat stat;
     char *identity;
     /* Fixed 192-bit trigram signatures: a sound filter, never a matcher. */
@@ -31,81 +34,7 @@ struct FsearchHeadlessSnapshot {
     size_t signature_stride[2];
 };
 
-#define SIGNATURE_MAX_BYTES (256u * 1024u * 1024u)
-#define CANDIDATE_BLOCK_BUDGET 500000u
-#define SIGNATURE_NONASCII (UINT64_C(1) << 63)
-#define SIGNATURE_UPPERCASE (UINT64_C(1) << 62)
-#define SIGNATURE_WORDS 3u
-#define SIGNATURE_BITS (SIGNATURE_WORDS * 64u - 2u)
-#define SIGNATURE_GRAMS (SIGNATURE_UPPERCASE - 1)
-static unsigned signature_lower(unsigned c) { return c >= 'A' && c <= 'Z' ? c + 32 : c; }
-static bool signature_ascii(const char *name) {
-    for (const unsigned char *p = (const unsigned char *)name; *p; ++p) if (*p >= 128) return false;
-    return true;
-}
-static void signature_text(const char *name, uint64_t out[SIGNATURE_WORDS]) {
-    memset(out, 0, SIGNATURE_WORDS * sizeof(uint64_t));
-    if (!signature_ascii(name)) out[SIGNATURE_WORDS-1] |= SIGNATURE_NONASCII;
-    size_t length = strlen(name);
-    for (size_t i = 0; i < length; ++i)
-        if (name[i] >= 'A' && name[i] <= 'Z') { out[SIGNATURE_WORDS-1] |= SIGNATURE_UPPERCASE; break; }
-    for (size_t i = 0; i + 2 < length; ++i) {
-        uint32_t gram = (signature_lower((unsigned char)name[i]) << 16)
-                      | (signature_lower((unsigned char)name[i+1]) << 8)
-                      | signature_lower((unsigned char)name[i+2]);
-        uint32_t hash = gram;
-        hash ^= hash >> 16; hash *= UINT32_C(0x7feb352d);
-        hash ^= hash >> 15; hash *= UINT32_C(0x846ca68b); hash ^= hash >> 16;
-        unsigned first = hash % SIGNATURE_BITS, second = (hash >> 7) % SIGNATURE_BITS;
-        out[first / 64] |= UINT64_C(1) << (first % 64);
-        out[second / 64] |= UINT64_C(1) << (second % 64);
-    }
-}
-static bool short_ascii_contains(const char *name, const char *query, bool match_case) {
-    unsigned first = match_case ? (unsigned char)query[0] : signature_lower((unsigned char)query[0]);
-    unsigned second = match_case ? (unsigned char)query[1] : signature_lower((unsigned char)query[1]);
-    for (const unsigned char *p = (const unsigned char *)name; *p; ++p) {
-        unsigned c = match_case ? *p : signature_lower(*p);
-        if (c == first && (!second || (match_case ? p[1] : signature_lower(p[1])) == second)) return true;
-    }
-    return false;
-}
-/* Use the same ICU normalization as the authoritative literal matcher. */
-static char *normalized_utf8(FsearchUtfBuilder *builder, const char *text) {
-    size_t length = strlen(text);
-    if (!builder->initialized || length > (size_t)builder->num_characters / 4) {
-        fsearch_utf_builder_clear(builder);
-        fsearch_utf_builder_init(builder, MAX(length, 512u));
-    }
-    if (!fsearch_utf_builder_normalize_and_fold_case(builder, text)) return NULL;
-    int32_t capacity = 3 * builder->string_normalized_folded_len + 1;
-    char *out = g_try_malloc(capacity);
-    if (!out) return NULL;
-    UErrorCode status = U_ZERO_ERROR;
-    u_strToUTF8(out, capacity, NULL, builder->string_normalized_folded,
-                builder->string_normalized_folded_len, &status);
-    if (U_FAILURE(status)) { g_free(out); return NULL; }
-    return out;
-}
-static bool query_signature(const Options *options, uint64_t required[SIGNATURE_WORDS]) {
-    if (options->path) return false;
-    if (signature_ascii(options->query) || options->match_case) {
-        if (strlen(options->query) < 3) return false;
-        signature_text(options->query, required);
-        required[SIGNATURE_WORDS-1] &= ~SIGNATURE_UPPERCASE;
-        return true;
-    }
-    FsearchUtfBuilder builder = {0};
-    g_autofree char *normalized = normalized_utf8(&builder, options->query);
-    bool result = builder.fold_options == U_FOLD_CASE_DEFAULT
-                  && normalized && strlen(normalized) >= 3;
-    if (result) {
-        signature_text(normalized, required);
-        required[SIGNATURE_WORDS-1] &= ~SIGNATURE_UPPERCASE;
-    }
-    fsearch_utf_builder_clear(&builder);
-    return result;
-}
+#include "fsearch_headless_signature.h"
 static uint64_t signature_block(FsearchHeadlessSnapshot *snapshot, unsigned type, unsigned block,
                                 const uint64_t required[SIGNATURE_WORDS]) {
     uint64_t possible = UINT64_MAX;
@@ -178,7 +107,9 @@ static void build_signatures(FsearchHeadlessSnapshot *snapshot) {
 
 void fsearch_headless_close(FsearchHeadlessSnapshot *snapshot) {
     if (!snapshot) return;
-    fsearch_database_index_store_unref(snapshot->store);
+    if(snapshot->store)fsearch_database_index_store_unref(snapshot->store);
+    if(snapshot->catalog)fsearch_catalog_free(snapshot->catalog);
+    if(snapshot->root_metadata)g_object_unref(snapshot->root_metadata);
     g_free(snapshot->identity);
     g_free(snapshot->signatures[0]);
     g_free(snapshot->signatures[1]);
@@ -187,7 +118,7 @@ void fsearch_headless_close(FsearchHeadlessSnapshot *snapshot) {
 
 const char *fsearch_headless_identity(FsearchHeadlessSnapshot *snapshot) { return snapshot->identity; }
 
-FsearchHeadlessSnapshot *fsearch_headless_open(const char *path, const char **error) {
+static FsearchHeadlessSnapshot *open_snapshot(const char *path, bool indexed, const char **error) {
     int fd = open(path, O_RDONLY | O_CLOEXEC | O_NOFOLLOW | O_NONBLOCK);
     if (fd < 0) { *error = "snapshot_unavailable"; return NULL; }
     struct stat st;
@@ -212,8 +143,51 @@ FsearchHeadlessSnapshot *fsearch_headless_open(const char *path, const char **er
     // Correctness does not depend on the allocator supporting this hint.
     malloc_trim(0);
 #endif
-    build_signatures(snapshot);
+    if(indexed)build_signatures(snapshot);
     return snapshot;
+}
+
+FsearchHeadlessSnapshot *fsearch_headless_open(const char *path,const char **error) {return open_snapshot(path,true,error);}
+FsearchCatalog *fsearch_headless_catalog(FsearchHeadlessSnapshot*s) {return s->catalog;}
+FsearchHeadlessSnapshot *fsearch_headless_open_catalog(const char*path,const char**error) {
+    FsearchHeadlessSnapshot*s=open_snapshot(path,false,error);if(!s)return NULL;
+    g_autoptr(FsearchDatabaseChunkedArray)folders=fsearch_database_index_store_get_folders(s->store,DATABASE_INDEX_PROPERTY_NAME);
+    g_autoptr(FsearchDatabaseChunkedArray)files=fsearch_database_index_store_get_files(s->store,DATABASE_INDEX_PROPERTY_NAME);
+    unsigned nf=folders?fsearch_database_chunked_array_get_num_entries(folders):0,nn=files?fsearch_database_chunked_array_get_num_entries(files):0;
+    if(nf>10000000u||nn>10000000u-nf){*error="entry_limit";fsearch_headless_close(s);return NULL;}
+    if(!nf&&!nn){build_signatures(s);return s;} /* Preserve valid empty legacy snapshots. */
+    FsearchCatalogEntry*seed=g_try_new0(FsearchCatalogEntry,nf+nn);
+    if(!seed){*error="memory_budget";fsearch_headless_close(s);return NULL;}
+    g_autoptr(GHashTable)ids=g_hash_table_new(g_direct_hash,g_direct_equal);unsigned next=0;
+    /* Allocate configured roots first so ID zero is always an immutable root. */
+    for(unsigned roots=0;roots<2;roots++)for(unsigned i=0;i<nf;i++) {
+        FsearchDatabaseEntry*e=fsearch_database_chunked_array_get_entry(folders,i);bool root=db_entry_get_parent(e)==NULL;
+        if(root!=(roots==0))continue;g_hash_table_insert(ids,e,GUINT_TO_POINTER(++next));
+    }
+    for(unsigned type=0;type<2;type++) {
+        FsearchDatabaseChunkedArray*array=type?files:folders;
+        g_autoptr(DynamicArray)chunks=array?fsearch_database_chunked_array_get_chunks(array):NULL;
+        for(unsigned chunk=0;chunks&&chunk<darray_get_num_items(chunks);chunk++) {
+            DynamicArray*entries=darray_get_item(chunks,chunk);
+            for(unsigned i=0;i<darray_get_num_items(entries);i++) {
+                FsearchDatabaseEntry*e=darray_get_item(entries,i),*parent=db_entry_get_parent(e);
+                unsigned id=type?next++:GPOINTER_TO_UINT(g_hash_table_lookup(ids,e))-1;
+                gpointer parent_id=parent?g_hash_table_lookup(ids,parent):GUINT_TO_POINTER(id+1);
+                if(!parent_id){g_free(seed);*error="invalid_parent";fsearch_headless_close(s);return NULL;}
+                seed[id]=(FsearchCatalogEntry){id,GPOINTER_TO_UINT(parent_id)-1,type?FSEARCH_CATALOG_FILE:FSEARCH_CATALOG_FOLDER,db_entry_get_name_raw(e)};
+            }
+        }
+    }
+    /* Leave process/service headroom outside the catalog's own allocation ledger. */
+    FsearchCatalogLimits limits={1200UL*1024*1024,4096,4096,16};
+    s->catalog=fsearch_catalog_new(seed,nf+nn,&limits,error);g_free(seed);
+    if(!s->catalog){fsearch_headless_close(s);return NULL;}
+    s->root_metadata=fsearch_database_index_store_get_include_manager(s->store);
+    fsearch_database_index_store_unref(s->store);s->store=NULL;
+#if defined(__GLIBC__)
+    malloc_trim(0);
+#endif
+    return s;
 }
 
 void
@@ -249,7 +223,27 @@ append_path(GString *out, const char *path) {
     }
 }
 
+static GString *catalog_search(const Options*o,FsearchHeadlessSnapshot*s,const char**error) {
+    g_autoptr(FsearchCatalogView)v=fsearch_catalog_acquire(s->catalog);FsearchCatalogQueryResult r;
+    if(!fsearch_catalog_query(v,o,&r,error))return NULL;
+    FsearchCatalogStatus state;fsearch_catalog_status(s->catalog,&state);
+    GString*out=g_string_new(NULL);
+    g_string_append_printf(out,"{\"schema_version\":1,\"status\":\"%s\",\"complete\":%s,\"truncated\":%s,\"visibility\":\"cached\",\"examined\":%u,\"catalog\":{\"sequence\":%llu,\"generation\":%llu,\"deferred_reason\":",r.stop,!strcmp(r.stop,"ok")?"true":"false",!strcmp(r.stop,"ok")?"false":"true",r.examined,(unsigned long long)fsearch_catalog_view_sequence(v),(unsigned long long)fsearch_catalog_view_generation(v));
+    if(state.deferred_reason)fsearch_headless_append_json_string(out,state.deferred_reason);else g_string_append(out,"null");
+    g_string_append_printf(out,"},\"snapshot\":{\"identity\":\"%s\",\"mtime_unix\":%lld,\"age_seconds\":%lld,\"roots\":[",s->identity,(long long)s->stat.st_mtime,(long long)MAX(0,g_get_real_time()/G_USEC_PER_SEC-s->stat.st_mtime));
+    g_autoptr(GPtrArray)roots=fsearch_database_include_manager_get_includes(s->root_metadata);
+    for(unsigned i=0;i<roots->len;i++) {
+        FsearchDatabaseInclude*root=g_ptr_array_index(roots,i);if(i)g_string_append_c(out,',');append_path(out,fsearch_database_include_get_path(root));g_string_truncate(out,out->len-1);
+        int64_t scan=fsearch_database_include_get_last_scan_time(root);g_string_append_printf(out,",\"last_scan_unix\":%lld,\"age_seconds\":",(long long)scan);
+        if(scan>0)g_string_append_printf(out,"%lld",(long long)MAX(0,g_get_real_time()/G_USEC_PER_SEC-scan));else g_string_append(out,"null");
+        g_string_append_printf(out,",\"last_error_code\":%u}",fsearch_database_include_get_last_error_code(root));
+        if(out->len>(unsigned)o->max_bytes/2){fsearch_catalog_query_clear(&r);g_string_free(out,true);*error="coverage_size_limit";return NULL;}
+    }
+    g_string_append(out,"]},\"results\":[");g_string_append_len(out,r.rows->str,r.rows->len);g_string_append(out,"]}\n");fsearch_catalog_query_clear(&r);
+    if(out->len>(unsigned)o->max_bytes){g_string_free(out,true);*error="response_size_limit";return NULL;}return out;
+}
 GString *fsearch_headless_search(const Options *options, FsearchHeadlessSnapshot *snapshot, const char **error) {
+    if(snapshot->catalog)return catalog_search(options,snapshot,error);
     FsearchDatabaseIndexStore *store = snapshot->store;
     struct stat st = snapshot->stat;
     g_autoptr(FsearchQuery) query = fsearch_query_new_literal(

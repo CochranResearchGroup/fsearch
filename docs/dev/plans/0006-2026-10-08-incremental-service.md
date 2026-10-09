@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-First packet: M1 native immutable generations and compaction, in progress under operator execution direction on 2026-10-08.
+Current packet: M2 production native query integration and private worker transport. M1 source accepted at 5de54e22; installed runtime remains unchanged.
 
 ## Destination and completion rule
 
@@ -80,7 +80,7 @@ Exit artifact: source slice or experiment, correctness/resource receipts and a c
 
 ### M2 — production bounded native query/overlay engine
 
-Depends on M1. Status: PENDING.
+Depends on M1. Status: IN_PROGRESS.
 
 Port the qualified design into real native source using shared candidate primitives, parent-linked stable entry identities, native exact matching and sorted base/overlay merging. Define collision, type-transition, rename and retired-identity handling. Treat directory entries distinctly from inode identity so hard links remain correct.
 
@@ -168,7 +168,7 @@ Out of scope: content indexing, whole-Ubuntu/Windows/Google Drive scans, replaci
 | Milestone | State | Evidence / remaining gate |
 |---|---|---|
 | M1 | SOURCE_ACCEPTED | [Lifecycle, native oracle, sanitizer and resource receipts](../notes/2026-10-08-plan6-m1-generations.md); installed acceptance remains M6 |
-| M2 | PENDING | Production integration and bounded query interface |
+| M2 | IN_PROGRESS | Production catalog/query/transport connected; native + frontend regression pass; diagnostic 1m gates pass; representative/current-scale query gates remain |
 | M3 | PENDING | Contained watcher, loss detection and reconciliation |
 | M4 | PENDING | Durable checkpoint/replay and crash/startup matrix |
 | M5 | PENDING | Current-scale aggregate acceptance and 24-hour synthetic soak |

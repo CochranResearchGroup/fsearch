@@ -1,0 +1,89 @@
+{
+  "command": [
+    "/tmp/fsearch-generations-build/src/tests/catalog_query_benchmark",
+    "100000"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 0.5426773910003249,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 18370560,
+  "peak_sampled_pss_bytes": 12665856,
+  "initial_host": {
+    "MemAvailable": 47120257024,
+    "SwapFree": 2687148032,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 1.44,
+    "io_full_avg10": 1.21
+  },
+  "final_host": {
+    "MemAvailable": 47086927872,
+    "SwapFree": 2687148032,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 1.44,
+    "io_full_avg10": 1.21
+  },
+  "samples": [
+    {
+      "seconds": 0.0005680089961970225,
+      "host": {
+        "MemAvailable": 47120257024,
+        "SwapFree": 2687148032,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.44,
+        "io_full_avg10": 1.21
+      },
+      "rss_bytes": 18022400,
+      "pss_bytes": 12450816,
+      "swap_bytes": 0,
+      "pids": [
+        48319
+      ]
+    },
+    {
+      "seconds": 0.23092165299749468,
+      "host": {
+        "MemAvailable": 47080890368,
+        "SwapFree": 2687148032,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.44,
+        "io_full_avg10": 1.21
+      },
+      "rss_bytes": 18370560,
+      "pss_bytes": 12665856,
+      "swap_bytes": 0,
+      "pids": [
+        48319
+      ]
+    },
+    {
+      "seconds": 0.4640301439940231,
+      "host": {
+        "MemAvailable": 47087869952,
+        "SwapFree": 2687148032,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.44,
+        "io_full_avg10": 1.21
+      },
+      "rss_bytes": 0,
+      "pss_bytes": 0,
+      "swap_bytes": 0,
+      "pids": []
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-m2-query-rebuilt-100000.service",
+    "memory.current": 8097792,
+    "memory.peak": 22044672,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant tree otherwise"
+}

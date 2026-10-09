@@ -1,0 +1,15 @@
+# Plan0006 M2 production catalog integration checkpoint
+
+State: IN_PROGRESS; owner ecochran76; issue #28; branch feat/incremental-generations.
+
+The resident worker now imports actual native snapshots into the immutable catalog, releases the old object store, and serves bounded native literal queries through sorted base/overlay merging. Shared signature primitives remain the same as the legacy engine. Standalone legacy CLI/worker remains an independent oracle and GUI behavior is unchanged. Forest imports support immutable multiple roots. Cached lookup performs no filesystem operation.
+
+The owner-private supervisor queues catalog_apply/catalog_lookup/catalog_compact/catalog_status through the existing bounded serial transport. Mutations require exact snapshot identity and sequence; IDs represent entries, not inodes. Wire fields and raw name/path bytes are bounded. Compaction runs in one joined background thread; shutdown cancels publication and joins before freeing state. This API is private and not exposed as MCP mutation tools. Updates explicitly report durable:false: crash/restart recovery and installed continuous indexing are NOT qualified or activated.
+
+Evidence: 26 native regression groups pass, independent snapshot/forest oracle parity, four-client private transport tests, deadline fault injection, explicit result/work/response bounds, and targeted ASan/UBSan scope. Indexed compaction at 1m crosses four generations and 400 accepted events with concurrent readers; cgroup peak174.04MiB/swap0. Diagnostic query stages 100k/300k/1m pass; see the frozen workload, retained failures and corrected source hashes in 2026-10-08-plan6-m2-query-workload.md. Native query timings do not prove CLI latency or current-scale representative path gates.
+
+Frontend: 34 actual FSearch contracts pass against an owned executable candidate runtime, including fresh stdio MCP clients and unavailable root cached results. A pre-existing default-discovery ENODEV exception blocked the comprehensive suite; isolated repair reproduced it, then 439 frontend tests and required smoke checks passed. file-searcher PR29 passed CI and merged via squash: source357866c5d086fb788eb394c110d2f868d38c7c41 -> main d2c1bf6235fb95c05165bce8d1ab17287c03fa54. Source repair is integrated, not installed.
+
+Retained failures: wrong path materialization, omitted parent/name prefilter, selective slash-path work-limit failure, stale benchmark artifact, systemd relative-path launch failure, frontend unavailable mount and non-executable script staging. Corrected reruns are separate. Deadline output mismatch found in review was corrected to the existing version1 deadline status and tested with a deterministic injected clock.
+
+Remaining: representative/current-scale query corpus and complete production import/aggregate envelopes; contained continuous event ingestion/reconciliation (M3); durable replay/checkpoint/crash recovery (M4); full M5 scale/24h soak and M6 installed acceptance/72h soak. Plan and issue remain OPEN. Installed runtime remains unchanged. Memory disposition forbidden; retain source artifacts.

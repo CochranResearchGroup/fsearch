@@ -1,5 +1,6 @@
 /* Production generation lifecycle tests. Owned in-memory filenames only. GPL-2.0-or-later. */
 #include "fsearch_catalog.h"
+#include "fsearch_catalog_query.h"
 #include "fsearch_query.h"
 #include "fsearch_database_entry.h"
 #include <stdio.h>
@@ -114,7 +115,7 @@ static void test_budget(void) {
     g_assert_true(fsearch_catalog_change(c,1,3,2,FSEARCH_CATALOG_FILE,"first",&e));
     g_assert_false(fsearch_catalog_change(c,2,4,2,FSEARCH_CATALOG_FILE,"second",&e));g_assert_cmpstr(e,==,"overlay_budget");
     compact(c);g_assert_true(fsearch_catalog_change(c,2,4,2,FSEARCH_CATALOG_FILE,"second",&e));
-    FsearchCatalogLimits small=limits;small.memory_limit=2048;small.replay_limit=16;
+    FsearchCatalogLimits small=limits;small.memory_limit=4096;small.replay_limit=16;
     FsearchCatalog*x=fsearch_catalog_new(seed,G_N_ELEMENTS(seed),&small,&e);
     g_assert_nonnull(x);FsearchCatalogBuild*t=fsearch_catalog_compact_begin(x,&e);g_assert_null(t);
     g_assert_cmpstr(e,==,"memory_budget");g_assert_cmpuint(status(x).generation,==,0);fsearch_catalog_free(x);
@@ -202,6 +203,26 @@ static void churn(unsigned count,bool report) {
     if(report){struct rusage usage;getrusage(RUSAGE_SELF,&usage);printf("{\"entries\":%u,\"compactions\":%u,\"accepted_events\":400,\"reader_checks\":%d,\"startup_ms\":%.3f,\"compaction_max_ms\":%.3f,\"accounted_bytes\":%zu,\"peak_committed_bytes\":%zu,\"worker_peak_rss_kib\":%ld,\"elapsed_ms\":%.3f}\n",count,compactions,r.reads,startup,compact_max,s.accounted_bytes,s.peak_bytes,usage.ru_maxrss,(g_get_monotonic_time()-started)/1000.);}
     fsearch_catalog_free(c);
 }
+static void test_query_bounds(void) {
+    g_autoptr(FsearchCatalog)c=make(limits);
+    g_autoptr(FsearchCatalogView)v=fsearch_catalog_acquire(c);
+    Options o={.query="",.kind="all",.limit=1,.max_candidates=500000,.max_bytes=1048576};
+    FsearchCatalogQueryResult r;const char *e=NULL;
+    g_assert_true(fsearch_catalog_query(v,&o,&r,&e));
+    g_assert_cmpstr(r.stop,==,"result_limit");g_assert_cmpuint(r.returned,==,1);
+    fsearch_catalog_query_clear(&r);
+    o.limit=1000;o.max_candidates=1;
+    g_assert_true(fsearch_catalog_query(v,&o,&r,&e));
+    g_assert_cmpstr(r.stop,==,"work_limit");g_assert_cmpuint(r.examined,==,1);
+    fsearch_catalog_query_clear(&r);
+    o.max_candidates=500000;o.max_bytes=512;
+    g_assert_true(fsearch_catalog_query(v,&o,&r,&e));
+    g_assert_cmpstr(r.stop,==,"byte_limit");g_assert_cmpuint(r.rows->len,<=,256);
+    fsearch_catalog_query_clear(&r);
+    o.max_bytes=511;
+    g_assert_false(fsearch_catalog_query(v,&o,&r,&e));g_assert_cmpstr(e,==,"invalid_query");
+    fsearch_catalog_query_clear(&r);
+}
 static void test_churn(void){churn(128,false);}
 int main(int argc,char**argv) {
     if(argc==3&&!strcmp(argv[1],"--scale")){churn(atoi(argv[2]),true);return 0;}
@@ -210,5 +231,6 @@ int main(int argc,char**argv) {
     g_test_add_func("/catalog/replay-overflow",test_overflow);g_test_add_func("/catalog/failures",test_failures);
     g_test_add_func("/catalog/lagging-reader",test_readers);g_test_add_func("/catalog/budgets",test_budget);
     g_test_add_func("/catalog/shutdown",test_shutdown);g_test_add_func("/catalog/concurrent-churn",test_churn);
+    g_test_add_func("/catalog/query-bounds",test_query_bounds);
     return g_test_run();
 }

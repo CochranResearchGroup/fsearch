@@ -11,7 +11,7 @@ typedef enum { FSEARCH_CATALOG_DELETED, FSEARCH_CATALOG_FILE, FSEARCH_CATALOG_FO
 typedef struct {
     uint32_t id, parent;
     FsearchCatalogKind kind;
-    const char *name; /* raw filesystem bytes; root 0 contains its absolute path */
+    const char *name; /* raw filesystem bytes; roots have parent == id and contain their absolute paths */
 } FsearchCatalogEntry;
 typedef struct {
     size_t memory_limit;
@@ -35,6 +35,7 @@ FsearchCatalogView *fsearch_catalog_acquire(FsearchCatalog *catalog);
 FsearchCatalogView *fsearch_catalog_view_ref(FsearchCatalogView *view);
 void fsearch_catalog_view_unref(FsearchCatalogView *view);
 bool fsearch_catalog_view_get(FsearchCatalogView *view, uint32_t id, FsearchCatalogEntry *entry);
+bool fsearch_catalog_view_lookup(FsearchCatalogView *, const char *absolute_path, FsearchCatalogEntry *);
 char *fsearch_catalog_view_path(FsearchCatalogView *view, uint32_t id);
 bool fsearch_catalog_view_visit(FsearchCatalogView *view, FsearchCatalogVisitor visitor, void *data);
 uint64_t fsearch_catalog_view_sequence(FsearchCatalogView *view);
