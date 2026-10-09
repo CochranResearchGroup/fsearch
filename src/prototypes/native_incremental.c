@@ -4,6 +4,7 @@
 #include "fsearch_database_entry.h"
 #include "fsearch_database_include.h"
 #include "fsearch_query.h"
+#include "fsearch_headless_signature.h"
 #include <sys/resource.h>
 #include <sys/stat.h>
 #include <stdio.h>
@@ -26,6 +27,44 @@ static void record_free(void *p){Record*r=p;if(r->entry)db_entry_free(r->entry);
 static Record *get(unsigned id){Record*r=g_hash_table_lookup(delta,GUINT_TO_POINTER(id+1));return r?r:id<base->len?g_ptr_array_index(base,id):NULL;}
 static bool live(unsigned id){for(unsigned depth=0;depth<64;depth++){Record*r=get(id);if(!r||!r->kind)return false;if(id==0)return true;id=r->parent;}return false;}
 static char *fullpath(unsigned id){if(!live(id))return NULL;const char *parts[64];unsigned n=0;for(;;){Record*r=get(id);parts[n++]=r->name;if(!id)break;id=r->parent;}GString*s=g_string_new("");while(n){if(s->len)g_string_append_c(s,'/');g_string_append(s,parts[--n]);}return g_string_free(s,false);}
+/* Immutable sorted identity ranks; only the bounded delta is re-sorted per query. */
+static GArray *ranks[2];
+static uint64_t *planes[2];
+static size_t strides[2];
+static int rank_compare(const void *a,const void *b,void *unused) {
+ unsigned ai=*(const unsigned*)a,bi=*(const unsigned*)b;
+ Record *ar=get(ai),*br=get(bi);
+ return db_entry_compare_entries_by_name(&ar->entry,&br->entry);
+}
+static void build_candidates(void) {
+ FsearchUtfBuilder builder={0};
+ for(unsigned type=0;type<2;type++) {
+  ranks[type]=g_array_new(false,false,sizeof(unsigned));
+  for(unsigned id=0;id<base->len;id++) if(((Record*)g_ptr_array_index(base,id))->kind==(type?2:1))g_array_append_val(ranks[type],id);
+  g_array_sort_with_data(ranks[type],rank_compare,NULL);
+  size_t stride=strides[type]=(ranks[type]->len+63)/64;
+  planes[type]=g_malloc0(stride*192*sizeof(uint64_t));
+  for(unsigned rank=0;rank<ranks[type]->len;rank++) {
+   unsigned id=g_array_index(ranks[type],unsigned,rank);Record*r=get(id);uint64_t sig[3];signature_text(r->name,sig);
+   if(!signature_ascii(r->name)) {
+    g_autofree char*normalized=normalized_utf8(&builder,r->name);
+    if(normalized){uint64_t folded[3];signature_text(normalized,folded);for(unsigned w=0;w<3;w++)sig[w]|=folded[w];}
+    else for(unsigned w=0;w<3;w++)sig[w]=UINT64_MAX;
+   }
+   for(unsigned w=0;w<3;w++)for(uint64_t bits=sig[w];bits;bits&=bits-1) {
+    unsigned bit=__builtin_ctzll(bits);planes[type][(w*64+bit)*stride+rank/64]|=UINT64_C(1)<<(rank%64);
+   }
+  }
+ }
+ fsearch_utf_builder_clear(&builder);
+}
+static uint64_t possible_block(unsigned type,unsigned block,const uint64_t required[3]) {
+ uint64_t possible=UINT64_MAX;
+ for(unsigned w=0;w<3&&possible;w++)for(uint64_t bits=required[w];bits&&possible;bits&=bits-1) {
+  unsigned bit=__builtin_ctzll(bits);possible&=planes[type][(w*64+bit)*strides[type]+block];
+ }
+ return possible;
+}
 static void fixture(unsigned count){
  base=g_ptr_array_new_with_free_func(record_free);oracle=g_ptr_array_new();delta=g_hash_table_new_full(g_direct_hash,g_direct_equal,NULL,record_free);
  for(unsigned id=0;id<count+3;id++){
@@ -76,24 +115,55 @@ static bool save_oracle(const char *path){
  if(snapshot)fsearch_headless_close(snapshot);const char*error=NULL;snapshot=ok?fsearch_headless_open(path,&error):NULL;
  return snapshot!=NULL;
 }
+static bool exact(unsigned id,Options*o,FsearchQuery*q,FsearchQueryMatchData*m) {
+ Record*r=get(id);if(!r||!r->kind||!live(id))return false;
+ if(o->extension&&(r->kind!=1||!db_entry_get_extension(r->entry)||g_ascii_strcasecmp(db_entry_get_extension(r->entry),o->extension)))return false;
+ FsearchDatabaseEntry*leaf=r->entry,*parent=NULL;
+ if(o->path&&id){g_autofree char*pp=fullpath(r->parent);parent=db_entry_new(DATABASE_INDEX_PROPERTY_FLAG_NAME,pp,NULL,DATABASE_ENTRY_TYPE_FOLDER);leaf=db_entry_new(DATABASE_INDEX_PROPERTY_FLAG_NAME,r->name,parent,r->kind==2?DATABASE_ENTRY_TYPE_FOLDER:DATABASE_ENTRY_TYPE_FILE);}
+ fsearch_query_match_data_set_entry(m,leaf);bool match=fsearch_query_match(q,m);
+ if(parent){db_entry_free(leaf);db_entry_free(parent);}return match;
+}
 static void candidate(Options*o){
  gint64 start=g_get_monotonic_time();g_autoptr(FsearchQuery)q=fsearch_query_new_literal(o->query,(o->path?QUERY_FLAG_SEARCH_IN_PATH:0)|(o->match_case?QUERY_FLAG_MATCH_CASE:0));
- FsearchQueryMatchData*m=fsearch_query_match_data_new(NULL,NULL);GPtrArray*hits=g_ptr_array_new_with_free_func(g_free);unsigned total=MAX(base->len,oracle->len);
- for(unsigned id=0;id<total;id++){Record*r=get(id);if(!r||!r->kind||!live(id))continue;if(!strcmp(o->kind,"files")&&r->kind!=1)continue;if(!strcmp(o->kind,"folders")&&r->kind!=2)continue;
-  if(o->extension&&(r->kind!=1||!db_entry_get_extension(r->entry)||g_ascii_strcasecmp(db_entry_get_extension(r->entry),o->extension)))continue;
-  FsearchDatabaseEntry*leaf=r->entry,*parent=NULL;
-  if(o->path&&id){g_autofree char*pp=fullpath(r->parent);parent=db_entry_new(DATABASE_INDEX_PROPERTY_FLAG_NAME,pp,NULL,DATABASE_ENTRY_TYPE_FOLDER);leaf=db_entry_new(DATABASE_INDEX_PROPERTY_FLAG_NAME,r->name,parent,r->kind==2?DATABASE_ENTRY_TYPE_FOLDER:DATABASE_ENTRY_TYPE_FILE);}
-  fsearch_query_match_data_set_entry(m,leaf);if(fsearch_query_match(q,m))g_ptr_array_add(hits,fullpath(id));
-  if(parent){db_entry_free(leaf);db_entry_free(parent);}
+ FsearchQueryMatchData*m=fsearch_query_match_data_new(NULL,NULL);
+ GArray*hits=g_array_new(false,false,sizeof(unsigned));unsigned examined=0,blocks=0;
+ uint64_t required[3]={0};bool filter=query_signature(o,required);
+ for(unsigned type=0;type<2;type++) {
+  if((type==0&&!strcmp(o->kind,"folders"))||(type==1&&!strcmp(o->kind,"files")))continue;
+  GArray *basehits=g_array_new(false,false,sizeof(unsigned)),*deltahits=g_array_new(false,false,sizeof(unsigned));
+  for(unsigned block=0;block<strides[type];block++) {
+   blocks++;uint64_t possible=filter?possible_block(type,block,required):UINT64_MAX;
+   while(possible){unsigned rank=block*64+__builtin_ctzll(possible);possible&=possible-1;if(rank>=ranks[type]->len)continue;
+    unsigned id=g_array_index(ranks[type],unsigned,rank);if(g_hash_table_contains(delta,GUINT_TO_POINTER(id+1)))continue;
+    examined++;if(exact(id,o,q,m))g_array_append_val(basehits,id);
+   }
+  }
+  GHashTableIter it;gpointer key,value;g_hash_table_iter_init(&it,delta);
+  while(g_hash_table_iter_next(&it,&key,&value)){Record*r=value;if(r->kind!=(type?2:1))continue;unsigned id=GPOINTER_TO_UINT(key)-1;examined++;if(exact(id,o,q,m))g_array_append_val(deltahits,id);}
+  g_array_sort_with_data(deltahits,rank_compare,NULL);
+  unsigned b=0,d=0;
+  while(b<basehits->len||d<deltahits->len){unsigned id;
+   if(d==deltahits->len||(b<basehits->len&&rank_compare(&g_array_index(basehits,unsigned,b),&g_array_index(deltahits,unsigned,d),NULL)<=0))id=g_array_index(basehits,unsigned,b++);
+   else id=g_array_index(deltahits,unsigned,d++);
+   g_array_append_val(hits,id);
+  }
+  g_array_unref(basehits);g_array_unref(deltahits);
  }
- fsearch_query_match_data_free(m);printf("{\"coverage\":\"%s\",\"elapsed_ms\":%.3f,\"overlay\":%u,\"paths_b64\":[",deferred?"deferred":"current",(g_get_monotonic_time()-start)/1000.,g_hash_table_size(delta));
- for(unsigned i=0;i<hits->len;i++){char*p=g_ptr_array_index(hits,i);g_autofree char*encoded=g_base64_encode((guchar*)p,strlen(p));printf("%s\"%s\"",i?",":"",encoded);}puts("]}");g_ptr_array_unref(hits);
+ fsearch_query_match_data_free(m);printf("{\"coverage\":\"%s\",\"elapsed_ms\":%.3f,\"examined\":%u,\"candidate_blocks\":%u,\"overlay\":%u,\"paths_b64\":[",deferred?"deferred":"current",(g_get_monotonic_time()-start)/1000.,examined,blocks,g_hash_table_size(delta));
+ unsigned returned=MIN(hits->len,(unsigned)o->limit);
+ for(unsigned i=0;i<returned;i++){g_autofree char*p=fullpath(g_array_index(hits,unsigned,i));g_autofree char*encoded=g_base64_encode((guchar*)p,strlen(p));printf("%s\"%s\"",i?",":"",encoded);}
+ printf("],\"total_matches\":%u,\"order_group_sizes\":[",hits->len);
+ unsigned group=0;for(unsigned i=0;i<hits->len;) {unsigned j=i+1,ai=g_array_index(hits,unsigned,i);Record*a=get(ai);
+  while(j<hits->len){unsigned bi=g_array_index(hits,unsigned,j);Record*b=get(bi);if(a->kind!=b->kind||rank_compare(&ai,&bi,NULL))break;j++;}
+  printf("%s%u",group++?",":"",j-i);i=j;
+ }
+ puts("]}");g_array_unref(hits);
 }
-int main(int argc,char**argv){if(argc!=2)return 2;struct rlimit bound={1024UL*1024*1024,1024UL*1024*1024},core={0,0};setrlimit(RLIMIT_AS,&bound);setrlimit(RLIMIT_CORE,&core);umask(0077);fixture(atoi(argv[1]));puts("{\"ready\":true}");fflush(stdout);
+int main(int argc,char**argv){if(argc!=2)return 2;struct rlimit bound={1024UL*1024*1024,1024UL*1024*1024},core={0,0};setrlimit(RLIMIT_AS,&bound);setrlimit(RLIMIT_CORE,&core);umask(0077);fixture(atoi(argv[1]));build_candidates();puts("{\"ready\":true}");fflush(stdout);
  char*line=NULL;size_t size=0;while(getline(&line,&size,stdin)>0){line[strcspn(line,"\r\n")]=0;g_auto(GStrv)v=g_strsplit(line,"\t",-1);
   if(!strcmp(v[0],"U")){gsize n;g_autofree char*name=(char*)g_base64_decode(v[4],&n);name=g_realloc(name,n+1);name[n]=0;bool accepted=update(atoi(v[1]),atoi(v[2]),atoi(v[3]),name);printf("{\"accepted\":%s,\"overlay\":%u}\n",accepted?"true":"false",g_hash_table_size(delta));}
   else if(!strcmp(v[0],"S"))printf("{\"saved\":%s}\n",save_oracle(v[1])?"true":"false");
-  else if(!strcmp(v[0],"Q")){gsize n;g_autofree char*text=(char*)g_base64_decode(v[5],&n);text=g_realloc(text,n+1);text[n]=0;Options o={.query=text,.path=atoi(v[1]),.match_case=atoi(v[2]),.kind=v[3],.extension=strcmp(v[4],"-")?v[4]:NULL,.limit=1000,.max_candidates=500000,.max_bytes=1048576};candidate(&o);if(snapshot){const char*error=NULL;g_autoptr(GString)reply=fsearch_headless_search(&o,snapshot,&error);if(!reply)return 4;fputs(reply->str,stdout);}}
+  else if(!strcmp(v[0],"Q")){gsize n;g_autofree char*text=(char*)g_base64_decode(v[5],&n);text=g_realloc(text,n+1);text[n]=0;Options o={.query=text,.path=atoi(v[1]),.match_case=atoi(v[2]),.kind=v[3],.extension=strcmp(v[4],"-")?v[4]:NULL,.limit=v[6]?atoi(v[6]):1000,.max_candidates=500000,.max_bytes=1048576};candidate(&o);if(snapshot){const char*error=NULL;g_autoptr(GString)reply=fsearch_headless_search(&o,snapshot,&error);if(!reply)return 4;fputs(reply->str,stdout);}}
   else if(!strcmp(v[0],"R")){struct rusage r;getrusage(RUSAGE_SELF,&r);printf("{\"peak_rss_kib\":%ld}\n",r.ru_maxrss);}
   fflush(stdout);
  }return 0;

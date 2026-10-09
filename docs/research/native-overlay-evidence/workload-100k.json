@@ -1,0 +1,25 @@
+{
+  "mode": "workload",
+  "startup_seconds": 0.12812154200219084,
+  "max_name_query_examined": 1021,
+  "entries": 100003,
+  "normal_events": 20,
+  "normal_visibility_ms": {
+    "p95": 100.58961898903362,
+    "max": 100.59483299846761
+  },
+  "heavy_events": 1000,
+  "heavy_visibility_ms": 325.76342999527697,
+  "base_worker_rss_bytes": 33214464,
+  "final_worker_rss_bytes": 33869824,
+  "worker_memory": {
+    "peak_rss_kib": 33076
+  },
+  "driver_peak_rss_kib": 15040,
+  "last_query_examined": 101023,
+  "last_query_candidate_blocks": 1564,
+  "native_name_query_p95_ms": 0.137,
+  "native_path_query_max_ms": 32.609,
+  "elapsed_seconds": 2.500215879001189,
+  "scope": "native matcher plus synthetic records and full-path fixture oracle; shared native signature helpers and immutable base bitplanes; no real watcher, compaction or installed service; heavy events sent serially"
+}

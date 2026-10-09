@@ -1,0 +1,108 @@
+{
+  "source_baseline": "9002f969ff6d67bca2b3ce110584c9cc1e86b0d5",
+  "shared_helpers_byte_identical": true,
+  "shared_helpers_sha256": "6ef24d26e4550826cf3b292a90121c9fdeefcb2a40510475502af5a8eec1a325",
+  "tests": [
+    {
+      "name": "fsearch:validate-metainfo",
+      "result": "OK",
+      "duration_seconds": 0.1065058708190918
+    },
+    {
+      "name": "fsearch:test_database",
+      "result": "OK",
+      "duration_seconds": 0.10031914710998535
+    },
+    {
+      "name": "fsearch:test_database_file",
+      "result": "OK",
+      "duration_seconds": 0.09654593467712402
+    },
+    {
+      "name": "fsearch:test_database_chunked_array",
+      "result": "OK",
+      "duration_seconds": 0.09184384346008301
+    },
+    {
+      "name": "fsearch:test_database_index_store",
+      "result": "OK",
+      "duration_seconds": 0.08896422386169434
+    },
+    {
+      "name": "fsearch:test_database_include",
+      "result": "OK",
+      "duration_seconds": 0.08390259742736816
+    },
+    {
+      "name": "fsearch:test_database_exclude",
+      "result": "OK",
+      "duration_seconds": 0.07852864265441895
+    },
+    {
+      "name": "fsearch:test_database_entry",
+      "result": "OK",
+      "duration_seconds": 0.07427644729614258
+    },
+    {
+      "name": "fsearch:test_array",
+      "result": "OK",
+      "duration_seconds": 0.07176375389099121
+    },
+    {
+      "name": "fsearch:test_size_utils",
+      "result": "OK",
+      "duration_seconds": 0.06175518035888672
+    },
+    {
+      "name": "fsearch:test_time_utils",
+      "result": "OK",
+      "duration_seconds": 0.04988527297973633
+    },
+    {
+      "name": "fsearch:test_query",
+      "result": "OK",
+      "duration_seconds": 0.07103943824768066
+    },
+    {
+      "name": "fsearch:test_string_utils",
+      "result": "OK",
+      "duration_seconds": 0.05605769157409668
+    },
+    {
+      "name": "fsearch:approved_root_move_race",
+      "result": "OK",
+      "duration_seconds": 0.09390902519226074
+    },
+    {
+      "name": "fsearch:boot_recovery",
+      "result": "OK",
+      "duration_seconds": 0.135223388671875
+    },
+    {
+      "name": "fsearch:monitor_worker",
+      "result": "OK",
+      "duration_seconds": 0.3492581844329834
+    },
+    {
+      "name": "fsearch:refresh_worker",
+      "result": "OK",
+      "duration_seconds": 2.3160481452941895
+    },
+    {
+      "name": "fsearch:headless_cli",
+      "result": "OK",
+      "duration_seconds": 7.423694133758545
+    },
+    {
+      "name": "fsearch:monitor_supervisor",
+      "result": "OK",
+      "duration_seconds": 11.981256246566772
+    },
+    {
+      "name": "fsearch:warm_service",
+      "result": "OK",
+      "duration_seconds": 22.35062885284424
+    }
+  ],
+  "result": "pass"
+}

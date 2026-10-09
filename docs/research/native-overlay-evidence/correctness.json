@@ -1,0 +1,24 @@
+{
+  "mode": "correctness",
+  "comparisons": 4536,
+  "ordered_prefix_checks": 81,
+  "exact_sequence_differences_within_ties": 0,
+  "phases": [
+    "base",
+    "create literal filename",
+    "Unicode file rename",
+    "ancestor rename",
+    "duplicate basename tied group",
+    "move across parent and sort position",
+    "ancestor delete",
+    "recreate name with new identity",
+    "new child, no resurrected descendants"
+  ],
+  "deferred_at": 2041,
+  "result": "pass",
+  "memory": {
+    "peak_rss_kib": 14880
+  },
+  "elapsed_seconds": 0.9843905750021804,
+  "ordering": "native files-then-folders comparator group parity; equal-name tie order unspecified"
+}
