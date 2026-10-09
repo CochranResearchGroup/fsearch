@@ -45,7 +45,7 @@ with tempfile.TemporaryDirectory(prefix='fsearch-catalog-parity-') as tmp:
         gold=subprocess.Popen([worker,db,str(os.getpid())],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         gold.stdin.write(b'G');gold.stdin.flush();assert receive(gold)['status']=='ready'
         try:
-            for text,path,case,kind,extension in itertools.product(['','file','café','STRASSE','İ','*','?','raw','alpha','moved','fresh','😀'],[0,1],[0,1],['all','files','folders'],['-','txt','pdf']):
+            for text,path,case,kind,extension in itertools.product(['','file','café','STRASSE','İ','*','?','raw','alpha','moved','fresh','😀','alpha/nested','nested/file','moved-2/fresh','/alpha/','nested/CAFÉ'],[0,1],[0,1],['all','files','folders'],['-','txt','pdf']):
                 def query(limit):
                     answer=send(f'Q\t{path}\t{case}\t{kind}\t{extension}\t{b64(text.encode())}\t{limit}')
                     ext=b'' if extension=='-' else extension.encode();flags=path|case*2|(4 if ext else 0);encoded=text.encode()

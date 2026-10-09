@@ -474,6 +474,47 @@ static unsigned parent_match(FsearchCatalogView*v,uint32_t id,const Options*o,un
     while(n){uint32_t key=pending[--n];if(key<count)cache[key]=result;}
     return result;
 }
+static bool exact_path_contains(const Options*o,const char*path) {
+    bool raw=signature_ascii(o->query)&&(o->match_case||fsearch_string_is_ascii_icase(o->query));
+    if(raw)return (o->match_case?strstr(path,o->query):strcasestr(path,o->query))!=NULL;
+    g_autoptr(FsearchQuery)q=fsearch_query_new_literal(o->query,o->match_case?QUERY_FLAG_MATCH_CASE:0);
+    FsearchQueryMatchData*m=fsearch_query_match_data_new(NULL,NULL);
+    FsearchDatabaseEntry*entry=db_entry_new(DATABASE_INDEX_PROPERTY_FLAG_NAME,path,NULL,DATABASE_ENTRY_TYPE_FOLDER);
+    fsearch_query_match_data_set_entry(m,entry);bool result=fsearch_query_match(q,m);
+    fsearch_query_match_data_free(m);db_entry_free(entry);return result;
+}
+/* A path match either ends inside an entry's own name or in an ancestor.
+ * Probe folder names with the final component's signature first. If no visible
+ * folder path can contain the full literal, the same tail signature is a sound
+ * global candidate filter. Uncertainty or the bounded probe cap means fallback. */
+static bool ancestor_possible(FsearchCatalogView*v,const Options*o,const char*tail,
+                              unsigned first,FsearchCatalogQueryResult*r,gint64 deadline) {
+    if(!*tail)return true;
+    Options full_options=*o;full_options.path=false;uint64_t full_signature[3];
+    if(!query_signature(&full_options,full_signature))return true;
+    bool raw=signature_ascii(o->query)&&(o->match_case||fsearch_string_is_ascii_icase(o->query));
+    Options name_options=*o;name_options.path=false;name_options.query=(char*)tail;
+    CandidateCursor folders={.view=v,.first=first,.next_block=first/64,.end=v->base->count,.result=r,.deadline=deadline};
+    folders.filter=query_signature(&name_options,folders.required);
+    unsigned probes=0;FsearchCatalogEntry e;
+    for(unsigned phase=0;phase<2;phase++) {
+        unsigned d=0;
+        for(;;) {
+            if(!phase){if(!next_candidate(&folders,&e))break;}
+            else {
+                if(d==v->count)break;
+                Delta*x=v->delta[d++];if(x->kind!=FSEARCH_CATALOG_FOLDER)continue;
+                e=(FsearchCatalogEntry){x->id,x->parent,x->kind,x->name};
+            }
+            if(raw&&!(o->match_case?strstr(e.name,tail):strcasestr(e.name,tail)))continue;
+            if(++probes>4096||g_get_monotonic_time()>=deadline)return true;
+            FsearchCatalogEntry live;if(!fsearch_catalog_view_get(v,e.id,&live))continue;
+            g_autofree char *path=bounded_path(v,e.id,4096);
+            if(!path||exact_path_contains(o,path))return true;
+        }
+    }
+    return strcmp(r->stop,"ok")!=0;
+}
 void fsearch_catalog_query_clear(FsearchCatalogQueryResult*r){if(r->rows)g_string_free(r->rows,true);memset(r,0,sizeof(*r));}
 bool fsearch_catalog_query(FsearchCatalogView*v,const Options*o,FsearchCatalogQueryResult*r,const char**error) {
     memset(r,0,sizeof(*r));r->stop="ok";
@@ -491,19 +532,23 @@ bool fsearch_catalog_query(FsearchCatalogView*v,const Options*o,FsearchCatalogQu
     /* The sorted base is files then folders. Skip the irrelevant kind in O(log N). */
     unsigned lo=0,hi=v->base->count;
     while(lo<hi){unsigned m=lo+(hi-lo)/2;if(v->base->entries[v->base->name_order[m]].kind==FSEARCH_CATALOG_FILE)lo=m+1;else hi=m;}
+    const char *tail=strrchr(o->query,'/');tail=tail?tail+1:o->query;
+    bool path_parts=o->path&&*o->query&&signature_ascii(o->query)&&(o->match_case||fsearch_string_is_ascii_icase(o->query));
+    if(o->path&&*o->query&&!ancestor_possible(v,o,tail,lo,r,deadline)) {
+        Options name_options=*o;name_options.path=false;name_options.query=(char*)tail;
+        cursor.filter=query_signature(&name_options,cursor.required);
+    }
     if(!strcmp(o->kind,"folders")){cursor.first=lo;cursor.next_block=lo/64;}
     if(!strcmp(o->kind,"files"))cursor.end=lo;
     FsearchCatalogEntry base_entry;bool has_base=next_candidate(&cursor,&base_entry);unsigned d=0;
     g_autoptr(FsearchQuery)q=fsearch_query_new_literal(o->query,(o->path?QUERY_FLAG_SEARCH_IN_PATH:0)|(o->match_case?QUERY_FLAG_MATCH_CASE:0));
     FsearchQueryMatchData*m=fsearch_query_match_data_new(NULL,NULL);r->rows=g_string_sized_new(MIN(o->max_bytes/2,4096));
-    bool path_parts=o->path&&*o->query&&signature_ascii(o->query)&&(o->match_case||fsearch_string_is_ascii_icase(o->query));
     size_t parent_count=path_parts?MIN((uint64_t)v->base->entries[v->base->count-1].id+1,16UL*1024*1024):0;
     unsigned char*parents=path_parts?g_try_malloc0(parent_count):NULL;
     if(path_parts&&!parents){fsearch_catalog_query_clear(r);fsearch_query_match_data_free(m);g_free(delta);return fail(error,"memory_budget");}
     /* If a slash-containing literal reaches the basename, its final component
      * must occur in that basename. Otherwise the full literal lies in the parent
      * path. A trailing slash has an empty tail and admits every basename. */
-    const char *tail=strrchr(o->query,'/');tail=tail?tail+1:o->query;
     bool ascii_query=!o->path&&signature_ascii(o->query),raw_ascii=ascii_query&&(o->match_case||fsearch_string_is_ascii_icase(o->query));
     while((has_base||d<delta_count)&&!strcmp(r->stop,"ok")) {
         if(g_get_monotonic_time()>=deadline){r->stop="deadline";break;}

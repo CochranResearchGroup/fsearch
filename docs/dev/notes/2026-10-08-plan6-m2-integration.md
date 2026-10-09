@@ -1,6 +1,6 @@
 # Plan0006 M2 production catalog integration checkpoint
 
-State: IN_PROGRESS; owner ecochran76; issue #28; branch feat/incremental-generations.
+State: SOURCE_ACCEPTED; owner ecochran76; issue #28; branch feat/incremental-generations.
 
 The resident worker now imports actual native snapshots into the immutable catalog, releases the old object store, and serves bounded native literal queries through sorted base/overlay merging. Shared signature primitives remain the same as the legacy engine. Standalone legacy CLI/worker remains an independent oracle and GUI behavior is unchanged. Forest imports support immutable multiple roots. Cached lookup performs no filesystem operation.
 
@@ -13,3 +13,5 @@ Frontend: 34 actual FSearch contracts pass against an owned executable candidate
 Retained failures: wrong path materialization, omitted parent/name prefilter, selective slash-path work-limit failure, stale benchmark artifact, systemd relative-path launch failure, frontend unavailable mount and non-executable script staging. Corrected reruns are separate. Deadline output mismatch found in review was corrected to the existing version1 deadline status and tested with a deterministic injected clock.
 
 Remaining: representative/current-scale query corpus and complete production import/aggregate envelopes; contained continuous event ingestion/reconciliation (M3); durable replay/checkpoint/crash recovery (M4); full M5 scale/24h soak and M6 installed acceptance/72h soak. Plan and issue remain OPEN. Installed runtime remains unchanged. Memory disposition forbidden; retain source artifacts.
+
+M2 source acceptance update: directory-heavy ten-way synthetic shape matches exact historical count6734348/618761folders. All12frozen query classes pass at every stage, including exact/zero Unicode paths. Exact-count concurrent compaction passes under1280MiB/swap0; see frozen packet and receipts. Latest native26groups and targeted6120-comparison sanitizer oracle pass. This satisfies the bounded production engine/source packet; actual workspace import/aggregate memory, end-to-end CLI/MCP latency and full program freshness/endurance remain M5/M6 gates. M3 ingestion and M4 durability are still pending.

@@ -1,0 +1,19 @@
+{
+  "result": "pass",
+  "comparisons": 6120,
+  "limited_prefix_checks": 30,
+  "phases": [
+    "initial",
+    "build-0-with-replay",
+    "published-0",
+    "build-1-with-replay",
+    "published-1",
+    "build-2-with-replay",
+    "published-2",
+    "ancestor-delete",
+    "recreate-new-identity",
+    "post-delete-compaction"
+  ],
+  "oracle": "independent owned filesystem rebuilt through native snapshot builder and resident worker",
+  "scope": "production bounded catalog query loop against independent legacy native snapshot worker"
+}
