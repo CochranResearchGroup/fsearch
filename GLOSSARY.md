@@ -35,3 +35,11 @@ _Avoid_: Match (before exact verification).
 **Exact verification**:
 Applying the authoritative literal matcher and requested filters to a search candidate. Every returned match must pass this step.
 _Avoid_: Filesystem verification (this operation uses cached filename knowledge).
+
+**Freshness delay**:
+Elapsed time between a filename change in an indexed root and that change being reflected in searchable cached knowledge.
+_Avoid_: Query latency (the time needed to answer one search).
+
+**Deferred update**:
+An update postponed while the last accepted filename knowledge remains searchable. Its freshness is not asserted to meet the normal update target.
+_Avoid_: Successful refresh.

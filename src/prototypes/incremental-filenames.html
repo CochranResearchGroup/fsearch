@@ -1,0 +1,51 @@
+<!doctype html><meta charset="utf-8"><title>Filename updates — throwaway prototype</title>
+<style>body{font:16px system-ui;max-width:1050px;margin:40px auto;padding:0 20px;color:#213044;background:#f6f8fc}h1{font-size:28px}section{background:white;padding:20px;margin:16px 0;border:1px solid #dde3ec;border-radius:10px}button{padding:9px 12px;margin:4px;border:1px solid #bac7da;border-radius:6px;background:white;cursor:pointer}button.active{background:#245acc;color:white}pre{white-space:pre-wrap}li{margin:6px}small{color:#526174}</style>
+<h1>Filename changes without a full rebuild</h1><p><b>THROWAWAY LOGIC PROTOTYPE.</b> Can a saved base plus small filename changes keep search correct through moves, deletes and deferred updates? Synthetic names only. This page does not watch or change your files. The change budget is a toy entry-count cap, not a byte-memory admission mechanism.</p>
+<section><h2>Current cached knowledge</h2><div id="state"></div></section>
+<section><h2>Free play</h2><div id="actions"></div></section>
+<section><h2>Guided walkthroughs</h2><div id="tabs"></div><p id="description"></p><div id="steps"></div></section>
+<script id="model">
+// Pure portable model; shared unchanged with the Node experiment. No filesystem or DOM calls.
+class FilenameModel {
+ constructor(records,cap=2000){this.base=new Map(records.map(r=>[r.id,Object.freeze({...r})]));this.overlay=new Map();this.cap=cap;this.coverage='current';this.reason='accepted synthetic base';this.baseVisits=0;}
+ get(id,overlay=this.overlay){return overlay.has(id)?overlay.get(id):this.base.get(id);}
+ path(id,overlay=this.overlay){const names=[],seen=new Set();while(id!==null){if(seen.has(id)||seen.size>=64)return null;seen.add(id);const r=this.get(id,overlay);if(!r)return null;names.push(r.name);id=r.parent;}return '/'+names.reverse().join('/');}
+ apply(events){if(this.coverage!=='current')return {accepted:false,reason:'reconciliation required'};const next=new Map(this.overlay);
+  for(const e of events){
+   if(typeof e.id!=='string'||!e.id||e.id==='root'||!['create','rename','delete'].includes(e.op))return {accepted:false,reason:'invalid event'};
+   const previous=this.get(e.id,next);
+   if(e.op==='delete'){if(!previous||!this.path(e.id,next))return {accepted:false,reason:'unknown live identity'};next.set(e.id,null);}
+   else {
+    if(typeof e.name!=='string'||!e.name||e.name.includes('/')||e.name.includes('\0')||['.','..'].includes(e.name))return {accepted:false,reason:'invalid basename'};
+    if(e.op==='create'&&(this.base.has(e.id)||next.has(e.id)))return {accepted:false,reason:'identity already exists'};
+    if(e.op==='rename'&&(!previous||!this.path(e.id,next)))return {accepted:false,reason:'unknown live identity'};
+    const parent=this.get(e.parent,next);if(!parent||parent.kind!=='folder'||!this.path(e.parent,next))return {accepted:false,reason:'outside live root'};
+    const record={id:e.id,name:e.name,parent:e.parent,kind:e.op==='create'?e.kind:previous.kind};
+    if(!['file','folder'].includes(record.kind))return {accepted:false,reason:'symlink or mount not admitted'};
+    next.set(e.id,Object.freeze(record));if(!this.path(e.id,next))return {accepted:false,reason:'cycle or depth boundary'};
+   }
+  }
+  if(next.size>this.cap){this.coverage='deferred';this.reason='change budget exceeded; accepted view retained';return {accepted:false,reason:this.reason};}
+  this.overlay=next;this.reason='changes visible';return {accepted:true,changed:events.length};
+ }
+ invalidate(reason){this.coverage='incomplete';this.reason=reason+'; cached names remain searchable';}
+ reconcile(records){this.base=new Map(records.map(r=>[r.id,Object.freeze({...r})]));this.overlay=new Map();this.coverage='current';this.reason='synthetic authoritative reconciliation';}
+ query(text='',pathMode=false){const results=[];const inspect=(id,r)=>{if(!r)return;const p=this.path(id);if(p&&(pathMode?p:r.name).includes(text))results.push(p);};
+  for(const [id,r] of this.base){this.baseVisits++;inspect(id,this.overlay.has(id)?this.overlay.get(id):r);}
+  for(const [id,r] of this.overlay)if(!this.base.has(id))inspect(id,r);
+  return results.sort();
+ }
+}
+globalThis.FilenameModel=FilenameModel;
+</script>
+<script>
+const initial=[{id:'root',name:'workspace',parent:null,kind:'folder'},{id:'a',name:'project',parent:'root',kind:'folder'},{id:'b',name:'nested',parent:'a',kind:'folder'},{id:'f',name:'CAFÉ [draft]*.txt',parent:'b',kind:'file'}];
+let model,next=0,tab=0;const actions=[['Create file',()=>model.apply([{op:'create',id:'new'+next++,parent:'a',name:'note-'+next+'.txt',kind:'file'}])],['Rename project',()=>model.apply([{op:'rename',id:'a',parent:'root',name:'renamed-project'}])],['Delete project',()=>model.apply([{op:'delete',id:'a'}])],['Missed events',()=>model.invalidate('event queue overflow')],['Restart watcher',()=>model.invalidate('watcher restarted without replay')],['Exceed change budget',()=>model.apply(Array.from({length:6},(_,i)=>({op:'create',id:'burst'+i,parent:'root',name:'burst-'+i,kind:'file'})))],['Reconcile known fixture',()=>model.reconcile(initial)],['Reset',()=>reset()]];
+const scenarios=[['Rename a directory','Descendant paths change after one parent record changes.',['Rename project']],['Delete a directory','Descendants disappear without tombstones for every child.',['Delete project']],['Lost events','Search remains available, but freshness becomes incomplete until reconciliation.',['Missed events','Create file','Reconcile known fixture']],['Memory pressure','A batch beyond the change budget is rejected as a whole; cached results stay available.',['Exceed change budget','Create file','Reconcile known fixture']]];
+function reset(){model=new FilenameModel(initial,5);next=0;}
+function render(message=''){const box=document.getElementById('state');box.replaceChildren();for(const text of ['Coverage: '+model.coverage,'Reason: '+model.reason,'Base entries: '+model.base.size+'; changed identities: '+model.overlay.size+' / '+model.cap,'Last action: '+message]){const p=document.createElement('p');p.textContent=text;box.append(p);}const list=document.createElement('ul');for(const path of model.query()){const li=document.createElement('li');li.textContent=path;list.append(li);}box.append(list);const pre=document.createElement('pre');pre.textContent='Changed records: '+JSON.stringify([...model.overlay],null,2);box.append(pre);}
+function act(label){const item=actions.find(x=>x[0]===label);const result=item[1]();render(label+(result?' — '+JSON.stringify(result):''));}
+for(const [label] of actions){const b=document.createElement('button');b.textContent=label;b.onclick=()=>act(label);document.getElementById('actions').append(b);}
+function walkthrough(i){tab=i;reset();render();document.getElementById('description').textContent=scenarios[i][1];const steps=document.getElementById('steps');steps.replaceChildren();scenarios[i][2].forEach((label,n)=>{const b=document.createElement('button');b.textContent=(n+1)+'. '+label;b.onclick=()=>act(label);steps.append(b);});[...document.getElementById('tabs').children].forEach((b,n)=>b.className=n===i?'active':'');}
+scenarios.forEach((s,i)=>{const b=document.createElement('button');b.textContent=s[0];b.onclick=()=>walkthrough(i);document.getElementById('tabs').append(b);});walkthrough(0);
+</script>
