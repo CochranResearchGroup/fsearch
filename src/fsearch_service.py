@@ -145,21 +145,35 @@ def reconcile(directory, recover=False):
 
 def validate_request(request):
     if not isinstance(request, dict): raise BoundaryError('invalid_request')
-    allowed = {'schema_version', 'request_id', 'query', 'extension', 'kind', 'path', 'match_case', 'limit', 'max_candidates', 'max_bytes', 'timeout_ms', 'op', 'expected_database_b64', 'candidate_database_b64', 'expected_snapshot_id', 'sequence', 'entry_id', 'parent_id', 'entry_kind', 'name_b64', 'path_b64'}
+    allowed = {'schema_version', 'request_id', 'query', 'extension', 'kind', 'path', 'match_case', 'limit', 'max_candidates', 'max_bytes', 'timeout_ms', 'op', 'expected_database_b64', 'candidate_database_b64', 'expected_snapshot_id', 'sequence', 'entry_id', 'parent_id', 'entry_kind', 'name_b64', 'path_b64', 'coverage'}
     if set(request) - allowed or type(request.get('schema_version')) is not int or request.get('schema_version') != 1: raise BoundaryError('invalid_request')
     request_id = request.get('request_id')
     if not isinstance(request_id, str) or len(request_id.encode('utf-8')) > 64: raise BoundaryError('invalid_request')
-    if request.get('op') not in (None, 'query', 'stop', 'replace', 'catalog_apply', 'catalog_lookup', 'catalog_compact', 'catalog_status'): raise BoundaryError('invalid_request')
+    if request.get('op') not in (None, 'query', 'stop', 'replace', 'catalog_apply', 'catalog_lookup', 'catalog_compact', 'catalog_status', 'catalog_coverage'): raise BoundaryError('invalid_request')
     if (request.get('op') or '').startswith('catalog_'):
         op=request['op'];keys={'schema_version','request_id','op','timeout_ms','expected_snapshot_id'}
         if op=='catalog_apply':keys|={'sequence','entry_id','parent_id','entry_kind','name_b64'}
         if op=='catalog_lookup':keys.add('path_b64')
+        if op=='catalog_coverage':keys.add('coverage')
         if set(request)-keys:raise BoundaryError('invalid_request')
         expected=request.get('expected_snapshot_id')
         if expected is not None and (not isinstance(expected,str) or not expected or len(expected)>256):raise BoundaryError('invalid_request')
-        if op in ('catalog_apply','catalog_compact') and expected is None:raise BoundaryError('invalid_request')
+        if op in ('catalog_apply','catalog_compact','catalog_coverage') and expected is None:raise BoundaryError('invalid_request')
         timeout=request.setdefault('timeout_ms',2000)
         if type(timeout) is not int or not 1<=timeout<=10000:raise BoundaryError('invalid_request')
+        if op=='catalog_coverage':
+            coverage=request.get('coverage')
+            keys={'state','root_b64','event_sequence','catalog_sequence','last_reconciled_unix_ms','oldest_unapplied_unix_ms','reason'}
+            if not isinstance(coverage,dict) or set(coverage)!=keys or coverage['state'] not in ('reconciling','watching','pending','deferred','offline','stopped'):raise BoundaryError('invalid_request')
+            if not isinstance(coverage['reason'],str) or len(coverage['reason'])>128:raise BoundaryError('invalid_request')
+            for key in ('event_sequence','catalog_sequence','last_reconciled_unix_ms','oldest_unapplied_unix_ms'):
+                value=coverage[key]
+                if value is not None and (type(value) is not int or not 0<=value<2**63):raise BoundaryError('invalid_request')
+            value=coverage['root_b64']
+            if not isinstance(value,str) or len(value)>5464:raise BoundaryError('invalid_request')
+            try:raw=base64.b64decode(value,validate=True)
+            except ValueError:raise BoundaryError('invalid_request')
+            if not raw.startswith(b'/') or len(raw)>4096 or b'\0' in raw:raise BoundaryError('invalid_request')
         if op=='catalog_apply':
             for key,minimum,maximum in (('sequence',1,2**64-1),('parent_id',0,2**32-1),('entry_kind',0,2)):
                 value=request.get(key)
@@ -219,6 +233,8 @@ def worker_limits():
 
 class Supervisor:
     def __init__(self, directory, database):
+        self.incremental_coverage = None
+        self.coverage_deadline = 0
         self.startup_timeout = worker_startup_timeout()
         self.directory, self.database = directory, database
         self.selector = selectors.DefaultSelector()
@@ -280,6 +296,11 @@ class Supervisor:
         if client['socket'].fileno() < 0: return
         request = client.get('request') or {}
         payload['request_id'] = request.get('request_id')
+        if request.get('op') in (None,'query') and self.incremental_coverage is not None:
+            coverage=dict(self.incremental_coverage)
+            if coverage['state'] in ('watching','pending') and time.monotonic()>self.coverage_deadline:
+                coverage.update(state='deferred',reason='watcher_lease_expired')
+            payload['incremental_coverage']=coverage
         body = encoded(payload)
         if len(body) > request.get('max_bytes', MAX_RESPONSE): body = encoded(error('response_size_limit', request.get('request_id')))
         client['output'] = body; client['deadline'] = time.monotonic() + 2
@@ -334,6 +355,7 @@ class Supervisor:
         self.start_deadline = time.monotonic() + self.startup_timeout
         self.worker_read.clear(); self.worker_ready = False
     def abort_worker(self, code):
+        if self.incremental_coverage is not None:self.incremental_coverage.update(state='deferred',reason='worker_stopped')
         if self.candidate:self.abort_candidate(code)
         if self.worker is None: return
         worker = self.worker
@@ -431,6 +453,7 @@ class Supervisor:
             except KeyError:pass
         self.worker=candidate['process'];self.record=self.candidate_record
         self.worker_database=candidate['path'];self.accepted_identity=candidate['identity']
+        if self.incremental_coverage is not None:self.incremental_coverage.update(state='reconciling',reason='snapshot_replaced')
         self.worker_ready=True;self.worker_read.clear();self.worker_write=b''
         self.candidate=None;self.candidate_record=None;self.retiring_record=old_record
         os.set_blocking(self.worker.stdin.fileno(),False)
@@ -456,6 +479,11 @@ class Supervisor:
             if expected is not None and expected!=self.accepted_identity:
                 client=self.active;self.active=None;self.reply(client,error('snapshot_conflict'));return
             op=request['op'];body=b''
+            if op=='catalog_coverage':
+                self.incremental_coverage=dict(request['coverage']);self.coverage_deadline=time.monotonic()+2
+                client=self.active;self.active=None
+                self.reply(client,{'schema_version':1,'status':'catalog_coverage','complete':False,'results':[],'snapshot_id':self.accepted_identity})
+                return
             if op=='catalog_apply':
                 body=base64.b64decode(request['name_b64']);sequence=request['sequence']
                 command=0x101 if 'entry_id' in request else 0x100

@@ -151,3 +151,11 @@ endif
 if host_machine.system() == 'linux'
     catalog_query_benchmark = executable('catalog_query_benchmark', 'catalog_query_benchmark.c', dependencies: libfsearch_dep)
 endif
+if host_machine.system() == 'linux'
+    test('continuous_events', python, args: [files('test_continuous_events.py'), fsearch_monitor_worker.full_path(), monitor_fault_fixture.full_path()],
+        depends: [fsearch_monitor_worker, monitor_fault_fixture], timeout: 30)
+endif
+if host_machine.system() == 'linux'
+    test('incremental_visibility', python, args: [files('test_incremental.py'), fsearch_service, fsearch_incremental, snapshot_fixture.full_path()],
+        depends: [fsearch_monitor_worker, fsearch_refresh_worker, fsearch_worker, snapshot_fixture], timeout: 40)
+endif

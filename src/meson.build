@@ -126,7 +126,9 @@ if host_machine.system() == 'linux'
         install: true, install_dir: get_option('bindir'), install_mode: 'rwxr-xr-x')
     fsearch_monitor = configure_file(input: 'fsearch_monitor.py', output: 'fsearch-monitor', copy: true, install: true,
         install_dir: get_option('bindir'), install_mode: 'rwxr-xr-x')
-    fsearch_monitor_worker = executable('fsearch-monitor-worker', 'fsearch_monitor_worker.c', install: true)
+    fsearch_incremental = configure_file(input: 'fsearch_incremental.py', output: 'fsearch-incremental', copy: true, install: true,
+        install_dir: get_option('bindir'), install_mode: 'rwxr-xr-x')
+    fsearch_monitor_worker = executable('fsearch-monitor-worker', 'fsearch_monitor_worker.c', dependencies: dependency('glib-2.0'), install: true)
     fsearch_refresh_worker = executable('fsearch-refresh-worker', 'fsearch_refresh_worker.c', dependencies: libfsearch_dep, install: true)
     fsearch_worker = executable('fsearch-worker', 'fsearch_worker.c', dependencies: libfsearch_dep, install: true)
     fsearch_service = configure_file(input: 'fsearch_service.py', output: 'fsearch-service', copy: true,

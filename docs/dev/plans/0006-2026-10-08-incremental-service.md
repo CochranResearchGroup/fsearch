@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: M3 contained continuous event ingestion, ready after M2 source acceptance. M1 source accepted at 5de54e22; M2 production engine integrated and source qualified; installed runtime remains unchanged.
+Current packet: M3 contained continuous event ingestion, in progress under issue #29. M1 source accepted at 5de54e22; M2 production engine integrated and source qualified; installed runtime remains unchanged.
 
 ## Destination and completion rule
 
@@ -96,7 +96,7 @@ Exit artifact: reviewed production implementation and API contract, with M1 life
 
 ### M3 — contained continuous indexing and reconciliation
 
-Depends on M2. Status: PENDING.
+Depends on M2. Status: IN_PROGRESS.
 
 Connect a separate contained watcher/updater to approved roots. Coalesce redundant events, retain bounded sequence/replay state, detect queue overflow and handle excluded mounts before metadata access. Reuse existing confinement and quarantine rules; query workers remain isolated from indexed-root operations.
 
@@ -169,7 +169,7 @@ Out of scope: content indexing, whole-Ubuntu/Windows/Google Drive scans, replaci
 |---|---|---|
 | M1 | SOURCE_ACCEPTED | [Lifecycle, native oracle, sanitizer and resource receipts](../notes/2026-10-08-plan6-m1-generations.md); installed acceptance remains M6 |
 | M2 | SOURCE_ACCEPTED | Production catalog/query/transport; 26 native groups, 439 frontend tests, 6120 sanitizer oracle comparisons; directory-heavy exact-count query and concurrent compaction pass; installed/program acceptance stays M5/M6 |
-| M3 | PENDING | Contained watcher, loss detection and reconciliation |
+| M3 | IN_PROGRESS | Real file events ingest through private catalog; explicit query coverage/lease; directory topology currently triggers full contained reconciliation, so current-scale freshness is not qualified |
 | M4 | PENDING | Durable checkpoint/replay and crash/startup matrix |
 | M5 | PENDING | Current-scale aggregate acceptance and 24-hour synthetic soak |
 | M6 | PENDING | Installed CLI/MCP acceptance, rollback and 72-hour operational soak |

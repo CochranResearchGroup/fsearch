@@ -1,6 +1,7 @@
 /* Bounded, single-generation explicit-root watcher. GPL-2.0-or-later. */
 #define _GNU_SOURCE
 #include <dirent.h>
+#include <glib.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <linux/landlock.h>
@@ -21,6 +22,11 @@
 #define WATCH_LIMIT 800000u
 static unsigned entries, watches;
 static int notifications, root_watch;
+static bool events_mode;
+typedef struct { dev_t device; ino_t inode; char relative[]; } WatchInfo;
+static GHashTable *watch_paths;
+static uint64_t event_sequence;
+
 
 static int failure(const char *code) {
     printf("{\"schema_version\":1,\"status\":\"error\",\"error\":{\"code\":\"%s\"}}\n", code);
@@ -53,6 +59,14 @@ static bool watch_tree(int fd, unsigned depth, int root, const char *relative) {
         | IN_DELETE_SELF | IN_MOVE_SELF | IN_ATTRIB | IN_UNMOUNT);
     if (watch < 0) { close(fd); return false; }
     watches++;
+    if(events_mode) {
+        struct stat pinned;
+        if(fstat(fd,&pinned)){close(fd);return false;}
+        WatchInfo *info=g_try_malloc(sizeof(*info)+strlen(relative)+1);
+        if(!info){close(fd);return false;}
+        info->device=pinned.st_dev;info->inode=pinned.st_ino;strcpy(info->relative,relative);
+        g_hash_table_insert(watch_paths,GINT_TO_POINTER(watch),info);
+    }
     if (!depth) root_watch = watch;
     DIR *directory = fdopendir(fd);
     if (!directory) { close(fd); return false; }
@@ -93,9 +107,60 @@ static bool watch_tree(int fd, unsigned depth, int root, const char *relative) {
     closedir(directory);
     return ok;
 }
+static int event_gap(const char *reason) {
+    printf("{\"schema_version\":1,\"status\":\"gap\",\"reason\":\"%s\",\"sequence\":%llu}\n",reason,(unsigned long long)event_sequence);
+    return 4;
+}
+static int continuous_events(int root) {
+    union { struct inotify_event alignment; char bytes[65536]; } buffer;
+    for(;;) {
+        ssize_t count;
+        do {count=read(notifications,buffer.bytes,sizeof(buffer.bytes));}while(count<0&&errno==EINTR);
+        if(count<=0)return event_gap("watch_failed");
+        for(size_t offset=0;offset<(size_t)count;) {
+            if((size_t)count-offset<sizeof(struct inotify_event))return event_gap("event_frame");
+            struct inotify_event *event=(struct inotify_event*)(buffer.bytes+offset);
+            if(event->len>(size_t)count-offset-sizeof(*event))return event_gap("event_frame");
+            offset+=sizeof(*event)+event->len;
+            if(event->mask&IN_Q_OVERFLOW)return event_gap("overflow");
+            if(event->wd==root_watch&&(event->mask&(IN_MOVE_SELF|IN_DELETE_SELF|IN_UNMOUNT|IN_IGNORED)))return event_gap("root_offline");
+            /* Directory topology changes require a contained reconciliation.
+             * Stop and release all watches before any possibly moved child is
+             * probed. The updater must not claim freshness across this gap. */
+            if(event->mask&(IN_ISDIR|IN_MOVE_SELF|IN_DELETE_SELF|IN_UNMOUNT|IN_IGNORED))return event_gap("directory_topology");
+            if(!(event->mask&(IN_CREATE|IN_DELETE|IN_MOVED_FROM|IN_MOVED_TO)))continue;
+            WatchInfo *parent=g_hash_table_lookup(watch_paths,GINT_TO_POINTER(event->wd));
+            if(!parent||!event->len||!memchr(event->name,0,event->len)||strchr(event->name,'/'))return event_gap("event_identity");
+            /* Re-resolve parent from the admitted root, never from its possibly
+             * relocated watch descriptor, and verify the watched identity. */
+            int parent_fd=beneath(root,*parent->relative?parent->relative:".",O_PATH|O_DIRECTORY);
+            struct stat info;
+            bool valid=parent_fd>=0&&!fstat(parent_fd,&info)&&info.st_dev==parent->device&&info.st_ino==parent->inode;
+            if(parent_fd>=0)close(parent_fd);
+            if(!valid)return event_gap("parent_relocated");
+            if(event->mask&(IN_CREATE|IN_MOVED_TO)) {
+                char relative[4096];int n=snprintf(relative,sizeof(relative),"%s%s%s",parent->relative,*parent->relative?"/":"",event->name);
+                if(n<0||(size_t)n>=sizeof(relative))return event_gap("path_limit");
+                int child=beneath(root,relative,O_PATH);
+                if(child<0) {
+                    if(errno==ELOOP||errno==EXDEV)continue;
+                    return event_gap("mutation_race");
+                }
+                bool eligible=!fstat(child,&info)&&S_ISREG(info.st_mode);close(child);
+                if(!eligible)continue;
+            }
+            g_autofree char *parent_b64=g_base64_encode((const guchar*)parent->relative,strlen(parent->relative));
+            g_autofree char *name_b64=g_base64_encode((const guchar*)event->name,strlen(event->name));
+            if(event_sequence==UINT64_MAX)return event_gap("sequence_limit");
+            printf("{\"schema_version\":1,\"status\":\"event\",\"sequence\":%llu,\"mask\":%u,\"cookie\":%u,\"parent_b64\":\"%s\",\"name_b64\":\"%s\",\"kind\":1,\"observed_monotonic_us\":%lld}\n",(unsigned long long)++event_sequence,event->mask,event->cookie,parent_b64,name_b64,(long long)g_get_monotonic_time());
+        }
+    }
+}
 int main(int argc, char **argv) {
     setvbuf(stdout, NULL, _IONBF, 0);
-    if (argc != 3 || strcmp(argv[1], "--root") || argv[2][0] != '/') return failure("invalid_request");
+    events_mode=argc==4&&!strcmp(argv[3],"--events");
+    if ((argc != 3&&!events_mode) || strcmp(argv[1], "--root") || argv[2][0] != '/') return failure("invalid_request");
+    if(events_mode)watch_paths=g_hash_table_new_full(g_direct_hash,g_direct_equal,NULL,g_free);
     pid_t parent = getppid();
     if (prctl(PR_SET_PDEATHSIG, SIGKILL) || getppid() != parent) return failure("parent_changed");
     char gate;
@@ -118,10 +183,14 @@ int main(int argc, char **argv) {
         return failure("watch_unavailable");
     }
     bool complete = watch_tree(contents, 0, root, "");
-    close(root);
+    if(!events_mode)close(root);
     if (!complete) { close(notifications); return failure("coverage_incomplete"); }
     printf("{\"schema_version\":1,\"status\":\"ready\",\"watches\":%u,\"root_device\":%llu,\"root_inode\":%llu}\n",
         watches, (unsigned long long)info.st_dev, (unsigned long long)info.st_ino);
+    if(events_mode) {
+        printf("{\"schema_version\":1,\"status\":\"coverage\",\"reconciliation_required\":true,\"reason\":\"startup_gap\"}\n");
+        int result=continuous_events(root);close(notifications);close(root);g_hash_table_unref(watch_paths);return result;
+    }
     union { struct inotify_event alignment; char bytes[65536]; } buffer;
     ssize_t count;
     do { count = read(notifications, buffer.bytes, sizeof(buffer.bytes)); } while (count < 0 && errno == EINTR);
