@@ -1,7 +1,10 @@
 /* Bounded, single-generation explicit-root watcher. GPL-2.0-or-later. */
+#ifndef _GNU_SOURCE
 #define _GNU_SOURCE
+#endif
 #include <dirent.h>
 #include <glib.h>
+#include <poll.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <linux/landlock.h>
@@ -24,7 +27,9 @@ static unsigned entries, watches;
 static int notifications, root_watch;
 static bool events_mode;
 typedef struct { dev_t device; ino_t inode; char relative[]; } WatchInfo;
-static GHashTable *watch_paths;
+static GHashTable *watch_paths, *expected_ignored, *pending_directories;
+typedef struct { int watch; dev_t device; ino_t inode; gint64 deadline; } PendingDirectory;
+static bool inventory_mode;
 static uint64_t event_sequence;
 
 
@@ -49,8 +54,63 @@ static bool confine(int root) {
     close(fd);
     return ok;
 }
+static bool emit_event(const char *parent,const char *name,unsigned kind,unsigned mask,unsigned cookie) {
+    if(event_sequence==UINT64_MAX)return false;
+    g_autofree char *parent_b64=g_base64_encode((const guchar*)parent,strlen(parent));
+    g_autofree char *name_b64=g_base64_encode((const guchar*)name,strlen(name));
+    printf("{\"schema_version\":1,\"status\":\"event\",\"sequence\":%llu,\"mask\":%u,\"cookie\":%u,\"parent_b64\":\"%s\",\"name_b64\":\"%s\",\"kind\":%u,\"observed_monotonic_us\":%lld}\n",(unsigned long long)++event_sequence,mask,cookie,parent_b64,name_b64,kind,(long long)g_get_monotonic_time());
+    return true;
+}
+static bool prefix_contains(const char *prefix,const char *path) {
+    size_t n=strlen(prefix);return !strncmp(prefix,path,n)&&(!path[n]||path[n]=='/');
+}
+static void remove_subtree(const char *prefix) {
+    GHashTableIter iter;gpointer key,value;g_hash_table_iter_init(&iter,watch_paths);
+    while(g_hash_table_iter_next(&iter,&key,&value)) {
+        WatchInfo *info=value;
+        if(prefix_contains(prefix,info->relative)) {
+            g_hash_table_add(expected_ignored,key);inotify_rm_watch(notifications,GPOINTER_TO_INT(key));
+            g_hash_table_iter_remove(&iter);watches--;
+        }
+    }
+}
+static int find_watch(const char *relative) {
+    GHashTableIter iter;gpointer key,value;g_hash_table_iter_init(&iter,watch_paths);
+    while(g_hash_table_iter_next(&iter,&key,&value))if(!strcmp(((WatchInfo*)value)->relative,relative))return GPOINTER_TO_INT(key);
+    return -1;
+}
+static bool rename_watches(const char *old,const char *replacement) {
+    size_t old_length=strlen(old);GHashTableIter iter;gpointer key,value;g_hash_table_iter_init(&iter,watch_paths);
+    while(g_hash_table_iter_next(&iter,&key,&value)) {
+        WatchInfo *info=value;if(!prefix_contains(old,info->relative))continue;
+        size_t length=strlen(replacement)+strlen(info->relative+old_length);
+        if(length>=4096)return false;
+        WatchInfo *next=g_try_malloc(sizeof(*next)+length+1);if(!next)return false;
+        next->device=info->device;next->inode=info->inode;
+        strcpy(next->relative,replacement);strcat(next->relative,info->relative+old_length);
+        g_hash_table_iter_replace(&iter,next);
+    }
+    return true;
+}
+static bool pending_subtree(const char *relative) {
+    GHashTableIter iter;gpointer value;g_hash_table_iter_init(&iter,pending_directories);
+    while(g_hash_table_iter_next(&iter,NULL,&value)) {
+        PendingDirectory *pending=value;WatchInfo *info=g_hash_table_lookup(watch_paths,GINT_TO_POINTER(pending->watch));
+        if(info&&prefix_contains(info->relative,relative))return true;
+    }
+    return false;
+}
+static void expire_directory_moves(void) {
+    GHashTableIter iter;gpointer value;g_hash_table_iter_init(&iter,pending_directories);gint64 now=g_get_monotonic_time();
+    while(g_hash_table_iter_next(&iter,NULL,&value)) {
+        PendingDirectory *pending=value;if(now<pending->deadline)continue;
+        WatchInfo *info=g_hash_table_lookup(watch_paths,GINT_TO_POINTER(pending->watch));
+        if(info){g_autofree char *relative=g_strdup(info->relative);remove_subtree(relative);}
+        g_hash_table_iter_remove(&iter);
+    }
+}
 static bool watch_tree(int fd, unsigned depth, int root, const char *relative) {
-    if (depth > 64 || watches >= WATCH_LIMIT) { close(fd); return false; }
+    if (depth > 64 || watches >= WATCH_LIMIT || (events_mode&&watches+g_hash_table_size(expected_ignored)>=WATCH_LIMIT)) { close(fd); return false; }
     /* Resolve the pinned descriptor, never a mutable child pathname. */
     char path[64];
     snprintf(path, sizeof(path), "/proc/self/fd/%d", fd);
@@ -58,8 +118,10 @@ static bool watch_tree(int fd, unsigned depth, int root, const char *relative) {
         IN_ONLYDIR | IN_CREATE | IN_DELETE | IN_MOVED_FROM | IN_MOVED_TO
         | IN_DELETE_SELF | IN_MOVE_SELF | IN_ATTRIB | IN_UNMOUNT);
     if (watch < 0) { close(fd); return false; }
-    watches++;
-    if(events_mode) {
+    bool existing=events_mode&&g_hash_table_contains(watch_paths,GINT_TO_POINTER(watch));
+    if(existing&&!inventory_mode){close(fd);return true;}
+    if(!existing)watches++;
+    if(events_mode&&!existing) {
         struct stat pinned;
         if(fstat(fd,&pinned)){close(fd);return false;}
         WatchInfo *info=g_try_malloc(sizeof(*info)+strlen(relative)+1);
@@ -93,6 +155,9 @@ static bool watch_tree(int fd, unsigned depth, int root, const char *relative) {
         int contents = S_ISDIR(info.st_mode) ? beneath(root, child_path, O_RDONLY | O_DIRECTORY) : -1;
         bool directory_entry = S_ISDIR(info.st_mode);
         close(child);
+        if(inventory_mode&&(directory_entry||S_ISREG(info.st_mode))) {
+            if(!emit_event(relative,item->d_name,directory_entry?2:1,IN_CREATE,0)) {ok=false;break;}
+        }
         if (directory_entry) {
             if (contents < 0 && (errno == EACCES || errno == EPERM)) continue;
             struct stat pinned;
@@ -114,6 +179,12 @@ static int event_gap(const char *reason) {
 static int continuous_events(int root) {
     union { struct inotify_event alignment; char bytes[65536]; } buffer;
     for(;;) {
+        if(g_hash_table_size(pending_directories)) {
+            struct pollfd waiting={.fd=notifications,.events=POLLIN};
+            int ready;do{ready=poll(&waiting,1,20);}while(ready<0&&errno==EINTR);
+            if(ready<0)return event_gap("watch_failed");
+            if(!ready){expire_directory_moves();continue;}
+        }
         ssize_t count;
         do {count=read(notifications,buffer.bytes,sizeof(buffer.bytes));}while(count<0&&errno==EINTR);
         if(count<=0)return event_gap("watch_failed");
@@ -124,10 +195,36 @@ static int continuous_events(int root) {
             offset+=sizeof(*event)+event->len;
             if(event->mask&IN_Q_OVERFLOW)return event_gap("overflow");
             if(event->wd==root_watch&&(event->mask&(IN_MOVE_SELF|IN_DELETE_SELF|IN_UNMOUNT|IN_IGNORED)))return event_gap("root_offline");
-            /* Directory topology changes require a contained reconciliation.
-             * Stop and release all watches before any possibly moved child is
-             * probed. The updater must not claim freshness across this gap. */
-            if(event->mask&(IN_ISDIR|IN_MOVE_SELF|IN_DELETE_SELF|IN_UNMOUNT|IN_IGNORED))return event_gap("directory_topology");
+            if(g_hash_table_contains(expected_ignored,GINT_TO_POINTER(event->wd))) {
+                if(event->mask&IN_IGNORED)g_hash_table_remove(expected_ignored,GINT_TO_POINTER(event->wd));
+                continue;
+            }
+            WatchInfo *watched=g_hash_table_lookup(watch_paths,GINT_TO_POINTER(event->wd));
+            if(watched&&pending_subtree(watched->relative)) {
+                /* Until a move cookie resolves, this watch may be outside the
+                 * admitted root. Never probe/export its names or silently lose
+                 * a mutation that could belong to an internal rename. */
+                if(event->mask&(IN_CREATE|IN_DELETE|IN_MOVED_FROM|IN_MOVED_TO|IN_ATTRIB|IN_UNMOUNT|IN_IGNORED))return event_gap("directory_move_concurrent");
+                continue;
+            }
+            if(event->mask&IN_MOVE_SELF) {
+                if(!watched)return event_gap("event_identity");
+                int current=beneath(root,*watched->relative?watched->relative:".",O_PATH|O_DIRECTORY);struct stat identity;
+                bool valid=current>=0&&!fstat(current,&identity)&&identity.st_dev==watched->device&&identity.st_ino==watched->inode;
+                if(current>=0)close(current);
+                if(!valid)return event_gap("parent_relocated");
+                continue;
+            }
+            if(event->mask&(IN_UNMOUNT|IN_IGNORED))return event_gap("directory_topology");
+            if(event->mask&IN_DELETE_SELF) {
+                WatchInfo *removed=g_hash_table_lookup(watch_paths,GINT_TO_POINTER(event->wd));
+                if(!removed)return event_gap("event_identity");
+                g_autofree char *relative=g_strdup(removed->relative),*parent=g_strdup(relative);
+                char *slash=strrchr(parent,'/');const char *name=slash?slash+1:relative;if(slash)*slash=0;else *parent=0;
+                if(!emit_event(parent,name,2,IN_DELETE,0))return event_gap("sequence_limit");
+                remove_subtree(relative);continue;
+            }
+            if((event->mask&IN_ISDIR)&&(event->mask&IN_ATTRIB))return event_gap("directory_topology");
             if(!(event->mask&(IN_CREATE|IN_DELETE|IN_MOVED_FROM|IN_MOVED_TO)))continue;
             WatchInfo *parent=g_hash_table_lookup(watch_paths,GINT_TO_POINTER(event->wd));
             if(!parent||!event->len||!memchr(event->name,0,event->len)||strchr(event->name,'/'))return event_gap("event_identity");
@@ -138,29 +235,62 @@ static int continuous_events(int root) {
             bool valid=parent_fd>=0&&!fstat(parent_fd,&info)&&info.st_dev==parent->device&&info.st_ino==parent->inode;
             if(parent_fd>=0)close(parent_fd);
             if(!valid)return event_gap("parent_relocated");
+            char relative[4096];int n=snprintf(relative,sizeof(relative),"%s%s%s",parent->relative,*parent->relative?"/":"",event->name);
+            if(n<0||(size_t)n>=sizeof(relative))return event_gap("path_limit");
+            unsigned kind=(event->mask&IN_ISDIR)?2:1;
+            bool paired_directory=false;
+            if(kind==2&&(event->mask&IN_MOVED_FROM)) {
+                int moved=find_watch(relative);WatchInfo *info=g_hash_table_lookup(watch_paths,GINT_TO_POINTER(moved));
+                if(!info||!event->cookie||g_hash_table_size(pending_directories)>=128||g_hash_table_contains(pending_directories,GUINT_TO_POINTER(event->cookie)))return event_gap("directory_move_budget");
+                PendingDirectory *pending=g_try_malloc(sizeof(*pending));if(!pending)return event_gap("memory_budget");
+                *pending=(PendingDirectory){moved,info->device,info->inode,g_get_monotonic_time()+100000};
+                g_hash_table_insert(pending_directories,GUINT_TO_POINTER(event->cookie),pending);
+            }
             if(event->mask&(IN_CREATE|IN_MOVED_TO)) {
-                char relative[4096];int n=snprintf(relative,sizeof(relative),"%s%s%s",parent->relative,*parent->relative?"/":"",event->name);
+                n=snprintf(relative,sizeof(relative),"%s%s%s",parent->relative,*parent->relative?"/":"",event->name);
                 if(n<0||(size_t)n>=sizeof(relative))return event_gap("path_limit");
                 int child=beneath(root,relative,O_PATH);
                 if(child<0) {
                     if(errno==ELOOP||errno==EXDEV)continue;
                     return event_gap("mutation_race");
                 }
-                bool eligible=!fstat(child,&info)&&S_ISREG(info.st_mode);close(child);
+                bool eligible=!fstat(child,&info)&&(S_ISREG(info.st_mode)||S_ISDIR(info.st_mode));close(child);
+                if(eligible)kind=S_ISDIR(info.st_mode)?2:1;
                 if(!eligible)continue;
+                if(kind!=((event->mask&IN_ISDIR)?2u:1u))return event_gap("mutation_type_race");
+                if(kind==2&&(event->mask&IN_MOVED_TO)) {
+                    PendingDirectory *pending=g_hash_table_lookup(pending_directories,GUINT_TO_POINTER(event->cookie));
+                    if(pending) {
+                        WatchInfo *old=g_hash_table_lookup(watch_paths,GINT_TO_POINTER(pending->watch));
+                        if(!old||info.st_dev!=pending->device||info.st_ino!=pending->inode)return event_gap("directory_move_identity");
+                        g_autofree char *previous=g_strdup(old->relative);
+                        int victim=find_watch(relative);
+                        if(victim>=0&&victim!=pending->watch)remove_subtree(relative);
+                        if(!rename_watches(previous,relative))return event_gap("directory_move_budget");
+                        g_hash_table_remove(pending_directories,GUINT_TO_POINTER(event->cookie));paired_directory=true;
+                    }
+                }
             }
-            g_autofree char *parent_b64=g_base64_encode((const guchar*)parent->relative,strlen(parent->relative));
-            g_autofree char *name_b64=g_base64_encode((const guchar*)event->name,strlen(event->name));
-            if(event_sequence==UINT64_MAX)return event_gap("sequence_limit");
-            printf("{\"schema_version\":1,\"status\":\"event\",\"sequence\":%llu,\"mask\":%u,\"cookie\":%u,\"parent_b64\":\"%s\",\"name_b64\":\"%s\",\"kind\":1,\"observed_monotonic_us\":%lld}\n",(unsigned long long)++event_sequence,event->mask,event->cookie,parent_b64,name_b64,(long long)g_get_monotonic_time());
+            if(!emit_event(parent->relative,event->name,kind,event->mask,event->cookie))return event_gap("sequence_limit");
+            if(kind==2&&(event->mask&IN_DELETE))remove_subtree(relative);
+            if(kind==2&&!paired_directory&&(event->mask&(IN_CREATE|IN_MOVED_TO))) {
+                int contents=beneath(root,relative,O_RDONLY|O_DIRECTORY);
+                if(contents<0)return event_gap("directory_unavailable");
+                unsigned depth=1;for(const char*p=relative;*p;p++)if(*p=='/')depth++;
+                printf("{\"schema_version\":1,\"status\":\"inventory\",\"phase\":\"begin\",\"sequence\":%llu}\n",(unsigned long long)event_sequence);
+                inventory_mode=true;entries=0;bool complete=watch_tree(contents,depth,root,relative);inventory_mode=false;
+                if(!complete)return event_gap("subtree_incomplete");
+                printf("{\"schema_version\":1,\"status\":\"inventory\",\"phase\":\"end\",\"sequence\":%llu}\n",(unsigned long long)event_sequence);
+            }
         }
+        expire_directory_moves();
     }
 }
 int main(int argc, char **argv) {
     setvbuf(stdout, NULL, _IONBF, 0);
     events_mode=argc==4&&!strcmp(argv[3],"--events");
     if ((argc != 3&&!events_mode) || strcmp(argv[1], "--root") || argv[2][0] != '/') return failure("invalid_request");
-    if(events_mode)watch_paths=g_hash_table_new_full(g_direct_hash,g_direct_equal,NULL,g_free);
+    if(events_mode){watch_paths=g_hash_table_new_full(g_direct_hash,g_direct_equal,NULL,g_free);expected_ignored=g_hash_table_new(g_direct_hash,g_direct_equal);pending_directories=g_hash_table_new_full(g_direct_hash,g_direct_equal,NULL,g_free);}
     pid_t parent = getppid();
     if (prctl(PR_SET_PDEATHSIG, SIGKILL) || getppid() != parent) return failure("parent_changed");
     char gate;
@@ -189,7 +319,7 @@ int main(int argc, char **argv) {
         watches, (unsigned long long)info.st_dev, (unsigned long long)info.st_ino);
     if(events_mode) {
         printf("{\"schema_version\":1,\"status\":\"coverage\",\"reconciliation_required\":true,\"reason\":\"startup_gap\"}\n");
-        int result=continuous_events(root);close(notifications);close(root);g_hash_table_unref(watch_paths);return result;
+        int result=continuous_events(root);close(notifications);close(root);g_hash_table_unref(watch_paths);g_hash_table_unref(expected_ignored);g_hash_table_unref(pending_directories);return result;
     }
     union { struct inotify_event alignment; char bytes[65536]; } buffer;
     ssize_t count;

@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/tmp/fsearch-guard-controls-53awou3z/no_blocking_pss.py", line 10, in <module>
+    runpy.run_path(sys.argv[0],run_name='__main__')
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/tmp/fsearch-incremental-generations/src/tests/run_pressure_guard.py", line 61, in <module>
+    now=time.monotonic();metrics=host();rows=tree(proc.pid,known)
+                                             ^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/fsearch-incremental-generations/src/tests/run_pressure_guard.py", line 37, in tree
+    rollup=(path/'smaps_rollup').read_text()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/fsearch-guard-controls-53awou3z/no_blocking_pss.py", line 6, in guarded
+    raise AssertionError('PSS must not block the pressure monitor')
+AssertionError: PSS must not block the pressure monitor
+Traceback (most recent call last):
+  File "/tmp/fsearch-incremental-generations/src/tests/test_pressure_guard.py", line 20, in <module>
+    assert not marker.exists(),'monitor attempted potentially blocking PSS read'
+           ^^^^^^^^^^^^^^^^^^^
+AssertionError: monitor attempted potentially blocking PSS read

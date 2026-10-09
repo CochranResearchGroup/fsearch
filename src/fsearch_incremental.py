@@ -91,25 +91,34 @@ def decode(value,relative=False):
     return raw
 
 def ingest(watcher,client,root):
-    observed=0;pending={};next_heartbeat=0;oldest=None
+    observed=0;pending={};next_heartbeat=0;oldest=None;inventory_since=None
     def remove(entry):
         if entry:client.apply(entry['parent_id'],b'',entry['entry_id'],0)
     while True:
         message=watcher.message(.02)
         now=time.monotonic()
-        for cookie,(entry,expiry,received) in list(pending.items()):
-            if now>=expiry:remove(entry);del pending[cookie]
         if message is None:
+            for cookie,(entry,expiry,received) in list(pending.items()):
+                if now>=expiry:remove(entry);del pending[cookie]
             if now>=next_heartbeat:
-                client.coverage('pending' if pending else 'watching',root,observed,min(x[2] for x in pending.values()) if pending else None)
+                outstanding=[x[2] for x in pending.values()]+([inventory_since] if inventory_since is not None else [])
+                client.coverage('pending' if outstanding else 'watching',root,observed,min(outstanding) if outstanding else None,reason='subtree_inventory' if inventory_since is not None else '')
                 next_heartbeat=now+.5
             continue
         if message.get('status')=='gap':raise monitor.GenerationChanged(message.get('reason','event_gap'))
+        if message.get('status')=='inventory':
+            if type(message.get('sequence')) is not int or message['sequence']!=observed:raise BoundaryError('event_sequence_gap')
+            if message.get('phase')=='begin' and inventory_since is None:inventory_since=int(time.time()*1000)
+            elif message.get('phase')=='end' and inventory_since is not None:inventory_since=None
+            else:raise BoundaryError('worker_protocol_failed')
+            outstanding=[x[2] for x in pending.values()]+([inventory_since] if inventory_since is not None else [])
+            client.coverage('pending',root,observed,min(outstanding) if outstanding else None,reason='subtree_inventory' if inventory_since is not None else 'inventory_drained')
+            continue
         if message.get('status')!='event' or type(message.get('sequence')) is not int or message['sequence']!=observed+1:raise BoundaryError('event_sequence_gap')
-        observed+=1;received=int(time.time()*1000);oldest=min([received]+[x[2] for x in pending.values()])
+        observed+=1;received=int(time.time()*1000);oldest=min([received]+[x[2] for x in pending.values()]+([inventory_since] if inventory_since is not None else []))
         client.coverage('pending',root,observed,oldest,reason='event_pending')
         mask=message.get('mask');cookie=message.get('cookie')
-        if type(mask) is not int or type(cookie) is not int or message.get('kind')!=1:raise BoundaryError('worker_protocol_failed')
+        if type(mask) is not int or type(cookie) is not int or message.get('kind') not in (1,2):raise BoundaryError('worker_protocol_failed')
         parent_relative=decode(message.get('parent_b64'),True);name=decode(message.get('name_b64'))
         parent_path=root+(b'/'+parent_relative if parent_relative else b'');path=parent_path+b'/'+name
         parent=client.lookup(parent_path)
@@ -123,11 +132,12 @@ def ingest(watcher,client,root):
             previous=pending.pop(cookie,(None,0,None))[0]
             if previous:
                 if existing and existing['entry_id']!=previous['entry_id']:remove(existing)
-                client.apply(parent['entry_id'],name,previous['entry_id'])
-            elif not existing:client.apply(parent['entry_id'],name)
+                client.apply(parent['entry_id'],name,previous['entry_id'],message['kind'])
+            else:
+                remove(existing);client.apply(parent['entry_id'],name,kind=message['kind'])
         elif mask&0x200:remove(existing)
         elif mask&0x100:
-            if not existing:client.apply(parent['entry_id'],name)
+            if not existing:client.apply(parent['entry_id'],name,kind=message['kind'])
         else:raise BoundaryError('worker_protocol_failed')
         emit('applied',event_sequence=observed,catalog_sequence=client.sequence,oldest_unapplied_monotonic=time.monotonic() if pending else None)
 

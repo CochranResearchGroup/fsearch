@@ -1,0 +1,6 @@
+{
+  "result": "failed_fixture_assertion",
+  "reason": "presence polling returned the pre-rename cached child; the assertion compared the new path immediately instead of waiting within the 1-second gate",
+  "correction": "poll for exact destination path and measure actual visibility latency; original failure retained",
+  "production_acceptance": "not yet established by this run"
+}

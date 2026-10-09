@@ -1,24 +1,44 @@
 """Actual filesystem-to-catalog visibility through confined watcher and updater."""
-import base64,json,os,signal,socket,subprocess,sys,tempfile,time
+import base64,json,os,runpy,signal,socket,subprocess,sys,tempfile,time
 from pathlib import Path
 service,incremental,fixture=sys.argv[1:];os.umask(0o077)
+# A watcher may pause while traversing an admitted populated subtree. Idle
+# heartbeats must retain pending coverage until its explicit end marker.
+implementation=runpy.run_path(incremental)
+class InventoryWatcher:
+    def __init__(self):self.messages=iter([{'status':'inventory','phase':'begin','sequence':0},None,{'status':'inventory','phase':'end','sequence':0},None])
+    def message(self,timeout):
+        message=next(self.messages)
+        if message is None:time.sleep(.51)
+        return message
+class CoverageClient:
+    def __init__(self):self.frames=[]
+    def coverage(self,*args,**kwargs):self.frames.append((args,kwargs))
+coverage_client=CoverageClient()
+try:implementation['ingest'](InventoryWatcher(),coverage_client,b'/owned-fixture')
+except StopIteration:pass
+frames=coverage_client.frames
+assert len(frames)==4,frames
+assert frames[0][0][0]==frames[1][0][0]=='pending' and frames[0][0][3]==frames[1][0][3] is not None,frames
+assert frames[1][1]['reason']=='subtree_inventory',frames
+assert frames[-1][0][0]=='watching' and frames[-1][0][3] is None,frames
 with tempfile.TemporaryDirectory(prefix='fsearch-incremental-') as tmp:
     work=Path(tmp);root=work/'owned';(root/'nested').mkdir(parents=True);(root/'initial.txt').touch()
     database=work/'snapshot.db';sock=work/'q.sock'
     subprocess.run([fixture,'build',str(database),str(root)],check=True,stdout=subprocess.DEVNULL)
     server=subprocess.Popen([sys.executable,service,'serve','--socket',str(sock),'--database',str(database)],stdout=subprocess.DEVNULL,stderr=subprocess.PIPE,start_new_session=True)
-    updater=None;latencies=[]
+    updater=None;latencies={'normal':[],'heavy':[],'reconciliation':[]}
     def query(text):
         with socket.socket(socket.AF_UNIX) as stream:
             stream.settimeout(3);stream.connect(str(sock));stream.sendall(json.dumps({'schema_version':1,'request_id':'freshness','query':text,'limit':1000}).encode()+b'\n');data=b''
             while b'\n' not in data:
                 chunk=stream.recv(65536);assert chunk;data+=chunk
             return json.loads(data)
-    def visible(text,present=True,deadline=1,started=None):
+    def visible(text,present=True,deadline=1,started=None,category="normal",expected_path=None):
         started=time.monotonic() if started is None else started
         while True:
             result=query(text)
-            if result.get('status')=='ok' and bool(result['results'])==present:latencies.append(time.monotonic()-started);return result
+            if result.get('status')=='ok' and bool(result['results'])==present and (expected_path is None or len(result['results'])==1 and result['results'][0]['path']==str(expected_path)):latencies[category].append(time.monotonic()-started);return result
             assert time.monotonic()-started<deadline,(text,present,result)
             time.sleep(.005)
     try:
@@ -47,10 +67,22 @@ with tempfile.TemporaryDirectory(prefix='fsearch-incremental-') as tmp:
             os.symlink(work/'outside',root/'excluded-link');assert not query('excluded-link')['results']
             start=time.monotonic()
             for i in range(1100):(root/f'burst-{i:04}.txt').touch()
-            visible('burst-1099',deadline=10,started=start)
+            visible('burst-1099',deadline=10,started=start,category='heavy')
             assert '"catalog_sequence": 1024' in log.read_text()
-            start=time.monotonic();(root/'new-directory').mkdir();visible('new-directory',deadline=5,started=start)
-            assert 'directory_topology' in log.read_text()
+            before=query('initial')['snapshot']['identity']
+            start=time.monotonic();(root/'new-directory').mkdir();(root/'new-directory'/'early-child.txt').touch();visible('early-child',deadline=1,started=start)
+            assert query('initial')['snapshot']['identity']==before
+            start=time.monotonic();os.rename(root/'new-directory',root/'moved-directory');reply=visible('early-child',started=start,expected_path=root/'moved-directory'/'early-child.txt')
+            assert query('initial')['snapshot']['identity']==before
+            (root/'empty-victim').mkdir();visible('empty-victim');start=time.monotonic();os.rename(root/'moved-directory',root/'empty-victim')
+            reply=visible('early-child',started=start,expected_path=root/'empty-victim'/'early-child.txt')
+            assert query('initial')['snapshot']['identity']==before
+            incoming=work/'incoming';(incoming/'deep').mkdir(parents=True);(incoming/'deep'/'imported.txt').touch()
+            start=time.monotonic();os.rename(incoming,root/'incoming');visible('imported',started=start)
+            assert query('initial')['snapshot']['identity']==before
+            start=time.monotonic();os.rename(root/'incoming',work/'outgoing');visible('imported',False,started=start)
+            (work/'outgoing'/'private-outside-name.txt').touch();assert not query('private-outside-name')['results']
+            assert 'directory_topology' not in log.read_text()
             limit=time.monotonic()+3
             while query('initial')['incremental_coverage']['state']!='watching':
                 assert time.monotonic()<limit;time.sleep(.01)
@@ -61,7 +93,7 @@ with tempfile.TemporaryDirectory(prefix='fsearch-incremental-') as tmp:
                 if coverage['reason']=='watcher_lease_expired':break
                 assert time.monotonic()<limit;time.sleep(.02)
             assert cached['results'] and cached['complete'] and coverage['state']=='deferred'
-            print(json.dumps({'result':'pass','normal_max_seconds':max(latencies[:-2]),'heavy_seconds':latencies[-2],'topology_reconciliation_seconds':latencies[-1],'burst_events':1100,'checks':['create','cross-parent rename','replace rename','hardlink','delete','raw bytes','excluded symlink','background compaction threshold','directory gap reconciliation','query-visible exact root/last reconciliation','abrupt updater death expires coverage lease and retains cached view'],'scope':'owned fixture actual mutation to native socket query'}))
+            print(json.dumps({'result':'pass','normal_max_seconds':max(latencies['normal']),'heavy_seconds':latencies['heavy'][0],'topology_reconciliation_seconds':None,'burst_events':1100,'checks':['create','cross-parent rename','replace rename','hardlink','delete','raw bytes','excluded symlink','background compaction threshold','idle inventory heartbeat stays pending','directory create inventory','directory ancestor rename','directory replacement rename','subtree import','subtree move out without outside indexing','no snapshot replacement for directory changes','query-visible exact root/last reconciliation','abrupt updater death expires coverage lease and retains cached view'],'scope':'owned fixture actual mutation to native socket query'}))
     finally:
         for proc in (updater,server):
             if proc:

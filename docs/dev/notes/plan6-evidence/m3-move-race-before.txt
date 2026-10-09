@@ -1,0 +1,30 @@
+ninja: Entering directory `/tmp/fsearch-generations-build'
+[1/2] Compiling C object src/tests/libmonitor_fault_fixture.so.p/monitor_fault_fixture.c.o
+../fsearch-incremental-generations/src/tests/monitor_fault_fixture.c:1: warning: "_GNU_SOURCE" redefined
+    1 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+[2/2] Linking target src/tests/libmonitor_fault_fixture.so
+1/1 fsearch:continuous_events FAIL            3.34s   exit status 1
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=180 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 LD_LIBRARY_PATH=/tmp/fsearch-generations-build/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3 /tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_continuous_events.py /tmp/fsearch-generations-build/src/fsearch-monitor-worker /tmp/fsearch-generations-build/src/tests/libmonitor_fault_fixture.so
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+Traceback (most recent call last):
+  File "/tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_continuous_events.py", line 77, in <module>
+    assert watch.read()['reason']=='directory_move_concurrent'
+           ^^^^^^^^^^^^
+  File "/tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_continuous_events.py", line 12, in read
+    assert select.select([self.proc.stdout],[],[],max(0,deadline-time.monotonic()))[0],('event timeout',self.proc.poll())
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+AssertionError: ('event timeout', None)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:continuous_events FAIL            3.34s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt

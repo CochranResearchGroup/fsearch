@@ -1,0 +1,75 @@
+{
+  "result": "measured",
+  "scope": "owned directory inode marks only; no capabilities or mount/filesystem marks",
+  "observations": [
+    {
+      "mode": "pinned",
+      "marks_before": 10000,
+      "marks_after_reclaim": 10000,
+      "memory_before": {
+        "total": 30277632,
+        "anon": 14893056,
+        "kernel": 14864384,
+        "file": 499712
+      },
+      "memory_after_reclaim": {
+        "total": 28794880,
+        "anon": 14897152,
+        "kernel": 13094912,
+        "file": 335872
+      },
+      "reclaim": [
+        {
+          "result": "returned_error",
+          "errno": 11
+        },
+        {
+          "result": "returned_error",
+          "errno": 11
+        },
+        {
+          "result": "returned_error",
+          "errno": 11
+        }
+      ],
+      "probes": 5,
+      "create_events": 5,
+      "overflow": false
+    },
+    {
+      "mode": "evictable",
+      "marks_before": 10000,
+      "marks_after_reclaim": 10000,
+      "memory_before": {
+        "total": 33370112,
+        "anon": 17747968,
+        "kernel": 14950400,
+        "file": 466944
+      },
+      "memory_after_reclaim": {
+        "total": 33435648,
+        "anon": 17747968,
+        "kernel": 14876672,
+        "file": 335872
+      },
+      "reclaim": [
+        {
+          "result": "returned_error",
+          "errno": 11
+        },
+        {
+          "result": "returned_error",
+          "errno": 11
+        },
+        {
+          "result": "returned_error",
+          "errno": 11
+        }
+      ],
+      "probes": 5,
+      "create_events": 5,
+      "overflow": false
+    }
+  ],
+  "evictable_retains_coverage": true
+}

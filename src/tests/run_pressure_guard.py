@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run an owned process group with time, aggregate RSS and host pressure stops.
 
-Receipts report sampled RSS/PSS separately from cgroup figures; this runner
+Receipts report sampled RSS separately from cgroup figures; this runner
 never treats sampled tree RSS as proof of an exact peak or uses it to accept M5.
 """
 import argparse,json,os,signal,subprocess,time
@@ -34,8 +34,8 @@ def tree(root,known):
             values={}
             for line in (path/'status').read_text().splitlines():
                 if line.startswith(('VmRSS:','VmSwap:')):values[line.split(':')[0]]=int(line.split()[1])*1024
-            rollup=(path/'smaps_rollup').read_text()
-            values['PSS']=sum(int(x.split()[1])*1024 for x in rollup.splitlines() if x.startswith('Pss:'))
+            # smaps_rollup can wait on the target's mmap lock during reclaim.
+            # Never put that blocking PSS read on the pressure/deadline path.
             rows.append({'pid':pid,**values})
         except (OSError,ValueError,ProcessLookupError):pass
     return rows
@@ -50,7 +50,7 @@ def cgroup():
 p=argparse.ArgumentParser();p.add_argument('--receipt',required=True);p.add_argument('--seconds',type=float,default=60);p.add_argument('--rss-mib',type=int,default=1280);p.add_argument('command',nargs=argparse.REMAINDER);args=p.parse_args()
 command=args.command[1:] if args.command[:1]==['--'] else args.command
 if not command:p.error('missing command')
-start=time.monotonic();initial=host();samples=[];reason=None;bad_since=None;known={}
+start=time.monotonic();initial=host();samples=[];reason=None;bad_since=None;known={};last_sample=start;max_sample_gap=0
 if initial['MemAvailable']<8*1024**3 or initial['memory_full_avg10']>2 or initial['io_full_avg10']>15:
     reason='host_pressure_preflight';proc=None
 else:
@@ -59,14 +59,16 @@ else:
 try:
     while proc is not None:
         now=time.monotonic();metrics=host();rows=tree(proc.pid,known)
-        rss=sum(x.get('VmRSS',0) for x in rows);pss=sum(x.get('PSS',0) for x in rows);swap=sum(x.get('VmSwap',0) for x in rows)
-        samples.append({'seconds':now-start,'host':metrics,'rss_bytes':rss,'pss_bytes':pss,'swap_bytes':swap,'pids':[x['pid'] for x in rows]})
+        rss=sum(x.get('VmRSS',0) for x in rows);swap=sum(x.get('VmSwap',0) for x in rows)
+        completed=time.monotonic();sample_gap=completed-last_sample;max_sample_gap=max(max_sample_gap,sample_gap);last_sample=completed
+        samples.append({'seconds':completed-start,'host':metrics,'rss_bytes':rss,'pss_bytes':None,'sample_duration_seconds':completed-now,'swap_bytes':swap,'pids':[x['pid'] for x in rows]})
         bad=metrics['MemAvailable']<8*1024**3 or metrics['memory_full_avg10']>2 or metrics['io_full_avg10']>15
         if bad and bad_since is None:bad_since=now
         if not bad:bad_since=None
-        if rss>args.rss_mib*1024**2:reason='aggregate_rss_budget'
+        if sample_gap>1:reason='monitor_sample_gap'
+        elif rss>args.rss_mib*1024**2:reason='aggregate_rss_budget'
         elif swap>0:reason='owned_tree_swapped'
-        elif now-start>args.seconds:reason='deadline'
+        elif completed-start>args.seconds:reason='deadline'
         elif bad_since is not None and now-bad_since>=10:reason='sustained_host_pressure'
         if reason or proc.poll() is not None:break
         time.sleep(.2)
@@ -84,6 +86,6 @@ finally:
         for row in tree(proc.pid,known):
             try:os.kill(row['pid'],signal.SIGKILL)
             except ProcessLookupError:pass
-    result={'command':command,'reason':reason,'exit_code':proc.returncode if proc else None,'elapsed_seconds':time.monotonic()-start,'sample_interval_seconds':.2,'peak_sampled_rss_bytes':max((x['rss_bytes'] for x in samples),default=0),'peak_sampled_pss_bytes':max((x['pss_bytes'] for x in samples),default=0),'initial_host':initial,'final_host':host(),'samples':samples,'cgroup':cgroup(),'qualification':'dedicated cgroup peak when present; sampled owned descendant tree otherwise'}
+    result={'command':command,'reason':reason,'exit_code':proc.returncode if proc else None,'elapsed_seconds':time.monotonic()-start,'sample_interval_seconds':.2,'peak_sampled_rss_bytes':max((x['rss_bytes'] for x in samples),default=0),'peak_sampled_pss_bytes':None,'max_sample_gap_seconds':max_sample_gap,'initial_host':initial,'final_host':host(),'samples':samples,'cgroup':cgroup(),'qualification':'dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor'}
     destination=Path(args.receipt);destination.parent.mkdir(parents=True,exist_ok=True);destination.write_text(json.dumps(result,indent=2)+'\n')
 raise SystemExit(1 if reason else proc.returncode)
