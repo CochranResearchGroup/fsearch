@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: M3 broker DESIGN_PREPARED under issue #29; operator selected preserving600MiB and preparing the broker design. Privileged activation remains gated; independent source correctness and frontend packets are checkpointed. M1 source accepted at 5de54e22; M2 production engine integrated and source qualified; installed runtime remains unchanged.
+Current packet: M3 broker parser SOURCE_FIXTURES_PASS under issue #29; operator selected preserving600MiB and preparing the broker design. Privileged activation remains gated; independent source correctness and frontend packets are checkpointed. M1 source accepted at 5de54e22; M2 production engine integrated and source qualified; installed runtime remains unchanged.
 
 ## Destination and completion rule
 
@@ -194,3 +194,5 @@ Out of scope: content indexing, whole-Ubuntu/Windows/Google Drive scans, replaci
 | M6 | PENDING | Installed CLI/MCP acceptance, rollback and 72-hour operational soak |
 
 Planning closeout: document/tracker publication only; no implementation or runtime effect. Memory disposition: forbidden; durable memory writes are not authorized by this planning packet. Preserve a non-write receipt with the planning evidence.
+
+Broker parser continuation2026-10-09: [source checkpoint](../notes/2026-10-09-plan6-broker-parser.md),9owned ABI/filter fixtures pass. No broker integration, privileged delivery, containment or M3 acceptance claim. Next source packet is bootstrap/state transitions and concrete launcher/broker preparation.

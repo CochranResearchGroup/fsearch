@@ -1,0 +1,13 @@
+# Plan0006 broker parser source checkpoint
+
+Status: SOURCE_FIXTURES_PASS; broker integration/privileged delivery unqualified
+
+Implemented src/fsearch_fanotify_events.py: bounded native-endian Linux ABI decoder, complete-batch rejection, opaque filesystem/type/handle identity, raw basename preservation, per-side rename admission, export sequence/root generation, sticky failure and source-progress lease. Module contains no fanotify/mark/open/metadata syscalls and is not installed or wired into query serving. Nine unittest cases cover truncated batches at every cut, malformed/duplicate/unknown records, unsupported/coalesced masks, overflow, identity differences, rename into/out of scope, admission revocation, bounded exports, invalid clocks, lease expiry and sanitized admission errors. Exception/object representations do not serialize raw identifiers; Python traceback-local capture is outside that guarantee and must be disabled in the eventual broker.
+
+Admission is an injected contract, not a containment implementation. A callback must prove fresh ancestry and identity; fixture callbacks merely model its outcome. Target handles remain decoder-internal and are not exported. Bootstrap buffering/drain cuts, directory admission/inventory, namespace catalog mutation, production transport, actual privilege separation, descriptor cleanup and durable recovery are not implemented in this packet. They remain required before M3 acceptance. Unsupported descriptor-bearing records fail closed; a future actual reader must close received descriptors before discarding/rejecting them.
+
+Validation: direct unittest9/9 PASS; registered Meson fanotify_event_filter1/1 PASS under pressure guard, final source after admission-error sanitization. Original native28groups and frontend8contracts were not rerun: serving code and installed runtime were untouched. Final raw guard receipt: plan6-evidence/m3-broker-parser-pressure.json. Zero owned swap; no pressure stop. This small fixture run establishes no whole-service memory or event-delivery performance claim.
+
+Meson regeneration reran the repository's existing unprivileged fanotify_init/inotify_init feature probes. These create empty groups and exit; no mark is added and no filesystem events are observed. The synthetic fixtures themselves call neither API. No privilege grant, root scan, real event-source activation or installation occurred.
+
+Next bounded source packet: bootstrap/state transition fixtures and concrete descriptor-transfer launcher/broker preparation, with confinement treated as a blocking proof obligation. The600MiBtarget remains unchanged; M3–M6 remain open. Original goal controls are not reset. Memory disposition forbidden: no personal durable memory-write authorization.

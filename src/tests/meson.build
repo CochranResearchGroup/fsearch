@@ -159,3 +159,6 @@ if host_machine.system() == 'linux'
     test('incremental_visibility', python, args: [files('test_incremental.py'), fsearch_service, fsearch_incremental, snapshot_fixture.full_path()],
         depends: [fsearch_monitor_worker, fsearch_refresh_worker, fsearch_worker, snapshot_fixture], timeout: 40)
 endif
+if host_machine.system() == 'linux'
+    test('fanotify_event_filter', python, args: files('test_fanotify_events.py'), timeout: 10)
+endif

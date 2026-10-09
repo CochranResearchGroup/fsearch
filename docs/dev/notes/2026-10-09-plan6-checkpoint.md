@@ -53,3 +53,5 @@ Memory disposition forbidden; preserve a non-write receipt. Resume by reading th
 ## Operator decision | 2026-10-09
 
 The operator accepted the recommendation to preserve600MiB and prepare a privileged event-broker design for review. The earlier unanswered-choice statements above describe the historical checkpoint. ADR0005 and the Plan0006 current packet are reconciled; the review packet is 2026-10-09-plan6-broker-design.md. Privileged execution, filesystem-wide observation and installation remain separately gated. Next source packet is unprivileged binary-parser/filter fixtures, not actual fanotify activation. Original goal budget/time controls and all M3–M6 acceptance criteria persist. No source executable, installed runtime, root registration or service unit changed in this design packet.
+
+Broker parser continuation: see 2026-10-09-plan6-broker-parser.md and plan6-evidence/m3-broker-parser-pressure.json. Nine synthetic ABI/filter fixtures pass; source is not installed or connected to observation. Original controls and privilege gates persist.
