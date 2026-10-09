@@ -1,6 +1,6 @@
 # ADR0005: event-source retention is part of the memory budget
 
-Status: PROPOSED; operator constraint decision pending
+Status: PROPOSED implementation; operator selected the 600 MiB broker-design direction on 2026-10-09
 Date: 2026-10-08
 Scope: Plan0006 M3; approved workspace only
 
@@ -31,7 +31,7 @@ Polling, narrowing the workspace, omitting kernel charges and reporting cached r
 
 ## Next gate
 
-Complete and preserve the owned alternative-source diagnostic, publish this evidence with M3 still open, and obtain the operator's constraint choice before any privilege or budget change. Continue independent source correctness and frontend contract work within existing authority. Do not install the partial continuous updater.
+The operator accepted recommendation 1 on 2026-10-09: preserve600MiB and prepare the privileged-broker design for review. The [review packet](../dev/notes/2026-10-09-plan6-broker-design.md) records observation scope, authority, filtering, unresolved confinement/descriptor-transfer questions, resources and rollback. The constraint-choice blocker is resolved for design/source preparation; privileged execution and broader observation remain unauthorized. Next is the unprivileged parser/filter fixture packet. M3 acceptance remains open; do not install the partial updater.
 
 ## Primary references
 

@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: M3 BLOCKED pending operator event-source/budget constraint choice under issue #29; independent source correctness and frontend packets are checkpointed. M1 source accepted at 5de54e22; M2 production engine integrated and source qualified; installed runtime remains unchanged.
+Current packet: M3 broker DESIGN_PREPARED under issue #29; operator selected preserving600MiB and preparing the broker design. Privileged activation remains gated; independent source correctness and frontend packets are checkpointed. M1 source accepted at 5de54e22; M2 production engine integrated and source qualified; installed runtime remains unchanged.
 
 ## Destination and completion rule
 
@@ -23,7 +23,9 @@ M1 and M2 are source accepted on `feat/incremental-generations`; file-ingestion 
 
 The installed service remains the earlier snapshot-based version. Durable recovery, whole-service resource qualification, installed CLI/MCP acceptance and both operational soaks remain open. In particular, native catalog measurements exclude the watcher's kernel and userspace costs; the 600 MiB steady target is still unproved for the combined service. Owned watcher measurements and failed exact-directory admission expose the event-source decision in [ADR0005](../../adr/0005-continuous-index-event-source.md); preserve existing limits pending operator direction. Frontend coverage is integrated in file-searcher main through PR31, but installed runtime remains unchanged.
 
-Execution blocker as of2026-10-09T04:06Z: the event-source/resource constraint remains unresolved across three consecutive goal turns. Source checkpoint7a53377a is published and tested; subsequent checkpoint documentation does not change that implementation identity. The operator question in ADR0005 has no recorded answer. No current candidate meets the frozen aggregate envelope; no privilege, observation-scope or resource-target change is authorized. The independent source correctness and frontend contract work is checkpointed. Dependent M3 acceptance and M4–M6 advancement require the constraint decision. This blocks execution, not the full objective's scope; the plan stays OPEN and all original completion gates remain required.
+Execution blocker as of2026-10-09T04:06Z: the event-source/resource constraint remains unresolved across three consecutive goal turns. Source checkpoint7a53377a is published and tested; subsequent checkpoint documentation does not change that implementation identity. At that historical checkpoint the operator question in ADR0005 had no recorded answer. No current candidate meets the frozen aggregate envelope; no privilege, observation-scope or resource-target change is authorized. The independent source correctness and frontend contract work is checkpointed. Dependent M3 acceptance and M4–M6 advancement require the constraint decision. This blocks execution, not the full objective's scope; the plan stays OPEN and all original completion gates remain required.
+
+Operator decision2026-10-09: retain600MiB and prepare the broker design; see [review packet](../notes/2026-10-09-plan6-broker-design.md). Design/source preparation may proceed. No capability grant, privileged fixture, broader observation or installation is authorized. The historical blocked audit is retained; the goal tool remains blocked until user/system resume. M3–M6 acceptance and original goal controls remain unchanged.
 
 ## Next execution sequence
 

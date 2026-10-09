@@ -48,3 +48,8 @@ Independent known correctness/front-end packets are complete and checkpointed. M
 Fresh audit: only installed fsearch-worker3338 under active supervisor94383, NRestarts0; native runtime identity remains e0ec8e758db755dbd3cf8b3a83c9e4a467c50137. No owned experiment is live. Worktree clean before this documentation change. Host PSI memoryfull avg10 0.96, IO full0.24, below guard stop thresholds; no additional stress runs. Goal usage at audit926196tokens/9512seconds, below operator stop limits; existing final checkpoint reservation04:19:28Z was not reset. Goal disposition BLOCKED pending operator input, not COMPLETE or an inferred pause. Full M1–M6 objective and24h/72hsoaks remain required on resume.
 
 Memory disposition forbidden; preserve a non-write receipt. Resume by reading the operator choice, current plan/ADR, Git remote and installed identity; then derive one bounded source/qualification packet. A broker-design choice alone does not authorize privileged activation or filesystem-wide observation.
+
+
+## Operator decision | 2026-10-09
+
+The operator accepted the recommendation to preserve600MiB and prepare a privileged event-broker design for review. The earlier unanswered-choice statements above describe the historical checkpoint. ADR0005 and the Plan0006 current packet are reconciled; the review packet is 2026-10-09-plan6-broker-design.md. Privileged execution, filesystem-wide observation and installation remain separately gated. Next source packet is unprivileged binary-parser/filter fixtures, not actual fanotify activation. Original goal budget/time controls and all M3–M6 acceptance criteria persist. No source executable, installed runtime, root registration or service unit changed in this design packet.
