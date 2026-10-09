@@ -1,0 +1,1 @@
+{"result":"failed","phase":"initial correctness run","cause":"g_strchomp removed trailing tab from empty-query protocol record; missing base64 field led to worker allocation failure","fix":"strip newline only, preserving empty tab-delimited fields","production_effect":"none; owned synthetic prototype process only"}

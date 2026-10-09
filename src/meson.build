@@ -134,3 +134,9 @@ if host_machine.system() == 'linux'
 endif
 
 subdir('tests')
+
+# Throwaway native incremental matcher experiment, never installed.
+if host_machine.system() == 'linux'
+    executable('native-incremental-prototype', 'prototypes/native_incremental.c',
+        include_directories: fsearch_include_dirs, dependencies: libfsearch_dep, install: false)
+endif

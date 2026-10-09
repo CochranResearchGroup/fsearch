@@ -1,0 +1,20 @@
+{
+  "mode": "correctness",
+  "comparisons": 3528,
+  "phases": [
+    "base",
+    "create literal filename",
+    "Unicode file rename",
+    "ancestor rename",
+    "ancestor delete",
+    "recreate name with new identity",
+    "new child, no resurrected descendants"
+  ],
+  "deferred_at": 2043,
+  "result": "pass",
+  "memory": {
+    "peak_rss_kib": 14720
+  },
+  "elapsed_seconds": 0.7124976820050506,
+  "ordering": "complete byte-preserving result-set parity; native order not qualified"
+}
