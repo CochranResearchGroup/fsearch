@@ -1,0 +1,49 @@
+ninja: Entering directory `/tmp/fsearch-generations-build'
+ninja: no work to do.
+ 1/28 fsearch:test_database               OK              0.02s
+ 2/28 fsearch:validate-metainfo           OK              0.03s
+ 3/28 fsearch:test_database_file          OK              0.03s
+ 4/28 fsearch:test_database_index_store   OK              0.01s
+ 5/28 fsearch:test_database_include       OK              0.01s
+ 6/28 fsearch:test_database_exclude       OK              0.01s
+ 7/28 fsearch:test_database_entry         OK              0.01s
+ 8/28 fsearch:test_database_chunked_array OK              0.07s
+ 9/28 fsearch:test_array                  OK              0.02s
+10/28 fsearch:test_query                  OK              0.01s
+11/28 fsearch:test_size_utils             OK              0.01s
+12/28 fsearch:test_string_utils           OK              0.04s
+13/28 fsearch:test_time_utils             OK              0.04s
+14/28 fsearch:boot_recovery               OK              0.11s
+15/28 fsearch:approved_root_move_race     OK              0.17s
+16/28 fsearch:monitor_worker              OK              0.43s
+17/28 fsearch:refresh_worker              OK              2.35s
+18/28 fsearch:monitor_supervisor          OK             10.69s
+19/28 fsearch:headless_cli                OK              7.29s
+20/28 fsearch:immutable_catalog           OK              0.02s
+21/28 fsearch:immutable_catalog_faults    OK              0.01s
+22/28 fsearch:catalog_native_parity       OK              2.32s
+23/28 fsearch:pressure_guard_controls     OK              2.50s
+24/28 fsearch:catalog_worker_transport    OK              0.16s
+25/28 fsearch:catalog_multiroot           OK              0.17s
+26/28 fsearch:warm_service                OK             20.85s
+27/28 fsearch:continuous_events           OK              0.78s
+28/28 fsearch:incremental_visibility      FAIL            5.31s   exit status 1
+>>> MALLOC_PERTURB_=19 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3 /tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_incremental.py /tmp/fsearch-generations-build/src/fsearch-service /tmp/fsearch-generations-build/src/fsearch-incremental /tmp/fsearch-generations-build/src/tests/snapshot_fixture
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+Traceback (most recent call last):
+  File "/tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_incremental.py", line 132, in <module>
+    assert updater.poll() is None and time.monotonic()<limit;time.sleep(.01)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+28/28 fsearch:incremental_visibility      FAIL            5.31s   exit status 1
+
+Ok:                27  
+Fail:              1   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt

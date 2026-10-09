@@ -6,12 +6,17 @@ class Watch:
     def __init__(self,root,**extra):
         self.proc=subprocess.Popen([worker,'--root',str(root),'--events'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env={**os.environ,**extra})
         self.buffer=bytearray();self.proc.stdin.write(b'G');self.proc.stdin.flush()
-    def read(self):
+    def read(self,include_heartbeat=False):
         deadline=time.monotonic()+3
-        while b'\n' not in self.buffer:
-            assert select.select([self.proc.stdout],[],[],max(0,deadline-time.monotonic()))[0],('event timeout',self.proc.poll())
-            chunk=os.read(self.proc.stdout.fileno(),65536);assert chunk,('event EOF',self.proc.stderr.read());self.buffer.extend(chunk)
-        line,_,rest=self.buffer.partition(b'\n');self.buffer=bytearray(rest);return json.loads(line)
+        while True:
+            while b'\n' not in self.buffer:
+                assert select.select([self.proc.stdout],[],[],max(0,deadline-time.monotonic()))[0],('event timeout',self.proc.poll())
+                chunk=os.read(self.proc.stdout.fileno(),65536);assert chunk,('event EOF',self.proc.stderr.read());self.buffer.extend(chunk)
+            line,_,rest=self.buffer.partition(b'\n');self.buffer=bytearray(rest);message=json.loads(line)
+            if message.get('status') in ('event','inventory','heartbeat','barrier'):assert type(message.get('observed_monotonic_us')) is int and message['observed_monotonic_us']<=time.monotonic_ns()//1000
+            if message.get('status')=='heartbeat' and not include_heartbeat:
+                assert time.monotonic()<deadline;continue
+            return message
     def ready(self):
         assert self.read()['status']=='ready'
         assert self.read()=={'schema_version':1,'status':'coverage','reconciliation_required':True,'reason':'startup_gap'}
@@ -23,10 +28,14 @@ with tempfile.TemporaryDirectory(prefix='fsearch-events-') as tmp:
     outside=Path(tmp)/'outside';outside.mkdir();(outside/'secret.txt').touch()
     watch=Watch(root)
     try:
-        watch.ready();name=b'raw-\xff.txt';path=os.fsencode(root/'nested')+b'/'+name
+        watch.ready();beat=watch.read(True);assert beat['status']=='heartbeat' and beat['sequence']==0
+        watch.proc.stdin.write(b'B');watch.proc.stdin.flush();barrier=watch.read();assert barrier['status']=='barrier' and barrier['sequence']==0
+        name=b'raw-\xff.txt';path=os.fsencode(root/'nested')+b'/'+name
         fd=os.open(path,os.O_CREAT|os.O_WRONLY,0o600);os.close(fd)
+        watch.proc.stdin.write(b'B');watch.proc.stdin.flush()
         created=watch.read();assert created['mask']&0x100 and created['sequence']==1
         assert base64.b64decode(created['parent_b64'])==b'nested' and base64.b64decode(created['name_b64'])==name
+        barrier=watch.read();assert barrier['status']=='barrier' and barrier['sequence']==1
         dest=os.fsencode(root/'nested')+b'/renamed.txt';os.rename(path,dest)
         old,new=watch.read(),watch.read();assert old['mask']&0x40 and new['mask']&0x80 and old['cookie']==new['cookie']!=0
         assert (old['sequence'],new['sequence'])==(2,3)
@@ -35,7 +44,8 @@ with tempfile.TemporaryDirectory(prefix='fsearch-events-') as tmp:
         linked=watch.read();assert linked['sequence']==4 and base64.b64decode(linked['name_b64'])==b'hardlink.txt'
         os.unlink(root/'nested'/'hardlink.txt');deleted=watch.read();assert deleted['mask']&0x200 and deleted['sequence']==5
         (root/'new-directory').mkdir();directory=watch.read();assert directory['kind']==2 and directory['mask']&0x100
-        assert watch.read()=={'schema_version':1,'status':'inventory','phase':'begin','sequence':directory['sequence']}
+        inventory=watch.read()
+        assert {k:v for k,v in inventory.items() if k!='observed_monotonic_us'}=={'schema_version':1,'status':'inventory','phase':'begin','sequence':directory['sequence']}
         (root/'new-directory'/'early-child.txt').touch();child=watch.read()
         if child.get('status')=='inventory':
             assert child['phase']=='end';child=watch.read()
@@ -81,4 +91,4 @@ with tempfile.TemporaryDirectory(prefix='fsearch-events-') as tmp:
     try:
         assert watch.read()['error']['code']=='coverage_incomplete';assert watch.proc.wait(timeout=3)==3
     finally:watch.stop()
-print(json.dumps({'result':'pass','events':5,'checks':['raw-byte create','paired file rename','hard links','excluded symlinks','delete','startup gap','directory inventory begin/end coverage','directory move identity and watch release','root relocation','concurrent subtree event requires reconciliation','overflow injection','watch exhaustion'],'scope':'owned fixture roots, native Landlock/openat2 worker'}))
+print(json.dumps({'result':'pass','events':5,'checks':['raw-byte create','paired file rename','hard links','excluded symlinks','delete','idle native watcher heartbeat','drain barrier after queued mutation','startup gap','directory inventory begin/end coverage','directory move identity and watch release','root relocation','concurrent subtree event requires reconciliation','overflow injection','watch exhaustion'],'scope':'owned fixture roots, native Landlock/openat2 worker'}))

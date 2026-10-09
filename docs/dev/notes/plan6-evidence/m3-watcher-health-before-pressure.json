@@ -1,0 +1,185 @@
+{
+  "command": [
+    "/home/linuxbrew/.linuxbrew/bin/uvx",
+    "--with",
+    "ninja",
+    "--from",
+    "meson",
+    "meson",
+    "test",
+    "-C",
+    "/tmp/fsearch-generations-build",
+    "incremental_visibility",
+    "--print-errorlogs"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 1.4003717720042914,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 102858752,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2264699480147101,
+  "initial_host": {
+    "MemAvailable": 50845433856,
+    "SwapFree": 1201332224,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.01,
+    "io_full_avg10": 0.01
+  },
+  "final_host": {
+    "MemAvailable": 50866974720,
+    "SwapFree": 1201332224,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.01,
+    "io_full_avg10": 0.01
+  },
+  "samples": [
+    {
+      "seconds": 0.027724423998733982,
+      "host": {
+        "MemAvailable": 50845433856,
+        "SwapFree": 1201332224,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.01,
+        "io_full_avg10": 0.01
+      },
+      "rss_bytes": 31948800,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.027263096999377012,
+      "swap_bytes": 0,
+      "pids": [
+        19074
+      ]
+    },
+    {
+      "seconds": 0.2541943720134441,
+      "host": {
+        "MemAvailable": 50805186560,
+        "SwapFree": 1201332224,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.01,
+        "io_full_avg10": 0.01
+      },
+      "rss_bytes": 83689472,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.026193874015007168,
+      "swap_bytes": 0,
+      "pids": [
+        19074,
+        19086
+      ]
+    },
+    {
+      "seconds": 0.4800534170062747,
+      "host": {
+        "MemAvailable": 50792673280,
+        "SwapFree": 1201332224,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.01,
+        "io_full_avg10": 0.01
+      },
+      "rss_bytes": 102858752,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.024792184005491436,
+      "swap_bytes": 0,
+      "pids": [
+        19074,
+        19099,
+        19086
+      ]
+    },
+    {
+      "seconds": 0.7064353600144386,
+      "host": {
+        "MemAvailable": 50791653376,
+        "SwapFree": 1201332224,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.01,
+        "io_full_avg10": 0.01
+      },
+      "rss_bytes": 102858752,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.025020312023116276,
+      "swap_bytes": 0,
+      "pids": [
+        19074,
+        19099,
+        19086
+      ]
+    },
+    {
+      "seconds": 0.9299982879892923,
+      "host": {
+        "MemAvailable": 50791710720,
+        "SwapFree": 1201332224,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.01,
+        "io_full_avg10": 0.01
+      },
+      "rss_bytes": 102858752,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.023221329000080004,
+      "swap_bytes": 0,
+      "pids": [
+        19074,
+        19099,
+        19086
+      ]
+    },
+    {
+      "seconds": 1.1545023570070043,
+      "host": {
+        "MemAvailable": 50807009280,
+        "SwapFree": 1201332224,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.01,
+        "io_full_avg10": 0.01
+      },
+      "rss_bytes": 102858752,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.02433457999723032,
+      "swap_bytes": 0,
+      "pids": [
+        19074,
+        19099,
+        19086
+      ]
+    },
+    {
+      "seconds": 1.3781079960172065,
+      "host": {
+        "MemAvailable": 50866917376,
+        "SwapFree": 1201332224,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.01,
+        "io_full_avg10": 0.01
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.023443179001333192,
+      "swap_bytes": 0,
+      "pids": [
+        19074
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-m3-watcher-health-before.service",
+    "memory.current": 10678272,
+    "memory.peak": 63897600,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

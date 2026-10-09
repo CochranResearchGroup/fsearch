@@ -19,7 +19,7 @@ Operator directed execution of Plan 0006 on 2026-10-08, with pressure monitoring
 
 ## Current State
 
-M1 and M2 are source accepted on `feat/incremental-generations`; file-ingestion checkpoint `be00ef11d10b4ee29cbfc499a2a17ccef71bc7f5` is followed by the directory/resource source packet recorded in the M3 note and issue29. M3 remains in progress. Directory ingestion now passes owned-fixture tests for ancestor rename, directory replacement, populated subtree admission and move-out containment without replacing the snapshot. These results do not establish current-workspace freshness or full M3 acceptance.
+M1 and M2 are source accepted on `feat/incremental-generations`; file-ingestion checkpoint `be00ef11d10b4ee29cbfc499a2a17ccef71bc7f5` is followed by the directory/resource source packet recorded in the M3 note and issue29. M3 remains in progress. Directory ingestion now passes owned-fixture tests for ancestor rename, directory replacement, populated subtree admission and move-out containment without replacing the snapshot. Source observation age, native watcher liveness and startup drain barriers also pass owned controls. These results do not establish current-workspace freshness or full M3 acceptance.
 
 The installed service remains the earlier snapshot-based version. Durable recovery, whole-service resource qualification, installed CLI/MCP acceptance and both operational soaks remain open. In particular, native catalog measurements exclude the watcher's kernel and userspace costs; the 600 MiB steady target is still unproved for the combined service. Owned watcher measurements and failed exact-directory admission expose the event-source decision in [ADR0005](../../adr/0005-continuous-index-event-source.md); preserve existing limits pending operator direction. Frontend coverage is integrated in file-searcher main through PR31, but installed runtime remains unchanged.
 
@@ -184,7 +184,7 @@ Out of scope: content indexing, whole-Ubuntu/Windows/Google Drive scans, replaci
 |---|---|---|
 | M1 | SOURCE_ACCEPTED | [Lifecycle, native oracle, sanitizer and resource receipts](../notes/2026-10-08-plan6-m1-generations.md); installed acceptance remains M6 |
 | M2 | SOURCE_ACCEPTED | Production catalog/query/transport; 26 native groups, 439 frontend tests, 6120 sanitizer oracle comparisons; directory-heavy exact-count query and concurrent compaction pass; installed/program acceptance stays M5/M6 |
-| M3 | IN_PROGRESS | Real file events ingest through private catalog; explicit query coverage/lease; Incremental directory topology and explicit inventory/move-race coverage pass owned fixtures; frontend coverage integrated; watcher kernel costs/event-source decision and current-scale freshness remain unqualified |
+| M3 | IN_PROGRESS | Real file events ingest through private catalog; explicit query coverage/lease; Incremental directory topology, observation age, native watcher health and startup drain barriers pass owned fixtures; frontend coverage integrated; watcher kernel costs/event-source decision and current-scale freshness remain unqualified |
 | M4 | PENDING | Durable checkpoint/replay and crash/startup matrix |
 | M5 | PENDING | Current-scale aggregate acceptance and 24-hour synthetic soak |
 | M6 | PENDING | Installed CLI/MCP acceptance, rollback and 72-hour operational soak |

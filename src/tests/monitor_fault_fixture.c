@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include <dlfcn.h>
 #include <errno.h>
+#include <poll.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/inotify.h>
@@ -36,4 +37,12 @@ ssize_t read(int fd, void *buffer, size_t count) {
     }
     ssize_t (*real_read)(int, void *, size_t) = dlsym(RTLD_NEXT, "read");
     return real_read(fd, buffer, count);
+}
+
+int poll(struct pollfd *fds,nfds_t count,int timeout) {
+    if(count>=1&&fds[0].fd==watched_fd&&(getenv("FSEARCH_MONITOR_FIXTURE_OVERFLOW")||(!injected&&getenv("FSEARCH_MONITOR_FIXTURE_MOVE_CHILD")))) {
+        fds[0].revents=POLLIN;return 1;
+    }
+    int (*real_poll)(struct pollfd*,nfds_t,int)=dlsym(RTLD_NEXT,"poll");
+    return real_poll(fds,count,timeout);
 }

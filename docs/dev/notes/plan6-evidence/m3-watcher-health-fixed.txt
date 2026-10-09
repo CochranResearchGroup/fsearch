@@ -1,0 +1,76 @@
+[0/1] Regenerating build files
+Cleaning... 0 files.
+The Meson build system
+Version: 1.12.1
+Source dir: /tmp/fsearch-incremental-generations
+Build dir: /tmp/fsearch-generations-build
+Build type: native build
+Project name: fsearch
+Project version: 0.3
+C compiler for the host machine: /usr/bin/cc (gcc 13.3.0 "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0")
+C linker for the host machine: /usr/bin/cc ld.bfd 2.42
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Checking if "malloc_trim is supported on the build platform" runs: YES
+Checking if "fanotify is supported by the build platform and works without CAP_SYS_ADMIN capabilities" runs: YES
+Checking if "inotify is supported by the build platform" runs: YES
+Configuring io.github.cboxdoerfer.FSearch.desktop.in using configuration
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Program desktop-file-validate found: NO
+Program appstreamcli found: YES (/usr/bin/appstreamcli)
+Could not find file LINGUAS in /tmp/fsearch-incremental-generations/help
+Program itstool found: YES (/usr/bin/itstool)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Library m found: YES
+Dependency gio-unix-2.0 for host machine found: YES 2.80.0 (cached)
+Dependency gtk+-3.0 for host machine found: YES 3.24.41 (cached)
+Dependency libpcre2-8 for host machine found: YES 10.42 (cached)
+Dependency icu-uc for host machine found: YES 74.2 (cached)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Library dl found: YES
+Program python3 found: YES (/home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3)
+Library dl found: YES
+Library dl found: YES
+Program msginit found: YES (/usr/bin/msginit)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program xgettext found: YES (/usr/bin/xgettext)
+Configuring config.h using configuration
+Build targets in project: 82
+NOTICE: Future-deprecated features used:
+ * 0.56.0: {'meson.source_root'}
+
+Found ninja-1.13.2.git.kitware.jobserver-pipe-1 at /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/ninja
+ninja: no work to do.
+ninja: Entering directory `/tmp/fsearch-generations-build'
+[1/4] Compiling C object src/tests/libmonitor_fault_fixture.so.p/monitor_fault_fixture.c.o
+../fsearch-incremental-generations/src/tests/monitor_fault_fixture.c:1: warning: "_GNU_SOURCE" redefined
+    1 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+../fsearch-incremental-generations/src/tests/monitor_fault_fixture.c: In function ‘poll’:
+../fsearch-incremental-generations/src/tests/monitor_fault_fixture.c:43:24: warning: ‘*fds.fd’ may be used uninitialized [-Wmaybe-uninitialized]
+   43 |     if(count==1&&fds[0].fd==watched_fd&&(getenv("FSEARCH_MONITOR_FIXTURE_OVERFLOW")||(!injected&&getenv("FSEARCH_MONITOR_FIXTURE_MOVE_CHILD")))) {
+      |                  ~~~~~~^~~
+../fsearch-incremental-generations/src/tests/monitor_fault_fixture.c:42:25: note: accessing argument 1 of a function declared with attribute ‘access (write_only, 1, 2)’
+   42 | int poll(struct pollfd *fds,nfds_t count,int timeout) {
+      |          ~~~~~~~~~~~~~~~^~~
+[2/4] Linking target src/tests/libmonitor_fault_fixture.so
+[3/4] Compiling C object src/fsearch-monitor-worker.p/fsearch_monitor_worker.c.o
+[4/4] Linking target src/fsearch-monitor-worker
+1/2 fsearch:continuous_events      OK              0.79s
+2/2 fsearch:incremental_visibility OK              5.18s
+
+Ok:                2   
+Fail:              0   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt

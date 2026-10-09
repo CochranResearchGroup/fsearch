@@ -1,0 +1,89 @@
+[0/1] Regenerating build files
+Cleaning... 0 files.
+The Meson build system
+Version: 1.12.1
+Source dir: /tmp/fsearch-incremental-generations
+Build dir: /tmp/fsearch-generations-build
+Build type: native build
+Project name: fsearch
+Project version: 0.3
+C compiler for the host machine: /usr/bin/cc (gcc 13.3.0 "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0")
+C linker for the host machine: /usr/bin/cc ld.bfd 2.42
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Checking if "malloc_trim is supported on the build platform" runs: YES
+Checking if "fanotify is supported by the build platform and works without CAP_SYS_ADMIN capabilities" runs: YES
+Checking if "inotify is supported by the build platform" runs: YES
+Configuring io.github.cboxdoerfer.FSearch.desktop.in using configuration
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Program desktop-file-validate found: NO
+Program appstreamcli found: YES (/usr/bin/appstreamcli)
+Could not find file LINGUAS in /tmp/fsearch-incremental-generations/help
+Program itstool found: YES (/usr/bin/itstool)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Library m found: YES
+Dependency gio-unix-2.0 for host machine found: YES 2.80.0 (cached)
+Dependency gtk+-3.0 for host machine found: YES 3.24.41 (cached)
+Dependency libpcre2-8 for host machine found: YES 10.42 (cached)
+Dependency icu-uc for host machine found: YES 74.2 (cached)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Library dl found: YES
+Program python3 found: YES (/home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3)
+Library dl found: YES
+Library dl found: YES
+Program msginit found: YES (/usr/bin/msginit)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program xgettext found: YES (/usr/bin/xgettext)
+Configuring config.h using configuration
+Build targets in project: 82
+NOTICE: Future-deprecated features used:
+ * 0.56.0: {'meson.source_root'}
+
+Found ninja-1.13.2.git.kitware.jobserver-pipe-1 at /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/ninja
+ninja: no work to do.
+ninja: Entering directory `/tmp/fsearch-generations-build'
+[1/2] Compiling C object src/fsearch-monitor-worker.p/fsearch_monitor_worker.c.o
+[2/2] Linking target src/fsearch-monitor-worker
+ 1/28 fsearch:test_database               OK              0.01s
+ 2/28 fsearch:validate-metainfo           OK              0.02s
+ 3/28 fsearch:test_database_file          OK              0.02s
+ 4/28 fsearch:test_database_index_store   OK              0.01s
+ 5/28 fsearch:test_database_include       OK              0.01s
+ 6/28 fsearch:test_database_exclude       OK              0.01s
+ 7/28 fsearch:test_database_entry         OK              0.01s
+ 8/28 fsearch:test_array                  OK              0.01s
+ 9/28 fsearch:test_database_chunked_array OK              0.06s
+10/28 fsearch:test_query                  OK              0.01s
+11/28 fsearch:test_size_utils             OK              0.01s
+12/28 fsearch:test_string_utils           OK              0.01s
+13/28 fsearch:test_time_utils             OK              0.05s
+14/28 fsearch:boot_recovery               OK              0.15s
+15/28 fsearch:approved_root_move_race     OK              0.15s
+16/28 fsearch:monitor_worker              OK              0.49s
+17/28 fsearch:refresh_worker              OK              2.15s
+18/28 fsearch:monitor_supervisor          OK             11.96s
+19/28 fsearch:headless_cli                OK              7.46s
+20/28 fsearch:immutable_catalog           OK              0.01s
+21/28 fsearch:immutable_catalog_faults    OK              0.01s
+22/28 fsearch:catalog_native_parity       OK              2.88s
+23/28 fsearch:pressure_guard_controls     OK              1.23s
+24/28 fsearch:catalog_worker_transport    OK              0.20s
+25/28 fsearch:catalog_multiroot           OK              0.21s
+26/28 fsearch:continuous_events           OK              0.28s
+27/28 fsearch:warm_service                OK             22.30s
+28/28 fsearch:incremental_visibility      OK              5.68s
+
+Ok:                28  
+Fail:              0   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt

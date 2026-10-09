@@ -1,0 +1,22 @@
+ninja: Entering directory `/tmp/fsearch-generations-build'
+ninja: no work to do.
+1/1 fsearch:incremental_visibility FAIL            5.41s   exit status 1
+>>> UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=24 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3 /tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_incremental.py /tmp/fsearch-generations-build/src/fsearch-service /tmp/fsearch-generations-build/src/fsearch-incremental /tmp/fsearch-generations-build/src/tests/snapshot_fixture
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+Traceback (most recent call last):
+  File "/tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_incremental.py", line 132, in <module>
+    assert updater.poll() is None and time.monotonic()<limit,((work/'updater-stall.log').read_text(),updater.stderr.read().decode() if updater.poll() is not None else 'still running');time.sleep(.01)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('{"schema_version": 1, "status": "error", "durable": false, "reason": "quarantined", "coverage": "incomplete"}\n', '')
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:incremental_visibility FAIL            5.41s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt

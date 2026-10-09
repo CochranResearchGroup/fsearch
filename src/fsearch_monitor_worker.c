@@ -61,6 +61,12 @@ static bool emit_event(const char *parent,const char *name,unsigned kind,unsigne
     printf("{\"schema_version\":1,\"status\":\"event\",\"sequence\":%llu,\"mask\":%u,\"cookie\":%u,\"parent_b64\":\"%s\",\"name_b64\":\"%s\",\"kind\":%u,\"observed_monotonic_us\":%lld}\n",(unsigned long long)++event_sequence,mask,cookie,parent_b64,name_b64,kind,(long long)g_get_monotonic_time());
     return true;
 }
+static void emit_inventory(const char *phase) {
+    printf("{\"schema_version\":1,\"status\":\"inventory\",\"phase\":\"%s\",\"sequence\":%llu,\"observed_monotonic_us\":%lld}\n",phase,(unsigned long long)event_sequence,(long long)g_get_monotonic_time());
+}
+static void emit_progress(const char *status) {
+    printf("{\"schema_version\":1,\"status\":\"%s\",\"sequence\":%llu,\"observed_monotonic_us\":%lld}\n",status,(unsigned long long)event_sequence,(long long)g_get_monotonic_time());
+}
 static bool prefix_contains(const char *prefix,const char *path) {
     size_t n=strlen(prefix);return !strncmp(prefix,path,n)&&(!path[n]||path[n]=='/');
 }
@@ -178,12 +184,31 @@ static int event_gap(const char *reason) {
 }
 static int continuous_events(int root) {
     union { struct inotify_event alignment; char bytes[65536]; } buffer;
+    gint64 next_heartbeat=g_get_monotonic_time()+500000;bool barrier_pending=false;
     for(;;) {
-        if(g_hash_table_size(pending_directories)) {
-            struct pollfd waiting={.fd=notifications,.events=POLLIN};
-            int ready;do{ready=poll(&waiting,1,20);}while(ready<0&&errno==EINTR);
-            if(ready<0)return event_gap("watch_failed");
-            if(!ready){expire_directory_moves();continue;}
+        struct pollfd waiting[2]={{.fd=notifications,.events=POLLIN},{.fd=STDIN_FILENO,.events=POLLIN}};
+        int timeout=barrier_pending?0:(g_hash_table_size(pending_directories)?20:500);
+        int ready;do{ready=poll(waiting,2,timeout);}while(ready<0&&errno==EINTR);
+        if(ready<0)return event_gap("watch_failed");
+        if(waiting[1].revents) {
+            char command;if(read(STDIN_FILENO,&command,1)!=1||command!='B')return event_gap("control_failed");
+            barrier_pending=true;
+        }
+        if(!waiting[0].revents) {
+            if(barrier_pending) {
+                /* The control byte may arrive after poll examined inotify.
+                 * Recheck after reading it before choosing the drain cut. */
+                struct pollfd verify={.fd=notifications,.events=POLLIN};
+                int queued;do{queued=poll(&verify,1,0);}while(queued<0&&errno==EINTR);
+                if(queued<0)return event_gap("watch_failed");
+                if(queued)continue;
+            }
+            expire_directory_moves();gint64 now=g_get_monotonic_time();
+            /* Acknowledge only after all already queued inotify records have
+             * been processed. New mutations after this cut remain sequenced. */
+            if(barrier_pending){emit_progress("barrier");barrier_pending=false;}
+            if(now>=next_heartbeat){emit_progress("heartbeat");next_heartbeat=now+500000;}
+            continue;
         }
         ssize_t count;
         do {count=read(notifications,buffer.bytes,sizeof(buffer.bytes));}while(count<0&&errno==EINTR);
@@ -277,10 +302,10 @@ static int continuous_events(int root) {
                 int contents=beneath(root,relative,O_RDONLY|O_DIRECTORY);
                 if(contents<0)return event_gap("directory_unavailable");
                 unsigned depth=1;for(const char*p=relative;*p;p++)if(*p=='/')depth++;
-                printf("{\"schema_version\":1,\"status\":\"inventory\",\"phase\":\"begin\",\"sequence\":%llu}\n",(unsigned long long)event_sequence);
+                emit_inventory("begin");
                 inventory_mode=true;entries=0;bool complete=watch_tree(contents,depth,root,relative);inventory_mode=false;
                 if(!complete)return event_gap("subtree_incomplete");
-                printf("{\"schema_version\":1,\"status\":\"inventory\",\"phase\":\"end\",\"sequence\":%llu}\n",(unsigned long long)event_sequence);
+                emit_inventory("end");
             }
         }
         expire_directory_moves();

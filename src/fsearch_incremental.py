@@ -35,8 +35,24 @@ class ContinuousWatcher(monitor.Watcher):
         if not coverage or coverage.get('reason')!='startup_gap':raise BoundaryError('worker_protocol_failed')
         self.save('ready','startup_gap')
     def check(self,timeout=0):
-        message=self.message(timeout)
-        if message is not None:raise monitor.GenerationChanged(message.get('reason',message.get('status','unknown')))
+        deadline=time.monotonic()+timeout
+        while True:
+            message=self.message(max(0,deadline-time.monotonic()))
+            if message is None:return
+            if message.get('status')=='heartbeat':
+                if type(message.get('sequence')) is not int or message['sequence']!=0:raise BoundaryError('event_sequence_gap')
+                observation_time(message);continue
+            raise monitor.GenerationChanged(message.get('reason',message.get('status','unknown')))
+
+    def barrier(self,timeout):
+        self.worker.stdin.write(b'B');self.worker.stdin.flush();deadline=time.monotonic()+timeout
+        while True:
+            message=self.message(max(0,deadline-time.monotonic()))
+            if message is None:raise BoundaryError('watcher_barrier_timeout')
+            if message.get('status') not in ('heartbeat','barrier'):raise monitor.GenerationChanged(message.get('reason',message.get('status','unknown')))
+            if type(message.get('sequence')) is not int or message['sequence']!=0:raise BoundaryError('event_sequence_gap')
+            observation_time(message)
+            if message['status']=='barrier':return
 
 class CatalogClient:
     def __init__(self,path):
@@ -90,14 +106,24 @@ def decode(value,relative=False):
     elif not raw or b'/' in raw:raise BoundaryError('worker_protocol_failed')
     return raw
 
+def observation_time(message):
+    """Map watcher monotonic observation to wall time without resetting backlog age."""
+    observed=message.get('observed_monotonic_us');now=time.monotonic_ns()//1000
+    if type(observed) is not int or not 0<=observed<=now:raise BoundaryError('event_observation_time')
+    return max(0,int(time.time()*1000)-(now-observed)//1000)
+
 def ingest(watcher,client,root):
-    observed=0;pending={};next_heartbeat=0;oldest=None;inventory_since=None
+    observed=0;pending={};next_heartbeat=0;oldest=None;inventory_since=None;last_source_progress=time.monotonic()
     def remove(entry):
         if entry:client.apply(entry['parent_id'],b'',entry['entry_id'],0)
     while True:
         message=watcher.message(.02)
         now=time.monotonic()
         if message is None:
+            if now-last_source_progress>2:
+                outstanding=[x[2] for x in pending.values()]+([inventory_since] if inventory_since is not None else [])
+                client.coverage('deferred',root,observed,min(outstanding) if outstanding else None,reason='watcher_progress_timeout')
+                raise BoundaryError('watcher_progress_timeout')
             for cookie,(entry,expiry,received) in list(pending.items()):
                 if now>=expiry:remove(entry);del pending[cookie]
             if now>=next_heartbeat:
@@ -106,16 +132,20 @@ def ingest(watcher,client,root):
                 next_heartbeat=now+.5
             continue
         if message.get('status')=='gap':raise monitor.GenerationChanged(message.get('reason','event_gap'))
+        if message.get('status')=='heartbeat':
+            if type(message.get('sequence')) is not int or message['sequence']!=observed:raise BoundaryError('event_sequence_gap')
+            observation_time(message);last_source_progress=time.monotonic();continue
         if message.get('status')=='inventory':
             if type(message.get('sequence')) is not int or message['sequence']!=observed:raise BoundaryError('event_sequence_gap')
-            if message.get('phase')=='begin' and inventory_since is None:inventory_since=int(time.time()*1000)
+            observed_unix_ms=observation_time(message);last_source_progress=time.monotonic()
+            if message.get('phase')=='begin' and inventory_since is None:inventory_since=observed_unix_ms
             elif message.get('phase')=='end' and inventory_since is not None:inventory_since=None
             else:raise BoundaryError('worker_protocol_failed')
             outstanding=[x[2] for x in pending.values()]+([inventory_since] if inventory_since is not None else [])
             client.coverage('pending',root,observed,min(outstanding) if outstanding else None,reason='subtree_inventory' if inventory_since is not None else 'inventory_drained')
             continue
         if message.get('status')!='event' or type(message.get('sequence')) is not int or message['sequence']!=observed+1:raise BoundaryError('event_sequence_gap')
-        observed+=1;received=int(time.time()*1000);oldest=min([received]+[x[2] for x in pending.values()]+([inventory_since] if inventory_since is not None else []))
+        received=observation_time(message);last_source_progress=time.monotonic();observed+=1;oldest=min([received]+[x[2] for x in pending.values()]+([inventory_since] if inventory_since is not None else []))
         client.coverage('pending',root,observed,oldest,reason='event_pending')
         mask=message.get('mask');cookie=message.get('cookie')
         if type(mask) is not int or type(cookie) is not int or message.get('kind') not in (1,2):raise BoundaryError('worker_protocol_failed')
@@ -139,7 +169,8 @@ def ingest(watcher,client,root):
         elif mask&0x100:
             if not existing:client.apply(parent['entry_id'],name,kind=message['kind'])
         else:raise BoundaryError('worker_protocol_failed')
-        emit('applied',event_sequence=observed,catalog_sequence=client.sequence,oldest_unapplied_monotonic=time.monotonic() if pending else None)
+        outstanding=[x[2] for x in pending.values()]+([inventory_since] if inventory_since is not None else [])
+        emit('applied',event_sequence=observed,catalog_sequence=client.sequence,oldest_unapplied_unix_ms=min(outstanding) if outstanding else None)
 
 
 def watch(directory,root,database,socket_path,timeout):
@@ -154,7 +185,7 @@ def watch(directory,root,database,socket_path,timeout):
                 try:
                     update.lock();lifecycle.reconcile(update)
                     monitor.MonitoredRefresh(update,watcher).run(root,database,timeout)
-                    watcher.check();identity=monitor.accepted_identity(directory,Path(database).name)
+                    watcher.check();watcher.barrier(min(2,timeout));identity=monitor.accepted_identity(directory,Path(database).name)
                     monitor.replace_serving(socket_path,database,identity,root)
                 finally:update.close()
                 client.reset();client.last_reconciled=int(time.time()*1000);client.coverage('watching',root_bytes,reason='reconciled');watcher.snapshot_id=client.identity;watcher.save('ready','reconciled')
@@ -167,7 +198,7 @@ def watch(directory,root,database,socket_path,timeout):
             finally:watcher.cleanup()
     finally:
         try:
-            if client.identity and client.coverage_state!='offline':client.coverage('deferred',root_bytes,reason='updater_stopped')
+            if client.identity and client.coverage_state not in ('offline','deferred'):client.coverage('deferred',root_bytes,reason='updater_stopped')
         except (BoundaryError,OSError,ValueError):pass
         client.close()
 

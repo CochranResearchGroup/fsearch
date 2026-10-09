@@ -1,0 +1,22 @@
+ninja: Entering directory `/tmp/fsearch-generations-build'
+ninja: no work to do.
+1/1 fsearch:incremental_visibility FAIL            1.06s   exit status 1
+>>> MALLOC_PERTURB_=242 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3 /tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_incremental.py /tmp/fsearch-generations-build/src/fsearch-service /tmp/fsearch-generations-build/src/fsearch-incremental /tmp/fsearch-generations-build/src/tests/snapshot_fixture
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+Traceback (most recent call last):
+  File "/tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_incremental.py", line 24, in <module>
+    assert frames[0][0][3]<=before_inventory_unix_ms-4900,('watcher backlog age was reset at receipt',frames)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('watcher backlog age was reset at receipt', [(('pending', b'/owned-fixture', 0, 1791517615120), {'reason': 'subtree_inventory'}), (('pending', b'/owned-fixture', 0, 1791517615120), {'reason': 'subtree_inventory'}), (('pending', b'/owned-fixture', 0, None), {'reason': 'inventory_drained'}), (('watching', b'/owned-fixture', 0, None), {'reason': ''})])
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:incremental_visibility FAIL            1.06s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt

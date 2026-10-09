@@ -1,0 +1,36 @@
+ninja: Entering directory `/tmp/fsearch-generations-build'
+[1/2] Compiling C object src/fsearch-monitor-worker.p/fsearch_monitor_worker.c.o
+[2/2] Linking target src/fsearch-monitor-worker
+ 1/28 fsearch:test_database               OK              0.02s
+ 2/28 fsearch:validate-metainfo           OK              0.03s
+ 3/28 fsearch:test_database_file          OK              0.02s
+ 4/28 fsearch:test_database_index_store   OK              0.01s
+ 5/28 fsearch:test_database_include       OK              0.01s
+ 6/28 fsearch:test_database_exclude       OK              0.01s
+ 7/28 fsearch:test_database_entry         OK              0.01s
+ 8/28 fsearch:test_array                  OK              0.01s
+ 9/28 fsearch:test_database_chunked_array OK              0.07s
+10/28 fsearch:test_query                  OK              0.01s
+11/28 fsearch:test_size_utils             OK              0.05s
+12/28 fsearch:test_string_utils           OK              0.01s
+13/28 fsearch:test_time_utils             OK              0.01s
+14/28 fsearch:boot_recovery               OK              0.10s
+15/28 fsearch:approved_root_move_race     OK              0.16s
+16/28 fsearch:monitor_worker              OK              0.49s
+17/28 fsearch:refresh_worker              OK              2.30s
+18/28 fsearch:monitor_supervisor          OK             10.71s
+19/28 fsearch:headless_cli                OK              7.40s
+20/28 fsearch:immutable_catalog           OK              0.01s
+21/28 fsearch:immutable_catalog_faults    OK              0.01s
+22/28 fsearch:catalog_native_parity       OK              2.83s
+23/28 fsearch:pressure_guard_controls     OK              2.57s
+24/28 fsearch:catalog_worker_transport    OK              0.20s
+25/28 fsearch:catalog_multiroot           OK              0.25s
+26/28 fsearch:continuous_events           OK              0.80s
+27/28 fsearch:warm_service                OK             21.85s
+28/28 fsearch:incremental_visibility      OK              7.16s
+
+Ok:                28  
+Fail:              0   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt

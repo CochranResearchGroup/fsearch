@@ -1,0 +1,28 @@
+ninja: Entering directory `/tmp/fsearch-generations-build'
+ninja: no work to do.
+1/1 fsearch:incremental_visibility FAIL            1.07s   exit status 1
+>>> ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=161 MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3 /tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_incremental.py /tmp/fsearch-generations-build/src/fsearch-service /tmp/fsearch-generations-build/src/fsearch-incremental /tmp/fsearch-generations-build/src/tests/snapshot_fixture
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+Traceback (most recent call last):
+  File "/tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_incremental.py", line 50, in <module>
+    try:implementation['ingest'](SilentWatcher(),silent_client,b'/owned-fixture')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/fsearch-generations-build/src/fsearch-incremental", line 104, in ingest
+    message=watcher.message(.02)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_incremental.py", line 45, in message
+    if self.calls>12:raise StopIteration
+                     ^^^^^^^^^^^^^^^^^^^
+StopIteration
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/1 fsearch:incremental_visibility FAIL            1.07s   exit status 1
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt

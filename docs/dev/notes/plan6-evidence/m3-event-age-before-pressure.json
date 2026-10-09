@@ -1,0 +1,205 @@
+{
+  "command": [
+    "/home/linuxbrew/.linuxbrew/bin/uvx",
+    "--with",
+    "ninja",
+    "--from",
+    "meson",
+    "meson",
+    "test",
+    "-C",
+    "/tmp/fsearch-generations-build",
+    "incremental_visibility",
+    "--print-errorlogs"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 1.6148554530227557,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 106459136,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.22552408301271498,
+  "initial_host": {
+    "MemAvailable": 51487485952,
+    "SwapFree": 1308123136,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.14,
+    "io_full_avg10": 0.06
+  },
+  "final_host": {
+    "MemAvailable": 51498119168,
+    "SwapFree": 1308123136,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.66,
+    "io_full_avg10": 0.59
+  },
+  "samples": [
+    {
+      "seconds": 0.023602809000294656,
+      "host": {
+        "MemAvailable": 51487485952,
+        "SwapFree": 1308123136,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.14,
+        "io_full_avg10": 0.06
+      },
+      "rss_bytes": 31948800,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.02318260198808275,
+      "swap_bytes": 0,
+      "pids": [
+        87824
+      ]
+    },
+    {
+      "seconds": 0.24712339299730957,
+      "host": {
+        "MemAvailable": 51470577664,
+        "SwapFree": 1308123136,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.14,
+        "io_full_avg10": 0.06
+      },
+      "rss_bytes": 72871936,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.023176753980806097,
+      "swap_bytes": 0,
+      "pids": [
+        87824,
+        87840
+      ]
+    },
+    {
+      "seconds": 0.4714109150227159,
+      "host": {
+        "MemAvailable": 51438903296,
+        "SwapFree": 1308123136,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.14,
+        "io_full_avg10": 0.06
+      },
+      "rss_bytes": 106459136,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.023020463006105274,
+      "swap_bytes": 0,
+      "pids": [
+        87824,
+        87840,
+        87854
+      ]
+    },
+    {
+      "seconds": 0.6944378040207084,
+      "host": {
+        "MemAvailable": 51438927872,
+        "SwapFree": 1308123136,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.14,
+        "io_full_avg10": 0.06
+      },
+      "rss_bytes": 106459136,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.022753347002435476,
+      "swap_bytes": 0,
+      "pids": [
+        87824,
+        87840,
+        87854
+      ]
+    },
+    {
+      "seconds": 0.9194103030022234,
+      "host": {
+        "MemAvailable": 51438333952,
+        "SwapFree": 1308123136,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.14,
+        "io_full_avg10": 0.06
+      },
+      "rss_bytes": 106459136,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.023397006996674463,
+      "swap_bytes": 0,
+      "pids": [
+        87824,
+        87840,
+        87854
+      ]
+    },
+    {
+      "seconds": 1.1434328530158382,
+      "host": {
+        "MemAvailable": 51441541120,
+        "SwapFree": 1308123136,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.14,
+        "io_full_avg10": 0.06
+      },
+      "rss_bytes": 106459136,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.023830210004234686,
+      "swap_bytes": 0,
+      "pids": [
+        87824,
+        87840,
+        87854
+      ]
+    },
+    {
+      "seconds": 1.3653523990069516,
+      "host": {
+        "MemAvailable": 51443793920,
+        "SwapFree": 1308123136,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.14,
+        "io_full_avg10": 0.06
+      },
+      "rss_bytes": 106459136,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.021783578995382413,
+      "swap_bytes": 0,
+      "pids": [
+        87824,
+        87840,
+        87854
+      ]
+    },
+    {
+      "seconds": 1.5908764820196666,
+      "host": {
+        "MemAvailable": 51499139072,
+        "SwapFree": 1308123136,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.66,
+        "io_full_avg10": 0.59
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.025228370010154322,
+      "swap_bytes": 0,
+      "pids": [
+        87824
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-m3-event-age-before.service",
+    "memory.current": 9240576,
+    "memory.peak": 61636608,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}
