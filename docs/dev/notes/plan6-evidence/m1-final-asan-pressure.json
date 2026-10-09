@@ -1,0 +1,71 @@
+{
+  "command": [
+    "/tmp/fsearch-catalog-asan"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 0.28237132100912277,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 20480000,
+  "peak_sampled_pss_bytes": 12370944,
+  "initial_host": {
+    "MemAvailable": 33791909888,
+    "SwapFree": 5505626112,
+    "memory_some_avg10": 0.11,
+    "memory_full_avg10": 0.01,
+    "io_some_avg10": 0.23,
+    "io_full_avg10": 0.01
+  },
+  "final_host": {
+    "MemAvailable": 33884467200,
+    "SwapFree": 5505626112,
+    "memory_some_avg10": 0.11,
+    "memory_full_avg10": 0.01,
+    "io_some_avg10": 0.23,
+    "io_full_avg10": 0.01
+  },
+  "samples": [
+    {
+      "seconds": 0.0004329710063757375,
+      "host": {
+        "MemAvailable": 33791909888,
+        "SwapFree": 5505626112,
+        "memory_some_avg10": 0.11,
+        "memory_full_avg10": 0.01,
+        "io_some_avg10": 0.23,
+        "io_full_avg10": 0.01
+      },
+      "rss_bytes": 20480000,
+      "pss_bytes": 12370944,
+      "swap_bytes": 0,
+      "pids": [
+        44877
+      ]
+    },
+    {
+      "seconds": 0.23139959400577936,
+      "host": {
+        "MemAvailable": 33886986240,
+        "SwapFree": 5505626112,
+        "memory_some_avg10": 0.11,
+        "memory_full_avg10": 0.01,
+        "io_some_avg10": 0.23,
+        "io_full_avg10": 0.01
+      },
+      "rss_bytes": 0,
+      "pss_bytes": 0,
+      "swap_bytes": 0,
+      "pids": []
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-m1-final-asan.service",
+    "memory.current": 10059776,
+    "memory.peak": 26316800,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant tree otherwise"
+}

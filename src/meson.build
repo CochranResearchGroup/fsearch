@@ -91,7 +91,7 @@ fsearch_enums = gnome.mkenums_simple('fsearch_enums',
 )
 
 if host_machine.system() == 'linux'
-    libfsearch_sources += ['fsearch_headless.c']
+    libfsearch_sources += ['fsearch_headless.c', 'fsearch_catalog.c']
 endif
 
 libfsearch = static_library(

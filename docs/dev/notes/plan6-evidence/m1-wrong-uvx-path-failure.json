@@ -1,0 +1,40 @@
+{
+  "command": [
+    "/home/ecochran76/.local/bin/uvx",
+    "--with",
+    "ninja",
+    "--from",
+    "meson",
+    "meson",
+    "compile",
+    "-C",
+    "/tmp/fsearch-generations-build",
+    "-j",
+    "2"
+  ],
+  "reason": "spawn_error: [Errno 2] No such file or directory: '/home/ecochran76/.local/bin/uvx'",
+  "exit_code": null,
+  "elapsed_seconds": 0.0006284390110522509,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 0,
+  "peak_sampled_pss_bytes": 0,
+  "initial_host": {
+    "MemAvailable": 36249272320,
+    "SwapFree": 5916102656,
+    "memory_some_avg10": 0.03,
+    "memory_full_avg10": 0.03,
+    "io_some_avg10": 1.7,
+    "io_full_avg10": 1.46
+  },
+  "final_host": {
+    "MemAvailable": 36249272320,
+    "SwapFree": 5916102656,
+    "memory_some_avg10": 0.03,
+    "memory_full_avg10": 0.03,
+    "io_some_avg10": 1.7,
+    "io_full_avg10": 1.46
+  },
+  "samples": [],
+  "cgroup": null,
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant tree otherwise"
+}

@@ -121,3 +121,20 @@ if host_machine.system() == 'linux'
         args: [files('test_headless.py'), fsearch_cli.full_path(), snapshot_fixture.full_path(), headless_fault_fixture.full_path()],
         depends: [fsearch_cli, snapshot_fixture, headless_fault_fixture], timeout: 60)
 endif
+
+if host_machine.system() == 'linux'
+    test_catalog = executable('test_catalog', 'test_catalog.c', dependencies: libfsearch_dep)
+    test('immutable_catalog', test_catalog, timeout: 60)
+endif
+if host_machine.system() == 'linux'
+    test_catalog_faults = executable('test_catalog_faults', 'test_catalog_faults.c', dependencies: libfsearch_dep)
+    test('immutable_catalog_faults', test_catalog_faults, timeout: 30)
+endif
+if host_machine.system() == 'linux'
+    catalog_fixture = executable('catalog_fixture', 'catalog_fixture.c', dependencies: libfsearch_dep)
+    test('catalog_native_parity', python, args: [files('test_catalog_parity.py'), catalog_fixture.full_path(), snapshot_fixture.full_path(), fsearch_worker.full_path()],
+        depends: [catalog_fixture, snapshot_fixture, fsearch_worker], timeout: 60)
+endif
+if host_machine.system() == 'linux'
+    test('pressure_guard_controls', python, args: [files('test_pressure_guard.py'), files('run_pressure_guard.py')], timeout: 15)
+endif

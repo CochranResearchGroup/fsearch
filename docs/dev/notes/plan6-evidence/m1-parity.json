@@ -1,0 +1,19 @@
+{
+  "result": "pass",
+  "comparisons": 4320,
+  "limited_prefix_checks": 30,
+  "phases": [
+    "initial",
+    "build-0-with-replay",
+    "published-0",
+    "build-1-with-replay",
+    "published-1",
+    "build-2-with-replay",
+    "published-2",
+    "ancestor-delete",
+    "recreate-new-identity",
+    "post-delete-compaction"
+  ],
+  "oracle": "independent owned filesystem rebuilt through native snapshot builder and resident worker",
+  "scope": "catalog view/native-matcher adapter; production accelerated query integration remains M2"
+}

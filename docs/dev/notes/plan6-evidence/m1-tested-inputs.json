@@ -1,0 +1,19 @@
+{
+  "source_baseline": "2f313c825b6591542d0cfbce205c530ce3c683c5",
+  "sha256": {
+    "src/fsearch_catalog.c": "a0948cec16f24d222c7b64ee06e6be9695e346c8f30b3765236548660d248329",
+    "src/fsearch_catalog.h": "b02619c3bb1e762c1fa29f348598eb0cb6424a6dfa13eb1a6ea9b2379bcd79ef",
+    "src/tests/test_catalog.c": "088327827e5b5ea2b9a47100c0a4067bd5d075048def8e63e1b79d1a504e0dc6",
+    "src/tests/test_catalog_faults.c": "f867c5d0eebb3c10421ae25ba9b413f1ea5b4e3eb882d37c1042e5b2c426edb1",
+    "src/tests/catalog_fixture.c": "52758ef0e4daadd1dcba796793a48d4428c73050a614a2ade28413f79d660d39",
+    "src/tests/test_catalog_parity.py": "df78adad0d79d21608646481985b471dd189b9622a4e301ac90038d2d7ed6f65",
+    "src/tests/run_pressure_guard.py": "fc6518947f5b9802087bdf9afea557713f6d05c007519ebeff5e1ce4bc7988b0",
+    "src/tests/test_pressure_guard.py": "2260f5fe639101aa93d636419ca590ced023ea6c5f2f4415883820d4e2e21bbc"
+  },
+  "binaries": {
+    "/tmp/fsearch-generations-build/src/tests/test_catalog": "a43d83a26bc09573db4d0be96fcf3f1b1e32bcdfc33231a6649e24f4fcbc87be",
+    "/tmp/fsearch-catalog-asan": "702481efaa17d04cee49f11c2d00c883349ed3052b1383c1e703a58559e5a180",
+    "/tmp/fsearch-catalog-faults-asan": "697953c0003ce3515e9b207259413d5aefadaac4034eaad7844a850c77a86043"
+  },
+  "sanitizers": "address and undefined; catalog and test source instrumented, existing native matcher archive uninstrumented"
+}

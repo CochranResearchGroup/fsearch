@@ -1,0 +1,54 @@
+{
+  "command": [
+    "/tmp/fsearch-generations-build/src/tests/test_catalog"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 0.08332804500241764,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 0,
+  "peak_sampled_pss_bytes": 0,
+  "initial_host": {
+    "MemAvailable": 38439112704,
+    "SwapFree": 6712373248,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 3.22,
+    "io_full_avg10": 0.26
+  },
+  "final_host": {
+    "MemAvailable": 38468603904,
+    "SwapFree": 6712373248,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 3.22,
+    "io_full_avg10": 0.26
+  },
+  "samples": [
+    {
+      "seconds": 0.0004733949899673462,
+      "host": {
+        "MemAvailable": 38439112704,
+        "SwapFree": 6712373248,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 3.22,
+        "io_full_avg10": 0.26
+      },
+      "rss_bytes": 0,
+      "pss_bytes": 0,
+      "swap_bytes": 0,
+      "pids": []
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-m1-correctness.service",
+    "memory.current": 8003584,
+    "memory.peak": 11173888,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant tree otherwise"
+}
