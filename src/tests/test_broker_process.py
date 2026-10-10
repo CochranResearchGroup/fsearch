@@ -236,6 +236,20 @@ asyncio.run(main())
             assert broker.returncode == code, error
             assert all(not Path('/proc', str(pid)).exists() for pid in worker_pids), worker_pids
 
+        def lookup_id(path):
+            request = {'schema_version': 1, 'request_id': 'hardlink-identity',
+                       'op': 'catalog_lookup', 'path_b64': base64.b64encode(os.fsencode(path)).decode()}
+            with socket.socket(socket.AF_UNIX) as channel:
+                channel.settimeout(3); channel.connect(str(endpoint))
+                channel.sendall((json.dumps(request) + '\n').encode())
+                body = b''
+                while b'\n' not in body:
+                    block = channel.recv(65536); assert block
+                    body += block
+            result = json.loads(body)
+            assert result['status'] != 'error', result
+            return result['entry_id']
+
         def inject(writer, data):
             if not actual:
                 writer.send(data)
@@ -303,14 +317,25 @@ asyncio.run(main())
             extended_controls = []
             if args.extended_actual:
                 moved_child = renamed / 'deep' / child.name
+                retired_child_id = lookup_id(moved_child)
                 moved_child.unlink(); visible('process-child', [])
                 moved_child.touch(); visible('process-child', [moved_child])
+                recreated_child_id = lookup_id(moved_child)
+                assert recreated_child_id != retired_child_id, 'deleted entry identity resurrected'
                 linked = root / 'process-child-hardlink.txt'
                 os.link(moved_child, linked)
                 visible('process-child', [moved_child, linked])
-                linked.unlink(); visible('process-child', [moved_child])
+                linked_id = lookup_id(linked)
+                assert linked.stat().st_ino == moved_child.stat().st_ino
+                assert linked_id != recreated_child_id, 'hard links share directory-entry identity'
+                renamed_link = root / 'process-child-hardlink-renamed.txt'
+                os.rename(linked, renamed_link)
+                visible('process-child', [moved_child, renamed_link])
+                assert lookup_id(renamed_link) == linked_id, 'hard-link rename changed entry identity'
+                renamed_link.unlink(); visible('process-child', [moved_child])
+                assert lookup_id(moved_child) == recreated_child_id, 'alias deletion retired surviving entry'
                 public('process-child', [moved_child], mcp=True)
-                extended_controls.append('delete_recreate_hardlink')
+                extended_controls.append('delete_recreate_hardlink_stable_distinct_ids')
                 outside_tree = work / 'outside-tree'
                 os.rename(renamed, outside_tree)
                 visible('process-child', [])

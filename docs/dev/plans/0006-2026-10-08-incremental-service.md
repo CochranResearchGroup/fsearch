@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: durable startup transport restart storm repaired after actual public-seam red; EOF/protocol/timeout/replay controls and explicit real-worker restart pass. Bounded full control62/62 passes; retain first61/62 monitor-deadline failure and isolated passing control. Next: M3 broker event semantics and durable observation-cursor reconciliation under existing owned-fixture authority. M3/M4 IN_PROGRESS; M5/M6 pending. No reboot or installed workspace/configuration change. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
+Current packet: actual kernel hard-link entry identity/rename/deletion and durable CLI/fresh-MCP controls pass on the already authorized fixed owned fixture. Helper hash/config/scope unchanged; combined helper/kernel resources remain unqualified. Startup repair full62 control passes with retained initial monitor-deadline failure. Next: M3 lost broker sessions and stale observation leases. M3/M4 IN_PROGRESS; M5/M6 pending. No reboot or installed workspace activation. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
 
 ## Destination and completion rule
 
@@ -220,3 +220,5 @@ Checkpoint crash continuation2026-10-10: [public-seam qualification](../notes/20
 Prior-boot continuation2026-10-10: [durable catalog public-seam controls](../notes/2026-10-10-plan6-prior-boot.md), five registered cases pass; retained fixture-expectation failure, no reboot qualification.
 
 Startup transport continuation2026-10-10: [red/green repair](../notes/2026-10-10-plan6-startup-failure.md), full62 control passes; original monitor-deadline failure retained, broader M3/M4/program acceptance open.
+
+Actual hard-link continuation2026-10-10: [identity qualification](../notes/2026-10-10-plan6-hardlink-identity.md); same-inode aliases retain distinct stable entry identities, retired IDs stay retired. Current-scale/aggregate and wider M3 acceptance remain open.
