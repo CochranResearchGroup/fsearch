@@ -11,6 +11,8 @@ Current packet: [bounded durable mutation groups](../notes/2026-10-10-plan6-dura
 
 Next correctness gate: [attribute-only permission transition](../notes/2026-10-10-plan6-permission-transitions.md) is RED_REPRODUCED on published30dd289a: fresh rebuild excludes directory/subtree after chmod000, while native and fresh MCP return both with watching coverage after a later regular barrier. Fixed helper lacks ATTRIB subscription; decoder and directory-self ABI handling also need a bounded source design. Production code/helper unchanged; deny/restore and unknown/outside/root tests plus separately reviewed pinned helper activation remain required.
 
+M4 supporting follow-up: [reported batch sync errors](../notes/2026-10-10-plan6-batch-sync-errors.md) adds log/cursor-file EIO public controls; final11/11 batch controls pass with rejected batch, preserved prefix, deferred read-only tail and roots/snapshot-absent recovery. Fixture failures and host-pressure preflight retained; production source unchanged. Durable accepted cached state is separate from source freshness and mutation writability.
+
 ## Destination and completion rule
 
 Deliver an always-warm Linux filename service behind file-searcher's normal CLI and MCP tools, continuously tracking the entire approved local workspace. Searches remain useful during sustained changes, failed updates, restart and resource pressure. Windows filename coverage stays with optional Everything integration; SQLite fallback remains useful without FSearch.

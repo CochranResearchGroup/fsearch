@@ -14,7 +14,7 @@ import time
 assert ctypes.CDLL(None).prctl(36, 1, 0, 0, 0) == 0
 runtime = Path(sys.argv[1]); os.umask(0o077)
 cut = sys.argv[2] if len(sys.argv) > 2 else 'normal'
-assert cut in ('normal', 'log_fsync', 'cursor_pre_rename', 'cursor_published', 'pause_cursor', 'native_error', 'native_deferred', 'native_identity', 'bounds')
+assert cut in ('normal', 'log_fsync', 'cursor_pre_rename', 'cursor_published', 'pause_cursor', 'native_error', 'native_deferred', 'native_identity', 'log_fsync_error', 'cursor_fsync_error', 'bounds')
 with tempfile.TemporaryDirectory(prefix='fsearch-group-crash-') as temporary:
     work = Path(temporary)
     root = work / 'owned'; root.mkdir(); (root / 'initial.txt').touch()
@@ -31,6 +31,8 @@ original_fsync=os.fsync
 original_publish=journal.CatalogJournal.publish_commit
 cut=sys.argv.pop(2)
 armed_fd=None
+cursor_armed=False
+faulted=False
 original_loads=json.loads
 def loads(*args,**kwargs):
     result=original_loads(*args,**kwargs)
@@ -41,6 +43,16 @@ def loads(*args,**kwargs):
     return result
 json.loads=loads
 def fsync(fd):
+    global cursor_armed,faulted
+    if cut=='log_fsync_error' and fd==armed_fd and not faulted:
+        faulted=True
+        Path(os.environ['FSEARCH_BATCH_FAULT']).write_text('log')
+        raise OSError(5,'injected log sync failure')
+    if cut=='cursor_fsync_error' and cursor_armed and fd!=armed_fd:
+        cursor_armed=False
+        faulted=True
+        Path(os.environ['FSEARCH_BATCH_FAULT']).write_text('cursor')
+        raise OSError(5,'injected cursor sync failure')
     result=original_fsync(fd)
     if cut=='log_fsync' and fd==armed_fd:os._exit(86)
     return result
@@ -49,6 +61,8 @@ def append(self,records):
     if records[0][0]['sequence']==2:armed_fd=self.fd
     return original_append(self,records)
 def publish(self,size,sequence,chain):
+    global cursor_armed
+    cursor_armed=sequence==9
     if cut=='pause_cursor' and sequence==9:
         Path(os.environ['FSEARCH_BATCH_PAUSE']).touch()
         deadline=time.monotonic()+1.5
@@ -84,7 +98,7 @@ runpy.run_path(sys.argv[0],run_name='__main__')
         command = [sys.executable, str(runtime / 'fsearch-service'), 'serve', '--catalog-journal', '--socket', str(endpoint), '--database', str(database)]
         if inject: command = [sys.executable, str(wrapper), str(runtime), cut, *command[1:]]
         server = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE,
-                                  env={**os.environ, 'FSEARCH_BATCH_PAUSE': str(work / 'paused'), 'FSEARCH_BATCH_RELEASE': str(work / 'release')})
+                                  env={**os.environ, 'FSEARCH_BATCH_PAUSE': str(work / 'paused'), 'FSEARCH_BATCH_RELEASE': str(work / 'release'), 'FSEARCH_BATCH_FAULT':str(work/'fault')})
         try:
             deadline = time.monotonic() + 5
             while True:
@@ -100,7 +114,7 @@ runpy.run_path(sys.argv[0],run_name='__main__')
 
     server = None
     try:
-        server, state = start(cut in ('log_fsync', 'cursor_pre_rename', 'cursor_published', 'pause_cursor', 'native_deferred', 'native_identity')); identity = state['snapshot_id']
+        server, state = start(cut in ('log_fsync', 'cursor_pre_rename', 'cursor_published', 'pause_cursor', 'native_deferred', 'native_identity', 'log_fsync_error', 'cursor_fsync_error')); identity = state['snapshot_id']
         first = call('catalog_apply', expected_snapshot_id=identity, sequence=1, parent_id=0, entry_kind=1, name_b64=base64.b64encode(b'acknowledged-\xff.txt').decode())
         assert first['durable'] and first['sequence'] == 1, first
         assert call('catalog_compact', expected_snapshot_id=identity)['status'] == 'catalog_compacting'
@@ -138,7 +152,23 @@ runpy.run_path(sys.argv[0],run_name='__main__')
             assert accepted['durable'] and accepted['sequence']==1026, accepted
             print(json.dumps({'result':'batch_exact_production_record_limit', 'records':1024, 'oversized_sequence_identity_rejected':True}))
             raise SystemExit(0)
-        if cut in ('native_error','native_deferred','native_identity'):
+        if cut in ('log_fsync_error','cursor_fsync_error'):
+            rejected=call('catalog_apply_batch',expected_snapshot_id=identity,mutations=mutations)
+            assert rejected['status']=='error' and rejected['error']['code']=='catalog_journal_write_failed',rejected
+            deadline=time.monotonic()+5
+            while True:
+                state=call()
+                if state['status']=='catalog_status':break
+                assert time.monotonic()<deadline;time.sleep(.01)
+            assert state['sequence']==1 and type(state['durable']) is bool,state
+            assert (work/'fault').read_text()==('log' if cut=='log_fsync_error' else 'cursor')
+            retained=call('query',query='batch-',limit=100)
+            assert retained['results']==[] and retained['durable']==state['durable'],retained
+            assert retained['incremental_coverage']['state']=='deferred' and retained['incremental_coverage']['reason']=='catalog_journal_tail_uncommitted',retained
+            refused=call('catalog_apply',expected_snapshot_id=identity,sequence=2,parent_id=0,entry_kind=1,name_b64=base64.b64encode(b'forbidden-before-restart.txt').decode())
+            assert refused['status']=='error' and refused['error']['code']=='journal_tail_uncommitted',refused
+            call('stop');server.wait(timeout=5);server=None
+        elif cut in ('native_error','native_deferred','native_identity'):
             invalid=mutations if cut in ('native_deferred','native_identity') else [mutations[0],dict(mutations[1],parent_id=2**32-1)]
             rejected=call('catalog_apply_batch', expected_snapshot_id=identity, mutations=invalid)
             assert rejected['status']=='error' and rejected['error']['code']=='catalog_batch_apply_failed', rejected
@@ -190,7 +220,7 @@ runpy.run_path(sys.argv[0],run_name='__main__')
             assert time.monotonic() < deadline
             time.sleep(.01)
         assert not Path('/proc', str(previous_worker)).exists()
-        if cut not in ('normal','pause_cursor','native_error','native_deferred','native_identity'):
+        if cut not in ('normal','pause_cursor','native_error','native_deferred','native_identity','log_fsync_error','cursor_fsync_error'):
             subprocess.run([sys.executable, str(runtime / 'fsearch-service'), 'recover', '--socket', str(endpoint)], check=True, capture_output=True, timeout=3)
         (root / 'initial.txt').unlink(); root.rmdir(); database.unlink()
         server, recovered = start()
@@ -199,7 +229,7 @@ runpy.run_path(sys.argv[0],run_name='__main__')
         retained = call('query', query='acknowledged-', limit=100)
         assert base64.b64decode(retained['results'][0]['path_bytes_base64']) == os.fsencode(root) + b'/acknowledged-\xff.txt', retained
         assert retained['incremental_coverage']['state'] == 'deferred', retained
-        if cut in ('log_fsync','cursor_pre_rename'):
+        if cut in ('log_fsync','cursor_pre_rename','log_fsync_error','cursor_fsync_error'):
             assert retained['incremental_coverage']['reason'] == 'catalog_journal_tail_uncommitted', retained
         batch_paths = call('query', query='batch-', limit=100)['results']
         assert len(batch_paths) == (8 if published else 0), batch_paths
@@ -207,10 +237,10 @@ runpy.run_path(sys.argv[0],run_name='__main__')
             recovered_ids=[call('catalog_lookup',path_b64=base64.b64encode(os.fsencode(root)+b'/'+base64.b64decode(mutation['name_b64'])).decode())['entry_id'] for mutation in mutations]
             assert recovered_ids==result['entry_ids'], (recovered_ids,result)
         assert call('catalog_lookup', path_b64=base64.b64encode(os.fsencode(root) + b'/acknowledged-\xff.txt').decode())['entry_id'] == first['entry_id']
-        if cut in ('log_fsync','cursor_pre_rename'):
+        if cut in ('log_fsync','cursor_pre_rename','log_fsync_error','cursor_fsync_error'):
             refused = call('catalog_apply', expected_snapshot_id=identity, sequence=2, parent_id=0, entry_kind=1, name_b64=base64.b64encode(b'forbidden.txt').decode())
             assert refused['status'] == 'error' and refused['error']['code'] == 'journal_tail_uncommitted', refused
-        print(json.dumps({'result': 'actual_batch_crash_pass', 'cut': cut, 'acknowledged_sequence': 1, 'uncommitted_tail_read_only': cut in ('log_fsync','cursor_pre_rename'), 'recovered_sequence': recovered['sequence'], 'root_and_original_snapshot_absent': True, 'raw_bytes_and_entry_id_preserved': True, 'power_loss_qualified': False}))
+        print(json.dumps({'result': 'actual_batch_crash_pass', 'cut': cut, 'acknowledged_sequence': 1, 'uncommitted_tail_read_only': cut in ('log_fsync','cursor_pre_rename','log_fsync_error','cursor_fsync_error'), 'recovered_sequence': recovered['sequence'], 'root_and_original_snapshot_absent': True, 'raw_bytes_and_entry_id_preserved': True, 'power_loss_qualified': False}))
     finally:
         if server:
             try: call('stop')

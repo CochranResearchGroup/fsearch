@@ -1,0 +1,46 @@
+{
+  "command": [
+    "/home/ecochran76/worktrees/fsearch-plan6-tools/bin/meson",
+    "test",
+    "-C",
+    "/home/ecochran76/worktrees/fsearch-plan6-build",
+    "--num-processes",
+    "1",
+    "--print-errorlogs",
+    "catalog_batch_*"
+  ],
+  "reason": "host_pressure_preflight",
+  "exit_code": null,
+  "elapsed_seconds": 0.00022580998484045267,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 0,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0,
+  "initial_host": {
+    "MemAvailable": 31474020352,
+    "SwapFree": 0,
+    "memory_some_avg10": 3.18,
+    "memory_full_avg10": 2.94,
+    "io_some_avg10": 16.25,
+    "io_full_avg10": 13.76
+  },
+  "final_host": {
+    "MemAvailable": 31475437568,
+    "SwapFree": 0,
+    "memory_some_avg10": 3.18,
+    "memory_full_avg10": 2.94,
+    "io_some_avg10": 16.25,
+    "io_full_avg10": 13.76
+  },
+  "samples": [],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-batch-sync-errors-20261010.service",
+    "memory.current": 7516160,
+    "memory.peak": 7516160,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}
