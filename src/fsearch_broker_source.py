@@ -115,10 +115,15 @@ class SourceReader:
                     return False
                 export = self.session.pending[0]
                 try:
-                    apply(export)
+                    batch=getattr(apply,'batch',None)
+                    count=batch(self.session.pending[:8],started+self.max_seconds) if batch else 1
+                    if not batch:apply(export)
+                    if type(count) is not int or not 1<=count<=min(8,len(self.session.pending)):
+                        raise Gap('catalog_batch_protocol')
                 except Exception:
                     self.session.fail('catalog_apply_failed')
-                self.session.applied(export.sequence)
+                for export in self.session.pending[:count]:
+                    self.session.applied(export.sequence)
                 # Application is real progress through already admitted data.
                 # It renews liveness, but only a later EAGAIN can prove drain.
                 self.session.progress(time.monotonic())
@@ -249,6 +254,37 @@ class CatalogSink:
                     raise Gap('directory_inventory_unavailable')
                 self.inventory(entry, path)
                 self.session.inventory_finished(entry, export.generation)
+
+    def batch(self, exports, deadline):
+        """Group only independent regular entries; acknowledge after commit.
+
+        Preparation yields at the source turn bound. Namespace dependencies,
+        directory work, replacements and exclusions retain the single path.
+        """
+        limit=min(8,getattr(self.client,'batch_remaining',0),len(exports))
+        mutations=[];names=set();count=0
+        for export in exports[:limit]:
+            if mutations and time.monotonic()>=deadline:break
+            operation=export.mask & (CREATE|DELETE|RENAME)
+            if export.mask & ONDIR or operation not in (CREATE,RENAME):break
+            sides={side[0]:self._side(side) for side in export.sides}
+            old=sides.get(10) if operation==RENAME else None
+            new=sides.get(12 if operation==RENAME else 2)
+            if new is None:break
+            paths={side[3] for side in (old,new) if side is not None}
+            if paths & names or old is not None and old[3]==new[3]:break
+            _,parent,name,path=new
+            if self.entry_kind is None or self.entry_kind(parent,name,export.generation)!=1:break
+            previous=self.client.lookup(old[3]) if old else None
+            existing=self.client.lookup(path)
+            if previous and previous['entry_kind']!=1 or existing:break
+            mutations.append((parent,name,previous['entry_id'] if previous else None,1))
+            names.update(paths);count+=1
+        if mutations:
+            self.client.apply_batch(mutations)
+            return count
+        self(exports[0])
+        return 1
 
 
 class CatalogBroker:

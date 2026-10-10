@@ -222,6 +222,10 @@ if host_machine.system() == 'linux'
     test_broker_mark_descriptor = executable('test_broker_mark_descriptor', 'test_broker_mark_descriptor.c', install: false)
     test('broker_mark_descriptor', test_broker_mark_descriptor, timeout: 10)
     test('broker_directory_map', python, args: files('test_broker_admission.py'), timeout: 10)
+    foreach cut : ['normal', 'log_fsync', 'cursor_pre_rename', 'cursor_published', 'pause_cursor', 'native_error', 'native_deferred', 'native_identity', 'bounds']
+        test('catalog_batch_' + cut, python, args: [files('test_catalog_batch.py'), join_paths(meson.project_build_root(), 'src'), cut],
+            depends: [fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 20)
+    endforeach
     test('broker_permission_exclusions', python, args: [files('test_broker_permission_exclusions.py'), join_paths(meson.project_build_root(), 'src'), broker_boundary.full_path()],
         depends: [broker_boundary, fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 15)
     test('broker_entry_eligibility', python, args: [files('test_broker_entry_eligibility.py'), join_paths(meson.project_build_root(), 'src'), broker_boundary.full_path()],

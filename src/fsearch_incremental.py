@@ -56,7 +56,7 @@ class ContinuousWatcher(monitor.Watcher):
 
 class CatalogClient:
     def __init__(self,path):
-        self.directory=lifecycle.PrivateDirectory(path);self.identity=None;self.sequence=0;self.changes=0;self.last_reconciled=None;self.coverage_state=None
+        self.directory=lifecycle.PrivateDirectory(path);self.identity=None;self.sequence=0;self.changes=0;self.last_reconciled=None;self.coverage_state=None;self.batch_remaining=0
     def close(self):self.directory.close()
     def call(self,op,**fields):
         request={'schema_version':1,'request_id':uuid.uuid4().hex,'op':op,'timeout_ms':2000,**fields}
@@ -79,6 +79,13 @@ class CatalogClient:
         self.identity=None;state=self.call('catalog_status')
         if state.get('status')!='catalog_status' or type(state.get('sequence')) is not int:raise BoundaryError('worker_protocol_failed')
         self.identity=state['snapshot_id'];self.sequence=state['sequence'];self.changes=0
+        self.batch_remaining=self.remaining(state)
+
+    @staticmethod
+    def remaining(reply):
+        value=reply.get('journal_remaining',0) if reply.get('durable') is True else 0
+        if type(value) is not int or not 0<=value<=1024:raise BoundaryError('worker_protocol_failed')
+        return value
     def coverage(self,state,root,observed=0,oldest=None,reason=''):
         self.call('catalog_coverage',coverage={'state':state,'root_b64':base64.b64encode(root).decode(),'event_sequence':observed,'catalog_sequence':self.sequence,'last_reconciled_unix_ms':self.last_reconciled,'oldest_unapplied_unix_ms':oldest,'reason':reason})
         self.coverage_state=state
@@ -92,10 +99,28 @@ class CatalogClient:
         reply=self.call('catalog_apply',**fields)
         if reply.get('status')!='catalog_applied' or reply.get('sequence')!=self.sequence+1:raise BoundaryError('worker_protocol_failed')
         self.sequence+=1;self.changes+=1
+        self.batch_remaining=self.remaining(reply)
         if reply.get('deferred_reason'):raise BoundaryError(reply['deferred_reason'])
         if self.changes>=1024 and not reply.get('building'):
             self.call('catalog_compact');self.changes=0
         return reply['entry_id']
+
+    def apply_batch(self, mutations):
+        if not 1<=len(mutations)<=min(lifecycle.MAX_BATCH_RECORDS,self.batch_remaining):raise BoundaryError('catalog_batch_limit')
+        requests=[]
+        for offset,(parent,name,entry,kind) in enumerate(mutations,1):
+            request={'sequence':self.sequence+offset,'parent_id':parent,'entry_kind':kind,'name_b64':base64.b64encode(name).decode()}
+            if entry is not None:request['entry_id']=entry
+            requests.append(request)
+        reply=self.call('catalog_apply_batch',mutations=requests)
+        entries=reply.get('entry_ids')
+        if reply.get('status')!='catalog_batch_applied' or reply.get('durable') is not True or reply.get('sequence')!=self.sequence+len(mutations) or not isinstance(entries,list) or len(entries)!=len(mutations) or any(type(entry) is not int or not 0<=entry<2**32 for entry in entries):raise BoundaryError('worker_protocol_failed')
+        self.sequence+=len(mutations);self.changes+=len(mutations)
+        self.batch_remaining=self.remaining(reply)
+        if reply.get('deferred_reason'):raise BoundaryError(reply['deferred_reason'])
+        if self.changes>=1024 and not reply.get('building'):
+            self.call('catalog_compact');self.changes=0
+        return entries
 
 def decode(value,relative=False):
     if not isinstance(value,str):raise BoundaryError('worker_protocol_failed')

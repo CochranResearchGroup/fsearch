@@ -1,0 +1,78 @@
+Log of Meson test suite run on 2026-10-10T14:23:09.194108
+
+Inherited environment: HOME=/home/ecochran76 LANG=C.UTF-8 LOGNAME=ecochran76 PATH=/home/ecochran76/worktrees/fsearch-plan6-tools/bin:/usr/bin:/bin SHELL=/bin/zsh USER=ecochran76 XDG_RUNTIME_DIR=/run/user/1000 QT_ACCESSIBILITY=1 XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/var/lib/snapd/desktop DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus GSM_SKIP_SSH_AGENT_WORKAROUND=true SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh MANAGERPID=696 INVOCATION_ID=24f53daf4cc14f489b320e3877b1e04f SYSTEMD_EXEC_PID=72763 MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-durable-batch-protocol-green-20261010.service/memory.pressure MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA= 
+
+==================================== 1/8 =====================================
+test:         fsearch:catalog_journal_boundaries
+start time:   19:23:09
+duration:     1.90s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=226 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_journal.py
+----------------------------------- stderr -----------------------------------
+...............
+----------------------------------------------------------------------
+Ran 15 tests in 1.764s
+
+OK
+==============================================================================
+
+==================================== 2/8 =====================================
+test:         fsearch:catalog_append_log_fsync_crash
+start time:   19:23:11
+duration:     2.07s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=29 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_append_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src log_fsync
+----------------------------------- stdout -----------------------------------
+{"result": "actual_append_crash_pass", "cut": "log_fsync", "acknowledged_sequence": 1, "uncommitted_tail_read_only": true, "recovered_sequence": 1, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+==================================== 3/8 =====================================
+test:         fsearch:catalog_append_cursor_pre_rename_crash
+start time:   19:23:13
+duration:     0.92s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=221 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_append_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src cursor_pre_rename
+----------------------------------- stdout -----------------------------------
+{"result": "actual_append_crash_pass", "cut": "cursor_pre_rename", "acknowledged_sequence": 1, "uncommitted_tail_read_only": true, "recovered_sequence": 1, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+==================================== 4/8 =====================================
+test:         fsearch:catalog_append_cursor_published_crash
+start time:   19:23:14
+duration:     0.84s
+result:       exit status 0
+command:      MALLOC_PERTURB_=77 MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_append_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src cursor_published
+----------------------------------- stdout -----------------------------------
+{"result": "actual_append_crash_pass", "cut": "cursor_published", "acknowledged_sequence": 1, "uncommitted_tail_read_only": false, "recovered_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+==================================== 5/8 =====================================
+test:         fsearch:catalog_batch_normal
+start time:   19:23:14
+duration:     0.60s
+result:       exit status 1
+command:      MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=110 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py /home/ecochran76/worktrees/fsearch-plan6-build/src normal
+----------------------------------- stderr -----------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py", line 127, in <module>
+    assert len(batch_paths) == (8 if cut in ('normal', 'cursor_published') else 0), batch_paths
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'path': '/tmp/fsearch-batch-crash-1igpy9yj/owned/batch-2.txt', 'path_bytes_base64': None}, {'path': '/tmp/fsearch-batch-crash-1igpy9yj/owned/batch-3.txt', 'path_bytes_base64': None}, {'path': '/tmp/fsearch-batch-crash-1igpy9yj/owned/batch-4.txt', 'path_bytes_base64': None}, {'path': '/tmp/fsearch-batch-crash-1igpy9yj/owned/batch-5.txt', 'path_bytes_base64': None}, {'path': '/tmp/fsearch-batch-crash-1igpy9yj/owned/batch-6.txt', 'path_bytes_base64': None}, {'path': '/tmp/fsearch-batch-crash-1igpy9yj/owned/batch-7.txt', 'path_bytes_base64': None}, {'path': '/tmp/fsearch-batch-crash-1igpy9yj/owned/batch-8.txt', 'path_bytes_base64': None}, {'path': '/tmp/fsearch-batch-crash-1igpy9yj/owned/batch-9.txt', 'path_bytes_base64': None}, {'path': '/tmp/fsearch-batch-crash-1igpy9yj/owned', 'path_bytes_base64': None}]
+==============================================================================
+
+==================================== 6/8 =====================================
+test:         fsearch:catalog_batch_log_fsync
+start time:   19:23:15
+duration:     0.04s
+result:       killed by signal 15 SIGTERM
+command:      MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=54 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py /home/ecochran76/worktrees/fsearch-plan6-build/src log_fsync
+==============================================================================
+
+
+Summary of Failures:
+
+5/8 fsearch:catalog_batch_normal                   FAIL            0.60s   exit status 1
+6/8 fsearch:catalog_batch_log_fsync                INTERRUPT       0.04s   killed by signal 15 SIGTERM
+
+Ok:                4   
+Fail:              2   

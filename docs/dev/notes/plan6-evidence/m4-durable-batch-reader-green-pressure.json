@@ -1,0 +1,77 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "src/tests/test_broker_source.py"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 0.36490210302872583,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 16547840,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2606030059978366,
+  "initial_host": {
+    "MemAvailable": 30475444224,
+    "SwapFree": 4096,
+    "memory_some_avg10": 0.04,
+    "memory_full_avg10": 0.03,
+    "io_some_avg10": 1.92,
+    "io_full_avg10": 1.43
+  },
+  "final_host": {
+    "MemAvailable": 30387548160,
+    "SwapFree": 20480,
+    "memory_some_avg10": 0.04,
+    "memory_full_avg10": 0.03,
+    "io_some_avg10": 1.92,
+    "io_full_avg10": 1.43
+  },
+  "samples": [
+    {
+      "seconds": 0.05484470503870398,
+      "host": {
+        "MemAvailable": 30475382784,
+        "SwapFree": 4096,
+        "memory_some_avg10": 0.04,
+        "memory_full_avg10": 0.03,
+        "io_some_avg10": 1.92,
+        "io_full_avg10": 1.43
+      },
+      "rss_bytes": 16547840,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.054311039042659104,
+      "swap_bytes": 0,
+      "pids": [
+        46616
+      ]
+    },
+    {
+      "seconds": 0.31544771103654057,
+      "host": {
+        "MemAvailable": 30411177984,
+        "SwapFree": 20480,
+        "memory_some_avg10": 0.04,
+        "memory_full_avg10": 0.03,
+        "io_some_avg10": 1.92,
+        "io_full_avg10": 1.43
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0604348280467093,
+      "swap_bytes": 0,
+      "pids": [
+        46616
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-durable-batch-reader-green-20261010.service",
+    "memory.current": 8511488,
+    "memory.peak": 19959808,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

@@ -1,0 +1,1386 @@
+Log of Meson test suite run on 2026-10-10T14:31:22.864134
+
+Inherited environment: HOME=/home/ecochran76 LANG=C.UTF-8 LOGNAME=ecochran76 PATH=/home/ecochran76/worktrees/fsearch-plan6-tools/bin:/usr/bin:/bin SHELL=/bin/zsh USER=ecochran76 XDG_RUNTIME_DIR=/run/user/1000 QT_ACCESSIBILITY=1 XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/var/lib/snapd/desktop DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus GSM_SKIP_SSH_AGENT_WORKAROUND=true SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh MANAGERPID=696 INVOCATION_ID=a63654e6475c4719ae51b25e59924b93 SYSTEMD_EXEC_PID=67031 MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-durable-batch-full-20261010.service/memory.pressure MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA= FSEARCH_FRONTEND_ACCEPTANCE_ROOT=/tmp/file-searcher-incremental-coverage 
+
+==================================== 1/73 ====================================
+test:         fsearch:validate-metainfo
+start time:   19:31:22
+duration:     0.03s
+result:       exit status 0
+command:      MALLOC_PERTURB_=32 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /usr/bin/appstreamcli validate --no-net /home/ecochran76/worktrees/fsearch-plan6-build/data/io.github.cboxdoerfer.FSearch.metainfo.xml
+----------------------------------- stdout -----------------------------------
+I: io.github.cboxdoerfer.FSearch:632: developer-name-tag-deprecated
+
+✔ Validation was successful: infos: 1, pedantic: 1
+==============================================================================
+
+==================================== 2/73 ====================================
+test:         fsearch:test_database
+start time:   19:31:22
+duration:     0.02s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MALLOC_PERTURB_=119 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_database
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S67504885f7b4dce921c0300fd0dbee68
+1..1
+# Start of FSearch tests
+# Start of database tests
+# GLib-GIO-DEBUG: _g_io_module_get_default: Found default implementation local (GLocalVfs) for ?gio-vfs?
+# fsearch-database-rescan-manager-DEBUG: [rescan-manager] Include manager updated. Rescheduling.
+# fsearch-database-scan-DEBUG: [db_scan] scan path: /tmp/fsearch-test-database-205UW3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 1
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-query-tree-DEBUG: [QueryParser]
+# fsearch-query-tree-DEBUG:  * global_flags: 
+# fsearch-query-tree-DEBUG:  * input: file_
+# fsearch-query-tree-DEBUG:  * output: [ascii_icase:'file_':] 
+# fsearch-database-index-store-DEBUG: [index_store] search "file_": 3 of 4 matched (0 folders, 3 files) in 0.576 ms
+# fsearch-database-file-DEBUG: [db_save] saving database to file...
+# fsearch-database-file-DEBUG: [db_save] trying to open temporary database file: /tmp/fsearch-test-database-205UW3/fsearch-test.db.tmp
+# fsearch-database-file-DEBUG: [db_save] saving database header...
+# fsearch-database-file-DEBUG: [db_save] saving database index flags...
+# fsearch-database-file-DEBUG: [db_save] saving database fast sort flags...
+# fsearch-database-file-DEBUG: [db_save] saving indices...
+# fsearch-database-file-DEBUG: [db_save] saving excludes...
+# fsearch-database-file-DEBUG: [db_save] saving folder block size...
+# fsearch-database-file-DEBUG: [db_save] saving file block size...
+# fsearch-database-file-DEBUG: [db_save] saving folders...
+# fsearch-database-file-DEBUG: [db_save] saving files...
+# fsearch-database-file-DEBUG: [db_save] saving sorted arrays...
+# fsearch-database-file-DEBUG: [db_save] updating file and folder block size: 57, 92
+# fsearch-database-file-DEBUG: [db_save] removing current database file...
+# fsearch-database-file-DEBUG: [db_save] renaming temporary database file: /tmp/fsearch-test-database-205UW3/fsearch-test.db.tmp -> /tmp/fsearch-test-database-205UW3/fsearch-test.db
+# fsearch-database-file-DEBUG: [db_save] database file saved in: 0.366000 ms
+ok 1 /FSearch/database/get_item_info_for_stale_index_still_signals
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 3/73 ====================================
+test:         fsearch:test_database_file
+start time:   19:31:22
+duration:     0.02s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=236 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_database_file
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sfcb2af31653e4728ef7c703c510b5411
+1..1
+# Start of FSearch tests
+# Start of database tests
+# Start of file tests
+# fsearch-database-scan-DEBUG: [db_scan] scan path: /tmp/fsearch-test-database-file-01BRW3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+# fsearch-database-file-DEBUG: [db_save] saving database to file...
+# fsearch-database-file-DEBUG: [db_save] trying to open temporary database file: /tmp/fsearch-test-database-file-01BRW3/test.db.tmp
+# fsearch-database-file-DEBUG: [db_save] saving database header...
+# fsearch-database-file-DEBUG: [db_save] saving database index flags...
+# fsearch-database-file-DEBUG: [db_save] saving database fast sort flags...
+# fsearch-database-file-DEBUG: [db_save] saving indices...
+# fsearch-database-file-DEBUG: [db_save] saving excludes...
+# fsearch-database-file-DEBUG: [db_save] saving folder block size...
+# fsearch-database-file-DEBUG: [db_save] saving file block size...
+# fsearch-database-file-DEBUG: [db_save] saving folders...
+# fsearch-database-file-DEBUG: [db_save] saving files...
+# fsearch-database-file-DEBUG: [db_save] saving sorted arrays...
+# fsearch-database-file-DEBUG: [db_save] updating file and folder block size: 92, 87
+# fsearch-database-file-DEBUG: [db_save] removing current database file...
+# fsearch-database-file-DEBUG: [db_save] renaming temporary database file: /tmp/fsearch-test-database-file-01BRW3/test.db.tmp -> /tmp/fsearch-test-database-file-01BRW3/test.db
+# fsearch-database-file-DEBUG: [db_save] database file saved in: 0.127000 ms
+# fsearch-database-file-DEBUG: [db_load] load 2 folders, 3 files
+# fsearch-database-file-DEBUG: [db_load] folder size: 92, file size: 87
+ok 1 /FSearch/database/file/save_load_roundtrip_preserves_hierarchy_and_sort_orders
+# End of file tests
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 4/73 ====================================
+test:         fsearch:test_database_chunked_array
+start time:   19:31:22
+duration:     0.07s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=97 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_database_chunked_array
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sede8799404db37a1a7d5894b93a53c72
+1..53
+# Start of FSearch tests
+# Start of database tests
+# Start of chunked_array tests
+ok 1 /FSearch/database/chunked_array/new_empty
+ok 2 /FSearch/database/chunked_array/new_small_single_chunk
+ok 3 /FSearch/database/chunked_array/new_large_splits_at_construction
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 4 /FSearch/database/chunked_array/new_unsorted_input_gets_sorted
+ok 5 /FSearch/database/chunked_array/new_claiming_sorted_is_trusted
+ok 6 /FSearch/database/chunked_array/ref_unref_roundtrip
+ok 7 /FSearch/database/chunked_array/get_type_registered
+ok 8 /FSearch/database/chunked_array/get_entry_out_of_bounds
+ok 9 /FSearch/database/chunked_array/get_entry_first_last
+ok 10 /FSearch/database/chunked_array/get_entry_crosses_chunk_boundary
+ok 11 /FSearch/database/chunked_array/get_chunks_total_matches_num_entries
+ok 12 /FSearch/database/chunked_array/get_joined_matches_get_entry
+ok 13 /FSearch/database/chunked_array/insert_into_empty
+ok 14 /FSearch/database/chunked_array/insert_maintains_sort_order
+ok 15 /FSearch/database/chunked_array/insert_no_split_below_2x_threshold
+ok 16 /FSearch/database/chunked_array/insert_splits_at_2x_threshold
+ok 17 /FSearch/database/chunked_array/insert_wrong_type_rejected
+ok 18 /FSearch/database/chunked_array/insert_with_size_sort_order
+ok 19 /FSearch/database/chunked_array/insert_array_empty_noop
+ok 20 /FSearch/database/chunked_array/insert_array_small_individual_path
+# fsearch-dynamic-array-DEBUG: [sort] merge sort: 8192
+ok 21 /FSearch/database/chunked_array/insert_array_bulk_path_at_threshold
+# fsearch-dynamic-array-DEBUG: [sort] merge sort: 8192
+ok 22 /FSearch/database/chunked_array/insert_array_bulk_interleaves_correctly
+# fsearch-dynamic-array-DEBUG: [sort] merge sort: 8192
+ok 23 /FSearch/database/chunked_array/insert_array_bulk_into_empty_self
+ok 24 /FSearch/database/chunked_array/find_existing
+ok 25 /FSearch/database/chunked_array/find_missing_null
+# fsearch-database-chunked-array-DEBUG: [chunks] empty
+ok 26 /FSearch/database/chunked_array/find_empty_array_null
+ok 27 /FSearch/database/chunked_array/find_slow_existing_and_missing
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 28 /FSearch/database/chunked_array/find_duplicate_keys
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 29 /FSearch/database/chunked_array/find_duplicates_across_chunk_boundary
+ok 30 /FSearch/database/chunked_array/steal_existing
+ok 31 /FSearch/database/chunked_array/steal_missing_null
+ok 32 /FSearch/database/chunked_array/steal_all_keeps_one_chunk
+ok 33 /FSearch/database/chunked_array/steal_does_not_merge_shrunken_chunks
+ok 34 /FSearch/database/chunked_array/steal_removes_emptied_chunk
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+ok 35 /FSearch/database/chunked_array/steal_descendants_direct_children
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+ok 36 /FSearch/database/chunked_array/steal_descendants_deeply_nested
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 2
+ok 37 /FSearch/database/chunked_array/steal_descendants_none_returns_empty
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 38 /FSearch/database/chunked_array/steal_descendants_known_count_fast_path
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 39 /FSearch/database/chunked_array/steal_descendants_known_count_path_fast_path
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 6
+ok 40 /FSearch/database/chunked_array/steal_descendants_known_count_name_order
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 41 /FSearch/database/chunked_array/steal_descendants_unknown_count_stops_at_end_of_run
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 4
+ok 42 /FSearch/database/chunked_array/steal_descendants_empty_subtree_stops_immediately
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 43 /FSearch/database/chunked_array/remove_marked_exact_count_scattered
+ok 44 /FSearch/database/chunked_array/steal_descendants_unknown_count_generic_scan
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+ok 45 /FSearch/database/chunked_array/steal_descendants_spanning_multiple_chunks
+ok 46 /FSearch/database/chunked_array/remove_marked_none_noop
+ok 47 /FSearch/database/chunked_array/remove_marked_contiguous_block
+ok 48 /FSearch/database/chunked_array/remove_marked_non_contiguous_blocks
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 3
+ok 49 /FSearch/database/chunked_array/remove_marked_files_inherit_from_parent
+ok 50 /FSearch/database/chunked_array/remove_marked_spans_chunk_boundary
+ok 51 /FSearch/database/chunked_array/remove_marked_all_keeps_one_chunk
+ok 52 /FSearch/database/chunked_array/remove_marked_exact_count_across_chunks
+ok 53 /FSearch/database/chunked_array/remove_marked_zero_count_is_noop
+# End of chunked_array tests
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 5/73 ====================================
+test:         fsearch:test_database_index_store
+start time:   19:31:23
+duration:     0.02s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MALLOC_PERTURB_=53 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_database_index_store
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sa3367d271a8521c1fdb19bd4b57f38ce
+1..1
+# Start of FSearch tests
+# Start of database tests
+# Start of index_store tests
+# fsearch-query-tree-DEBUG: [QueryParser]
+# fsearch-query-tree-DEBUG:  * global_flags: 
+# fsearch-query-tree-DEBUG:  * input: apple
+# fsearch-query-tree-DEBUG:  * output: [ascii_icase:'apple':] 
+# fsearch-database-index-store-DEBUG: [index_store] search "apple": 100 of 100 matched (0 folders, 100 files) in 0.355 ms
+# fsearch-query-tree-DEBUG: [QueryParser]
+# fsearch-query-tree-DEBUG:  * global_flags: 
+# fsearch-query-tree-DEBUG:  * input: banana
+# fsearch-query-tree-DEBUG:  * output: [ascii_icase:'banana':] 
+# fsearch-database-index-store-DEBUG: [index_store] search "banana": 0 of 100 matched (0 folders, 0 files) in 0.269 ms, cancelled
+ok 1 /FSearch/database/index_store/cancelled_search_keeps_partial_results_marked_incomplete
+# End of index_store tests
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 6/73 ====================================
+test:         fsearch:test_database_include
+start time:   19:31:23
+duration:     0.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MALLOC_PERTURB_=206 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_database_include
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S4c7631efea6d14bfbff5d26532ba66bc
+1..2
+# Start of FSearch tests
+# Start of database tests
+ok 1 /FSearch/database/include
+ok 2 /FSearch/database/include_manager
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 7/73 ====================================
+test:         fsearch:test_database_exclude
+start time:   19:31:23
+duration:     0.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests MALLOC_PERTURB_=188 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_database_exclude
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S432d8650f74b3d9865c4c36f9a3115e1
+1..3
+# Start of FSearch tests
+# Start of database tests
+ok 1 /FSearch/database/exclude
+ok 2 /FSearch/database/exclude_manager
+ok 3 /FSearch/database/exclude_matching
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 8/73 ====================================
+test:         fsearch:test_database_entry
+start time:   19:31:23
+duration:     0.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=209 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_database_entry
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S8b3519ae5816838c92bf6305ee939011
+1..97
+# Start of FSearch tests
+# Start of database tests
+# Start of entry tests
+ok 1 /FSearch/database/entry/new_file_type
+ok 2 /FSearch/database/entry/new_folder_type
+ok 3 /FSearch/database/entry/new_stores_name_without_flag
+ok 4 /FSearch/database/entry/new_folder_forces_childcount_flags
+ok 5 /FSearch/database/entry/new_file_no_childcount_flags
+ok 6 /FSearch/database/entry/new_empty_name
+ok 7 /FSearch/database/entry/new_with_attributes_stores_values
+ok 8 /FSearch/database/entry/new_with_attributes_no_varargs
+ok 9 /FSearch/database/entry/new_with_attributes_folder_counts
+ok 10 /FSearch/database/entry/attribute_flags_null
+ok 11 /FSearch/database/entry/attribute_get_missing_flag
+ok 12 /FSearch/database/entry/attribute_set_missing_flag
+ok 13 /FSearch/database/entry/attribute_size_roundtrip
+ok 14 /FSearch/database/entry/creation_time_never_stored
+ok 15 /FSearch/database/entry/attribute_offset_full_layout
+ok 16 /FSearch/database/entry/attribute_offset_none_fails
+ok 17 /FSearch/database/entry/attribute_offsets_computed_properties_absent
+ok 18 /FSearch/database/entry/attribute_name_for_offset
+ok 19 /FSearch/database/entry/attribute_for_offset_roundtrip
+ok 20 /FSearch/database/entry/name_raw
+ok 21 /FSearch/database/entry/name_raw_for_display
+ok 22 /FSearch/database/entry/name_raw_for_display_empty_is_separator
+ok 23 /FSearch/database/entry/name_raw_for_display_null
+ok 24 /FSearch/database/entry/name_for_display_gstring
+ok 25 /FSearch/database/entry/extension_regular
+ok 26 /FSearch/database/entry/extension_no_dot
+ok 27 /FSearch/database/entry/extension_hidden_file
+ok 28 /FSearch/database/entry/extension_trailing_dot
+ok 29 /FSearch/database/entry/extension_folder_null
+ok 30 /FSearch/database/entry/extension_null_entry
+ok 31 /FSearch/database/entry/mark_default_unset
+ok 32 /FSearch/database/entry/mark_set_clear
+ok 33 /FSearch/database/entry/mark_null_entry
+ok 34 /FSearch/database/entry/set_name_noop
+ok 35 /FSearch/database/entry/depth_root_zero
+ok 36 /FSearch/database/entry/depth_nesting
+ok 37 /FSearch/database/entry/parent_of_root_null
+ok 38 /FSearch/database/entry/parent_null_entry
+ok 39 /FSearch/database/entry/parent_returns_actual
+ok 40 /FSearch/database/entry/sibling_same_parent
+ok 41 /FSearch/database/entry/sibling_different_parent
+ok 42 /FSearch/database/entry/sibling_two_roots_false
+ok 43 /FSearch/database/entry/descendant_direct_child
+ok 44 /FSearch/database/entry/descendant_deeply_nested
+ok 45 /FSearch/database/entry/descendant_unrelated
+ok 46 /FSearch/database/entry/descendant_not_self
+ok 47 /FSearch/database/entry/set_parent_updates_childcount
+ok 48 /FSearch/database/entry/set_parent_reparent_childcount
+ok 49 /FSearch/database/entry/set_parent_folder_num_folders
+ok 50 /FSearch/database/entry/set_parent_size_propagates_all_ancestors
+ok 51 /FSearch/database/entry/set_parent_size_stops_without_flag
+ok 52 /FSearch/database/entry/set_parent_reparent_size_both_sides
+ok 53 /FSearch/database/entry/set_parent_no_update_no_counts
+ok 54 /FSearch/database/entry/set_parent_update_childcount_no_size
+ok 55 /FSearch/database/entry/set_parent_update_childcount_reparent
+ok 56 /FSearch/database/entry/increment_childcount_file_folder
+ok 57 /FSearch/database/entry/increment_childcount_null_safe
+ok 58 /FSearch/database/entry/root_path_single_level
+ok 59 /FSearch/database/entry/root_path_nested
+ok 60 /FSearch/database/entry/root_path_null
+ok 61 /FSearch/database/entry/path_of_root_is_empty
+ok 62 /FSearch/database/entry/path_full_of_root_is_name
+ok 63 /FSearch/database/entry/path_excludes_own_name
+ok 64 /FSearch/database/entry/path_full_includes_own_name
+ok 65 /FSearch/database/entry/paths_root_is_separator
+ok 66 /FSearch/database/entry/append_path_preserves_prefix
+# GLib-GIO-DEBUG: _g_io_module_get_default: Found default implementation local (GLocalVfs) for ?gio-vfs?
+ok 67 /FSearch/database/entry/content_type_nonexistent_is_unknown
+ok 68 /FSearch/database/entry/compare_by_name_natural_order
+ok 69 /FSearch/database/entry/compare_by_name_null_entries
+ok 70 /FSearch/database/entry/compare_by_size
+ok 71 /FSearch/database/entry/compare_by_size_no_flag_zero
+ok 72 /FSearch/database/entry/compare_by_modification_time
+ok 73 /FSearch/database/entry/compare_by_extension
+ok 74 /FSearch/database/entry/compare_by_extension_folder_empty
+ok 75 /FSearch/database/entry/compare_by_position_always_zero
+ok 76 /FSearch/database/entry/compare_by_type_folders_always_equal
+ok 77 /FSearch/database/entry/compare_by_type_folder_file_differ
+ok 78 /FSearch/database/entry/compare_by_chain_type_then_name
+ok 79 /FSearch/database/entry/compare_by_path_siblings_name_order
+ok 80 /FSearch/database/entry/compare_by_path_different_depth
+ok 81 /FSearch/database/entry/compare_by_full_path_ancestor_order
+ok 82 /FSearch/database/entry/path_sort_keeps_descendant_files_contiguous
+ok 83 /FSearch/database/entry/path_compare_has_no_name_collisions
+ok 84 /FSearch/database/entry/dummy_does_not_change_parent_child_counts
+ok 85 /FSearch/database/entry/dummy_sorts_before_every_child
+ok 86 /FSearch/database/entry/deep_copy_root
+ok 87 /FSearch/database/entry/deep_copy_independent
+ok 88 /FSearch/database/entry/deep_copy_parent_chain
+ok 89 /FSearch/database/entry/free_updates_parent_state
+ok 90 /FSearch/database/entry/free_no_unparent_leaves_parent_untouched
+ok 91 /FSearch/database/entry/free_full_frees_chain
+ok 92 /FSearch/database/entry/monitored_fanotify_roundtrip
+ok 93 /FSearch/database/entry/monitored_inotify_roundtrip
+ok 94 /FSearch/database/entry/monitored_failed_folder
+ok 95 /FSearch/database/entry/monitored_flags_file_redirect
+ok 96 /FSearch/database/entry/monitored_flags_rootless_file_false
+ok 97 /FSearch/database/entry/get_flags_type_and_mark
+# End of entry tests
+# End of database tests
+# End of FSearch tests
+==============================================================================
+
+==================================== 9/73 ====================================
+test:         fsearch:test_array
+start time:   19:31:23
+duration:     0.01s
+result:       exit status 0
+command:      MALLOC_PERTURB_=3 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_array
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S81f289eb4622aa192dd18057c616a755
+1..10
+# Start of FSearch tests
+# Start of array tests
+# fsearch-dynamic-array-DEBUG: [sort] merge sort: 128
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+# 0:0
+# 1:1
+# 2:2
+# 3:3
+# 4:4
+# 5:5
+# 6:6
+# 7:7
+# 8:8
+# 9:9
+# 10:10
+# 11:11
+# 12:12
+# 13:13
+# 14:14
+# 15:15
+# 16:16
+# 17:17
+# 18:18
+# 19:19
+# 20:20
+# 21:21
+# 22:22
+# 23:23
+# 24:24
+# 25:25
+# 26:26
+# 27:27
+# 28:28
+# 29:29
+# 30:30
+# 31:31
+# 32:32
+# 33:33
+# 34:34
+# 35:35
+# 36:36
+# 37:37
+# 38:38
+# 39:39
+# 40:40
+# 41:41
+# 42:42
+# 43:43
+# 44:44
+# 45:45
+# 46:46
+# 47:47
+# 48:48
+# 49:49
+# 50:50
+# 51:51
+# 52:52
+# 53:53
+# 54:54
+# 55:55
+# 56:56
+# 57:57
+# 58:58
+# 59:59
+# 60:60
+# 61:61
+# 62:62
+# 63:63
+# 64:64
+# 65:65
+# 66:66
+# 67:67
+# 68:68
+# 69:69
+# 70:70
+# 71:71
+# 72:72
+# 73:73
+# 74:74
+# 75:75
+# 76:76
+# 77:77
+# 78:78
+# 79:79
+# 80:80
+# 81:81
+# 82:82
+# 83:83
+# 84:84
+# 85:85
+# 86:86
+# 87:87
+# 88:88
+# 89:89
+# 90:90
+# 91:91
+# 92:92
+# 93:93
+# 94:94
+# 95:95
+# 96:96
+# 97:97
+# 98:98
+# 99:99
+# 100:100
+# 101:101
+# 102:102
+# 103:103
+# 104:104
+# 105:105
+# 106:106
+# 107:107
+# 108:108
+# 109:109
+# 110:110
+# 111:111
+# 112:112
+# 113:113
+# 114:114
+# 115:115
+# 116:116
+# 117:117
+# 118:118
+# 119:119
+# 120:120
+# 121:121
+# 122:122
+# 123:123
+# 124:124
+# 125:125
+# 126:126
+# 127:127
+ok 1 /FSearch/array/main
+ok 2 /FSearch/array/insert
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 16
+ok 3 /FSearch/array/insert_sorted
+# 1
+ok 4 /FSearch/array/remove
+ok 5 /FSearch/array/steal
+ok 6 /FSearch/array/steal_items_func
+ok 7 /FSearch/array/range
+ok 8 /FSearch/array/copy_ref
+# fsearch-dynamic-array-DEBUG: [sort] insertion sort: 16
+# fsearch-dynamic-array-DEBUG: [sort] sorting with 8 threads
+# 0.7 / 0.7
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 0.9 / 0.9
+# 1.4 / 1.4
+# 1.5 / 1.5
+# 1.9 / 1.9
+# 2.6 / 2.6
+# 2.8 / 2.8
+# 3.0 / 3.0
+# 4.1 / 4.1
+# 4.2 / 4.2
+# 4.3 / 4.3
+ok 9 /FSearch/array/sort
+ok 10 /FSearch/array/search
+# End of array tests
+# End of FSearch tests
+==============================================================================
+
+=================================== 10/73 ====================================
+test:         fsearch:test_query
+start time:   19:31:23
+duration:     0.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests MALLOC_PERTURB_=13 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_query
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S9fc874a0eeb78d7f9db89b1f1288ebbb
+1..3
+# Start of FSearch tests
+# Start of query tests
+ok 1 /FSearch/query/main
+ok 2 /FSearch/query/mappings_turkic
+ok 3 /FSearch/query/mappings_german
+# End of query tests
+# End of FSearch tests
+----------------------------------- stderr -----------------------------------
+Failed to set locale to en_US.UTF-8. Skipping test.
+Failed to set locale to tr_TR.UTF-8. Skipping test.
+Failed to set locale to de_DE.UTF-8. Skipping test.
+==============================================================================
+
+=================================== 11/73 ====================================
+test:         fsearch:test_size_utils
+start time:   19:31:23
+duration:     0.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=54 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_size_utils
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sff120996d9796a59d7298e0020d40743
+1..1
+# Start of FSearch tests
+# Start of size_utils tests
+ok 1 /FSearch/size_utils/parse_size
+# End of size_utils tests
+# End of FSearch tests
+==============================================================================
+
+=================================== 12/73 ====================================
+test:         fsearch:test_string_utils
+start time:   19:31:23
+duration:     0.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=63 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_string_utils
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sf362acbb7e4cc35656e6f41d21795679
+1..7
+# Start of FSearch tests
+# Start of string_utils tests
+ok 1 /FSearch/string_utils/get_extension
+ok 2 /FSearch/string_utils/is_empty
+ok 3 /FSearch/string_utils/has_upper
+ok 4 /FSearch/string_utils/has_upper_utf8
+ok 5 /FSearch/string_utils/is_ascii_icase
+ok 6 /FSearch/string_utils/convert_wildcard_to_regex
+ok 7 /FSearch/string_utils/starts_with_interval
+# End of string_utils tests
+# End of FSearch tests
+----------------------------------- stderr -----------------------------------
+Failed to set locale to en_US.UTF-8. Skipping test.
+Failed to set locale to en_US.UTF-8. Skipping test.
+Failed to set locale to en_US.UTF-8. Skipping test.
+==============================================================================
+
+=================================== 13/73 ====================================
+test:         fsearch:test_time_utils
+start time:   19:31:23
+duration:     0.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 G_TEST_BUILDDIR=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MALLOC_PERTURB_=218 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 G_TEST_SRCDIR=/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_time_utils
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02S8b84eae158aa96994ce302e307dee50d
+1..1
+# Start of FSearch tests
+# Start of time_utils tests
+ok 1 /FSearch/time_utils/parse_time_interval
+# End of time_utils tests
+# End of FSearch tests
+==============================================================================
+
+=================================== 14/73 ====================================
+test:         fsearch:boot_recovery
+start time:   19:31:23
+duration:     0.14s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=242 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_boot_recovery.py
+----------------------------------- stderr -----------------------------------
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.044s
+
+OK
+==============================================================================
+
+=================================== 15/73 ====================================
+test:         fsearch:monitor_supervisor
+start time:   19:31:23
+duration:     14.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=28 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_monitor.py /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-monitor /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-cli /home/ecochran76/worktrees/fsearch-plan6-build/src/tests
+----------------------------------- stderr -----------------------------------
+.....................
+----------------------------------------------------------------------
+Ran 21 tests in 13.947s
+
+OK
+==============================================================================
+
+=================================== 16/73 ====================================
+test:         fsearch:approved_root_move_race
+start time:   19:31:37
+duration:     0.17s
+result:       exit status 0
+command:      MALLOC_PERTURB_=230 MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/../prototypes/verify_root_move_race.py --runtime /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/.. --fault /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/librefresh_fault_fixture.so --evidence-dir /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/move-race-evidence
+----------------------------------- stdout -----------------------------------
+Both workers reject the moved subtree without outside descendant access
+==============================================================================
+
+=================================== 17/73 ====================================
+test:         fsearch:monitor_worker
+start time:   19:31:37
+duration:     0.43s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=236 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_monitor_worker.py /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-monitor-worker /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libmonitor_fault_fixture.so /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/librefresh_fault_fixture.so
+----------------------------------- stderr -----------------------------------
+...........
+----------------------------------------------------------------------
+Ran 11 tests in 0.379s
+
+OK
+==============================================================================
+
+=================================== 18/73 ====================================
+test:         fsearch:refresh_worker
+start time:   19:31:37
+duration:     2.78s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=245 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_refresh.py /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-refresh-worker /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-cli /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/librefresh_fault_fixture.so /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libheadless_fault_fixture.so
+----------------------------------- stderr -----------------------------------
+..............
+----------------------------------------------------------------------
+Ran 14 tests in 2.721s
+
+OK
+==============================================================================
+
+=================================== 19/73 ====================================
+test:         fsearch:warm_service
+start time:   19:31:40
+duration:     28.57s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=167 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_service.py /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-service /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-cli /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/snapshot_fixture /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libheadless_fault_fixture.so
+----------------------------------- stderr -----------------------------------
+...................................
+----------------------------------------------------------------------
+Ran 35 tests in 28.550s
+
+OK
+==============================================================================
+
+=================================== 20/73 ====================================
+test:         fsearch:headless_cli
+start time:   19:32:09
+duration:     7.42s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MALLOC_PERTURB_=122 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_headless.py /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-cli /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/snapshot_fixture /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libheadless_fault_fixture.so
+----------------------------------- stderr -----------------------------------
+...............
+----------------------------------------------------------------------
+Ran 15 tests in 7.358s
+
+OK
+==============================================================================
+
+=================================== 21/73 ====================================
+test:         fsearch:immutable_catalog
+start time:   19:32:16
+duration:     0.03s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=124 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_catalog
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sf77badca212727b283b718572c008f79
+1..10
+# Start of catalog tests
+ok 1 /catalog/checkpoint
+ok 2 /catalog/immutable
+ok 3 /catalog/replay
+ok 4 /catalog/replay-overflow
+ok 5 /catalog/failures
+ok 6 /catalog/lagging-reader
+ok 7 /catalog/budgets
+ok 8 /catalog/shutdown
+ok 9 /catalog/concurrent-churn
+ok 10 /catalog/query-bounds
+# End of catalog tests
+==============================================================================
+
+=================================== 22/73 ====================================
+test:         fsearch:immutable_catalog_faults
+start time:   19:32:16
+duration:     0.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=47 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_catalog_faults
+----------------------------------- stdout -----------------------------------
+TAP version 13
+# random seed: R02Sfc91836ebe1eb2900325923d970fa5dd
+1..3
+# Start of catalog-faults tests
+ok 1 /catalog-faults/allocation
+ok 2 /catalog-faults/candidate-corruption
+ok 3 /catalog-faults/query-deadline
+# End of catalog-faults tests
+==============================================================================
+
+=================================== 23/73 ====================================
+test:         fsearch:catalog_native_parity
+start time:   19:32:16
+duration:     3.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=67 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_parity.py /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/catalog_fixture /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/snapshot_fixture /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/catalog_oracle_worker
+----------------------------------- stdout -----------------------------------
+{
+  "result": "pass",
+  "comparisons": 6120,
+  "limited_prefix_checks": 30,
+  "phases": [
+    "initial",
+    "build-0-with-replay",
+    "published-0",
+    "build-1-with-replay",
+    "published-1",
+    "build-2-with-replay",
+    "published-2",
+    "ancestor-delete",
+    "recreate-new-identity",
+    "post-delete-compaction"
+  ],
+  "oracle": "independent owned filesystem rebuilt through native snapshot builder and resident worker",
+  "scope": "production bounded catalog query loop against independent legacy native snapshot worker"
+}
+==============================================================================
+
+=================================== 24/73 ====================================
+test:         fsearch:pressure_guard_controls
+start time:   19:32:19
+duration:     2.48s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=88 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_pressure_guard.py /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/run_pressure_guard.py
+----------------------------------- stdout -----------------------------------
+pressure guard positive controls and nonblocking sampling pass
+==============================================================================
+
+=================================== 25/73 ====================================
+test:         fsearch:catalog_worker_transport
+start time:   19:32:22
+duration:     0.27s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=20 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_transport.py /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-service /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/snapshot_fixture
+----------------------------------- stdout -----------------------------------
+{
+  "result": "pass",
+  "accepted_events": 53,
+  "concurrent_queries": 20,
+  "generation": 1,
+  "checks": [
+    "snapshot identity guard",
+    "cached lookup confinement",
+    "literal names",
+    "raw bytes",
+    "sequence gap",
+    "namespace collision",
+    "type transition",
+    "retired identity",
+    "background compaction",
+    "four concurrent clients",
+    "cached queries/lookup after root removal"
+  ],
+  "durable_updates": false
+}
+==============================================================================
+
+=================================== 26/73 ====================================
+test:         fsearch:catalog_multiroot
+start time:   19:32:22
+duration:     0.24s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=131 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_multiroot.py /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/snapshot_fixture /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-worker /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/catalog_oracle_worker
+----------------------------------- stdout -----------------------------------
+{"result": "pass", "roots": 2, "comparisons": 468, "oracle": "legacy resident snapshot worker", "scope": "owned filesystem forest import, native literal matching and filters"}
+==============================================================================
+
+=================================== 27/73 ====================================
+test:         fsearch:continuous_events
+start time:   19:32:22
+duration:     0.76s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=106 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_continuous_events.py /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-monitor-worker /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libmonitor_fault_fixture.so
+----------------------------------- stdout -----------------------------------
+{"result": "pass", "events": 5, "checks": ["raw-byte create", "paired file rename", "hard links", "excluded symlinks", "delete", "idle native watcher heartbeat", "drain barrier after queued mutation", "startup gap", "directory inventory begin/end coverage", "directory move identity and watch release", "root relocation", "concurrent subtree event requires reconciliation", "overflow injection", "watch exhaustion"], "scope": "owned fixture roots, native Landlock/openat2 worker"}
+==============================================================================
+
+=================================== 28/73 ====================================
+test:         fsearch:incremental_visibility
+start time:   19:32:23
+duration:     7.75s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=101 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_incremental.py /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-service /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-incremental /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/snapshot_fixture
+----------------------------------- stdout -----------------------------------
+{"result": "pass", "normal_max_seconds": 0.12624553899513558, "heavy_seconds": 1.9515100760036148, "watcher_stall_deferred_seconds": 1.5502793840132654, "topology_reconciliation_seconds": null, "burst_events": 1100, "checks": ["create", "cross-parent rename", "replace rename", "hardlink", "delete", "raw bytes", "excluded symlink", "background compaction threshold", "clean/dirty/unacknowledged startup drain barriers", "source observation age survives queued inventory/events", "invalid observation clocks fail closed", "idle inventory heartbeat stays pending", "directory create inventory", "directory ancestor rename", "directory replacement rename", "subtree import", "subtree move out without outside indexing", "no snapshot replacement for directory changes", "query-visible exact root/last reconciliation", "abrupt updater death expires coverage lease and retains cached view", "paused native watcher fails deferred while updater is alive and cached queries remain complete", "paused watcher is killed and reaped"], "scope": "owned fixture actual mutation to native socket query"}
+==============================================================================
+
+=================================== 29/73 ====================================
+test:         fsearch:catalog_journal_boundaries
+start time:   19:32:31
+duration:     0.99s
+result:       exit status 0
+command:      MALLOC_PERTURB_=109 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_journal.py
+----------------------------------- stderr -----------------------------------
+...............
+----------------------------------------------------------------------
+Ran 15 tests in 0.914s
+
+OK
+==============================================================================
+
+=================================== 30/73 ====================================
+test:         fsearch:catalog_durable_capacity
+start time:   19:32:32
+duration:     32.94s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=115 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_capacity.py /home/ecochran76/worktrees/fsearch-plan6-build/src
+----------------------------------- stdout -----------------------------------
+{"accepted_sequence": 64, "elapsed_seconds": 0.7808891699532978, "batch_seconds": 0.7808891699532978, "batch_max_mutation_seconds": 0.022459227999206632}
+{"accepted_sequence": 128, "elapsed_seconds": 1.688708763977047, "batch_seconds": 0.9078195940237492, "batch_max_mutation_seconds": 0.045846387976780534}
+{"accepted_sequence": 192, "elapsed_seconds": 2.4500808119773865, "batch_seconds": 0.7613720480003394, "batch_max_mutation_seconds": 0.020518947974778712}
+{"accepted_sequence": 256, "elapsed_seconds": 3.400487541977782, "batch_seconds": 0.9504067300003953, "batch_max_mutation_seconds": 0.03072608500951901}
+{"accepted_sequence": 320, "elapsed_seconds": 4.1206266259541735, "batch_seconds": 0.7201390839763917, "batch_max_mutation_seconds": 0.02459031797479838}
+{"accepted_sequence": 384, "elapsed_seconds": 4.897572300978936, "batch_seconds": 0.7769456750247627, "batch_max_mutation_seconds": 0.022077243018429726}
+{"accepted_sequence": 448, "elapsed_seconds": 5.60834049800178, "batch_seconds": 0.7107681970228441, "batch_max_mutation_seconds": 0.02862491103587672}
+{"accepted_sequence": 512, "elapsed_seconds": 6.320385526982136, "batch_seconds": 0.7120450289803557, "batch_max_mutation_seconds": 0.022126963012851775}
+{"accepted_sequence": 576, "elapsed_seconds": 7.042442254954949, "batch_seconds": 0.722056727972813, "batch_max_mutation_seconds": 0.019187288999091834}
+{"accepted_sequence": 640, "elapsed_seconds": 7.851430368958972, "batch_seconds": 0.8089881140040234, "batch_max_mutation_seconds": 0.03600220399675891}
+{"accepted_sequence": 704, "elapsed_seconds": 8.592748522001784, "batch_seconds": 0.7413181530428119, "batch_max_mutation_seconds": 0.021446910977829248}
+{"accepted_sequence": 768, "elapsed_seconds": 9.699191425985191, "batch_seconds": 1.1064429039834067, "batch_max_mutation_seconds": 0.07860184198943898}
+{"accepted_sequence": 832, "elapsed_seconds": 10.973876209987793, "batch_seconds": 1.274684784002602, "batch_max_mutation_seconds": 0.05464152799686417}
+{"accepted_sequence": 896, "elapsed_seconds": 12.033712213975377, "batch_seconds": 1.0598360039875843, "batch_max_mutation_seconds": 0.03681801800848916}
+{"accepted_sequence": 960, "elapsed_seconds": 12.9881680230028, "batch_seconds": 0.9544558090274222, "batch_max_mutation_seconds": 0.0285623439704068}
+{"accepted_sequence": 1024, "elapsed_seconds": 14.978788664971944, "batch_seconds": 1.9906206419691443, "batch_max_mutation_seconds": 0.4516023690230213}
+{"accepted_sequence": 1088, "elapsed_seconds": 16.17428450100124, "batch_seconds": 1.1954958360292949, "batch_max_mutation_seconds": 0.16862745501566678}
+{"accepted_sequence": 1152, "elapsed_seconds": 17.240387681988068, "batch_seconds": 1.066103180986829, "batch_max_mutation_seconds": 0.06436502997530624}
+{"accepted_sequence": 1216, "elapsed_seconds": 18.21643629699247, "batch_seconds": 0.9760486150044017, "batch_max_mutation_seconds": 0.02431058301590383}
+{"accepted_sequence": 1280, "elapsed_seconds": 19.211579313967377, "batch_seconds": 0.9951430169749074, "batch_max_mutation_seconds": 0.036510270030703396}
+{"accepted_sequence": 1344, "elapsed_seconds": 20.187273691000883, "batch_seconds": 0.9756943770335056, "batch_max_mutation_seconds": 0.02745767799206078}
+{"accepted_sequence": 1408, "elapsed_seconds": 21.988129328994546, "batch_seconds": 1.8008556379936635, "batch_max_mutation_seconds": 0.5580656849779189}
+{"accepted_sequence": 1472, "elapsed_seconds": 22.870494768954813, "batch_seconds": 0.8823654399602674, "batch_max_mutation_seconds": 0.02331861504353583}
+{"accepted_sequence": 1536, "elapsed_seconds": 23.84487830096623, "batch_seconds": 0.9743835320114158, "batch_max_mutation_seconds": 0.049304128042422235}
+{"accepted_sequence": 1600, "elapsed_seconds": 24.926743799995165, "batch_seconds": 1.081865499028936, "batch_max_mutation_seconds": 0.030155285028740764}
+{"accepted_sequence": 1664, "elapsed_seconds": 25.936814674991183, "batch_seconds": 1.0100708749960177, "batch_max_mutation_seconds": 0.03160702803870663}
+{"accepted_sequence": 1728, "elapsed_seconds": 26.972677499987185, "batch_seconds": 1.035862824996002, "batch_max_mutation_seconds": 0.03036257397616282}
+{"accepted_sequence": 1792, "elapsed_seconds": 28.852957080991473, "batch_seconds": 1.880279581004288, "batch_max_mutation_seconds": 0.8244101949967444}
+{"accepted_sequence": 1856, "elapsed_seconds": 29.751912001986057, "batch_seconds": 0.8989549209945835, "batch_max_mutation_seconds": 0.028622000012546778}
+{"accepted_sequence": 1920, "elapsed_seconds": 30.65892068296671, "batch_seconds": 0.9070086809806526, "batch_max_mutation_seconds": 0.03005435597151518}
+{"accepted_sequence": 1984, "elapsed_seconds": 31.488651861960534, "batch_seconds": 0.8297311789938249, "batch_max_mutation_seconds": 0.021599842002615333}
+{"accepted_sequence": 2048, "elapsed_seconds": 32.28929580800468, "batch_seconds": 0.800643946044147, "batch_max_mutation_seconds": 0.026941719988826662}
+{"result": "two_production_journal_rollovers_pass", "sequence": 2052, "checkpoint_sequence": 2048, "generation": 2, "retired_id_reuse": false, "original_snapshot_and_root_absent": true}
+==============================================================================
+
+=================================== 31/73 ====================================
+test:         fsearch:catalog_append_log_fsync_crash
+start time:   19:33:05
+duration:     0.68s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=209 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_append_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src log_fsync
+----------------------------------- stdout -----------------------------------
+{"result": "actual_append_crash_pass", "cut": "log_fsync", "acknowledged_sequence": 1, "uncommitted_tail_read_only": true, "recovered_sequence": 1, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 32/73 ====================================
+test:         fsearch:catalog_append_cursor_pre_rename_crash
+start time:   19:33:05
+duration:     0.70s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MALLOC_PERTURB_=255 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_append_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src cursor_pre_rename
+----------------------------------- stdout -----------------------------------
+{"result": "actual_append_crash_pass", "cut": "cursor_pre_rename", "acknowledged_sequence": 1, "uncommitted_tail_read_only": true, "recovered_sequence": 1, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 33/73 ====================================
+test:         fsearch:catalog_append_cursor_published_crash
+start time:   19:33:06
+duration:     0.66s
+result:       exit status 0
+command:      MALLOC_PERTURB_=33 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_append_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src cursor_published
+----------------------------------- stdout -----------------------------------
+{"result": "actual_append_crash_pass", "cut": "cursor_published", "acknowledged_sequence": 1, "uncommitted_tail_read_only": false, "recovered_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 34/73 ====================================
+test:         fsearch:catalog_startup_transport_failure
+start time:   19:33:07
+duration:     1.10s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=174 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_startup_failure.py /home/ecochran76/worktrees/fsearch-plan6-build/src
+----------------------------------- stdout -----------------------------------
+{"result": "durable_startup_failure_bounded", "mode": "eof", "queries": 6, "worker_launches": 1, "explicit_restart_recovers_sequence": 2}
+==============================================================================
+
+=================================== 35/73 ====================================
+test:         fsearch:catalog_startup_transport_protocol
+start time:   19:33:08
+duration:     1.00s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=54 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_startup_failure.py /home/ecochran76/worktrees/fsearch-plan6-build/src protocol
+----------------------------------- stdout -----------------------------------
+{"result": "durable_startup_failure_bounded", "mode": "protocol", "queries": 6, "worker_launches": 1, "explicit_restart_recovers_sequence": 2}
+==============================================================================
+
+=================================== 36/73 ====================================
+test:         fsearch:catalog_startup_transport_timeout
+start time:   19:33:09
+duration:     1.35s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=171 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_startup_failure.py /home/ecochran76/worktrees/fsearch-plan6-build/src timeout
+----------------------------------- stdout -----------------------------------
+{"result": "durable_startup_failure_bounded", "mode": "timeout", "queries": 6, "worker_launches": 1, "explicit_restart_recovers_sequence": 2}
+==============================================================================
+
+=================================== 37/73 ====================================
+test:         fsearch:catalog_startup_transport_replay
+start time:   19:33:10
+duration:     1.17s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=207 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_startup_failure.py /home/ecochran76/worktrees/fsearch-plan6-build/src replay
+----------------------------------- stdout -----------------------------------
+{"result": "durable_startup_failure_bounded", "mode": "replay", "queries": 6, "worker_launches": 1, "explicit_restart_recovers_sequence": 2}
+==============================================================================
+
+=================================== 38/73 ====================================
+test:         fsearch:catalog_prior_boot_ready
+start time:   19:33:11
+duration:     0.75s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=156 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src ready
+----------------------------------- stdout -----------------------------------
+{"result": "actual_prior_boot_catalog_recovery_pass", "phase": "ready", "real_reboot_qualified": false, "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 39/73 ====================================
+test:         fsearch:catalog_prior_boot_starting
+start time:   19:33:12
+duration:     0.71s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=12 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src starting
+----------------------------------- stdout -----------------------------------
+{"result": "actual_prior_boot_catalog_recovery_pass", "phase": "starting", "real_reboot_qualified": false, "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 40/73 ====================================
+test:         fsearch:catalog_prior_boot_quarantined
+start time:   19:33:13
+duration:     0.72s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=9 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src quarantined
+----------------------------------- stdout -----------------------------------
+{"result": "actual_prior_boot_catalog_recovery_pass", "phase": "quarantined", "real_reboot_qualified": false, "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 41/73 ====================================
+test:         fsearch:catalog_prior_boot_current_boot
+start time:   19:33:13
+duration:     0.86s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=54 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src current_boot
+----------------------------------- stdout -----------------------------------
+{"result": "actual_prior_boot_catalog_recovery_pass", "phase": "current_boot", "real_reboot_qualified": false, "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 42/73 ====================================
+test:         fsearch:catalog_prior_boot_mixed_boot
+start time:   19:33:14
+duration:     0.88s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=254 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src mixed_boot
+----------------------------------- stdout -----------------------------------
+{"result": "actual_prior_boot_catalog_recovery_pass", "phase": "mixed_boot", "real_reboot_qualified": false, "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 43/73 ====================================
+test:         fsearch:catalog_crash_manifest_pre_rename
+start time:   19:33:15
+duration:     0.93s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=200 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_checkpoint_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src manifest_pre_rename
+----------------------------------- stdout -----------------------------------
+{"result": "actual_checkpoint_manifest_crash_pass", "cut": "manifest_pre_rename", "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 44/73 ====================================
+test:         fsearch:catalog_crash_manifest_published
+start time:   19:33:16
+duration:     1.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MALLOC_PERTURB_=227 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_checkpoint_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src manifest_published
+----------------------------------- stdout -----------------------------------
+{"result": "actual_checkpoint_manifest_crash_pass", "cut": "manifest_published", "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 45/73 ====================================
+test:         fsearch:catalog_crash_checkpoint_write
+start time:   19:33:17
+duration:     0.84s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=28 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_checkpoint_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src checkpoint_write /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libcheckpoint_fault_fixture.so
+----------------------------------- stdout -----------------------------------
+{"result": "actual_checkpoint_manifest_crash_pass", "cut": "checkpoint_write", "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 46/73 ====================================
+test:         fsearch:catalog_corrupt_pair
+start time:   19:33:18
+duration:     1.96s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=112 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_corrupt_pair.py /home/ecochran76/worktrees/fsearch-plan6-build/src
+----------------------------------- stdout -----------------------------------
+{"result": "corrupt_selected_pair_fallback_pass", "sequence": 1, "selected_sequence": 2, "original_snapshot_and_root_absent": true, "mutation_refused": true}
+==============================================================================
+
+=================================== 47/73 ====================================
+test:         fsearch:catalog_corrupt_pair_unavailable
+start time:   19:33:20
+duration:     4.09s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=202 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_corrupt_pair.py /home/ecochran76/worktrees/fsearch-plan6-build/src both
+----------------------------------- stdout -----------------------------------
+{"result": "all_pairs_invalid_refuses_without_restart_storm", "fault": "both", "original_root_absent": true, "unaccepted_baseline_refused": false}
+==============================================================================
+
+=================================== 48/73 ====================================
+test:         fsearch:catalog_corrupt_pair_binding
+start time:   19:33:24
+duration:     4.07s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=125 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_corrupt_pair.py /home/ecochran76/worktrees/fsearch-plan6-build/src binding
+----------------------------------- stdout -----------------------------------
+{"result": "all_pairs_invalid_refuses_without_restart_storm", "fault": "binding", "original_root_absent": true, "unaccepted_baseline_refused": true}
+==============================================================================
+
+=================================== 49/73 ====================================
+test:         fsearch:catalog_corrupt_pair_sequence
+start time:   19:33:28
+duration:     1.84s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=70 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_corrupt_pair.py /home/ecochran76/worktrees/fsearch-plan6-build/src sequence
+----------------------------------- stdout -----------------------------------
+{"result": "corrupt_selected_pair_fallback_pass", "sequence": 1, "selected_sequence": 2, "original_snapshot_and_root_absent": true, "mutation_refused": true}
+==============================================================================
+
+=================================== 50/73 ====================================
+test:         fsearch:catalog_corrupt_pair_metadata
+start time:   19:33:30
+duration:     2.36s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=13 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_corrupt_pair.py /home/ecochran76/worktrees/fsearch-plan6-build/src metadata
+----------------------------------- stdout -----------------------------------
+{"result": "corrupt_selected_pair_fallback_pass", "sequence": 1, "selected_sequence": 2, "original_snapshot_and_root_absent": true, "mutation_refused": true}
+==============================================================================
+
+=================================== 51/73 ====================================
+test:         fsearch:catalog_corrupt_pair_manifest
+start time:   19:33:32
+duration:     2.09s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=177 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_corrupt_pair.py /home/ecochran76/worktrees/fsearch-plan6-build/src manifest
+----------------------------------- stdout -----------------------------------
+{"result": "all_pairs_invalid_refuses_without_restart_storm", "fault": "manifest", "original_root_absent": true, "unaccepted_baseline_refused": false}
+==============================================================================
+
+=================================== 52/73 ====================================
+test:         fsearch:catalog_durable_replacement
+start time:   19:33:34
+duration:     3.18s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=164 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_replacement_durability.py /home/ecochran76/worktrees/fsearch-plan6-build/src
+----------------------------------- stdout -----------------------------------
+{"result": "durable_replacement_pass", "fault": null, "selected": "new", "source_snapshot_absent": true, "indexed_root_absent": true}
+{"result": "durable_replacement_pass", "fault": "before", "selected": "old", "source_snapshot_absent": true, "indexed_root_absent": true}
+{"result": "durable_replacement_pass", "fault": "after", "selected": "new", "source_snapshot_absent": true, "indexed_root_absent": true}
+==============================================================================
+
+=================================== 53/73 ====================================
+test:         fsearch:catalog_durable_rollover
+start time:   19:33:38
+duration:     5.59s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MALLOC_PERTURB_=103 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_rollover.py /home/ecochran76/worktrees/fsearch-plan6-build/src /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libcheckpoint_fault_fixture.so
+----------------------------------- stdout -----------------------------------
+{"result": "durable_catalog_rollover_pass", "sequence": 6, "checkpoint_sequence": 5, "post_capture_mutation_replayed": true, "queries_during_held_write": true, "indexed_root_absent": true, "original_snapshot_absent": true, "watching_claimed": false, "uncommitted_tail": "acknowledged_view_retained_read_only", "truncated_committed_replay": "accepted_checkpoint_served_deferred_and_mutation_refused"}
+==============================================================================
+
+=================================== 54/73 ====================================
+test:         fsearch:catalog_native_checkpoint
+start time:   19:33:43
+duration:     0.28s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=48 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_checkpoint_worker.py /home/ecochran76/worktrees/fsearch-plan6-build/src /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libcheckpoint_fault_fixture.so
+----------------------------------- stdout -----------------------------------
+{"result": "native_checkpoint_wire_pass", "sequence": 3, "raw_bytes": true, "retired_id_reuse": false, "indexed_root_absent": true, "queries_and_mutations_during_held_write": true}
+{"result": "private_checkpoint_metadata_pass", "original_snapshot_absent": true, "indexed_root_absent": true, "cached_coverage_preserved": true, "metadata_checksum_and_sequence_refused": true}
+==============================================================================
+
+=================================== 55/73 ====================================
+test:         fsearch:catalog_durable_replay
+start time:   19:33:43
+duration:     3.89s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=156 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_durability.py /home/ecochran76/worktrees/fsearch-plan6-build/src
+----------------------------------- stdout -----------------------------------
+{"result": "durable_catalog_replay_pass", "sequence": 2, "indexed_root_absent": true, "watching_claimed": false, "uncommitted_tail": "acknowledged_view_retained_read_only", "truncated_committed_replay": "baseline_served_deferred_and_mutation_refused"}
+==============================================================================
+
+=================================== 56/73 ====================================
+test:         fsearch:fanotify_event_filter
+start time:   19:33:47
+duration:     0.06s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=153 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_fanotify_events.py
+----------------------------------- stderr -----------------------------------
+........................
+----------------------------------------------------------------------
+Ran 24 tests in 0.006s
+
+OK
+==============================================================================
+
+=================================== 57/73 ====================================
+test:         fsearch:fanotify_owned_coalescing
+start time:   19:33:47
+duration:     0.04s
+result:       exit status 0
+command:      MALLOC_PERTURB_=203 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_fanotify_coalescing.py
+----------------------------------- stdout -----------------------------------
+coalescing_pass: real CREATE|DELETE discarded outside, sticky gap inside; no names exported
+==============================================================================
+
+=================================== 58/73 ====================================
+test:         fsearch:broker_source_transport
+start time:   19:33:47
+duration:     0.17s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=40 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_source.py
+----------------------------------- stderr -----------------------------------
+.................
+----------------------------------------------------------------------
+Ran 17 tests in 0.107s
+
+OK
+==============================================================================
+
+=================================== 59/73 ====================================
+test:         fsearch:broker_listener_credentials
+start time:   19:33:48
+duration:     0.03s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=202 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_broker_listener
+----------------------------------- stdout -----------------------------------
+broker_listener_pass: creator credentials survive inherited accept; wrong creator/client/path and socketpair refused; no descriptor leak; child reaped
+==============================================================================
+
+=================================== 60/73 ====================================
+test:         fsearch:broker_mark_descriptor
+start time:   19:33:48
+duration:     0.02s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=219 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/test_broker_mark_descriptor
+----------------------------------- stdout -----------------------------------
+broker_mark_descriptor_pass: owned inode mark accepts setup root descriptor
+==============================================================================
+
+=================================== 61/73 ====================================
+test:         fsearch:broker_directory_map
+start time:   19:33:48
+duration:     0.07s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=97 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_admission.py
+----------------------------------- stderr -----------------------------------
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.004s
+
+OK
+==============================================================================
+
+=================================== 62/73 ====================================
+test:         fsearch:catalog_batch_normal
+start time:   19:33:48
+duration:     0.75s
+result:       exit status 0
+command:      MALLOC_PERTURB_=231 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py /home/ecochran76/worktrees/fsearch-plan6-build/src normal
+----------------------------------- stdout -----------------------------------
+{"result": "actual_batch_crash_pass", "cut": "normal", "acknowledged_sequence": 1, "uncommitted_tail_read_only": false, "recovered_sequence": 9, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 63/73 ====================================
+test:         fsearch:catalog_batch_log_fsync
+start time:   19:33:48
+duration:     0.78s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=221 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py /home/ecochran76/worktrees/fsearch-plan6-build/src log_fsync
+----------------------------------- stdout -----------------------------------
+{"result": "actual_batch_crash_pass", "cut": "log_fsync", "acknowledged_sequence": 1, "uncommitted_tail_read_only": true, "recovered_sequence": 1, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 64/73 ====================================
+test:         fsearch:catalog_batch_cursor_pre_rename
+start time:   19:33:49
+duration:     1.44s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MALLOC_PERTURB_=66 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py /home/ecochran76/worktrees/fsearch-plan6-build/src cursor_pre_rename
+----------------------------------- stdout -----------------------------------
+{"result": "actual_batch_crash_pass", "cut": "cursor_pre_rename", "acknowledged_sequence": 1, "uncommitted_tail_read_only": true, "recovered_sequence": 1, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 65/73 ====================================
+test:         fsearch:catalog_batch_cursor_published
+start time:   19:33:51
+duration:     0.69s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=132 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py /home/ecochran76/worktrees/fsearch-plan6-build/src cursor_published
+----------------------------------- stdout -----------------------------------
+{"result": "actual_batch_crash_pass", "cut": "cursor_published", "acknowledged_sequence": 1, "uncommitted_tail_read_only": false, "recovered_sequence": 9, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 66/73 ====================================
+test:         fsearch:catalog_batch_pause_cursor
+start time:   19:33:51
+duration:     0.78s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=70 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py /home/ecochran76/worktrees/fsearch-plan6-build/src pause_cursor
+----------------------------------- stdout -----------------------------------
+{"result": "actual_batch_crash_pass", "cut": "pause_cursor", "acknowledged_sequence": 1, "uncommitted_tail_read_only": false, "recovered_sequence": 9, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 67/73 ====================================
+test:         fsearch:catalog_batch_native_error
+start time:   19:33:52
+duration:     1.74s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=137 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py /home/ecochran76/worktrees/fsearch-plan6-build/src native_error
+----------------------------------- stdout -----------------------------------
+{"result": "actual_batch_crash_pass", "cut": "native_error", "acknowledged_sequence": 1, "uncommitted_tail_read_only": false, "recovered_sequence": 1, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_id_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+=================================== 68/73 ====================================
+test:         fsearch:catalog_batch_bounds
+start time:   19:33:54
+duration:     2.59s
+result:       exit status 0
+command:      MALLOC_PERTURB_=16 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_batch.py /home/ecochran76/worktrees/fsearch-plan6-build/src bounds
+----------------------------------- stdout -----------------------------------
+{"result": "batch_exact_production_record_limit", "records": 1024, "oversized_sequence_identity_rejected": true}
+==============================================================================
+
+=================================== 69/73 ====================================
+test:         fsearch:broker_permission_exclusions
+start time:   19:33:56
+duration:     0.19s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=237 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_permission_exclusions.py /home/ecochran76/worktrees/fsearch-plan6-build/src /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary
+----------------------------------- stdout -----------------------------------
+{"result": "native_refresh_inventory_permission_exclusions_agree", "excluded_permissions": 1, "readable_siblings": 1, "inventory_items": 2}
+==============================================================================
+
+=================================== 70/73 ====================================
+test:         fsearch:broker_entry_eligibility
+start time:   19:33:57
+duration:     0.26s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=98 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_entry_eligibility.py /home/ecochran76/worktrees/fsearch-plan6-build/src /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary
+----------------------------------- stdout -----------------------------------
+{"result": "native_entry_eligibility_matches_snapshot", "cases": 7, "unreadable_regular_filename_retained": true}
+==============================================================================
+
+=================================== 71/73 ====================================
+test:         fsearch:broker_process_cli_mcp
+start time:   19:33:57
+duration:     10.03s
+result:       exit status 0
+command:      MALLOC_PERTURB_=45 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_process.py /home/ecochran76/worktrees/fsearch-plan6-build/src - /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary
+----------------------------------- stdout -----------------------------------
+{"status": "assembled_broker_fixture_pass", "durable_catalog": false, "controls": ["named_listener_handoff", "outside_bootstrap_churn", "startup", "create", "directory_inventory", "ancestor_rename", "root_replacement", "inherited_fixture_handoff", "overflow", "restart_after_reap"], "actual_delivery": "NOT_QUALIFIED", "adversarial_confinement": "SEPARATE_RECEIPT_REQUIRED", "boundary_pids_reaped": [2181, 3416]}
+==============================================================================
+
+=================================== 72/73 ====================================
+test:         fsearch:broker_dirty_startup_preserves_accepted
+start time:   19:34:07
+duration:     2.20s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=62 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_process.py /home/ecochran76/worktrees/fsearch-plan6-build/src - /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary --startup-churn
+----------------------------------- stdout -----------------------------------
+{"result": "dirty_bootstrap_preserves_accepted_snapshot", "snapshot_id": "2096:6535538:256:1791660847:771306465:1791660847:807395705"}
+==============================================================================
+
+=================================== 73/73 ====================================
+test:         fsearch:broker_permission_startup_cli_mcp
+start time:   19:34:09
+duration:     8.01s
+result:       exit status 0
+command:      MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=4 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_process.py /home/ecochran76/worktrees/fsearch-plan6-build/src - /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary --permission-exclusions
+----------------------------------- stdout -----------------------------------
+{"result": "broker_permission_exclusions_preserve_readable_updates", "durable_catalog": false, "actual_delivery": "NOT_QUALIFIED", "owned_boundary_pids": [4722]}
+==============================================================================
+
+
+Ok:                73  
+Fail:              0   

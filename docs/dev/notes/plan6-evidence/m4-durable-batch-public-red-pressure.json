@@ -1,0 +1,117 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "src/tests/test_catalog_batch.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime",
+    "normal"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 0.8155627909582108,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 44728320,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2454259530059062,
+  "initial_host": {
+    "MemAvailable": 34000797696,
+    "SwapFree": 0,
+    "memory_some_avg10": 2.15,
+    "memory_full_avg10": 1.93,
+    "io_some_avg10": 7.33,
+    "io_full_avg10": 6.29
+  },
+  "final_host": {
+    "MemAvailable": 33827160064,
+    "SwapFree": 0,
+    "memory_some_avg10": 2.12,
+    "memory_full_avg10": 1.95,
+    "io_some_avg10": 6.55,
+    "io_full_avg10": 5.51
+  },
+  "samples": [
+    {
+      "seconds": 0.05392653396120295,
+      "host": {
+        "MemAvailable": 34000281600,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.15,
+        "memory_full_avg10": 1.93,
+        "io_some_avg10": 7.33,
+        "io_full_avg10": 6.29
+      },
+      "rss_bytes": 14581760,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.053488317993469536,
+      "swap_bytes": 0,
+      "pids": [
+        61510
+      ]
+    },
+    {
+      "seconds": 0.29935248696710914,
+      "host": {
+        "MemAvailable": 33952534528,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.15,
+        "memory_full_avg10": 1.93,
+        "io_some_avg10": 7.33,
+        "io_full_avg10": 6.29
+      },
+      "rss_bytes": 44728320,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04529285099124536,
+      "swap_bytes": 0,
+      "pids": [
+        61554,
+        61580,
+        61510
+      ]
+    },
+    {
+      "seconds": 0.5372994389617816,
+      "host": {
+        "MemAvailable": 33930121216,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.12,
+        "memory_full_avg10": 1.95,
+        "io_some_avg10": 6.55,
+        "io_full_avg10": 5.51
+      },
+      "rss_bytes": 30474240,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.037820574012584984,
+      "swap_bytes": 0,
+      "pids": [
+        61510
+      ]
+    },
+    {
+      "seconds": 0.7759200389846228,
+      "host": {
+        "MemAvailable": 33858072576,
+        "SwapFree": 4096,
+        "memory_some_avg10": 2.12,
+        "memory_full_avg10": 1.95,
+        "io_some_avg10": 6.55,
+        "io_full_avg10": 5.51
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.038490332022774965,
+      "swap_bytes": 0,
+      "pids": [
+        61510
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-durable-batch-public-red-20261010.service",
+    "memory.current": 14286848,
+    "memory.peak": 31789056,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

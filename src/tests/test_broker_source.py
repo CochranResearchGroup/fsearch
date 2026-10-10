@@ -97,6 +97,39 @@ class Reader(unittest.TestCase):
         self.assertEqual(self.session.source_sequence, 1)
         self.assertEqual(self.session.state, 'watching')
 
+    def test_failed_batch_does_not_advance_source_acknowledgement(self):
+        self.ready();self.output.send(event()+event()+event())
+        session=self.session
+        class FailedCommit:
+            def batch(self,exports,deadline):
+                if session.applied_sequence!=0:raise AssertionError('source acknowledged before commit')
+                raise OSError('durable publication failed')
+        with self.assertRaisesRegex(f.Gap,'catalog_apply_failed'):
+            self.reader.pump(lambda *args:7,FailedCommit())
+        self.assertEqual(self.session.applied_sequence,0)
+        self.assertEqual(len(self.session.pending),0)  # Sticky gaps discard uncommitted carryover.
+        self.assertEqual(self.session.state,'deferred')
+
+    def test_batch_yield_retains_order_and_requires_subsequent_drain(self):
+        self.ready();self.reader.max_seconds=.005
+        self.output.send(event()+event()+event());received=[];session=self.session
+        class SlowCommit:
+            def batch(self,exports,deadline):
+                group=exports[:2]
+                if received and session.applied_sequence!=received[-1]:raise AssertionError('prior commit not acknowledged')
+                received.extend(export.sequence for export in group)
+                time.sleep(.02)
+                return len(group)
+        sink=SlowCommit()
+        self.assertFalse(self.reader.pump(lambda *args:7,sink))
+        self.assertEqual(received,[1,2]);self.assertEqual(session.applied_sequence,2)
+        self.assertEqual(len(session.pending),1);self.assertEqual(session.state,'pending')
+        self.assertFalse(self.reader.pump(lambda *args:7,sink))
+        self.assertEqual(received,[1,2,3]);self.assertEqual(session.applied_sequence,3)
+        self.assertEqual(session.state,'pending')
+        self.assertTrue(self.reader.pump(lambda *args:7,sink))
+        self.assertEqual(session.state,'watching')
+
     def test_bootstrap_drain_does_not_complete_inventory(self):
         self.assertTrue(self.pump())
         self.assertEqual(self.session.state, 'reconciling')

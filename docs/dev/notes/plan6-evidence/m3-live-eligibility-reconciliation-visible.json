@@ -1,0 +1,126 @@
+{
+  "artifact_path": "/home/ecochran76/.graphiti-openclaw/state/closeout-memory/20261010T193124Z-reconciliation.json",
+  "classification": "completed_visible",
+  "command": "remember-reconcile",
+  "get_memory_job_status_elapsed_seconds": 0.08,
+  "graphiti_writes_attempted": 0,
+  "group_id": "openclaw_ec_main",
+  "job_id": "0701f247-0d8f-4cfe-ae2e-e4d52118ca73",
+  "job_status": {
+    "current_stage": "completed",
+    "episode_uuid": "a6373a48-d587-4084-9922-a3098e6fcb4a",
+    "episode_visible_in_group": true,
+    "error_type": null,
+    "failure_category": null,
+    "finished_at": "2026-10-10T19:20:24.973212+00:00",
+    "group_id": "openclaw_ec_main",
+    "job_id": "0701f247-0d8f-4cfe-ae2e-e4d52118ca73",
+    "name": "fsearch-plan0006-live-entry-eligibility-2026-10-10",
+    "processing_elapsed_seconds": 238.13044892100152,
+    "provider_latency_event_count": 91,
+    "provider_latency_summary": {
+      "by_prompt_name": {
+        "dedupe_edges.resolve_edge": {
+          "event_count": 28,
+          "total_elapsed_seconds": 84.669472
+        },
+        "dedupe_nodes.nodes": {
+          "event_count": 42,
+          "total_elapsed_seconds": 36.266786
+        },
+        "extract_edges.edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 29.574252
+        },
+        "extract_nodes.extract_attributes_batch": {
+          "event_count": 7,
+          "total_elapsed_seconds": 11.968405
+        },
+        "extract_nodes.extract_text": {
+          "event_count": 7,
+          "total_elapsed_seconds": 20.462395
+        }
+      },
+      "by_substage": {
+        "initialize": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 13.707077
+        },
+        "parse_validation": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 0.024483
+        },
+        "process_start": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 6.40904
+        },
+        "process_teardown": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 18.351194
+        },
+        "thread_start": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 32.059297
+        },
+        "turn_completion": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 97.016347
+        },
+        "turn_start": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 15.373872
+        }
+      },
+      "event_count": 91,
+      "models": [
+        "gpt-5.5"
+      ],
+      "provider_call_count": 13,
+      "providers": [
+        "codex"
+      ],
+      "schema_version": "provider_latency_summary.v0",
+      "status_counts": {
+        "completed": 91
+      },
+      "total_elapsed_seconds": 182.94131,
+      "transports": [
+        "app-server-stdio"
+      ]
+    },
+    "queued_at": "2026-10-10T19:16:24.020904+00:00",
+    "read_after_write_ready": true,
+    "retryable": null,
+    "started_at": "2026-10-10T19:16:27.053446+00:00",
+    "status": "completed",
+    "warnings": []
+  },
+  "mcp_url": "http://127.0.0.1:8817/mcp",
+  "name": "fsearch-plan0006-live-entry-eligibility-2026-10-10",
+  "recorded_at": "2026-10-10T19:31:24.740219+00:00",
+  "safe_to_retry": false,
+  "schema_version": "graphiti_closeout_memory_reconciliation.v1",
+  "source_description": "FSearch Plan0006 live entry eligibility public red repair actual oracle qualification and retained throughput failures",
+  "source_receipt": "docs/dev/notes/plan6-evidence/m3-live-eligibility-memory-receipt.json"
+}

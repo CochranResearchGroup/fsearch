@@ -13,6 +13,7 @@ MAGIC = b'FSCJ0001'
 MAX_BYTES = 16 * 1024 * 1024
 MAX_RECORDS = 1024
 MAX_FRAME = 8192
+MAX_BATCH_RECORDS = 8
 
 
 class JournalError(ValueError):
@@ -326,17 +327,35 @@ class CatalogJournal:
             raise JournalError('journal_byte_budget')
 
     def append(self, request, entry_id):
-        if request['sequence'] != self.count + 1:
-            raise JournalError('journal_sequence')
-        self.reserve(request)
-        frame = self.frame({'request': request, 'entry_id': entry_id})
-        chain = hashlib.sha256(self.chain + frame).digest()
-        self.write_all(self.fd, frame + chain)
+        self.append_batch([(request, entry_id)])
+
+    def reserve_batch(self, requests):
+        if not 1 <= len(requests) <= MAX_BATCH_RECORDS:
+            raise JournalError('journal_batch_limit')
+        self.reserve(requests[0])
+        if self.count - self.base_sequence + len(requests) > MAX_RECORDS:
+            raise JournalError('journal_checkpoint_required')
+        size = os.fstat(self.fd).st_size
+        for offset, request in enumerate(requests, 1):
+            if request['sequence'] != self.count + offset:
+                raise JournalError('journal_sequence')
+            size += len(self.frame({'request': request, 'entry_id': 2**32 - 1})) + 32
+        if size > MAX_BYTES:
+            raise JournalError('journal_byte_budget')
+
+    def append_batch(self, records):
+        self.reserve_batch([request for request, entry in records])
+        chain = self.chain
+        for request, entry_id in records:
+            frame = self.frame({'request': request, 'entry_id': entry_id})
+            chain = hashlib.sha256(chain + frame).digest()
+            self.write_all(self.fd, frame + chain)
         os.fsync(self.fd)
         size = os.fstat(self.fd).st_size
-        self.publish_commit(size, self.count + 1, chain)
-        self.committed_bytes, self.committed_count, self.committed_chain = size, self.count + 1, chain
-        self.count += 1
+        count = self.count + len(records)
+        self.publish_commit(size, count, chain)
+        self.committed_bytes, self.committed_count, self.committed_chain = size, count, chain
+        self.count = count
         self.chain = chain
 
     def close(self):

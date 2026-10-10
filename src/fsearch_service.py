@@ -17,7 +17,7 @@ import subprocess
 import sys
 import time
 import uuid
-from fsearch_catalog_journal import CatalogJournal, JournalError
+from fsearch_catalog_journal import CatalogJournal, JournalError, MAX_BATCH_RECORDS, MAX_RECORDS
 
 MAX_FRAME = 65536
 MAX_RESPONSE = 1048576
@@ -146,22 +146,32 @@ def reconcile(directory, recover=False):
 
 def validate_request(request):
     if not isinstance(request, dict): raise BoundaryError('invalid_request')
-    allowed = {'schema_version', 'request_id', 'query', 'extension', 'kind', 'path', 'match_case', 'limit', 'max_candidates', 'max_bytes', 'timeout_ms', 'op', 'expected_database_b64', 'candidate_database_b64', 'expected_snapshot_id', 'sequence', 'entry_id', 'parent_id', 'entry_kind', 'name_b64', 'path_b64', 'coverage'}
+    allowed = {'schema_version', 'request_id', 'query', 'extension', 'kind', 'path', 'match_case', 'limit', 'max_candidates', 'max_bytes', 'timeout_ms', 'op', 'expected_database_b64', 'candidate_database_b64', 'expected_snapshot_id', 'sequence', 'entry_id', 'parent_id', 'entry_kind', 'name_b64', 'path_b64', 'coverage', 'mutations'}
     if set(request) - allowed or type(request.get('schema_version')) is not int or request.get('schema_version') != 1: raise BoundaryError('invalid_request')
     request_id = request.get('request_id')
     if not isinstance(request_id, str) or len(request_id.encode('utf-8')) > 64: raise BoundaryError('invalid_request')
-    if request.get('op') not in (None, 'query', 'stop', 'replace', 'catalog_apply', 'catalog_lookup', 'catalog_compact', 'catalog_status', 'catalog_coverage'): raise BoundaryError('invalid_request')
+    if request.get('op') not in (None, 'query', 'stop', 'replace', 'catalog_apply', 'catalog_apply_batch', 'catalog_lookup', 'catalog_compact', 'catalog_status', 'catalog_coverage'): raise BoundaryError('invalid_request')
     if (request.get('op') or '').startswith('catalog_'):
         op=request['op'];keys={'schema_version','request_id','op','timeout_ms','expected_snapshot_id'}
         if op=='catalog_apply':keys|={'sequence','entry_id','parent_id','entry_kind','name_b64'}
+        if op=='catalog_apply_batch':keys.add('mutations')
         if op=='catalog_lookup':keys.add('path_b64')
         if op=='catalog_coverage':keys.add('coverage')
         if set(request)-keys:raise BoundaryError('invalid_request')
         expected=request.get('expected_snapshot_id')
         if expected is not None and (not isinstance(expected,str) or not expected or len(expected)>256):raise BoundaryError('invalid_request')
-        if op in ('catalog_apply','catalog_compact','catalog_coverage') and expected is None:raise BoundaryError('invalid_request')
+        if op in ('catalog_apply','catalog_apply_batch','catalog_compact','catalog_coverage') and expected is None:raise BoundaryError('invalid_request')
         timeout=request.setdefault('timeout_ms',2000)
         if type(timeout) is not int or not 1<=timeout<=10000:raise BoundaryError('invalid_request')
+        if op=='catalog_apply_batch':
+            mutations=request.get('mutations')
+            if not isinstance(mutations,list) or not 1<=len(mutations)<=MAX_BATCH_RECORDS:raise BoundaryError('invalid_request')
+            previous=None
+            for mutation in mutations:
+                if not isinstance(mutation,dict) or set(mutation)-{'sequence','entry_id','parent_id','entry_kind','name_b64'}:raise BoundaryError('invalid_request')
+                validate_request({'schema_version':1,'request_id':request_id,'op':'catalog_apply','expected_snapshot_id':expected,'timeout_ms':timeout,**mutation})
+                if previous is not None and mutation['sequence']!=previous+1:raise BoundaryError('invalid_request')
+                previous=mutation['sequence']
         if op=='catalog_coverage':
             coverage=request.get('coverage')
             keys={'state','root_b64','event_sequence','catalog_sequence','last_reconciled_unix_ms','oldest_unapplied_unix_ms','reason'}
@@ -459,7 +469,9 @@ class Supervisor:
         if self.catalog_journal_enabled:
             if payload.get('status') == 'catalog_status' and self.checkpoint_action is not None:
                 payload['building'] = True
-            payload['durable'] = self.journal is not None and self.journal_failure is None and payload.get('status') in ('catalog_applied', 'replaced', 'catalog_checkpointed', 'catalog_status', 'catalog_located', 'catalog_missing', 'ok', 'truncated')
+            payload['durable'] = self.journal is not None and self.journal_failure is None and payload.get('status') in ('catalog_applied', 'catalog_batch_applied', 'replaced', 'catalog_checkpointed', 'catalog_status', 'catalog_located', 'catalog_missing', 'ok', 'truncated')
+            if self.journal is not None and payload.get('status') in ('catalog_status','catalog_applied','catalog_batch_applied'):
+                payload['journal_remaining']=MAX_RECORDS-(self.journal.count-self.journal.base_sequence)
             if request.get('op') in (None, 'query') and self.recovery_gap:
                 roots = payload.get('snapshot', {}).get('roots', [])
                 if roots:
@@ -623,6 +635,22 @@ class Supervisor:
         elif self.active is not None:
             if time.monotonic() >= self.active['deadline']: self.abort_worker('deadline'); return
             client = self.active
+            if client['request'].get('op') == 'catalog_apply_batch':
+                requests=client['batch_requests']; records=client['batch_records']
+                request=requests[len(records)]
+                if payload.get('status')!='catalog_applied' or payload.get('sequence')!=request['sequence'] or payload.get('snapshot_id')!=self.accepted_identity or payload.get('deferred_reason') or type(payload.get('entry_id')) is not int or not 0<=payload['entry_id']<2**32:
+                    self.abort_worker('catalog_batch_apply_failed'); return
+                records.append((request,payload['entry_id']))
+                if len(records)<len(requests):
+                    self.send_batch_mutation(requests[len(records)])
+                    return
+                try:
+                    self.journal.append_batch(records)
+                    self.recovered_sequence=payload['sequence']
+                except (JournalError,OSError):
+                    self.journal_failure='catalog_journal_write_failed'
+                    self.abort_worker('catalog_journal_write_failed'); return
+                payload=dict(payload,status='catalog_batch_applied',entry_ids=[entry for request,entry in records])
             if self.journal is not None and client['request'].get('op') == 'catalog_apply' and payload.get('status') == 'catalog_applied':
                 try:
                     self.journal.append(client['request'], payload['entry_id'])
@@ -775,7 +803,7 @@ class Supervisor:
             elif time.monotonic() >= self.next_start: self.spawn()
             return
         if not self.worker_ready: return
-        if self.checkpoint_action is not None and self.journal is not None and self.queue[0]['request'].get('op') == 'catalog_apply' and self.journal.checkpoint_required():
+        if self.checkpoint_action is not None and self.journal is not None and self.queue[0]['request'].get('op') in ('catalog_apply','catalog_apply_batch') and self.journal.checkpoint_required():
             return
         self.active = self.queue.popleft(); request = self.active['request']
         if (request.get('op') or '').startswith('catalog_'):
@@ -783,6 +811,15 @@ class Supervisor:
             if expected is not None and expected!=self.accepted_identity:
                 client=self.active;self.active=None;self.reply(client,error('snapshot_conflict'));return
             op=request['op'];body=b''
+            if op=='catalog_apply_batch':
+                if not self.catalog_journal_enabled or self.journal is None or self.journal_failure:
+                    client=self.active;self.active=None;self.reply(client,error('catalog_batch_requires_durability'));return
+                requests=[{'schema_version':1,'request_id':request['request_id'],'op':'catalog_apply','expected_snapshot_id':expected,'timeout_ms':request['timeout_ms'],**mutation} for mutation in request['mutations']]
+                try:self.journal.reserve_batch(requests)
+                except (JournalError,OSError) as failure:
+                    client=self.active;self.active=None;self.reply(client,error(str(failure) if isinstance(failure,JournalError) else 'catalog_journal_write_failed'));return
+                self.active['batch_requests']=requests;self.active['batch_records']=[]
+                self.send_batch_mutation(requests[0]);return
             if op=='catalog_coverage':
                 self.incremental_coverage=dict(request['coverage']);self.coverage_deadline=time.monotonic()+2
                 if self.catalog_journal_enabled and self.journal is not None and self.journal_failure is None and not self.journal.tail_uncommitted and request['coverage']['state']=='watching' and request['coverage']['catalog_sequence']==self.journal.count:
@@ -826,6 +863,12 @@ class Supervisor:
         flags = int(request['path']) | (int(request['match_case']) << 1) | (4 if request['extension'] is not None else 0)
         self.worker_write = struct.pack('!7I', flags, ('all', 'files', 'folders').index(request['kind']), request['limit'], request['max_candidates'], request['max_bytes'], len(query), len(extension)) + query + extension
         self.selector.register(self.worker.stdin, selectors.EVENT_WRITE, 'worker_write')
+    def send_batch_mutation(self, request):
+        body=base64.b64decode(request['name_b64']);sequence=request['sequence']
+        command=0x101 if 'entry_id' in request else 0x100
+        self.worker_write=struct.pack('!7I',command,request['entry_kind'],request['parent_id'],request.get('entry_id',0),sequence>>32,sequence&0xffffffff,len(body))+body
+        self.selector.register(self.worker.stdin,selectors.EVENT_WRITE,'worker_write')
+
     def run(self):
         try:
             while not self.stopping:

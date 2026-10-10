@@ -49,3 +49,32 @@ or selecting unreferenced cache files.
 
 This narrows corrupt-pair source gaps; full process/power-loss/crash and startup
 qualification, durable observation reconciliation and M3/M5/M6 remain open.
+
+## Bounded durable groups —2026-10-10
+
+The public owner-private service accepts at most8contiguous mutations in one
+durable group, after reserving all records inside the existing1024record and
+16MiB journal bounds. The native worker applies entries in order while the
+supervisor keeps the client active; queries, internal checkpoint dispatch and
+replacement promotion cannot expose an uncommitted native prefix. Each native
+reply must bind the accepted snapshot, sequence and valid entry ID without
+a deferred reason. A failed native prefix is reaped/discarded and recovered
+from the prior committed view.
+
+Journal frames/checksums/cursor format remain unchanged. Write the bounded
+frames and chain, sync the log, atomically publish and sync the committed cursor,
+then reply. Crash before cursor publication retains the old committed prefix
+read-only when a tail exists; published cursor replays the complete group.
+No unsynced acknowledgement, in-place cursor overwrite or larger retention
+is introduced. Failure/timeout after publication remains an ambiguous accepted
+effect requiring current readback, not blind retry.
+
+The broker groups only independent regular create/rename entries after ordinary
+rooted eligibility checks. Shared namespace sides, directory work, replacements,
+exclusions and non-durable fixtures retain single application. The service
+advertises remaining record capacity so groups stop at the same journal limit.
+Source acknowledgement follows durable group completion; a fresh EAGAIN remains
+necessary for watching. The [durable batch qualification](../dev/notes/2026-10-10-plan6-durable-batches.md)
+retains public red/green, cursor cuts, publication pause, native gap/identity
+controls and the fixed actual workload. Power-loss, aggregate/current-scale
+and operational soaks remain unqualified.
