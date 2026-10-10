@@ -1,0 +1,126 @@
+{
+  "artifact_path": "/home/ecochran76/.graphiti-openclaw/state/closeout-memory/20261010T195956Z-reconciliation.json",
+  "classification": "completed_visible",
+  "command": "remember-reconcile",
+  "get_memory_job_status_elapsed_seconds": 0.063,
+  "graphiti_writes_attempted": 0,
+  "group_id": "openclaw_ec_main",
+  "job_id": "d7ae7a76-c25d-47f7-84b6-32a58a0d5b0e",
+  "job_status": {
+    "current_stage": "completed",
+    "episode_uuid": "3add0665-b2f8-42a1-9f32-37743d0e8bef",
+    "episode_visible_in_group": true,
+    "error_type": null,
+    "failure_category": null,
+    "finished_at": "2026-10-10T19:54:02.462148+00:00",
+    "group_id": "openclaw_ec_main",
+    "job_id": "d7ae7a76-c25d-47f7-84b6-32a58a0d5b0e",
+    "name": "fsearch-plan0006-attribute-permission-transition-red-2026-10-10",
+    "processing_elapsed_seconds": 189.3315124490182,
+    "provider_latency_event_count": 63,
+    "provider_latency_summary": {
+      "by_prompt_name": {
+        "dedupe_edges.resolve_edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 5.543375
+        },
+        "dedupe_nodes.nodes": {
+          "event_count": 35,
+          "total_elapsed_seconds": 22.506935
+        },
+        "extract_edges.edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 26.47277
+        },
+        "extract_nodes.extract_attributes_batch": {
+          "event_count": 7,
+          "total_elapsed_seconds": 14.630311
+        },
+        "extract_nodes.extract_text": {
+          "event_count": 7,
+          "total_elapsed_seconds": 12.740825
+        }
+      },
+      "by_substage": {
+        "initialize": {
+          "event_count": 9,
+          "status_counts": {
+            "completed": 9
+          },
+          "total_elapsed_seconds": 2.254542
+        },
+        "parse_validation": {
+          "event_count": 9,
+          "status_counts": {
+            "completed": 9
+          },
+          "total_elapsed_seconds": 0.016842
+        },
+        "process_start": {
+          "event_count": 9,
+          "status_counts": {
+            "completed": 9
+          },
+          "total_elapsed_seconds": 2.213204
+        },
+        "process_teardown": {
+          "event_count": 9,
+          "status_counts": {
+            "completed": 9
+          },
+          "total_elapsed_seconds": 1.740819
+        },
+        "thread_start": {
+          "event_count": 9,
+          "status_counts": {
+            "completed": 9
+          },
+          "total_elapsed_seconds": 9.331462
+        },
+        "turn_completion": {
+          "event_count": 9,
+          "status_counts": {
+            "completed": 9
+          },
+          "total_elapsed_seconds": 64.20746
+        },
+        "turn_start": {
+          "event_count": 9,
+          "status_counts": {
+            "completed": 9
+          },
+          "total_elapsed_seconds": 2.129887
+        }
+      },
+      "event_count": 63,
+      "models": [
+        "gpt-5.5"
+      ],
+      "provider_call_count": 9,
+      "providers": [
+        "codex"
+      ],
+      "schema_version": "provider_latency_summary.v0",
+      "status_counts": {
+        "completed": 63
+      },
+      "total_elapsed_seconds": 81.894216,
+      "transports": [
+        "app-server-stdio"
+      ]
+    },
+    "queued_at": "2026-10-10T19:50:50.524753+00:00",
+    "read_after_write_ready": true,
+    "retryable": null,
+    "started_at": "2026-10-10T19:50:53.368911+00:00",
+    "status": "completed",
+    "warnings": []
+  },
+  "mcp_url": "http://127.0.0.1:8817/mcp",
+  "name": "fsearch-plan0006-attribute-permission-transition-red-2026-10-10",
+  "recorded_at": "2026-10-10T19:59:56.410728+00:00",
+  "safe_to_retry": false,
+  "schema_version": "graphiti_closeout_memory_reconciliation.v1",
+  "source_description": "Plan0006 M3 minimized actual owned-root correctness failure on source30dd289a; no production repair or helper activation",
+  "source_receipt": "docs/dev/notes/plan6-evidence/m3-permission-transition-memory-receipt.json"
+}

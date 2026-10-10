@@ -1,0 +1,130 @@
+{
+  "artifact_path": "/home/ecochran76/.graphiti-openclaw/state/closeout-memory/20261010T195939Z-reconciliation.json",
+  "classification": "completed_visible",
+  "command": "remember-reconcile",
+  "get_memory_job_status_elapsed_seconds": 0.071,
+  "graphiti_writes_attempted": 0,
+  "group_id": "openclaw_ec_main",
+  "job_id": "6cc11ade-3f21-4d79-b240-b4c2449d6397",
+  "job_status": {
+    "current_stage": "completed",
+    "episode_uuid": "bfca5b53-7bdf-47ca-b10e-1e2eb1518978",
+    "episode_visible_in_group": true,
+    "error_type": null,
+    "failure_category": null,
+    "finished_at": "2026-10-10T19:59:26.036649+00:00",
+    "group_id": "openclaw_ec_main",
+    "job_id": "6cc11ade-3f21-4d79-b240-b4c2449d6397",
+    "name": "fsearch-plan0006-batch-reported-sync-error-controls-2026-10-10",
+    "processing_elapsed_seconds": 275.13631421799073,
+    "provider_latency_event_count": 100,
+    "provider_latency_summary": {
+      "by_prompt_name": {
+        "dedupe_edges.resolve_edge": {
+          "event_count": 28,
+          "total_elapsed_seconds": 60.591438
+        },
+        "dedupe_nodes.nodes": {
+          "event_count": 49,
+          "total_elapsed_seconds": 41.731841
+        },
+        "extract_edges.edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 29.522605
+        },
+        "extract_nodes.extract_attributes_batch": {
+          "event_count": 7,
+          "total_elapsed_seconds": 15.726119
+        },
+        "extract_nodes.extract_summaries_batch": {
+          "event_count": 7,
+          "total_elapsed_seconds": 9.637314
+        },
+        "extract_nodes.extract_text": {
+          "event_count": 2,
+          "total_elapsed_seconds": 0.88851
+        }
+      },
+      "by_substage": {
+        "initialize": {
+          "event_count": 14,
+          "status_counts": {
+            "completed": 14
+          },
+          "total_elapsed_seconds": 13.556244
+        },
+        "parse_validation": {
+          "event_count": 15,
+          "status_counts": {
+            "completed": 15
+          },
+          "total_elapsed_seconds": 0.023609
+        },
+        "process_start": {
+          "event_count": 14,
+          "status_counts": {
+            "completed": 14
+          },
+          "total_elapsed_seconds": 5.060242
+        },
+        "process_teardown": {
+          "event_count": 15,
+          "status_counts": {
+            "completed": 15
+          },
+          "total_elapsed_seconds": 10.172781
+        },
+        "thread_start": {
+          "event_count": 14,
+          "status_counts": {
+            "completed": 14
+          },
+          "total_elapsed_seconds": 24.111927
+        },
+        "turn_completion": {
+          "event_count": 14,
+          "status_counts": {
+            "completed": 14
+          },
+          "total_elapsed_seconds": 84.006164
+        },
+        "turn_start": {
+          "event_count": 14,
+          "status_counts": {
+            "completed": 14
+          },
+          "total_elapsed_seconds": 21.16686
+        }
+      },
+      "event_count": 100,
+      "models": [
+        "gpt-5.5"
+      ],
+      "provider_call_count": 15,
+      "providers": [
+        "codex"
+      ],
+      "schema_version": "provider_latency_summary.v0",
+      "status_counts": {
+        "completed": 100
+      },
+      "total_elapsed_seconds": 158.097827,
+      "transports": [
+        "app-server-stdio"
+      ]
+    },
+    "queued_at": "2026-10-10T19:54:48.059727+00:00",
+    "read_after_write_ready": true,
+    "retryable": null,
+    "started_at": "2026-10-10T19:54:51.309064+00:00",
+    "status": "completed",
+    "warnings": []
+  },
+  "mcp_url": "http://127.0.0.1:8817/mcp",
+  "name": "fsearch-plan0006-batch-reported-sync-error-controls-2026-10-10",
+  "recorded_at": "2026-10-10T19:59:39.299628+00:00",
+  "safe_to_retry": false,
+  "schema_version": "graphiti_closeout_memory_reconciliation.v1",
+  "source_description": "Plan0006 M4 reported log/cursor synchronization error public controls on production30dd289a; test-only continuation afterf6d398cf",
+  "source_receipt": "docs/dev/notes/plan6-evidence/m4-batch-sync-errors-memory-receipt.json"
+}

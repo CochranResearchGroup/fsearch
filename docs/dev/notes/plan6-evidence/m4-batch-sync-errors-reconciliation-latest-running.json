@@ -1,0 +1,120 @@
+{
+  "artifact_path": "/home/ecochran76/.graphiti-openclaw/state/closeout-memory/20261010T195844Z-reconciliation.json",
+  "classification": "running_server_work",
+  "command": "remember-reconcile",
+  "get_memory_job_status_elapsed_seconds": 2.365,
+  "graphiti_writes_attempted": 0,
+  "group_id": "openclaw_ec_main",
+  "job_id": "6cc11ade-3f21-4d79-b240-b4c2449d6397",
+  "job_status": {
+    "current_stage": "graphiti_resolving_edges_embedding_resolved",
+    "episode_uuid": null,
+    "error_type": null,
+    "failure_category": null,
+    "finished_at": null,
+    "group_id": "openclaw_ec_main",
+    "job_id": "6cc11ade-3f21-4d79-b240-b4c2449d6397",
+    "name": "fsearch-plan0006-batch-reported-sync-error-controls-2026-10-10",
+    "processing_elapsed_seconds": 230.34058888501022,
+    "provider_latency_event_count": 91,
+    "provider_latency_summary": {
+      "by_prompt_name": {
+        "dedupe_edges.resolve_edge": {
+          "event_count": 28,
+          "total_elapsed_seconds": 60.591438
+        },
+        "dedupe_nodes.nodes": {
+          "event_count": 49,
+          "total_elapsed_seconds": 41.731841
+        },
+        "extract_edges.edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 29.522605
+        },
+        "extract_nodes.extract_text": {
+          "event_count": 7,
+          "total_elapsed_seconds": 15.333304
+        }
+      },
+      "by_substage": {
+        "initialize": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 12.111634
+        },
+        "parse_validation": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 0.020658
+        },
+        "process_start": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 5.055715
+        },
+        "process_teardown": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 9.144835
+        },
+        "thread_start": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 23.518423
+        },
+        "turn_completion": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 80.207124
+        },
+        "turn_start": {
+          "event_count": 13,
+          "status_counts": {
+            "completed": 13
+          },
+          "total_elapsed_seconds": 17.120799
+        }
+      },
+      "event_count": 91,
+      "models": [
+        "gpt-5.5"
+      ],
+      "provider_call_count": 13,
+      "providers": [
+        "codex"
+      ],
+      "schema_version": "provider_latency_summary.v0",
+      "status_counts": {
+        "completed": 91
+      },
+      "total_elapsed_seconds": 147.179188,
+      "transports": [
+        "app-server-stdio"
+      ]
+    },
+    "queued_at": "2026-10-10T19:54:48.059727+00:00",
+    "retryable": null,
+    "started_at": "2026-10-10T19:54:51.309064+00:00",
+    "status": "running",
+    "warnings": []
+  },
+  "mcp_url": "http://127.0.0.1:8817/mcp",
+  "name": "fsearch-plan0006-batch-reported-sync-error-controls-2026-10-10",
+  "recorded_at": "2026-10-10T19:58:37.991165+00:00",
+  "safe_to_retry": false,
+  "schema_version": "graphiti_closeout_memory_reconciliation.v1",
+  "source_description": "Plan0006 M4 reported log/cursor synchronization error public controls on production30dd289a; test-only continuation afterf6d398cf",
+  "source_receipt": "docs/dev/notes/plan6-evidence/m4-batch-sync-errors-memory-receipt.json"
+}

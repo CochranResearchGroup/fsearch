@@ -13,6 +13,8 @@ Next correctness gate: [attribute-only permission transition](../notes/2026-10-1
 
 M4 supporting follow-up: [reported batch sync errors](../notes/2026-10-10-plan6-batch-sync-errors.md) adds log/cursor-file EIO public controls; final11/11 batch controls pass with rejected batch, preserved prefix, deferred read-only tail and roots/snapshot-absent recovery. Fixture failures and host-pressure preflight retained; production source unchanged. Durable accepted cached state is separate from source freshness and mutation writability.
 
+Bounded-run handoff: [three-hour checkpoint](../notes/2026-10-10-plan6-three-hour-checkpoint.md) preserves source/test custody, exact runtime census, remaining M1–M6 gates, Graphiti receipts and first permission-event design packet. This is an operator-bound execution checkpoint, not program completion or installed activation.
+
 ## Destination and completion rule
 
 Deliver an always-warm Linux filename service behind file-searcher's normal CLI and MCP tools, continuously tracking the entire approved local workspace. Searches remain useful during sustained changes, failed updates, restart and resource pressure. Windows filename coverage stays with optional Everything integration; SQLite fallback remains useful without FSearch.

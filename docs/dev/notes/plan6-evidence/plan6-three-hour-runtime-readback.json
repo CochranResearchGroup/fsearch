@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-10-10T19:57:10.251834+00:00",
+  "feature_source": "9896dc4cb8aaa162e37ca8abd2c2b6b30151a400",
+  "registered_tests": 77,
+  "installed_service": {
+    "MainPID": "94383",
+    "ExecStart": "{ path=/home/ecochran76/.local/share/fsearch/runtimes/e0ec8e758db755dbd3cf8b3a83c9e4a467c50137/bin/fsearch-service ; argv[]=/home/ecochran76/.local/share/fsearch/runtimes/e0ec8e758db755dbd3cf8b3a83c9e4a467c50137/bin/fsearch-service serve --socket /home/ecochran76/.local/share/fsearch/pilots/workspace.local/query.sock --database /home/ecochran76/.local/share/fsearch/pilots/workspace.local/snapshot.db ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+    "ControlGroup": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-workspace-query.service",
+    "MemoryCurrent": "76664832",
+    "MemoryPeak": "1019846656",
+    "MemorySwapCurrent": "447778816",
+    "MemoryMax": "1610612736",
+    "MemorySwapMax": "infinity",
+    "ActiveState": "active",
+    "SubState": "running",
+    "FragmentPath": "/home/ecochran76/.config/systemd/user/fsearch-workspace-query.service"
+  },
+  "installed_processes": [
+    {
+      "pid": 94383,
+      "start": "7977890",
+      "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db",
+      "comm": "python3",
+      "exe": "/usr/bin/python3.12",
+      "VmRSS": "7200 kB",
+      "VmSwap": "7040 kB",
+      "Uid": "1000\t1000\t1000\t1000",
+      "CapEff": "0000000000000000",
+      "NoNewPrivs": "1"
+    },
+    {
+      "pid": 3338,
+      "start": "7988660",
+      "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db",
+      "comm": "fsearch-worker",
+      "exe": "/home/ecochran76/.local/share/fsearch/runtimes/e0ec8e758db755dbd3cf8b3a83c9e4a467c50137/bin/fsearch-worker",
+      "VmRSS": "66824 kB",
+      "VmSwap": "429600 kB",
+      "Uid": "1000\t1000\t1000\t1000",
+      "CapEff": "0000000000000000",
+      "NoNewPrivs": "1"
+    }
+  ],
+  "installed_cli": "/home/ecochran76/.local/share/fsearch/runtimes/7317390ed5da4928c295049887e4eb629ca1c06d/bin/fsearch-cli",
+  "installed_fsr": "/home/ecochran76/.local/share/file-searcher/runtimes/13de343bbed79f4214d844532b7136b0c3e8c10e/python-3.12/bin/fsr",
+  "current_production_hashes_match_final_stage": {
+    "fsearch_catalog_journal.py": "fbccd0199ed3130ce4f824a1741791755e35fc5d7e059026ef565b50aedb7127",
+    "fsearch_service.py": "717886298bf79e60c3671c20595b5e7fe4accd67f03700c20d30b1a440faed8e",
+    "fsearch_incremental.py": "5270540e67b3e7515a19c4c4766e803fce203384cf373a34e7a8dec187c01fe8",
+    "fsearch_broker_source.py": "7468ebeb867a49eb068f8089e26d7e81f9daafdac5ee021bdb900d8ead570be8",
+    "fsearch_fanotify_events.py": "0007b0a89dac79b92ff4cbe2ec9a2c2c9a303bdc1ef99d928fcad05c44801eb5",
+    "fsearch_broker_admission.py": "a1b94c2470abe951f241d7b1a2acd0d29442610e01fbd093e1858ee937fdf7f7",
+    "fsearch_broker.py": "61ea2a89b4662a2b970715326f7946130b7b6525c99296715e8851bfc5db29c1"
+  },
+  "stage": "/home/ecochran76/worktrees/fsearch-plan6-durable-batch-final-runtime",
+  "qualification": "read-only identity/process census; no installed CLI/MCP or current-scale acceptance"
+}
