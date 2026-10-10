@@ -1,0 +1,47 @@
+Log of Meson test suite run on 2026-10-10T12:38:31.018801
+
+Inherited environment: HOME=/home/ecochran76 LANG=C.UTF-8 LOGNAME=ecochran76 PATH=/home/ecochran76/worktrees/fsearch-plan6-tools/bin:/usr/bin:/bin SHELL=/bin/zsh USER=ecochran76 XDG_RUNTIME_DIR=/run/user/1000 QT_ACCESSIBILITY=1 XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/var/lib/snapd/desktop DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus GSM_SKIP_SSH_AGENT_WORKAROUND=true SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh MANAGERPID=696 INVOCATION_ID=f46bb4bb0f764d2ea6bdb60241840313 SYSTEMD_EXEC_PID=93268 MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-startup-eof-green-20261010.service/memory.pressure MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA= 
+
+==================================== 1/4 =====================================
+test:         fsearch:catalog_startup_transport_failure
+start time:   17:38:31
+duration:     1.12s
+result:       exit status 0
+command:      MALLOC_PERTURB_=40 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_startup_failure.py /home/ecochran76/worktrees/fsearch-plan6-build/src
+----------------------------------- stdout -----------------------------------
+{"result": "durable_startup_failure_bounded", "queries": 6, "worker_launches": 1}
+==============================================================================
+
+==================================== 2/4 =====================================
+test:         fsearch:catalog_corrupt_pair
+start time:   17:38:32
+duration:     1.84s
+result:       exit status 0
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=168 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_corrupt_pair.py /home/ecochran76/worktrees/fsearch-plan6-build/src
+----------------------------------- stdout -----------------------------------
+{"result": "corrupt_selected_pair_fallback_pass", "sequence": 1, "selected_sequence": 2, "original_snapshot_and_root_absent": true, "mutation_refused": true}
+==============================================================================
+
+==================================== 3/4 =====================================
+test:         fsearch:catalog_corrupt_pair_unavailable
+start time:   17:38:33
+duration:     4.35s
+result:       exit status 0
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=212 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_corrupt_pair.py /home/ecochran76/worktrees/fsearch-plan6-build/src both
+----------------------------------- stdout -----------------------------------
+{"result": "all_pairs_invalid_refuses_without_restart_storm", "fault": "both", "original_root_absent": true, "unaccepted_baseline_refused": false}
+==============================================================================
+
+==================================== 4/4 =====================================
+test:         fsearch:catalog_durable_replay
+start time:   17:38:38
+duration:     4.14s
+result:       exit status 0
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=85 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_durability.py /home/ecochran76/worktrees/fsearch-plan6-build/src
+----------------------------------- stdout -----------------------------------
+{"result": "durable_catalog_replay_pass", "sequence": 2, "indexed_root_absent": true, "watching_claimed": false, "uncommitted_tail": "acknowledged_view_retained_read_only", "truncated_committed_replay": "baseline_served_deferred_and_mutation_refused"}
+==============================================================================
+
+
+Ok:                4   
+Fail:              0   

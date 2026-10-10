@@ -1,0 +1,126 @@
+{
+  "artifact_path": "/home/ecochran76/.graphiti-openclaw/state/closeout-memory/20261010T173935Z-reconciliation.json",
+  "classification": "completed_visible",
+  "command": "remember-reconcile",
+  "get_memory_job_status_elapsed_seconds": 1.325,
+  "graphiti_writes_attempted": 0,
+  "group_id": "openclaw_ec_main",
+  "job_id": "09543395-990a-4a56-b291-6a4a688f12f7",
+  "job_status": {
+    "current_stage": "completed",
+    "episode_uuid": "d413c8b6-4542-4ad1-b00e-b0f708d49aca",
+    "episode_visible_in_group": true,
+    "error_type": null,
+    "failure_category": null,
+    "finished_at": "2026-10-10T17:39:31.823850+00:00",
+    "group_id": "openclaw_ec_main",
+    "job_id": "09543395-990a-4a56-b291-6a4a688f12f7",
+    "name": "fsearch-plan0006-prior-boot-state-2026-10-10",
+    "processing_elapsed_seconds": 179.8534307469963,
+    "provider_latency_event_count": 42,
+    "provider_latency_summary": {
+      "by_prompt_name": {
+        "dedupe_edges.resolve_edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 5.975904
+        },
+        "dedupe_nodes.nodes": {
+          "event_count": 14,
+          "total_elapsed_seconds": 20.196493
+        },
+        "extract_edges.edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 24.885245
+        },
+        "extract_nodes.extract_attributes_batch": {
+          "event_count": 7,
+          "total_elapsed_seconds": 10.093999
+        },
+        "extract_nodes.extract_text": {
+          "event_count": 7,
+          "total_elapsed_seconds": 10.467333
+        }
+      },
+      "by_substage": {
+        "initialize": {
+          "event_count": 6,
+          "status_counts": {
+            "completed": 6
+          },
+          "total_elapsed_seconds": 4.065513
+        },
+        "parse_validation": {
+          "event_count": 6,
+          "status_counts": {
+            "completed": 6
+          },
+          "total_elapsed_seconds": 0.011545
+        },
+        "process_start": {
+          "event_count": 6,
+          "status_counts": {
+            "completed": 6
+          },
+          "total_elapsed_seconds": 2.793872
+        },
+        "process_teardown": {
+          "event_count": 6,
+          "status_counts": {
+            "completed": 6
+          },
+          "total_elapsed_seconds": 3.857175
+        },
+        "thread_start": {
+          "event_count": 6,
+          "status_counts": {
+            "completed": 6
+          },
+          "total_elapsed_seconds": 13.00608
+        },
+        "turn_completion": {
+          "event_count": 6,
+          "status_counts": {
+            "completed": 6
+          },
+          "total_elapsed_seconds": 35.465972
+        },
+        "turn_start": {
+          "event_count": 6,
+          "status_counts": {
+            "completed": 6
+          },
+          "total_elapsed_seconds": 12.418817
+        }
+      },
+      "event_count": 42,
+      "models": [
+        "gpt-5.5"
+      ],
+      "provider_call_count": 6,
+      "providers": [
+        "codex"
+      ],
+      "schema_version": "provider_latency_summary.v0",
+      "status_counts": {
+        "completed": 42
+      },
+      "total_elapsed_seconds": 71.618974,
+      "transports": [
+        "app-server-stdio"
+      ]
+    },
+    "queued_at": "2026-10-10T17:36:43.502953+00:00",
+    "read_after_write_ready": true,
+    "retryable": null,
+    "started_at": "2026-10-10T17:36:47.635580+00:00",
+    "status": "completed",
+    "warnings": []
+  },
+  "mcp_url": "http://127.0.0.1:8817/mcp",
+  "name": "fsearch-plan0006-prior-boot-state-2026-10-10",
+  "recorded_at": "2026-10-10T17:39:30.534329+00:00",
+  "safe_to_retry": false,
+  "schema_version": "graphiti_closeout_memory_reconciliation.v1",
+  "source_description": "FSearch Plan0006 source6c02c37b public-seam durable-catalog prior-boot state qualification",
+  "source_receipt": "docs/dev/notes/plan6-evidence/m4-prior-boot-memory-receipt.json"
+}

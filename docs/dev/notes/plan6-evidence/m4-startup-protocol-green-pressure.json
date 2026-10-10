@@ -1,0 +1,156 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "src/tests/test_catalog_startup_failure.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src",
+    "protocol"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 1.4642142050433904,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 44400640,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.27747342898510396,
+  "initial_host": {
+    "MemAvailable": 36847616000,
+    "SwapFree": 1146880,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.39,
+    "io_full_avg10": 0.11
+  },
+  "final_host": {
+    "MemAvailable": 37718691840,
+    "SwapFree": 1245184,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.39,
+    "io_full_avg10": 0.11
+  },
+  "samples": [
+    {
+      "seconds": 0.059890186006668955,
+      "host": {
+        "MemAvailable": 36844519424,
+        "SwapFree": 1146880,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.39,
+        "io_full_avg10": 0.11
+      },
+      "rss_bytes": 11960320,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.057765534962527454,
+      "swap_bytes": 0,
+      "pids": [
+        4186
+      ]
+    },
+    {
+      "seconds": 0.32783459703205153,
+      "host": {
+        "MemAvailable": 36669394944,
+        "SwapFree": 1216512,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.39,
+        "io_full_avg10": 0.11
+      },
+      "rss_bytes": 36044800,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.06748175999382511,
+      "swap_bytes": 0,
+      "pids": [
+        4186,
+        4199
+      ]
+    },
+    {
+      "seconds": 0.585113943030592,
+      "host": {
+        "MemAvailable": 36527910912,
+        "SwapFree": 1216512,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.39,
+        "io_full_avg10": 0.11
+      },
+      "rss_bytes": 44400640,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.056824165978468955,
+      "swap_bytes": 0,
+      "pids": [
+        4186,
+        4202,
+        4199
+      ]
+    },
+    {
+      "seconds": 0.8380736390245147,
+      "host": {
+        "MemAvailable": 36863389696,
+        "SwapFree": 1216512,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.39,
+        "io_full_avg10": 0.11
+      },
+      "rss_bytes": 37519360,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.052652493002824485,
+      "swap_bytes": 0,
+      "pids": [
+        4186,
+        4210
+      ]
+    },
+    {
+      "seconds": 1.1155470680096187,
+      "host": {
+        "MemAvailable": 37758971904,
+        "SwapFree": 1245184,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.39,
+        "io_full_avg10": 0.11
+      },
+      "rss_bytes": 37519360,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0769955389550887,
+      "swap_bytes": 0,
+      "pids": [
+        4186,
+        4210
+      ]
+    },
+    {
+      "seconds": 1.3918047950137407,
+      "host": {
+        "MemAvailable": 37691531264,
+        "SwapFree": 1245184,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.39,
+        "io_full_avg10": 0.11
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.07580621796660125,
+      "swap_bytes": 0,
+      "pids": [
+        4186
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-startup-protocol-green-20261010.service",
+    "memory.current": 8609792,
+    "memory.peak": 33271808,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

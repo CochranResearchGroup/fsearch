@@ -155,3 +155,21 @@ complete the remaining checkpoint/append/fsync/publication crash and corrupt-pai
 fallback controls, then prior-boot/dirty-startup evidence; retain event-cursor
 reconciliation, power-loss/current-scale and aggregate gates. M5/M6 soaks unchanged.
 No installed workspace runtime or helper-root change. Memory disposition forbidden.
+
+## Superseding Graphiti authority and recovery evidence
+
+The earlier forbidden-memory annotations describe historical/personal-memory
+boundaries and do not govern current Graphiti closeout. The operator explicitly
+corrected that interpretation: Graphiti memories are critical. AGENTS.md now
+requires qualified source-backed singleton closeouts and retained receipts.
+Checkpoint, corrupt-pair, append, checkpoint-crash and prior-boot closeouts have
+completed_visible reconciliation receipts under plan6-evidence; newer queued
+jobs remain queue acceptance until separately reconciled. No original receipt
+or historical outcome is rewritten.
+
+Later actual-worker recovery qualifications are in2026-10-10-plan6-corrupt-pair-recovery.md,
+2026-10-10-plan6-append-crash.md,2026-10-10-plan6-checkpoint-crash.md and
+2026-10-10-plan6-prior-boot.md. Durable startup transport repair evidence is in
+2026-10-10-plan6-startup-failure.md. These supersede the earlier next-packet list;
+M3/M4 remain open with event-cursor, real power-loss/current-scale and aggregate
+acceptance still unqualified. Current plan header is the resume authority.

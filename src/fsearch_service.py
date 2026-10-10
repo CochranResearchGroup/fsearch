@@ -535,6 +535,10 @@ class Supervisor:
         self.start_deadline = time.monotonic() + self.startup_timeout
         self.worker_read.clear(); self.worker_ready = False
     def abort_worker(self, code):
+        if self.catalog_journal_enabled and not self.worker_ready and code in (
+                'worker_failed', 'worker_protocol_failed', 'startup_deadline',
+                'catalog_replay_failed', 'containment_unavailable', 'deadline'):
+            self.startup_exhausted = code
         if self.incremental_coverage is not None:self.incremental_coverage.update(state='deferred',reason='worker_stopped')
         if self.candidate:self.abort_candidate(code)
         if self.pending_replacement is not None:

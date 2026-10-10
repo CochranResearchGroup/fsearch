@@ -170,6 +170,14 @@ if host_machine.system() == 'linux'
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
     test('catalog_append_cursor_published_crash', python, args: [files('test_catalog_append_crash.py'), join_paths(meson.project_build_root(), 'src'), 'cursor_published'],
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_startup_transport_failure', python, args: [files('test_catalog_startup_failure.py'), join_paths(meson.project_build_root(), 'src')],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_startup_transport_protocol', python, args: [files('test_catalog_startup_failure.py'), join_paths(meson.project_build_root(), 'src'), 'protocol'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_startup_transport_timeout', python, args: [files('test_catalog_startup_failure.py'), join_paths(meson.project_build_root(), 'src'), 'timeout'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_startup_transport_replay', python, args: [files('test_catalog_startup_failure.py'), join_paths(meson.project_build_root(), 'src'), 'replay'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
     test('catalog_prior_boot_ready', python, args: [files('test_catalog_prior_boot.py'), join_paths(meson.project_build_root(), 'src'), 'ready'],
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
     test('catalog_prior_boot_starting', python, args: [files('test_catalog_prior_boot.py'), join_paths(meson.project_build_root(), 'src'), 'starting'],

@@ -1,0 +1,156 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "src/tests/test_catalog_startup_failure.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src",
+    "replay"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 1.3492733140010387,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 45219840,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2641895660199225,
+  "initial_host": {
+    "MemAvailable": 37594046464,
+    "SwapFree": 22433792,
+    "memory_some_avg10": 0.07,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 2.62,
+    "io_full_avg10": 1.16
+  },
+  "final_host": {
+    "MemAvailable": 37355089920,
+    "SwapFree": 22499328,
+    "memory_some_avg10": 0.23,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 2.69,
+    "io_full_avg10": 1.31
+  },
+  "samples": [
+    {
+      "seconds": 0.046547750011086464,
+      "host": {
+        "MemAvailable": 37594046464,
+        "SwapFree": 22433792,
+        "memory_some_avg10": 0.07,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 2.62,
+        "io_full_avg10": 1.16
+      },
+      "rss_bytes": 14909440,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0460489799734205,
+      "swap_bytes": 0,
+      "pids": [
+        11813
+      ]
+    },
+    {
+      "seconds": 0.2890791189856827,
+      "host": {
+        "MemAvailable": 37543489536,
+        "SwapFree": 22462464,
+        "memory_some_avg10": 0.07,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 2.62,
+        "io_full_avg10": 1.16
+      },
+      "rss_bytes": 45219840,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.042211801977828145,
+      "swap_bytes": 0,
+      "pids": [
+        11827,
+        11813,
+        11823
+      ]
+    },
+    {
+      "seconds": 0.5331861230079085,
+      "host": {
+        "MemAvailable": 37487108096,
+        "SwapFree": 22478848,
+        "memory_some_avg10": 0.07,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 2.62,
+        "io_full_avg10": 1.16
+      },
+      "rss_bytes": 38174720,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.043636551999952644,
+      "swap_bytes": 0,
+      "pids": [
+        11813,
+        11846
+      ]
+    },
+    {
+      "seconds": 0.797375689027831,
+      "host": {
+        "MemAvailable": 37383884800,
+        "SwapFree": 22478848,
+        "memory_some_avg10": 0.07,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 2.62,
+        "io_full_avg10": 1.16
+      },
+      "rss_bytes": 38174720,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.06403351802146062,
+      "swap_bytes": 0,
+      "pids": [
+        11813,
+        11846
+      ]
+    },
+    {
+      "seconds": 1.0588481349986978,
+      "host": {
+        "MemAvailable": 37256433664,
+        "SwapFree": 22495232,
+        "memory_some_avg10": 0.23,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 2.69,
+        "io_full_avg10": 1.31
+      },
+      "rss_bytes": 36864000,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.061288208002224565,
+      "swap_bytes": 0,
+      "pids": [
+        11923,
+        11813
+      ]
+    },
+    {
+      "seconds": 1.3053584400331602,
+      "host": {
+        "MemAvailable": 37370171392,
+        "SwapFree": 22499328,
+        "memory_some_avg10": 0.23,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 2.69,
+        "io_full_avg10": 1.31
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04620595101732761,
+      "swap_bytes": 0,
+      "pids": [
+        11813
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-replay-eof-green-20261010.service",
+    "memory.current": 8491008,
+    "memory.peak": 33320960,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}
