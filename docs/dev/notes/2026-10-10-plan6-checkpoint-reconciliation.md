@@ -49,3 +49,15 @@ qualification and M3 dependency are separate follow-on work.
 
 Memory disposition forbidden: no personal durable-memory writes authorized;
 current source/receipts suffice and advisory discovery is unnecessary.
+
+## Terminal packet result
+
+Coupled source checkpoint8b134d7f is published with matching remote SHA. Capacity
+diagnostic passes in31.062seconds (31.110-second systemd unit runtime): sequence2052/checkpoint2048/generation2,
+retired identity preserved and original root/snapshot absent on recovery.
+checkpoint-capacity-closeout-identity.json binds source, worker/test and fresh
+sampled-PID absence. No capacity implementation fix or production gate rebaseline
+was needed; former deadline/pressure failures are preserved. This bounded
+checkpoint/reconciliation/diagnostic objective is complete. Plan0006 remains open;
+next packet is remaining M4 crash/corrupt-pair/startup qualification with M3 gates
+retained. No merge to master, install, new mark or helper/root change.

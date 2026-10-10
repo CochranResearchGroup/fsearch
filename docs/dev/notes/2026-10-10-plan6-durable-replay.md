@@ -129,3 +129,29 @@ Next bounded packet: diagnose production-limit capacity control, then finish
 M4 crash/corrupt-pair and startup evidence while retaining M3 mount/ignored/watch-
 exhaustion/adversarial gates. Installed helper remains fixed to the owned fixture;
 no full-root activation or new sudo authentication was performed in this packet.
+
+## Published source and bounded capacity result
+
+Authorized checkpoint2026-10-10: helper packaging7e753d5c; coupled supporting
+broker/durable-catalog source8b134d7f48a374ea6675137dce5dac4c0a3eb0b1 published
+on origin/feat/incremental-generations with matching remote SHA. Earlier
+uncommitted/unpublished statements above are historical. Fresh verification and
+fixture import repairs are described in2026-10-10-plan6-checkpoint-reconciliation.md.
+
+The production-limit capacity control now passes: accepted sequence2052,
+checkpoint sequence2048, recovered generation2, retired ID not reused, original
+snapshot and indexed root removed before recovery. Receipt
+checkpoint-capacity-diagnostic-pressure.json: exit0/reason null,31.062seconds (31.110-second systemd unit runtime).
+The120-second diagnostic execution budget matched the registered Meson timeout;
+no pressure/memory/swap/visibility gate changed. Progress timings show sequence1024
+at14.022seconds and2048 at30.113seconds. Both earlier stopped attempts remain
+unqualified historical evidence. They did not reproduce on this bounded run;
+this result does not isolate their environmental cause or accept performance
+at current workspace scale. Fresh sampled-PID absence and source/test/worker
+identity are in checkpoint-capacity-closeout-identity.json.
+
+M4 remains supporting source IN_PROGRESS with M3 unaccepted. Next bounded packet:
+complete the remaining checkpoint/append/fsync/publication crash and corrupt-pair
+fallback controls, then prior-boot/dirty-startup evidence; retain event-cursor
+reconciliation, power-loss/current-scale and aggregate gates. M5/M6 soaks unchanged.
+No installed workspace runtime or helper-root change. Memory disposition forbidden.

@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: checkpoint qualified broker/durable-catalog supporting source and retained evidence, then diagnose the production-limit capacity control under unchanged pressure/resource gates. Owned-fixture actual helper delivery and M4 checkpoint/replay/replacement controls pass; M3/M4 acceptance remains open and M5/M6 pending. Installed workspace runtime unchanged. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
+Current packet: qualified supporting source checkpoint published; production-limit capacity/recovery control passes. Next complete bounded M4 crash/corrupt-pair/startup evidence under unchanged pressure/resource gates. Owned-fixture actual helper delivery and M4 checkpoint/replay/replacement controls pass; M3/M4 acceptance remains open and M5/M6 pending. Installed workspace runtime unchanged. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
 
 ## Destination and completion rule
 
@@ -19,7 +19,7 @@ Operator directed execution of Plan 0006 on 2026-10-08, with pressure monitoring
 
 ## Current State
 
-Latest supporting source: [durable catalog continuation](../notes/2026-10-10-plan6-durable-replay.md), including private checkpoints, background rollover and replacement publication. [Broker continuation](../notes/2026-10-09-plan6-bootstrap-candidate.md) records fixed-helper actual event delivery on the owned fixture, normal CLI/fresh MCP, overflow and edge controls. ADR0005 records the accepted bounded formerly-admitted-descriptor exception; custom kernel work is excluded. These controls do not accept M3 or establish full-workspace freshness. Next is the production-limit capacity diagnostic, followed by remaining bounded M4 crash/corrupt-pair/startup controls; retain M3 root/mount/ignored/watch-exhaustion/adversarial gates.
+Latest supporting source: [durable catalog continuation](../notes/2026-10-10-plan6-durable-replay.md), including private checkpoints, background rollover and replacement publication. [Broker continuation](../notes/2026-10-09-plan6-bootstrap-candidate.md) records fixed-helper actual event delivery on the owned fixture, normal CLI/fresh MCP, overflow and edge controls. ADR0005 records the accepted bounded formerly-admitted-descriptor exception; custom kernel work is excluded. These controls do not accept M3 or establish full-workspace freshness. Supporting source is published at8b134d7f; the two production-limit rollover control passes (sequence2052/checkpoint2048). Next is remaining bounded M4 crash/corrupt-pair/startup evidence; retain M3 root/mount/ignored/watch-exhaustion/adversarial gates.
 
 Reconciliation 2026-10-10: earlier activation-preparation and blocked-goal statements below are historical. The goal tool reported no current goal before this checkpoint task. The operator authorized source checkpoint/reconciliation and bounded continuation; this does not grant new roots, privilege, installation, resource rebaselines or early milestone acceptance. Source acceptance, Git custody and installed acceptance remain separate.
 
@@ -34,7 +34,7 @@ Operator decision2026-10-09: retain600MiB and prepare the broker design; see [re
 ## Next execution sequence
 
 1. Finish M3: measure real watcher costs on bounded owned directory trees, qualify inventory coverage and directory races, and preserve explicit degraded state for every event gap. Advance only after correctness, confinement and pressure gates pass.
-2. Finish M4 qualification of the implemented private checkpoint/replay/rollover/replacement source. First diagnose the two production-limit rollover control, then complete crash/corrupt-pair/startup gates; M3 remains an acceptance prerequisite. A full rescan on every restart does not satisfy durable recovery.
+2. Finish M4 qualification of the implemented private checkpoint/replay/rollover/replacement source. The two production-limit rollover control passes; complete crash/corrupt-pair/startup gates; M3 remains an acceptance prerequisite. A full rescan on every restart does not satisfy durable recovery.
 3. Run M5 against the staged synthetic sizes and exact approved workspace scale, measuring the serving process, updater, watchers, retained generations and kernel charges together. Complete the 24-hour synthetic soak.
 4. Publish and install a reversible candidate for M6; verify fresh CLI/MCP clients, rollback and process cleanup, then complete the 72-hour installed soak.
 
@@ -136,7 +136,7 @@ Exit artifact: contained ingestion/reconciliation source and failure-injection e
 
 Depends on M3. Status: IN_PROGRESS (supporting source; M3 remains unaccepted).
 
-Bounded opt-in replay, private checkpoint/rollover and replacement publication now have owned native/actual-source controls; see [source checkpoint](../notes/2026-10-10-plan6-durable-replay.md). Capacity, full crash/startup/current-scale qualification and the M3 dependency remain open.
+Bounded opt-in replay, private checkpoint/rollover and replacement publication now have owned native/actual-source controls; see [source checkpoint](../notes/2026-10-10-plan6-durable-replay.md). The owned production-limit capacity/recovery control passes at published source8b134d7f. Full crash/startup/current-scale qualification and the M3 dependency remain open.
 
 Specify checkpoint, replay and accepted-generation persistence. Start serving the last qualified private generation promptly, then catch up through a separately contained updater. Startup readiness must mean query acceptance, not just process existence.
 
@@ -195,7 +195,7 @@ Out of scope: content indexing, whole-Ubuntu/Windows/Google Drive scans, replaci
 | M1 | SOURCE_ACCEPTED | [Lifecycle, native oracle, sanitizer and resource receipts](../notes/2026-10-08-plan6-m1-generations.md); installed acceptance remains M6 |
 | M2 | SOURCE_ACCEPTED | Production catalog/query/transport; 26 native groups, 439 frontend tests, 6120 sanitizer oracle comparisons; directory-heavy exact-count query and concurrent compaction pass; installed/program acceptance stays M5/M6 |
 | M3 | IN_PROGRESS | Real file events ingest through private catalog; explicit query coverage/lease; Incremental directory topology, observation age, native watcher health and startup drain barriers pass owned fixtures; frontend coverage integrated; watcher kernel costs/event-source decision and current-scale freshness remain unqualified |
-| M4 | IN_PROGRESS | Supporting private checkpoint/replay/replacement source; M3 dependency, capacity and full crash/startup acceptance open |
+| M4 | IN_PROGRESS | Supporting private checkpoint/replay/replacement source; Owned production-limit capacity/recovery passes; M3 dependency and full crash/startup acceptance open |
 | M5 | PENDING | Current-scale aggregate acceptance and 24-hour synthetic soak |
 | M6 | PENDING | Installed CLI/MCP acceptance, rollback and 72-hour operational soak |
 
