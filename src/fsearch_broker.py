@@ -206,7 +206,7 @@ def main():
         published_root = client.lookup(root)
         if not published_root or published_root['entry_id'] != located_root['entry_id']:
             raise Gap('catalog_root_changed')
-        broker = CatalogBroker(reader, client, root, admission.validate, directory_map, admission.inventory)
+        broker = CatalogBroker(reader, client, root, admission.validate, directory_map, admission.inventory, admission.entry_kind)
         deadline = min(startup_deadline, time.monotonic() + 2)
         while not broker.pump():
             if time.monotonic() >= deadline:

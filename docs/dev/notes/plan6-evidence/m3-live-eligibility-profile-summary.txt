@@ -1,0 +1,53 @@
+Sat Oct 10 14:07:52 2026    /home/ecochran76/worktrees/fsr-q-20261010/service.profile
+
+         790406 function calls (790046 primitive calls) in 16.713 seconds
+
+   Ordered by: cumulative time
+   List reduced from 766 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     26/1    0.000    0.000   16.717   16.717 {built-in method builtins.exec}
+        1    0.000    0.000   16.717   16.717 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-service:1(<module>)
+        1    0.000    0.000   16.700   16.700 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-service:927(main)
+        1    0.131    0.131   16.655   16.655 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-service:829(run)
+     3298    0.039    0.000    7.967    0.002 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-service:569(read_worker)
+    13177    0.069    0.000    7.575    0.001 /usr/lib/python3.12/selectors.py:451(select)
+      514    0.010    0.000    7.500    0.015 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_catalog_journal.py:328(append)
+    13177    7.481    0.001    7.481    0.001 {method 'poll' of 'select.epoll' objects}
+     1579    7.323    0.005    7.323    0.005 {built-in method posix.fsync}
+      520    0.019    0.000    5.041    0.010 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_catalog_journal.py:207(publish_json)
+      518    0.006    0.000    5.035    0.010 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_catalog_journal.py:221(publish_commit)
+     2938    0.032    0.000    0.212    0.000 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-service:450(reply)
+     2938    0.027    0.000    0.208    0.000 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-service:476(accept)
+     2938    0.036    0.000    0.200    0.000 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-service:487(read_client)
+     2938    0.015    0.000    0.169    0.000 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-service:436(close_client)
+
+
+(('~', 0, '<built-in method posix.fsync>'), 1579, 7.3233097570000005, 7.3233097570000005)
+Sat Oct 10 14:07:52 2026    /home/ecochran76/worktrees/fsr-q-20261010/first.profile
+
+         356489 function calls (356018 primitive calls) in 16.563 seconds
+
+   Ordered by: cumulative time
+   List reduced from 992 to 15 due to restriction <15>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     58/1    0.002    0.000   16.573   16.573 {built-in method builtins.exec}
+        1    0.000    0.000   16.573   16.573 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_broker.py:1(<module>)
+        1    0.003    0.003   16.554   16.554 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_broker.py:107(main)
+      259    0.004    0.000   10.669    0.041 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_broker_source.py:261(pump)
+     2096    0.081    0.000   10.253    0.005 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-incremental:61(call)
+      268    0.004    0.000   10.044    0.037 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_broker_source.py:107(pump)
+     2091    9.955    0.005    9.955    0.005 {method 'recv' of '_socket.socket' objects}
+      406    0.006    0.000    9.851    0.024 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_broker_source.py:112(apply_pending)
+      512    0.009    0.000    9.837    0.019 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_broker_source.py:199(__call__)
+      514    0.007    0.000    8.113    0.016 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-incremental:89(apply)
+      118    5.417    0.046    5.417    0.046 {built-in method time.sleep}
+     1053    0.007    0.000    1.474    0.001 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-incremental:85(lookup)
+      522    0.007    0.000    1.004    0.002 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_broker_source.py:176(_side)
+      520    0.005    0.000    0.624    0.001 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-incremental:82(coverage)
+        1    0.000    0.000    0.253    0.253 /home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch-monitor:126(replace_serving)
+
+
+(('~', 0, '<built-in method posix.fsync>'), 20, 0.073208206, 0.073208206)
+(('/home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime/fsearch_broker_admission.py', 221, 'entry_kind'), 503, 0.010050729000000001, 0.20263615000000001)

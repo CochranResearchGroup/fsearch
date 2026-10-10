@@ -1,0 +1,31 @@
+Log of Meson test suite run on 2026-10-10T13:59:00.920206
+
+Inherited environment: HOME=/home/ecochran76 LANG=C.UTF-8 LOGNAME=ecochran76 PATH=/home/ecochran76/worktrees/fsearch-plan6-tools/bin:/usr/bin:/bin SHELL=/bin/zsh USER=ecochran76 XDG_RUNTIME_DIR=/run/user/1000 QT_ACCESSIBILITY=1 XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/var/lib/snapd/desktop DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus GSM_SKIP_SSH_AGENT_WORKAROUND=true SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh MANAGERPID=696 INVOCATION_ID=4b2e4b2d21244ec3adede744ec67a0f8 SYSTEMD_EXEC_PID=40170 MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-entry-eligibility-green-20261010.service/memory.pressure MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA= 
+
+==================================== 1/2 =====================================
+test:         fsearch:broker_directory_map
+start time:   18:59:00
+duration:     0.05s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=83 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_admission.py
+----------------------------------- stderr -----------------------------------
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.002s
+
+OK
+==============================================================================
+
+==================================== 2/2 =====================================
+test:         fsearch:broker_entry_eligibility
+start time:   18:59:00
+duration:     0.14s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=104 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_entry_eligibility.py /home/ecochran76/worktrees/fsearch-plan6-build/src /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary
+----------------------------------- stdout -----------------------------------
+{"result": "native_entry_eligibility_matches_snapshot", "cases": 7, "unreadable_regular_filename_retained": true}
+==============================================================================
+
+
+Ok:                2   
+Fail:              0   

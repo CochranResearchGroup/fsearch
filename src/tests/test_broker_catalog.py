@@ -71,7 +71,7 @@ def main():
                 admission.arm(); admission.inventory(root_id, os.fsencode(root), baseline=True)
                 validate, parent_paths, inventory = admission.validate, directory_map, admission.inventory
             session.finish_baseline(1)
-            broker = CatalogBroker(reader, client, os.fsencode(root), validate, parent_paths, inventory)
+            broker = CatalogBroker(reader, client, os.fsencode(root), validate, parent_paths, inventory, admission.entry_kind if admission else None)
             assert broker.pump() and session.state == 'watching'
 
             def parent_info(role, name, parent=root_id):

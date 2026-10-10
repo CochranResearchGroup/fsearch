@@ -167,10 +167,11 @@ class CatalogSink:
     this sink. Directory insertion requires a bounded inventory implementation;
     absence/failure defers, rather than publishing an incomplete fresh view.
     """
-    def __init__(self, client, session, root, parent_paths, inventory=None):
+    def __init__(self, client, session, root, parent_paths, inventory=None, entry_kind=None):
         self.client, self.session, self.root = client, session, root
         self.parent_paths = parent_paths
         self.inventory = inventory
+        self.entry_kind = entry_kind
 
     def _side(self, side):
         role, parent_id, name = side
@@ -212,6 +213,15 @@ class CatalogSink:
             raise Gap('catalog_namespace_missing')
         _, parent, name, path = new
         existing = self.client.lookup(path)
+        if self.entry_kind is not None:
+            eligible = self.entry_kind(parent, name, export.generation)
+            if eligible == 0:
+                self._remove(previous)
+                if existing and (not previous or existing['entry_id'] != previous['entry_id']):
+                    self._remove(existing)
+                return
+            if eligible != kind:
+                raise Gap('catalog_kind_changed')
         if previous and previous['entry_kind'] != kind:
             raise Gap('catalog_kind_changed')
         if existing and (not previous or existing['entry_id'] != previous['entry_id']):
@@ -243,9 +253,9 @@ class CatalogSink:
 
 class CatalogBroker:
     """Run one bounded source turn, exposing sticky gaps in actual query JSON."""
-    def __init__(self, reader, client, root, validate, parent_paths, inventory=None):
+    def __init__(self, reader, client, root, validate, parent_paths, inventory=None, entry_kind=None):
         self.reader, self.client, self.root, self.validate = reader, client, root, validate
-        self.sink = CatalogSink(client, reader.session, root, parent_paths, inventory)
+        self.sink = CatalogSink(client, reader.session, root, parent_paths, inventory, entry_kind)
         self.oldest = None
 
     def pump(self):

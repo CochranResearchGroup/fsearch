@@ -1,0 +1,102 @@
+{
+  "command": [
+    "/home/ecochran76/worktrees/fsearch-plan6-tools/bin/meson",
+    "test",
+    "-C",
+    "/home/ecochran76/worktrees/fsearch-plan6-build",
+    "--num-processes",
+    "1",
+    "--print-errorlogs",
+    "broker_entry_eligibility",
+    "broker_directory_map"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 0.5449169949861243,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 39800832,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.23600998998153955,
+  "initial_host": {
+    "MemAvailable": 36921909248,
+    "SwapFree": 28672,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 1.2,
+    "io_full_avg10": 1.1
+  },
+  "final_host": {
+    "MemAvailable": 36840419328,
+    "SwapFree": 40960,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 1.2,
+    "io_full_avg10": 1.1
+  },
+  "samples": [
+    {
+      "seconds": 0.03849376802099869,
+      "host": {
+        "MemAvailable": 36921909248,
+        "SwapFree": 28672,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.2,
+        "io_full_avg10": 1.1
+      },
+      "rss_bytes": 18186240,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.03781949600670487,
+      "swap_bytes": 0,
+      "pids": [
+        40175
+      ]
+    },
+    {
+      "seconds": 0.2743484760285355,
+      "host": {
+        "MemAvailable": 36827906048,
+        "SwapFree": 32768,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.2,
+        "io_full_avg10": 1.1
+      },
+      "rss_bytes": 39800832,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.03569993900600821,
+      "swap_bytes": 0,
+      "pids": [
+        40175
+      ]
+    },
+    {
+      "seconds": 0.5103584660100751,
+      "host": {
+        "MemAvailable": 36853682176,
+        "SwapFree": 40960,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.2,
+        "io_full_avg10": 1.1
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.035620461974758655,
+      "swap_bytes": 0,
+      "pids": [
+        40175
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-entry-eligibility-green-20261010.service",
+    "memory.current": 9805824,
+    "memory.peak": 56979456,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

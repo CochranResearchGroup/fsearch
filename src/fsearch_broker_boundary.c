@@ -181,6 +181,46 @@ static char *relative_path(const char *encoded) {
     return path;
 }
 
+static bool admitted_directory(const char *relative, const char *expected_fsid,
+                               const char *expected_type, const char *expected_handle) {
+    int fd = beneath(relative, O_PATH | O_DIRECTORY);
+    g_autofree char *fsid = NULL, *opaque = NULL;
+    char *end; errno = 0;
+    long expected_kind = strtol(expected_type, &end, 10);
+    int actual_kind;
+    bool ok = !errno && !*end && fd >= 0 && handle(fd, &fsid, &actual_kind, &opaque)
+        && actual_kind == expected_kind && !strcmp(fsid, expected_fsid)
+        && !strcmp(opaque, expected_handle) && same_path(fd, relative);
+    if (fd >= 0) close(fd);
+    return ok;
+}
+
+/* Metadata only, rooted/no-follow/no-cross-mount. A pinned inode cannot be
+ * reused while its identity is compared with the current rooted path. */
+static int entry_kind(const char *relative) {
+    int fd = beneath(relative, O_PATH);
+    if (fd < 0) {
+        if (errno == ELOOP || errno == EXDEV || errno == EACCES || errno == EPERM || errno == ENOENT) return 0;
+        return -1;
+    }
+    struct stat metadata, current;
+    if (fstat(fd, &metadata)) { close(fd); return -1; }
+    int kind = S_ISDIR(metadata.st_mode) ? 2 : S_ISREG(metadata.st_mode) ? 1 : 0;
+    if (kind == 2) {
+        int contents = beneath(relative, O_RDONLY | O_DIRECTORY);
+        if (contents < 0 && (errno == EACCES || errno == EPERM)) kind = 0;
+        else if (contents < 0 || fstat(contents, &current)
+                 || current.st_dev != metadata.st_dev || current.st_ino != metadata.st_ino) kind = -1;
+        if (contents >= 0) close(contents);
+    }
+    int again = beneath(relative, O_PATH);
+    bool same = again >= 0 && !fstat(again, &current)
+        && current.st_dev == metadata.st_dev && current.st_ino == metadata.st_ino;
+    if (again >= 0) close(again);
+    close(fd);
+    return same ? kind : -1;
+}
+
 int main(int argc, char **argv) {
     if (argc != 3 || strcmp(argv[1], "--root") || *argv[2] != '/') return 2;
     struct rlimit memory = {128u * 1024u * 1024u, 128u * 1024u * 1024u}, core = {0, 0};
@@ -218,16 +258,23 @@ int main(int argc, char **argv) {
             puts("{\"status\":\"inventory_done\"}");
         }
         else if (!strcmp(fields[0], "V") && count == 5) {
-            int fd = beneath(relative, O_PATH | O_DIRECTORY);
-            g_autofree char *fsid = NULL, *opaque = NULL;
-            char *end; errno = 0;
-            long expected_kind = strtol(fields[3], &end, 10);
-            int actual_kind;
-            bool ok = !errno && !*end && fd >= 0 && handle(fd, &fsid, &actual_kind, &opaque)
-                && actual_kind == expected_kind && !strcmp(fsid, fields[2]) && !strcmp(opaque, fields[4]) && same_path(fd, relative);
-            if (fd >= 0) close(fd);
+            bool ok = admitted_directory(relative, fields[2], fields[3], fields[4]);
             puts(ok ? "{\"status\":\"admitted\"}" : "{\"status\":\"gap\",\"reason\":\"parent_identity_changed\"}");
             if (!ok) return 4;
+        }
+        else if (!strcmp(fields[0], "S") && count == 6) {
+            g_autofree char *name = relative_path(fields[5]);
+            if (!name || !*name || strchr(name, '/') || strlen(name) > 255) return 4;
+            if (!admitted_directory(relative, fields[2], fields[3], fields[4])) {
+                puts("{\"status\":\"gap\",\"reason\":\"parent_identity_changed\"}"); return 4;
+            }
+            char child[4096];
+            int length = snprintf(child, sizeof(child), "%s%s%s", relative, *relative ? "/" : "", name);
+            int kind = length < 0 || (size_t)length >= sizeof(child) ? -1 : entry_kind(child);
+            if (kind < 0 || !admitted_directory(relative, fields[2], fields[3], fields[4])) {
+                puts("{\"status\":\"gap\",\"reason\":\"entry_identity_changed\"}"); return 4;
+            }
+            printf("{\"status\":\"entry_kind\",\"kind\":%d}\n", kind);
         }
         else return 4;
     }

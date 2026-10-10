@@ -217,3 +217,20 @@ class ContainedAdmission:
                     raise Gap('inventory_protocol') from None
                 name = path.rsplit(b'/', 1)[-1] if path else b''
                 self.map.add(identity, located['entry_id'], located['parent_id'] if path else None, name)
+
+    def entry_kind(self, parent, name, generation):
+        if type(generation) is not int or generation != self.generation:
+            raise Gap('root_generation_changed')
+        if type(parent) is not int or parent < 0 or not isinstance(name, bytes) or not name or len(name) > 255 or b'/' in name or b'\0' in name or name in (b'.', b'..'):
+            raise Gap('entry_scope')
+        relative = self.map.get(parent)
+        if relative is None:
+            raise Gap('entry_parent_missing')
+        identity = self.map.identity(parent)
+        encoded = base64.b64encode(relative).decode() if relative else '-'
+        request = f'S {encoded} {identity.fsid.hex()} {identity.kind} {identity.opaque.hex()} {base64.b64encode(name).decode()}\n'.encode()
+        self.watcher.worker.stdin.write(request); self.watcher.worker.stdin.flush()
+        reply = self.watcher.message(1)
+        if not reply or reply.get('status') != 'entry_kind' or type(reply.get('kind')) is not int or reply['kind'] not in (0, 1, 2):
+            raise Gap('entry_admission_failed')
+        return reply['kind']

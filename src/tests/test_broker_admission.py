@@ -66,6 +66,10 @@ class MapTests(unittest.TestCase):
         self.assertIsNone(admission.validate(handle(b'outside'), 1))
         with self.assertRaisesRegex(Gap, 'root_generation_changed'):
             admission.validate(handle(b'root'), 2)
+        with self.assertRaisesRegex(Gap, 'entry_parent_missing'):
+            admission.entry_kind(999, b'outside-secret', 1)
+        with self.assertRaisesRegex(Gap, 'root_generation_changed'):
+            admission.entry_kind(0, b'name', 2)
 
 
 if __name__ == '__main__': unittest.main()

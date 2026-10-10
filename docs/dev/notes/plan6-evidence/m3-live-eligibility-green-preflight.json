@@ -1,0 +1,79 @@
+{
+  "base_source": "07df1d5cb93c6b99074b5c79100557caefd5a9a9",
+  "working_diff": true,
+  "runtime": "/home/ecochran76/worktrees/fsearch-plan6-live-eligibility-runtime",
+  "hashes": {
+    "fsearch_catalog_journal.py": "df97b18995ff175d1a713ea557969e2d0a8e4b3757cfd917f91d56fec54c88dd",
+    "fsearch_service.py": "1fc09249d75d6ff168f63e472d71731d5361490386c1fb04fe9f7b258fd0efec",
+    "fsearch_incremental.py": "c06159dce79e8d9144b6f9754790aeeb473fe3631a96675650196fe276ef5120",
+    "fsearch_refresh.py": "7ea98c67f0bec307386a0af126c359f91b746fac54855dacc1022d6f949a9cd2",
+    "fsearch-monitor": "bd95b6fe8f1f308a526968c4408ece3f4b7aa0a38b1f79074d5a9213cc99f86f",
+    "fsearch-service": "1fc09249d75d6ff168f63e472d71731d5361490386c1fb04fe9f7b258fd0efec",
+    "fsearch_fanotify_events.py": "0007b0a89dac79b92ff4cbe2ec9a2c2c9a303bdc1ef99d928fcad05c44801eb5",
+    "fsearch-worker": "2bf3311cde0987b4e552c1ce7338839c3e95ea5681c4663bd93f175ef726bbf7",
+    "fsearch-refresh": "7ea98c67f0bec307386a0af126c359f91b746fac54855dacc1022d6f949a9cd2",
+    "fsearch-monitor-worker": "68b9c7442d6109a48d0b1bb8719164ef6292fbf19ea30d0d81d5d3d382813f80",
+    "fsearch_broker_admission.py": "a1b94c2470abe951f241d7b1a2acd0d29442610e01fbd093e1858ee937fdf7f7",
+    "fsearch-incremental": "c06159dce79e8d9144b6f9754790aeeb473fe3631a96675650196fe276ef5120",
+    "fsearch-refresh-worker": "ab05ee79f71f99ee4576c8bd90ef4b74faff139aaa8593fc70e6ec1ac1aa413b",
+    "fsearch-broker-setup": "bb895f28fca591d67b8b4fa89b3cbe1ae25bcbf21b2a20ab7c7e5d1b096d6cb1",
+    "fsearch-cli": "c68bd60409189b3dd7d4ac08a440daa3453751e88b92432d70c99d8551ca895e",
+    "fsearch_broker_source.py": "ccb6b7bc48b332ce8ed8b383eaa2e5ddf85f4a735f2e96afe578d4f71bccae84",
+    "fsearch-broker-boundary": "ee022281ae1bca1eda1ffc393875dd19108108bd15542e1ccab35f1dbb383f6d",
+    "fsearch_monitor.py": "bd95b6fe8f1f308a526968c4408ece3f4b7aa0a38b1f79074d5a9213cc99f86f",
+    "fsearch_broker.py": "61ea2a89b4662a2b970715326f7946130b7b6525c99296715e8851bfc5db29c1"
+  },
+  "archive": "/home/ecochran76/worktrees/fsr-q-20261010/archive-before-live-eligibility-green-20261010",
+  "absence": [
+    {
+      "state": "snapshot.refresh.state",
+      "role": "supervisor",
+      "record": {
+        "pid": 39809,
+        "start": "28510620",
+        "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db"
+      },
+      "current": null
+    },
+    {
+      "state": "snapshot.broker-preview.state",
+      "role": "supervisor",
+      "record": {
+        "pid": 39873,
+        "start": "28510644",
+        "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db"
+      },
+      "current": null
+    },
+    {
+      "state": "exclusion-oracle.refresh.state",
+      "role": "supervisor",
+      "record": {
+        "pid": 41312,
+        "start": "28511175",
+        "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db"
+      },
+      "current": null
+    },
+    {
+      "state": "q.sock.state",
+      "role": "supervisor",
+      "record": {
+        "pid": 39764,
+        "start": "28510611",
+        "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db"
+      },
+      "current": null
+    },
+    {
+      "state": "snapshot.broker.state",
+      "role": "supervisor",
+      "record": {
+        "pid": 39809,
+        "start": "28510620",
+        "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db"
+      },
+      "current": null
+    }
+  ]
+}

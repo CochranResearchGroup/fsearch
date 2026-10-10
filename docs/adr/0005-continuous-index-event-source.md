@@ -87,3 +87,22 @@ symlink and content-read boundaries are unchanged. The [permission qualification
 records the public native red/green and actual static owned-fixture control.
 This does not qualify live permission transitions, configured ignored paths
 or arbitrary event type eligibility.
+
+## Live namespace entry eligibility —2026-10-10
+
+An admitted namespace event and ONDIR mask alone do not prove refresh eligibility.
+Before publishing a new side, the production boundary validates its cached
+parent handle, opens the named child beneath the fixed root with no-follow and
+no-cross-mount restrictions, classifies pinned metadata, verifies directory
+readability, then revalidates child and parent identity. Regular filename
+knowledge remains allowed even when file contents are unreadable. Links,
+special files, inaccessible directories and vanished children are excluded;
+identity/type inconsistency produces a sticky gap. Retire the accepted old
+side when a rename's current new side is excluded. These metadata probes occur
+in ingestion, never in query-only service. No file contents or link targets
+are read.
+
+The [live exclusion qualification](../dev/notes/2026-10-10-plan6-live-exclusions.md)
+retains the actual WATCHING-but-wrong public symlink control and its repair.
+It does not qualify attribute-only permission transitions, configured ignore
+patterns, arbitrary mount effects or production-scale aggregate resources.

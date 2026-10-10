@@ -1,0 +1,46 @@
+{
+  "control": null,
+  "seconds": 1.0116377369849943,
+  "expected_entries": 1,
+  "observed_entries": 0,
+  "gate_seconds": 1,
+  "payload": {
+    "schema_version": 1,
+    "status": "ok",
+    "complete": true,
+    "truncated": false,
+    "visibility": "cached",
+    "examined": 0,
+    "catalog": {
+      "sequence": 15,
+      "generation": 0,
+      "deferred_reason": null
+    },
+    "snapshot": {
+      "identity": "2096:552197:266:1791659454:848496277:1791659455:32058316",
+      "mtime_unix": 1791659454,
+      "age_seconds": 10,
+      "roots": [
+        {
+          "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned",
+          "path_bytes_base64": null,
+          "last_scan_unix": 1791659454,
+          "age_seconds": 10,
+          "last_error_code": 0
+        }
+      ]
+    },
+    "results": [],
+    "request_id": "38473-286392868972-2918376320",
+    "incremental_coverage": {
+      "state": "watching",
+      "root_b64": "L2hvbWUvZWNvY2hyYW43Ni93b3JrdHJlZXMvZnNyLXEtMjAyNjEwMTAvb3duZWQ=",
+      "event_sequence": 11,
+      "catalog_sequence": 15,
+      "last_reconciled_unix_ms": 1791659464584,
+      "oldest_unapplied_unix_ms": null,
+      "reason": "source_drained"
+    },
+    "durable": true
+  }
+}

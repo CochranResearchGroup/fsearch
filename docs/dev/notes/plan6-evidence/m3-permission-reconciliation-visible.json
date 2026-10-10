@@ -1,0 +1,118 @@
+{
+  "artifact_path": "/home/ecochran76/.graphiti-openclaw/state/closeout-memory/20261010T185756Z-reconciliation.json",
+  "classification": "completed_visible",
+  "command": "remember-reconcile",
+  "get_memory_job_status_elapsed_seconds": 0.059,
+  "graphiti_writes_attempted": 0,
+  "group_id": "openclaw_ec_main",
+  "job_id": "62ea4b1d-1c21-40f3-9c77-bf8a7ddeb57f",
+  "job_status": {
+    "current_stage": "completed",
+    "episode_uuid": "c3b05b17-ff57-4682-9366-7c8dc60f1ec1",
+    "episode_visible_in_group": true,
+    "error_type": null,
+    "failure_category": null,
+    "finished_at": "2026-10-10T18:50:29.883278+00:00",
+    "group_id": "openclaw_ec_main",
+    "job_id": "62ea4b1d-1c21-40f3-9c77-bf8a7ddeb57f",
+    "name": "fsearch-plan0006-static-permission-exclusion-consistency-2026-10-10",
+    "processing_elapsed_seconds": 127.87272629601648,
+    "provider_latency_event_count": 35,
+    "provider_latency_summary": {
+      "by_prompt_name": {
+        "dedupe_nodes.nodes": {
+          "event_count": 21,
+          "total_elapsed_seconds": 16.530835
+        },
+        "extract_edges.edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 15.427953
+        },
+        "extract_nodes.extract_text": {
+          "event_count": 7,
+          "total_elapsed_seconds": 13.980589
+        }
+      },
+      "by_substage": {
+        "initialize": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.797423
+        },
+        "parse_validation": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.009343
+        },
+        "process_start": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 1.009373
+        },
+        "process_teardown": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 1.4573
+        },
+        "thread_start": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 6.686203
+        },
+        "turn_completion": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 35.84968
+        },
+        "turn_start": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.130055
+        }
+      },
+      "event_count": 35,
+      "models": [
+        "gpt-5.5"
+      ],
+      "provider_call_count": 5,
+      "providers": [
+        "codex"
+      ],
+      "schema_version": "provider_latency_summary.v0",
+      "status_counts": {
+        "completed": 35
+      },
+      "total_elapsed_seconds": 45.939377,
+      "transports": [
+        "app-server-stdio"
+      ]
+    },
+    "queued_at": "2026-10-10T18:48:20.622478+00:00",
+    "read_after_write_ready": true,
+    "retryable": null,
+    "started_at": "2026-10-10T18:48:24.703353+00:00",
+    "status": "completed",
+    "warnings": []
+  },
+  "mcp_url": "http://127.0.0.1:8817/mcp",
+  "name": "fsearch-plan0006-static-permission-exclusion-consistency-2026-10-10",
+  "recorded_at": "2026-10-10T18:57:56.894784+00:00",
+  "safe_to_retry": false,
+  "schema_version": "graphiti_closeout_memory_reconciliation.v1",
+  "source_description": "FSearch Plan0006 public native red and actual static permission-denied baseline consistency",
+  "source_receipt": "docs/dev/notes/plan6-evidence/m3-permission-memory-receipt.json"
+}

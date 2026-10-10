@@ -1,0 +1,75 @@
+[
+  {
+    "receipt": "m3-entry-eligibility-full-pressure.json",
+    "present_pids": [
+      2167,
+      80806,
+      92044
+    ],
+    "unit_status": {
+      "MainPID": "0",
+      "ActiveState": "failed",
+      "InactiveEnterTimestampMonotonic": "286040082461"
+    },
+    "pid_identity_checks": [
+      {
+        "pid": 2167,
+        "start_ticks": 28669707,
+        "state": "S",
+        "parent": 81490,
+        "classification": "pid_reused_after_unit_exit"
+      },
+      {
+        "pid": 80806,
+        "start_ticks": 28658966,
+        "state": "S",
+        "parent": 81490,
+        "classification": "pid_reused_after_unit_exit"
+      },
+      {
+        "pid": 92044,
+        "classification": "now_absent"
+      }
+    ]
+  },
+  {
+    "receipt": "m3-entry-eligibility-full-recheck-pressure.json",
+    "present_pids": [
+      96215
+    ],
+    "unit_status": {
+      "MainPID": "0",
+      "ActiveState": "failed",
+      "InactiveEnterTimestampMonotonic": "286324443378"
+    },
+    "pid_identity_checks": [
+      {
+        "pid": 96215,
+        "start_ticks": 28666966,
+        "state": "S",
+        "parent": 63659,
+        "classification": "pid_reused_after_unit_exit"
+      }
+    ]
+  },
+  {
+    "receipt": "m3-entry-eligibility-full-final-pressure.json",
+    "present_pids": [],
+    "unit_status": {
+      "MainPID": "0",
+      "ActiveState": "failed",
+      "InactiveEnterTimestampMonotonic": "286553258658"
+    },
+    "pid_identity_checks": []
+  },
+  {
+    "receipt": "m3-entry-eligibility-final-targeted-pressure.json",
+    "present_pids": [],
+    "unit_status": {
+      "MainPID": "0",
+      "ActiveState": "inactive",
+      "InactiveEnterTimestampMonotonic": "0"
+    },
+    "pid_identity_checks": []
+  }
+]
