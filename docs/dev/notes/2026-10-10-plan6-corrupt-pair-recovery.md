@@ -51,3 +51,51 @@ Reboots are deferred until explicit operator authorization or operator action.
 Graphiti discovery used openclaw_ec_main. Previous capacity-closeout job completed
 and its episode is visible; source-linked facts retrieved. New outcome admission
 and two-axis review will be recorded at this packet checkpoint.
+
+## Matt two-axis review
+
+Primary reviewed fixed point04d763d0394ea23d4f71ee40d3da562c77c62f4e to
+source commit a9b6bee717f90814aa0b788793e5070cce8065a9 with
+`git diff 04d763d...HEAD` and the one-commit list. Source SHA and bounded diff
+are fixed; no delegated reviewers. Authorities: AGENTS.md, CONTRIBUTING.md,
+docs/agents/{domain,codex-stack,runtime-proof,issue-tracker}.md, GLOSSARY.md,
+ADR0006, spec0004 stories14–17/24 and Plan0006 M4.
+
+### Standards
+
+No accepted documented-standard violation. Existing native matching, GUI, root
+confinement and default serving are untouched. Production changes stay behind the
+opt-in private catalog seam and bounded existing slots. Owned actual-worker
+controls use public query/mutation/readiness as verdicts; private manifest reads
+only identify fault artifacts and process readback proves cleanup. Raw evidence
+log whitespace is preserved; source diff-check passes.
+
+STD-001 possible duplicated recovery-state advancement in native-error and
+sequence-mismatch branches: nonblocking_backlog, low severity. Both branches
+encode the same selected/retained/baseline progression. Current small delta is
+reviewable and behavior-tested; no speculative abstraction/refactor is required
+for this acceptance packet.
+
+### Spec
+
+No accepted blocking finding in this packet. Native validation gates readiness;
+fallback keeps the recorded accepted identity, serves read-only/deferred, and
+cannot claim restored watching or admit new journal mutation/replacement. Slot
+retention/storage caps are unchanged; malformed manifests do not authorize
+orphan selection or scanning. Unknown boot/cleanup authority is unchanged.
+
+Full M4 remains unaccepted: arbitrary worker transport loss/timeouts and all
+append/fsync/publication crash boundaries, interrupted compaction, prior-boot/
+dirty-startup/current-scale and local power-loss qualification still require
+evidence. These are explicit remaining program gates, not reduced requirements
+or a claimed overall Spec pass. No broadened observation, root, installation or
+reboot authority follows from this source review.
+
+Review summary: Standards zero blocking/one nonblocking low-severity smell;
+Spec zero packet blockers, full program acceptance gates retained.
+
+Source checkpoint a9b6bee7 binds the full47-group run and source/native runtime
+hashes. Goal remains active across this checkpoint. Next is an actual append/
+fsync/commit-publication crash control, one public seam at a time.
+
+Memory disposition queued: groupopenclaw_ec_main, job27d96057-8428-4f3a-afc8-d76c75f25818. Receipt m4-corrupt-pair-memory-receipt.json; queue acceptance only, no persistence/retrieval claim.
