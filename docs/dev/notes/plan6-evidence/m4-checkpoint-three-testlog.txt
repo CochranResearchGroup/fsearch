@@ -1,0 +1,37 @@
+Log of Meson test suite run on 2026-10-10T12:29:42.831202
+
+Inherited environment: HOME=/home/ecochran76 LANG=C.UTF-8 LOGNAME=ecochran76 PATH=/home/ecochran76/worktrees/fsearch-plan6-tools/bin:/usr/bin:/bin SHELL=/bin/zsh USER=ecochran76 XDG_RUNTIME_DIR=/run/user/1000 QT_ACCESSIBILITY=1 XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/var/lib/snapd/desktop DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus GSM_SKIP_SSH_AGENT_WORKAROUND=true SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh MANAGERPID=696 INVOCATION_ID=4f1dd10941da43f191fbcddf723837d1 SYSTEMD_EXEC_PID=72340 MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-three-20261010.service/memory.pressure MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA= 
+
+==================================== 1/3 =====================================
+test:         fsearch:catalog_crash_checkpoint_write
+start time:   17:29:42
+duration:     0.96s
+result:       exit status 0
+command:      MALLOC_PERTURB_=177 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 LD_LIBRARY_PATH=/home/ecochran76/worktrees/fsearch-plan6-build/src/tests MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_checkpoint_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src checkpoint_write /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libcheckpoint_fault_fixture.so
+----------------------------------- stdout -----------------------------------
+{"result": "actual_checkpoint_manifest_crash_pass", "cut": "checkpoint_write", "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+==================================== 2/3 =====================================
+test:         fsearch:catalog_crash_manifest_pre_rename
+start time:   17:29:42
+duration:     1.02s
+result:       exit status 0
+command:      MALLOC_PERTURB_=104 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_checkpoint_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src manifest_pre_rename
+----------------------------------- stdout -----------------------------------
+{"result": "actual_checkpoint_manifest_crash_pass", "cut": "manifest_pre_rename", "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+==================================== 3/3 =====================================
+test:         fsearch:catalog_crash_manifest_published
+start time:   17:29:42
+duration:     1.06s
+result:       exit status 0
+command:      UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=70 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_checkpoint_crash.py /home/ecochran76/worktrees/fsearch-plan6-build/src manifest_published
+----------------------------------- stdout -----------------------------------
+{"result": "actual_checkpoint_manifest_crash_pass", "cut": "manifest_published", "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+
+Ok:                3   
+Fail:              0   

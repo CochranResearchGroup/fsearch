@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: qualified supporting source checkpoint published; production-limit capacity/recovery control passes. Corrupt-pair supporting source now passes actual-worker fallback, identity refusal and bounded unavailable controls; full47-group regression passes. Next: remaining append/fsync/publication crash matrix and prior-boot/dirty-startup evidence under unchanged pressure/resource gates. Owned-fixture actual helper delivery and M4 checkpoint/replay/replacement controls pass; M3/M4 acceptance remains open and M5/M6 pending. Installed workspace runtime unchanged. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
+Current packet: owned append/checkpoint process-crash controls and corrupt-pair recovery pass; combined53-group serial regression passes. Retained parallel-run task-exhaustion failure is unqualified. Next: public-seam prior-boot/dirty-startup durable-catalog evidence under unchanged limits. M3/M4 remain IN_PROGRESS; M5/M6 pending. Installed workspace runtime unchanged. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
 
 ## Destination and completion rule
 
@@ -214,3 +214,5 @@ Historical planning packet only (superseded for current implementation closeouts
 Broker parser continuation2026-10-09: [source checkpoint](../notes/2026-10-09-plan6-broker-parser.md),9owned ABI/filter fixtures pass. No broker integration, privileged delivery, containment or M3 acceptance claim. Next source packet is bootstrap/state transitions and concrete launcher/broker preparation.
 
 Bootstrap continuation2026-10-09: [checkpoint](../notes/2026-10-09-plan6-broker-bootstrap.md),15synthetic cases pass. Clean-baseline/drain, pending acknowledgments and inventory dependencies are implemented; actual reader, launcher and containment remain unqualified. Next is broker adapter/descriptor-transfer preparation.
+
+Checkpoint crash continuation2026-10-10: [public-seam qualification](../notes/2026-10-10-plan6-checkpoint-crash.md), three actual-worker process-crash cases pass; full M3/M4 and power-loss acceptance remain open.
