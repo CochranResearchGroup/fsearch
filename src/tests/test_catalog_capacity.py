@@ -47,6 +47,7 @@ with tempfile.TemporaryDirectory(prefix='fsearch-capacity-') as temporary:
         while call()['building']:
             assert time.monotonic()<deadline;time.sleep(.01)
         before=call();generation=json.loads(Path(str(endpoint)+'.catalog-generation').read_text())
+        if generation['schema_version']==3:generation=generation['generations'][0]
         assert before['sequence']==2052 and generation['sequence']>=2048,(before,generation)
         worker=json.loads(Path(str(endpoint)+'.state').read_text())['worker']['pid']
         process.kill();process.wait(timeout=5);process=None

@@ -63,11 +63,11 @@ class CatalogJournal:
             raise
 
     @classmethod
-    def checkpoint_selection(cls, directory, snapshot_id):
+    def checkpoint_selection(cls, directory, snapshot_id, *, fallback=False):
         probe = cls.__new__(cls)
         probe.directory, probe.snapshot_id = directory, snapshot_id
         probe.manifest_name = directory.name + '.catalog-generation'
-        generation = probe.read_generation()
+        generation = probe.read_generation(fallback=fallback)
         if generation is None:
             return None
         return directory.name + '.catalog-checkpoint-' + generation['slot'], generation['sequence']
@@ -78,7 +78,7 @@ class CatalogJournal:
             result['base_sequence'] = self.base_sequence
         return result
 
-    def read_generation(self):
+    def read_generation(self, *, fallback=False):
         try:
             fd = self.directory.open_private(self.manifest_name, os.O_RDONLY)
         except FileNotFoundError:
@@ -89,7 +89,7 @@ class CatalogJournal:
             envelope = json.loads(data)
             if len(data) > 2048 or not isinstance(envelope, dict):
                 raise JournalError('journal_generation_invalid')
-            if set(envelope) == {'schema_version', 'generations'} and type(envelope['schema_version']) is int and envelope['schema_version'] == 2:
+            if set(envelope) == {'schema_version', 'generations'} and type(envelope['schema_version']) is int and envelope['schema_version'] in (2, 3):
                 records = envelope['generations']
                 if not isinstance(records, list) or len(records) != 2:
                     raise JournalError('journal_generation_invalid')
@@ -100,11 +100,14 @@ class CatalogJournal:
                     raise JournalError('journal_generation_invalid')
                 if type(record['schema_version']) is not int or record['schema_version'] != 1 or not isinstance(record['snapshot_id'], str) or not record['snapshot_id'] or len(record['snapshot_id']) > 256 or record['slot'] not in ('a', 'b') or type(record['sequence']) is not int or not 0 <= record['sequence'] < 2**64:
                     raise JournalError('journal_generation_invalid')
-            if len({record['slot'] for record in records}) != len(records) or len({record['snapshot_id'] for record in records}) != len(records):
+            same_identity_history = envelope.get('schema_version') == 3
+            if len({record['slot'] for record in records}) != len(records) or (not same_identity_history and len({record['snapshot_id'] for record in records}) != len(records)) or (same_identity_history and (len({record['snapshot_id'] for record in records}) != 1 or records[0]['sequence'] < records[1]['sequence'])):
                 raise JournalError('journal_generation_invalid')
             matching = [record for record in records if record['snapshot_id'] == self.snapshot_id]
-            if len(matching) != 1:
+            if not matching or (not same_identity_history and len(matching) != 1):
                 raise JournalError('journal_generation_invalid')
+            if fallback:
+                return matching[1] if same_identity_history else None
             return matching[0]
         except (ValueError, TypeError) as error:
             raise JournalError('journal_generation_invalid') from error
@@ -192,7 +195,9 @@ class CatalogJournal:
             size = os.fstat(next_log.fd).st_size
             next_log.publish_commit(size, next_log.count, next_log.chain)
             next_log.committed_bytes, next_log.committed_count, next_log.committed_chain = size, next_log.count, next_log.chain
-            self.publish_json(self.manifest_name, generation)
+            previous = {'schema_version': 1, 'snapshot_id': self.snapshot_id, 'slot': self.slot, 'sequence': self.base_sequence}
+            manifest = {'schema_version': 3, 'generations': [generation, previous]} if self.slot is not None else generation
+            self.publish_json(self.manifest_name, manifest)
         except BaseException:
             next_log.close()
             raise

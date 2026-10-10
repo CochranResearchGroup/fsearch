@@ -241,6 +241,9 @@ class Supervisor:
         self.internal_checkpoint = False
         self.checkpoint_poll_after = 0
         self.worker_checkpoint_sequence = None
+        self.checkpoint_fallback = False
+        self.checkpoint_baseline = False
+        self.startup_exhausted = None
         self.recovery_gap = None
         self.recovered_sequence = 0
         self.incremental_coverage = None
@@ -399,6 +402,11 @@ class Supervisor:
                     self.journal_failure = 'catalog_checkpoint_invalid'
 
         self.recovery_gap = 'catalog_recovered_source_gap'
+        if self.checkpoint_fallback:
+            self.journal_failure = self.recovery_gap = 'catalog_checkpoint_fallback'
+            self.worker_ready = True
+            self.save('ready', self.recovery_gap)
+            return
         if self.journal_failure and self.journal_failure != 'catalog_journal_write_failed':
             self.recovery_gap = self.journal_failure
             self.worker_ready = True
@@ -504,15 +512,16 @@ class Supervisor:
         executable = str(Path(__file__).resolve().with_name('fsearch-worker'))
         command = [executable, self.worker_database, str(os.getpid())]
         self.worker_checkpoint_sequence = None
-        if self.catalog_journal_enabled and self.accepted_identity is not None and self.journal_failure != 'catalog_checkpoint_invalid':
+        if self.catalog_journal_enabled and self.accepted_identity is not None and not self.checkpoint_baseline:
             try:
-                selected = CatalogJournal.checkpoint_selection(self.directory, self.accepted_identity)
+                selected = CatalogJournal.checkpoint_selection(self.directory, self.accepted_identity, fallback=self.checkpoint_fallback)
                 if selected is not None:
                     name, sequence = selected
                     command = [executable, f'/proc/{os.getpid()}/fd/{self.directory.fd}/{name}', str(os.getpid()), '--checkpoint', self.accepted_identity]
                     self.worker_checkpoint_sequence = sequence
             except (JournalError, BoundaryError, OSError, ValueError):
                 self.journal_failure = 'catalog_checkpoint_invalid'
+                self.checkpoint_fallback = self.checkpoint_baseline = True
         self.worker = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, close_fds=True, preexec_fn=worker_limits)
         try:
             self.record = identity(self.worker.pid)
@@ -579,13 +588,27 @@ class Supervisor:
             return
         if not self.worker_ready:
             if payload.get('status') != 'ready':
-                if self.worker_checkpoint_sequence is not None: self.journal_failure = 'catalog_checkpoint_invalid'
+                if self.worker_checkpoint_sequence is not None:
+                    self.journal_failure = 'catalog_checkpoint_invalid'
+                    if not self.checkpoint_fallback:
+                        self.checkpoint_fallback = True
+                    else:
+                        self.checkpoint_baseline = True
+                elif self.catalog_journal_enabled and self.checkpoint_fallback:
+                    self.startup_exhausted = 'catalog_checkpoint_unavailable'
                 self.abort_worker(payload.get('error', {}).get('code', 'worker_failed')); return
+            if self.catalog_journal_enabled and self.accepted_identity is not None and payload.get('snapshot_id') != self.accepted_identity:
+                self.startup_exhausted = 'snapshot_conflict'
+                self.abort_worker('snapshot_conflict'); return
             self.accepted_identity = payload.get('snapshot_id')
             if self.catalog_journal_enabled:
                 if self.worker_checkpoint_sequence is not None:
                     if payload.get('checkpoint_sequence') != self.worker_checkpoint_sequence:
                         self.journal_failure = 'catalog_checkpoint_invalid'
+                        if not self.checkpoint_fallback:
+                            self.checkpoint_fallback = True
+                        else:
+                            self.checkpoint_baseline = True
                         self.abort_worker('catalog_checkpoint_invalid'); return
                     self.recovered_sequence = self.worker_checkpoint_sequence
                     self.recover_catalog(restored=True)
@@ -743,7 +766,9 @@ class Supervisor:
                 return
         if not self.queue: return
         if self.worker is None:
-            if time.monotonic() >= self.next_start: self.spawn()
+            if self.startup_exhausted:
+                self.reply(self.queue.popleft(), error(self.startup_exhausted))
+            elif time.monotonic() >= self.next_start: self.spawn()
             return
         if not self.worker_ready: return
         if self.checkpoint_action is not None and self.journal is not None and self.queue[0]['request'].get('op') == 'catalog_apply' and self.journal.checkpoint_required():

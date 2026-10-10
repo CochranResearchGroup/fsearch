@@ -100,6 +100,7 @@ with tempfile.TemporaryDirectory(prefix='fsearch-durable-') as temporary:
         assert base64.b64decode(raw['path_bytes_base64'])==os.fsencode(root)+b'/raw-\xff.txt'
         call('stop'); server.wait(timeout=5); server=None
         generation=json.loads(Path(str(endpoint)+'.catalog-generation').read_text())
+        if generation['schema_version']==3:generation=generation['generations'][0]
         journal=Path(str(endpoint)+'.catalog-journal-'+generation['slot'])
         data=journal.read_bytes()
         with journal.open('ab') as stream: stream.write(b'\x00\x00')

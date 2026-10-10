@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: qualified supporting source checkpoint published; production-limit capacity/recovery control passes. Next complete bounded M4 crash/corrupt-pair/startup evidence under unchanged pressure/resource gates. Owned-fixture actual helper delivery and M4 checkpoint/replay/replacement controls pass; M3/M4 acceptance remains open and M5/M6 pending. Installed workspace runtime unchanged. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
+Current packet: qualified supporting source checkpoint published; production-limit capacity/recovery control passes. Corrupt-pair supporting source now passes actual-worker fallback, identity refusal and bounded unavailable controls; full47-group regression passes. Next: remaining append/fsync/publication crash matrix and prior-boot/dirty-startup evidence under unchanged pressure/resource gates. Owned-fixture actual helper delivery and M4 checkpoint/replay/replacement controls pass; M3/M4 acceptance remains open and M5/M6 pending. Installed workspace runtime unchanged. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
 
 ## Destination and completion rule
 
@@ -18,6 +18,16 @@ Close this plan only when M1–M6 pass, production source and frontend integrati
 Operator directed execution of Plan 0006 on 2026-10-08, with pressure monitoring and a checkpoint before three hours or two million tokens. Implementation uses bounded milestone packets. Real-root qualification and installed activation must follow the operator's execution direction and existing root admission; this plan introduces no additional root admission, disk-health conclusion or installation effect.
 
 ## Current State
+
+Resume2026-10-10: operator directs continuing the full plan, following Matt's
+diagnosis/TDD process. No reboot until separately authorized or performed by
+operator. Checkpoint before the earlier of2million tokens or3hours; neither
+limit shrinks M1–M6 acceptance. Primary Codex owns the serialized packet.
+Corrupt-pair seam: actual serve/recover and query/mutation protocol with owned
+fixtures and both original root/snapshot absent. Red control demonstrated
+snapshot_unavailable while a previous accepted private pair still existed.
+Packet result: truthful read-only fallback, bounded invalid-pair behavior and
+47-group regression pass; see [corrupt-pair source evidence](../notes/2026-10-10-plan6-corrupt-pair-recovery.md). This is not full M4 or program acceptance.
 
 Latest supporting source: [durable catalog continuation](../notes/2026-10-10-plan6-durable-replay.md), including private checkpoints, background rollover and replacement publication. [Broker continuation](../notes/2026-10-09-plan6-bootstrap-candidate.md) records fixed-helper actual event delivery on the owned fixture, normal CLI/fresh MCP, overflow and edge controls. ADR0005 records the accepted bounded formerly-admitted-descriptor exception; custom kernel work is excluded. These controls do not accept M3 or establish full-workspace freshness. Supporting source is published at8b134d7f; the two production-limit rollover control passes (sequence2052/checkpoint2048). Next is remaining bounded M4 crash/corrupt-pair/startup evidence; retain M3 root/mount/ignored/watch-exhaustion/adversarial gates.
 

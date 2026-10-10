@@ -164,6 +164,18 @@ if host_machine.system() == 'linux'
     checkpoint_fault_fixture = shared_library('checkpoint_fault_fixture', 'checkpoint_fault_fixture.c', dependencies: cc.find_library('dl'), install: false)
     test('catalog_durable_capacity', python, args: [files('test_catalog_capacity.py'), join_paths(meson.project_build_root(), 'src')],
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 120)
+    test('catalog_corrupt_pair', python, args: [files('test_catalog_corrupt_pair.py'), join_paths(meson.project_build_root(), 'src')],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_corrupt_pair_unavailable', python, args: [files('test_catalog_corrupt_pair.py'), join_paths(meson.project_build_root(), 'src'), 'both'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_corrupt_pair_binding', python, args: [files('test_catalog_corrupt_pair.py'), join_paths(meson.project_build_root(), 'src'), 'binding'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_corrupt_pair_sequence', python, args: [files('test_catalog_corrupt_pair.py'), join_paths(meson.project_build_root(), 'src'), 'sequence'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_corrupt_pair_metadata', python, args: [files('test_catalog_corrupt_pair.py'), join_paths(meson.project_build_root(), 'src'), 'metadata'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_corrupt_pair_manifest', python, args: [files('test_catalog_corrupt_pair.py'), join_paths(meson.project_build_root(), 'src'), 'manifest'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
     test('catalog_durable_replacement', python, args: [files('test_catalog_replacement_durability.py'), join_paths(meson.project_build_root(), 'src')],
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 40)
     test('catalog_durable_rollover', python, args: [files('test_catalog_rollover.py'), join_paths(meson.project_build_root(), 'src'), checkpoint_fault_fixture.full_path()],
