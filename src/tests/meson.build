@@ -222,8 +222,12 @@ if host_machine.system() == 'linux'
     test_broker_mark_descriptor = executable('test_broker_mark_descriptor', 'test_broker_mark_descriptor.c', install: false)
     test('broker_mark_descriptor', test_broker_mark_descriptor, timeout: 10)
     test('broker_directory_map', python, args: files('test_broker_admission.py'), timeout: 10)
+    test('broker_permission_exclusions', python, args: [files('test_broker_permission_exclusions.py'), join_paths(meson.project_build_root(), 'src'), broker_boundary.full_path()],
+        depends: [broker_boundary, fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 15)
     test('broker_process_cli_mcp', python, args: [files('test_broker_process.py'), join_paths(meson.project_build_root(), 'src'), '-', broker_boundary.full_path()],
         depends: [broker_boundary, fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 30)
     test('broker_dirty_startup_preserves_accepted', python, args: [files('test_broker_process.py'), join_paths(meson.project_build_root(), 'src'), '-', broker_boundary.full_path(), '--startup-churn'],
+        depends: [broker_boundary, fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 30)
+    test('broker_permission_startup_cli_mcp', python, args: [files('test_broker_process.py'), join_paths(meson.project_build_root(), 'src'), '-', broker_boundary.full_path(), '--permission-exclusions'],
         depends: [broker_boundary, fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 30)
 endif

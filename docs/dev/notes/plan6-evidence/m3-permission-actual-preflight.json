@@ -1,0 +1,73 @@
+{
+  "source_base": "12f7eff69425324fdf5cc8b2b3ef112767f40636",
+  "source_fix": "directory read eligibility before inventory export",
+  "source_sha256": {
+    "src/fsearch_broker_boundary.c": "549d8a821f8037a39d05ca4eb8f68dc09b1c6662619c77b146d51d795ab4780e",
+    "src/tests/test_broker_process.py": "8c3e18fd821dce9e088cbf1c9464bd4be64fa54e9b3d03e14e1cb4ee59af2519",
+    "src/tests/test_broker_permission_exclusions.py": "c470c43ee7af35b26a4874052feaeae8cf75b219d8bf2cfa6b112846b625391f"
+  },
+  "archive": "/home/ecochran76/worktrees/fsr-q-20261010/archive-before-permission-exclusions-20261010",
+  "absence": [
+    {
+      "state": "snapshot.refresh.state",
+      "role": "supervisor",
+      "record": {
+        "pid": 10372,
+        "start": "28397694",
+        "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db"
+      },
+      "current": null
+    },
+    {
+      "state": "snapshot.broker-preview.state",
+      "role": "supervisor",
+      "record": {
+        "pid": 10401,
+        "start": "28397710",
+        "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db"
+      },
+      "current": null
+    },
+    {
+      "state": "q.sock.state",
+      "role": "supervisor",
+      "record": {
+        "pid": 8954,
+        "start": "28396619",
+        "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db"
+      },
+      "current": null
+    },
+    {
+      "state": "snapshot.broker.state",
+      "role": "supervisor",
+      "record": {
+        "pid": 10372,
+        "start": "28397694",
+        "boot": "3cf33f0d-c332-452e-8b6d-396eccccd3db"
+      },
+      "current": null
+    }
+  ],
+  "runtime": "/home/ecochran76/worktrees/fsearch-plan6-permissions-runtime",
+  "sha256": {
+    "fsearch_catalog_journal.py": "df97b18995ff175d1a713ea557969e2d0a8e4b3757cfd917f91d56fec54c88dd",
+    "fsearch_service.py": "1fc09249d75d6ff168f63e472d71731d5361490386c1fb04fe9f7b258fd0efec",
+    "fsearch_incremental.py": "c06159dce79e8d9144b6f9754790aeeb473fe3631a96675650196fe276ef5120",
+    "fsearch_refresh.py": "7ea98c67f0bec307386a0af126c359f91b746fac54855dacc1022d6f949a9cd2",
+    "fsearch-monitor": "bd95b6fe8f1f308a526968c4408ece3f4b7aa0a38b1f79074d5a9213cc99f86f",
+    "fsearch-service": "1fc09249d75d6ff168f63e472d71731d5361490386c1fb04fe9f7b258fd0efec",
+    "fsearch_fanotify_events.py": "0007b0a89dac79b92ff4cbe2ec9a2c2c9a303bdc1ef99d928fcad05c44801eb5",
+    "fsearch-worker": "2bf3311cde0987b4e552c1ce7338839c3e95ea5681c4663bd93f175ef726bbf7",
+    "fsearch-refresh": "7ea98c67f0bec307386a0af126c359f91b746fac54855dacc1022d6f949a9cd2",
+    "fsearch-monitor-worker": "68b9c7442d6109a48d0b1bb8719164ef6292fbf19ea30d0d81d5d3d382813f80",
+    "fsearch_broker_admission.py": "0e523bfb06099a0f963ef0dcb7b9e86656c4cfe075f915a3d88004d994432444",
+    "fsearch-incremental": "c06159dce79e8d9144b6f9754790aeeb473fe3631a96675650196fe276ef5120",
+    "fsearch-refresh-worker": "ab05ee79f71f99ee4576c8bd90ef4b74faff139aaa8593fc70e6ec1ac1aa413b",
+    "fsearch-cli": "c68bd60409189b3dd7d4ac08a440daa3453751e88b92432d70c99d8551ca895e",
+    "fsearch_broker_source.py": "9f75342562220bce935558defdfb95ab09cae901264fae77ed9c6b995e4e08e1",
+    "fsearch-broker-boundary": "ce774c247b2764625b820b458ed2901f02228a6305e5616677fc3ff8675bb1b0",
+    "fsearch_monitor.py": "bd95b6fe8f1f308a526968c4408ece3f4b7aa0a38b1f79074d5a9213cc99f86f",
+    "fsearch_broker.py": "34efabc5d33b80deb5a411ce99c2cad172912384b4353622db8bc33d47f1a9ab"
+  }
+}

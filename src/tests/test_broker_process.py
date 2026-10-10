@@ -36,9 +36,11 @@ def main():
     parser.add_argument('--actual-edges', action='store_true')
     parser.add_argument('--actual-loss', action='store_true')
     parser.add_argument('--actual-churn', action='store_true')
+    parser.add_argument('--actual-exclusions', action='store_true')
     parser.add_argument('--profile-broker', action='store_true')
     parser.add_argument('--profile-service', action='store_true')
     parser.add_argument('--startup-churn', action='store_true')
+    parser.add_argument('--permission-exclusions', action='store_true')
     parser.add_argument('--durable-catalog', action='store_true')
     args = parser.parse_args()
     actual = args.actual_fixture_dir is not None
@@ -49,6 +51,8 @@ def main():
     assert not args.actual_edges or actual and not args.extended_actual and not args.actual_overflow, 'edge controls require separate actual run'
     assert not args.actual_loss or actual and not any((args.extended_actual, args.actual_overflow, args.actual_edges)), 'session loss requires a separate actual run'
     assert not args.actual_churn or actual and args.durable_catalog and not any((args.extended_actual, args.actual_overflow, args.actual_edges, args.actual_loss)), 'churn requires a separate actual durable run'
+    assert not args.permission_exclusions or not any((args.extended_actual, args.actual_overflow, args.actual_edges, args.actual_loss, args.actual_churn, args.startup_churn)), 'permission exclusions require a separate run'
+    assert not args.actual_exclusions or actual and args.durable_catalog and not any((args.extended_actual, args.actual_overflow, args.actual_edges, args.actual_loss, args.actual_churn, args.startup_churn, args.permission_exclusions)), 'live exclusions require a separate actual durable run'
     if args.actual_overflow:
         assert 0 < int(Path('/proc/sys/fs/fanotify/max_queued_events').read_text()) <= 16384, 'queue bound outside reviewed burst'
     if actual:
@@ -98,8 +102,15 @@ def main():
         work = args.actual_fixture_dir if actual else Path(temporary)
         root = work / 'owned'; root.mkdir(exist_ok=actual)
         (root / 'initial.txt').touch()
+        denied = None
+        if args.permission_exclusions:
+            denied = root / 'permissions-excluded'; denied.mkdir()
+            (denied / 'permissions-hidden.txt').touch()
+            denied.chmod(0)
         database = work / 'snapshot'; endpoint = work / 'q.sock'
-        subprocess.run([sys.executable, str(runtime / 'fsearch-refresh'), 'refresh', '--root', str(root), '--database', str(database)], check=True, capture_output=True, timeout=10)
+        refreshed = subprocess.run([sys.executable, str(runtime / 'fsearch-refresh'), 'refresh', '--root', str(root), '--database', str(database)], check=True, capture_output=True, timeout=10)
+        if args.permission_exclusions:
+            assert json.loads(refreshed.stdout)['scan']['excluded_permissions'] == 1, refreshed.stdout
         # Obtain only this owned root's handle from the actual unprivileged
         # helper. This does not create any fanotify group/mark.
         identity_worker = subprocess.Popen([str(boundary), '--root', str(root)], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -309,6 +320,13 @@ asyncio.run(main())
             renamed = root / 'process-renamed'; os.rename(directory, renamed)
             inject(writer, event(RENAME | ONDIR, [side(10, os.fsencode(directory.name)), side(12, os.fsencode(renamed.name)), info(1)]))
             visible('process-child', [renamed / 'deep' / child.name])
+            if args.permission_exclusions:
+                public('permissions-excluded', [], mcp=True)
+                public('permissions-hidden', [])
+                print(json.dumps({'result': 'broker_permission_exclusions_preserve_readable_updates',
+                    'durable_catalog': args.durable_catalog, 'actual_delivery': 'PASS' if actual else 'NOT_QUALIFIED',
+                    'owned_boundary_pids': worker_pids}))
+                return 0
             if not actual:
                 writer.send(event(OVERFLOW, [])); terminal('queue_overflow')
                 assert 'queue_overflow' in log.read_text(), log.read_text()
@@ -354,6 +372,35 @@ asyncio.run(main())
                 public('edge-heavy-0127', [heavy[-1]], mcp=True)
                 (work / 'visibility-timings.json').write_text(json.dumps(timings, indent=2) + '\n')
             extended_controls = []
+            if args.actual_exclusions:
+                excluded = [root / 'excluded-live-symlink', root / 'excluded-live-fifo', root / 'excluded-live-denied']
+                controls = []
+                try:
+                    for index, path in enumerate(excluded):
+                        if index == 0: path.symlink_to(work / 'outside-fixture', target_is_directory=True)
+                        elif index == 1: os.mkfifo(path, 0o600)
+                        else: path.mkdir(mode=0)
+                        # A later same-parent regular event must become visible
+                        # before checking absence, avoiding an early empty read.
+                        sentinel = root / f'eligible-after-exclusion-{index}.txt'; sentinel.touch()
+                        visible(sentinel.stem, [sentinel])
+                        oracle = work / 'exclusion-oracle'
+                        subprocess.run([sys.executable, str(runtime / 'fsearch-refresh'), 'refresh', '--root', str(root), '--database', str(oracle)], check=True, capture_output=True, timeout=10)
+                        reference = subprocess.run([str(runtime / 'fsearch-cli'), '--database', str(oracle), '--query', path.name], check=True, capture_output=True, text=True, timeout=3)
+                        assert json.loads(reference.stdout)['results'] == [], reference.stdout
+                        public(path.name, [], mcp=True)
+                        controls.append(path.name)
+                    oracle = work / 'exclusion-oracle'
+                    refreshed = subprocess.run([sys.executable, str(runtime / 'fsearch-refresh'), 'refresh', '--root', str(root), '--database', str(oracle)], check=True, capture_output=True, timeout=10)
+                    scan = json.loads(refreshed.stdout)['scan']
+                    assert scan['excluded_symlinks'] == 1 and scan['excluded_permissions'] == 1, scan
+                    expected = subprocess.run([str(runtime / 'fsearch-cli'), '--database', str(oracle), '--query', 'excluded-live-'], check=True, capture_output=True, text=True, timeout=3)
+                    assert json.loads(expected.stdout)['results'] == [], expected.stdout
+                    public('excluded-live-', [], mcp=True)
+                    print(json.dumps({'result': 'actual_live_exclusions_match_rebuilt_oracle', 'controls': controls, 'scan': scan}))
+                    return 0
+                finally:
+                    if excluded[-1].exists(): excluded[-1].chmod(0o700)
             if args.actual_churn:
                 # Frozen workload: 27 normal mutations, three mixed bursts of
                 # 512 creates/512 renames/256 deletes, four querying clients.
@@ -540,6 +587,8 @@ asyncio.run(main())
                 try:
                     if os.waitpid(-1, os.WNOHANG)[0] == 0: break
                 except ChildProcessError: break
+            if denied is not None:
+                denied.chmod(0o700)
 
 
 if __name__ == '__main__': raise SystemExit(main())

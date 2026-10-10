@@ -148,6 +148,17 @@ static bool inventory(const char *relative, unsigned depth) {
         close(item);
         if (!stat_ok) { ok = false; break; }
         unsigned kind = S_ISDIR(metadata.st_mode) ? 2 : S_ISREG(metadata.st_mode) ? 1 : 0;
+        if (kind == 2) {
+            /* Match refresh eligibility before exporting an entry/handle.
+             * O_PATH alone does not prove that directory contents are readable. */
+            int contents = beneath(child, O_RDONLY | O_DIRECTORY);
+            if (contents < 0 && (errno == EACCES || errno == EPERM)) continue;
+            struct stat current;
+            bool readable = contents >= 0 && !fstat(contents, &current)
+                && current.st_dev == metadata.st_dev && current.st_ino == metadata.st_ino;
+            if (contents >= 0) close(contents);
+            if (!readable) { ok = false; break; }
+        }
         if (kind && !emit_item(child, kind)) { ok = false; break; }
         if (kind == 2 && !inventory(child, depth + 1)) { ok = false; break; }
     }

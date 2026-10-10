@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: owned actual broker mixed churn passes27normal/3840heavy mutations, four concurrent query clients, three production durable rollovers and768independent rebuilt-oracle paths. Source turns yield between pending applications and do not sleep while backlog remains; original timing failures retained. Final63/63 source and actual extended regression pass; qualified post-baseline events now replay as pending before first drain. Helper/kernel aggregate, current scale and remaining ignored/mount/adversarial gates unqualified. M3/M4 IN_PROGRESS; M5/M6 pending. No reboot or installed workspace activation. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
+Current packet: native refresh/broker inventory now agree on static permission-denied directory exclusions. Public native red/green and actual selected CLI/fresh MCP startup/readable updates pass. First65-case full run stopped by host-pressure guard; stable-preflight rerun passes65/65 with all evidence retained. Next: live excluded symlink/FIFO/permission eligibility versus rebuilt snapshot. Helper/kernel aggregate, current scale and mount/adversarial gates unqualified. M3/M4 IN_PROGRESS; M5/M6 pending. No reboot or installed workspace activation. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
 
 ## Destination and completion rule
 

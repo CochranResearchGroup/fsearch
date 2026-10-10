@@ -75,3 +75,15 @@ A qualified finish_baseline transitions immediately to pending. Events received
 after that cut are replay, even before the first drain or serving-publication
 completion. Legacy unqualified startup keeps its conservative dirty-inventory
 behavior. Neither transition permits watching without a subsequent drain.
+
+## Static permission exclusion consistency —2026-10-10
+
+Refresh and broker baseline inventory must share directory eligibility. O_PATH
+metadata success does not imply readable directory contents. Before exporting
+a directory entry/handle, re-resolve its read descriptor beneath the admitted
+root and verify the same device/inode. Skip EACCES/EPERM consistently with
+refresh; retain gaps for identity changes and unexpected errors. Root, mount,
+symlink and content-read boundaries are unchanged. The [permission qualification](../dev/notes/2026-10-10-plan6-permission-exclusions.md)
+records the public native red/green and actual static owned-fixture control.
+This does not qualify live permission transitions, configured ignored paths
+or arbitrary event type eligibility.

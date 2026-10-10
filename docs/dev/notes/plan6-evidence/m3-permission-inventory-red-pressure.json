@@ -1,0 +1,79 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "src/tests/test_broker_permission_exclusions.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 0.3138933160225861,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 13598720,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.23511001601582393,
+  "initial_host": {
+    "MemAvailable": 38716911616,
+    "SwapFree": 14348288,
+    "memory_some_avg10": 0.06,
+    "memory_full_avg10": 0.03,
+    "io_some_avg10": 1.62,
+    "io_full_avg10": 1.17
+  },
+  "final_host": {
+    "MemAvailable": 38655918080,
+    "SwapFree": 14360576,
+    "memory_some_avg10": 0.06,
+    "memory_full_avg10": 0.03,
+    "io_some_avg10": 1.62,
+    "io_full_avg10": 1.17
+  },
+  "samples": [
+    {
+      "seconds": 0.04408045101445168,
+      "host": {
+        "MemAvailable": 38716911616,
+        "SwapFree": 14348288,
+        "memory_some_avg10": 0.06,
+        "memory_full_avg10": 0.03,
+        "io_some_avg10": 1.62,
+        "io_full_avg10": 1.17
+      },
+      "rss_bytes": 13598720,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04351730999769643,
+      "swap_bytes": 0,
+      "pids": [
+        53315
+      ]
+    },
+    {
+      "seconds": 0.2791904670302756,
+      "host": {
+        "MemAvailable": 38659452928,
+        "SwapFree": 14352384,
+        "memory_some_avg10": 0.06,
+        "memory_full_avg10": 0.03,
+        "io_some_avg10": 1.62,
+        "io_full_avg10": 1.17
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0350110920262523,
+      "swap_bytes": 0,
+      "pids": [
+        53315
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-permission-inventory-red-20261010.service",
+    "memory.current": 12574720,
+    "memory.peak": 29614080,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}
