@@ -61,3 +61,24 @@ was needed; former deadline/pressure failures are preserved. This bounded
 checkpoint/reconciliation/diagnostic objective is complete. Plan0006 remains open;
 next packet is remaining M4 crash/corrupt-pair/startup qualification with M3 gates
 retained. No merge to master, install, new mark or helper/root change.
+
+## Graphiti authority correction
+
+Operator correction2026-10-10: Graphiti memories are critical. The inherited
+no-personal-memory annotation was applied too broadly; it must not be carried
+forward as a prohibition on qualified source-backed Graphiti discovery/closeout.
+The operator now directs recording this verified outcome in Graphiti. Historical
+forbidden dispositions remain attributable history and are superseded for this
+new authorized closeout. Files under ~/.codex/memories have separate update rules.
+
+The graphiti-discovery workflow is applied. Runtime doctor is healthy. Narrow
+atlas/general-group discovery supplied no relevant checkpoint recall and no repo
+group is configured; use the documented general local-agent group
+openclaw_ec_main for this singleton, without new cloud bootstrap or bulk seed.
+Memory content is limited to published source/capacity result and open gates.
+Queue acceptance is distinct from processing, persisted visibility and retrieval.
+
+Corrected memory disposition: queued. graphiti-runtime remember accepted one
+source-backed singleton inopenclaw_ec_main, job86ba880c-ad8b-4a15-9ec1-877e367dad5f. Receipt:
+plan6-evidence/checkpoint-graphiti-memory-receipt.json. Processing/retrieval is
+not yet proven; do not resubmit because extraction is asynchronous.
