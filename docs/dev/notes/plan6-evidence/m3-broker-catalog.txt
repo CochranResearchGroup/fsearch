@@ -1,0 +1,26 @@
+Running as unit: fsearch-plan6-broker-wiring.service; invocation ID: 5e63d879b5ad4184ab90f0f81409f8a3
+Traceback (most recent call last):
+  File "/tmp/fsearch-incremental-generations/src/tests/test_broker_catalog.py", line 125, in <module>
+    main()
+  File "/tmp/fsearch-incremental-generations/src/tests/test_broker_catalog.py", line 94, in main
+    writer.send(event(CREATE, [info(2, name=os.fsencode(created.name)), info(1)])); assert broker.pump()
+                                                                                           ^^^^^^^^^^^^^
+  File "/tmp/fsearch-incremental-generations/src/fsearch_broker_source.py", line 228, in pump
+    drained = self.reader.pump(self.validate, self.sink)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/fsearch-incremental-generations/src/fsearch_broker_source.py", line 125, in pump
+    exports = self.session.receive(data, self.session.filter.generation, self.session.source_sequence + 1, validate)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/fsearch-incremental-generations/src/fsearch_fanotify_events.py", line 231, in receive
+    self.fail(str(error))
+  File "/tmp/fsearch-incremental-generations/src/fsearch_fanotify_events.py", line 210, in fail
+    self.filter.fail(reason)
+  File "/tmp/fsearch-incremental-generations/src/fsearch_fanotify_events.py", line 135, in fail
+    raise Gap(self.reason) from None
+fsearch_fanotify_events.Gap: admission_invalid
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 527ms
+CPU time consumed: 374ms
+Memory peak: 256.0K
+Memory swap peak: 0B

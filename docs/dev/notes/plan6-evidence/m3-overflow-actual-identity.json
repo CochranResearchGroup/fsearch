@@ -1,0 +1,28 @@
+{
+  "verdict": "actual_kernel_overflow_pass",
+  "burst_entries": 17000,
+  "queue_limit": 16384,
+  "coverage": "deferred_queue_overflow",
+  "boundary_pid_95700_absent": true,
+  "pressure": {
+    "exit_code": 0,
+    "reason": null,
+    "elapsed_seconds": 8.645626753976103,
+    "cgroup": {
+      "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-actual-overflow-20261010b.service",
+      "memory.current": 45797376,
+      "memory.peak": 162594816,
+      "memory.max": 1342177280,
+      "memory.swap.current": 0,
+      "memory.swap.peak": 0,
+      "memory.swap.max": 0
+    },
+    "peak_sampled_rss_bytes": 178745344
+  },
+  "sha256": {
+    "/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests/test_broker_process.py": "2acf2fd3d1e7b07044b603b95ace14558d0a2f2de27c4349ceebfc22ed5a6f84",
+    "/home/ecochran76/worktrees/fsearch-incremental-generations/src/fsearch_broker.py": "19cabbb674b06bce9cb7bd9c48f4060631727c151a52fce3b27dfd22ebe97608",
+    "/home/ecochran76/worktrees/fsearch-incremental-generations/src/fsearch_fanotify_events.py": "09d9d0417822310a01dfec35e06f7c3b84f7110ace86b37c918dacbab263d7a9",
+    "/usr/local/libexec/fsearch-broker/installation.json": "bbc11961f12a621a47320e47aa5c667f98c23d99b7be7f2423f58a3299fba2de"
+  }
+}

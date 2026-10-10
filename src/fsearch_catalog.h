@@ -56,3 +56,18 @@ bool fsearch_catalog_compact_publish(FsearchCatalog *, FsearchCatalogBuild *, co
 void fsearch_catalog_compact_free(FsearchCatalog *, FsearchCatalogBuild *);
 G_DEFINE_AUTOPTR_CLEANUP_FUNC(FsearchCatalogView, fsearch_catalog_view_unref)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC(FsearchCatalog, fsearch_catalog_free)
+
+/* Owner-private cache descriptors only. Writer requires an empty file; caller owns
+ * atomic publication and directory fsync. Reader validates snapshot binding,
+ * checksum and tree before exposing a catalog. Indexed roots are never probed. */
+bool fsearch_catalog_checkpoint_write(FsearchCatalog *, int fd, const char *snapshot_id, const char **error);
+FsearchCatalog *fsearch_catalog_checkpoint_read(int fd, const char *snapshot_id,
+                                               const FsearchCatalogLimits *, const char **error);
+
+typedef struct FsearchCatalogCheckpoint FsearchCatalogCheckpoint;
+FsearchCatalogCheckpoint *fsearch_catalog_checkpoint_capture(FsearchCatalog *, const char **error);
+bool fsearch_catalog_checkpoint_write_capture(FsearchCatalogCheckpoint *, int fd, const char *snapshot_id, const char **error);
+void fsearch_catalog_checkpoint_free(FsearchCatalogCheckpoint *);
+uint64_t fsearch_catalog_checkpoint_sequence(FsearchCatalogCheckpoint *);
+
+bool fsearch_catalog_checkpoint_verify_capture(FsearchCatalogCheckpoint *, int fd, const char **error);

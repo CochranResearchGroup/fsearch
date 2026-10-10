@@ -25,7 +25,7 @@ Complete an assembled, reviewable broker candidate; qualify its real event sourc
 8. As an agent, I want raw filename bytes preserved, so non-UTF-8 names remain discoverable.
 9. As an operator, I want ancestor moves and directory replacements handled, so entire subtrees do not become incorrect.
 10. As an operator, I want hard links treated as distinct directory entries, so aliases remain searchable independently.
-11. As an operator, I want indexing confined to approved roots, so unrelated names are never exported or probed.
+11. As an operator, I want indexing confined to approved roots, with the bounded formerly-admitted-descriptor transition exception in ADR0005; unrelated names must never be exported or logged and outside destinations must never be followed.
 12. As an operator, I want any wider kernel observation described before activation, so approval refers to the actual effect.
 13. As an operator, I want privilege removed after setup, so a long-running privileged reader is not silently introduced.
 14. As an agent, I want explicit pending/deferred coverage after a source gap, so cached visibility is not mistaken for current coverage.
@@ -46,7 +46,7 @@ Complete an assembled, reviewable broker candidate; qualify its real event sourc
 - Immutable catalog generation, native matching and bounded worker transport already have source acceptance. Preserve them; integrate broker events through the existing updater and private catalog mutation seam. Query workers remain isolated from root metadata operations.
 - The candidate source uses a single filesystem notification mark with subtree-only export. Kernel collection is filesystem-wide and requires separate explicit observation/capability approval. Neither the specification nor ready labels authorize activation.
 - Prefer a minimal setup launcher that passes a descriptor to an unprivileged broker and exits. Capability lifetime and continued descriptor behavior are proof obligations. No permission events, network listener, content indexing or arbitrary outside handle resolution.
-- Root generation, mount/filesystem identity, raw basenames and opaque directory handles govern admission. Cached membership is insufficient: fresh containment must be proved under adversarial moves before export or secondary probes.
+- Root generation, mount/filesystem identity, raw basenames and opaque directory handles govern admission. Cached membership is insufficient: validate rooted identity before and after metadata operations, discard/report a gap on an ancestry change, and qualify adversarial moves under ADR0005's operator-approved bounded transition exception. No initially outside object is admitted.
 - Bootstrap requires a clean accepted baseline and source-drain cut. Current conservative dirty-baseline rejection is supporting source, not evidence of a viable current-scale startup strategy. Candidate acceptance must show bounded startup under the frozen workload; design revisions are allowed without changing the final contract.
 - Event loss, unknown identity, backpressure, expired source lease and failed reconciliation expose deferred coverage while accepted queries remain usable. No blind retries after unproved cleanup.
 - Directory creation/move-in requires bounded inventory; move-out revokes admission before export. Parent/name mutations preserve directory-entry identity and cannot resurrect retired descendants.

@@ -1,0 +1,120 @@
+Running as unit: fsearch-plan6-broker-native-retest.service; invocation ID: 20b5a1ce44c542a28ccf5dee4f68a070
+[0/1] Regenerating build files
+Cleaning... 0 files.
+The Meson build system
+Version: 1.12.1
+Source dir: /tmp/fsearch-incremental-generations
+Build dir: /tmp/fsearch-generations-build
+Build type: native build
+Project name: fsearch
+Project version: 0.3
+C compiler for the host machine: /usr/bin/cc (gcc 13.3.0 "cc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0")
+C linker for the host machine: /usr/bin/cc ld.bfd 2.42
+Host machine cpu family: x86_64
+Host machine cpu: x86_64
+Checking if "malloc_trim is supported on the build platform" runs: YES
+Checking if "fanotify is supported by the build platform and works without CAP_SYS_ADMIN capabilities" runs: YES
+Checking if "inotify is supported by the build platform" runs: YES
+Configuring io.github.cboxdoerfer.FSearch.desktop.in using configuration
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Program desktop-file-validate found: NO
+Program appstreamcli found: YES (/usr/bin/appstreamcli)
+Could not find file LINGUAS in /tmp/fsearch-incremental-generations/help
+Program itstool found: YES (/usr/bin/itstool)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program msgfmt found: YES (/usr/bin/msgfmt)
+Found pkg-config: YES (/usr/bin/pkg-config) 1.8.1
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Dependency gio-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-compile-resources found: YES (/usr/bin/glib-compile-resources)
+Library m found: YES
+Dependency gio-unix-2.0 for host machine found: YES 2.80.0 (cached)
+Dependency gtk+-3.0 for host machine found: YES 3.24.41 (cached)
+Dependency libpcre2-8 for host machine found: YES 10.42 (cached)
+Dependency icu-uc for host machine found: YES 74.2 (cached)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Program /usr/bin/glib-mkenums found: YES (/usr/bin/glib-mkenums)
+Dependency glib-2.0 for host machine found: YES 2.80.0 (cached)
+Library dl found: YES
+Program python3 found: YES (/home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3)
+Library dl found: YES
+Library dl found: YES
+Program msginit found: YES (/usr/bin/msginit)
+Program msgmerge found: YES (/usr/bin/msgmerge)
+Program xgettext found: YES (/usr/bin/xgettext)
+Configuring config.h using configuration
+Build targets in project: 83
+NOTICE: Future-deprecated features used:
+ * 0.56.0: {'meson.source_root'}
+
+Found ninja-1.13.2.git.kitware.jobserver-pipe-1 at /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/ninja
+ninja: no work to do.
+ninja: Entering directory `/tmp/fsearch-generations-build'
+ninja: no work to do.
+ 1/30 fsearch:validate-metainfo           OK              0.19s
+ 2/30 fsearch:test_database               OK              0.19s
+ 3/30 fsearch:test_database_file          OK              0.19s
+ 4/30 fsearch:test_database_chunked_array OK              0.18s
+ 5/30 fsearch:test_database_index_store   OK              0.18s
+ 6/30 fsearch:test_database_include       OK              0.17s
+ 7/30 fsearch:test_database_exclude       OK              0.17s
+ 8/30 fsearch:test_database_entry         OK              0.16s
+ 9/30 fsearch:test_array                  OK              0.11s
+10/30 fsearch:test_size_utils             OK              0.10s
+11/30 fsearch:test_time_utils             OK              0.10s
+12/30 fsearch:test_query                  OK              0.51s
+13/30 fsearch:test_string_utils           OK              0.50s
+14/30 fsearch:immutable_catalog           OK              0.40s
+15/30 fsearch:immutable_catalog_faults    OK              0.39s
+16/30 fsearch:fanotify_event_filter       OK              0.40s
+17/30 fsearch:boot_recovery               OK              0.79s
+18/30 fsearch:broker_source_transport     OK              0.40s
+19/30 fsearch:approved_root_move_race     OK              0.90s
+20/30 fsearch:monitor_worker              OK              1.18s
+21/30 fsearch:catalog_multiroot           OK              1.18s
+22/30 fsearch:catalog_worker_transport    OK              1.19s
+23/30 fsearch:continuous_events           OK              1.19s
+24/30 fsearch:pressure_guard_controls     OK              3.49s
+25/30 fsearch:refresh_worker              OK              6.69s
+26/30 fsearch:catalog_native_parity       OK              7.14s
+27/30 fsearch:headless_cli                OK              9.15s
+28/30 fsearch:incremental_visibility      OK             11.19s
+29/30 fsearch:monitor_supervisor          FAIL           20.05s   exit status 1
+>>> MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=125 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 LD_LIBRARY_PATH=/tmp/fsearch-generations-build/src/tests UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3 /tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_monitor.py /tmp/fsearch-generations-build/src/fsearch-monitor /tmp/fsearch-generations-build/src/fsearch-cli /tmp/fsearch-generations-build/src/tests
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+.............F.......
+======================================================================
+FAIL: test_overflow_reconciliation_is_bounded_and_preserves_snapshot (__main__.Monitor.test_overflow_reconciliation_is_bounded_and_preserves_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_monitor.py", line 219, in test_overflow_reconciliation_is_bounded_and_preserves_snapshot
+    else: self.fail('overflow reconciliation did not terminate within 5 seconds')
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: overflow reconciliation did not terminate within 5 seconds
+
+----------------------------------------------------------------------
+Ran 21 tests in 19.767s
+
+FAILED (failures=1)
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+30/30 fsearch:warm_service                OK             31.78s
+
+Summary of Failures:
+
+29/30 fsearch:monitor_supervisor          FAIL           20.05s   exit status 1
+
+Ok:                29  
+Fail:              1   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 39.717s
+CPU time consumed: 24.013s
+Memory peak: 288.0K
+Memory swap peak: 0B

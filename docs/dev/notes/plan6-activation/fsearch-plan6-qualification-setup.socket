@@ -1,0 +1,10 @@
+[Unit]
+Description=Root-created owned qualification transport
+[Socket]
+ListenSequentialPacket=/run/fsearch/broker.sock
+SocketUser=1000
+SocketGroup=1000
+SocketMode=0600
+DirectoryMode=0755
+Service=fsearch-plan6-qualification-setup.service
+RemoveOnStop=yes

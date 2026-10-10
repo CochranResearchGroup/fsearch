@@ -1,0 +1,43 @@
+{
+  "command": [
+    "/home/ecochran76/worktrees/fsearch-plan6-tools/bin/ninja",
+    "-C",
+    "/home/ecochran76/worktrees/fsearch-plan6-build",
+    "-j2",
+    "src/tests/test_catalog"
+  ],
+  "reason": "host_pressure_preflight",
+  "exit_code": null,
+  "elapsed_seconds": 0.00016178697114810348,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 0,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0,
+  "initial_host": {
+    "MemAvailable": 35354644480,
+    "SwapFree": 7606272,
+    "memory_some_avg10": 7.41,
+    "memory_full_avg10": 4.95,
+    "io_some_avg10": 37.33,
+    "io_full_avg10": 26.28
+  },
+  "final_host": {
+    "MemAvailable": 35354644480,
+    "SwapFree": 7606272,
+    "memory_some_avg10": 7.41,
+    "memory_full_avg10": 4.95,
+    "io_some_avg10": 37.33,
+    "io_full_avg10": 26.28
+  },
+  "samples": [],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-build.service",
+    "memory.current": 7450624,
+    "memory.peak": 7454720,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

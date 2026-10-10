@@ -1,0 +1,22 @@
+Running as unit: fsearch-plan6-broker-boundary-build.service; invocation ID: 63121e00e55b4fabb359c47251243395
+ninja: Entering directory `/tmp/fsearch-generations-build'
+[1/4] Compiling C object src/fsearch-broker-setup.p/fsearch_broker_setup.c.o
+../fsearch-incremental-generations/src/fsearch_broker_setup.c:5: warning: "_GNU_SOURCE" redefined
+    5 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+[2/4] Linking target src/fsearch-broker-setup
+[3/4] Compiling C object src/fsearch-broker-boundary.p/fsearch_broker_boundary.c.o
+../fsearch-incremental-generations/src/fsearch_broker_boundary.c:5: warning: "_GNU_SOURCE" redefined
+    5 | #define _GNU_SOURCE
+      | 
+<command-line>: note: this is the location of the previous definition
+[4/4] Linking target src/fsearch-broker-boundary
+INFO: autodetecting backend as ninja
+INFO: calculating backend command to run: /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/ninja -C /tmp/fsearch-generations-build src/fsearch-broker-boundary src/fsearch-broker-setup
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 505ms
+CPU time consumed: 449ms
+Memory peak: 288.0K
+Memory swap peak: 0B

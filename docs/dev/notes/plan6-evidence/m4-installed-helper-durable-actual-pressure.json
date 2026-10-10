@@ -1,0 +1,167 @@
+{
+  "command": [
+    "/tmp/file-searcher-incremental-coverage/.venv/bin/python",
+    "src/tests/test_broker_process.py",
+    "/home/ecochran76/worktrees/fsearch-broker-candidate/bin",
+    "/tmp/file-searcher-incremental-coverage",
+    "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/fsearch-broker-boundary",
+    "--actual-fixture-dir",
+    "/home/ecochran76/worktrees/fsr-q-20261010",
+    "--extended-actual",
+    "--durable-catalog"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 1.282327905006241,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 76021760,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.24586128001101315,
+  "initial_host": {
+    "MemAvailable": 35305070592,
+    "SwapFree": 86016,
+    "memory_some_avg10": 0.09,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 1.07,
+    "io_full_avg10": 0.51
+  },
+  "final_host": {
+    "MemAvailable": 35276115968,
+    "SwapFree": 118784,
+    "memory_some_avg10": 0.08,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 1.96,
+    "io_full_avg10": 1.32
+  },
+  "samples": [
+    {
+      "seconds": 0.03750905196648091,
+      "host": {
+        "MemAvailable": 35305070592,
+        "SwapFree": 86016,
+        "memory_some_avg10": 0.09,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.07,
+        "io_full_avg10": 0.51
+      },
+      "rss_bytes": 16711680,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.03690352599369362,
+      "swap_bytes": 0,
+      "pids": [
+        19865
+      ]
+    },
+    {
+      "seconds": 0.2805401450023055,
+      "host": {
+        "MemAvailable": 35291475968,
+        "SwapFree": 98304,
+        "memory_some_avg10": 0.09,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.07,
+        "io_full_avg10": 0.51
+      },
+      "rss_bytes": 42926080,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.042806768033187836,
+      "swap_bytes": 0,
+      "pids": [
+        19865,
+        19873
+      ]
+    },
+    {
+      "seconds": 0.5162130889948457,
+      "host": {
+        "MemAvailable": 35286831104,
+        "SwapFree": 110592,
+        "memory_some_avg10": 0.09,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.07,
+        "io_full_avg10": 0.51
+      },
+      "rss_bytes": 59801600,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0354219590080902,
+      "swap_bytes": 0,
+      "pids": [
+        19865,
+        19884,
+        19887
+      ]
+    },
+    {
+      "seconds": 0.7546447219792753,
+      "host": {
+        "MemAvailable": 35297533952,
+        "SwapFree": 118784,
+        "memory_some_avg10": 0.09,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.07,
+        "io_full_avg10": 0.51
+      },
+      "rss_bytes": 76021760,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.038109935994725674,
+      "swap_bytes": 0,
+      "pids": [
+        19890,
+        19892,
+        19865,
+        19884,
+        19887
+      ]
+    },
+    {
+      "seconds": 0.9936543189687654,
+      "host": {
+        "MemAvailable": 35265716224,
+        "SwapFree": 118784,
+        "memory_some_avg10": 0.09,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.07,
+        "io_full_avg10": 0.51
+      },
+      "rss_bytes": 75157504,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0387797899893485,
+      "swap_bytes": 0,
+      "pids": [
+        19915,
+        19884,
+        19887,
+        19892,
+        19865
+      ]
+    },
+    {
+      "seconds": 1.2395155989797786,
+      "host": {
+        "MemAvailable": 35255128064,
+        "SwapFree": 118784,
+        "memory_some_avg10": 0.08,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 1.96,
+        "io_full_avg10": 1.32
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04559914697892964,
+      "swap_bytes": 0,
+      "pids": [
+        19865
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-durable-actual-test.service",
+    "memory.current": 9953280,
+    "memory.peak": 46641152,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

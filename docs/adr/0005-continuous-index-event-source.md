@@ -38,3 +38,9 @@ The operator accepted recommendation 1 on 2026-10-09: preserve600MiB and prepare
 - [Linux fanotify_init restrictions](https://man7.org/linux/man-pages/man2/fanotify_init.2.html): unprivileged groups cannot use mount/filesystem marks.
 - [Linux fanotify_mark semantics](https://man7.org/linux/man-pages/man2/fanotify_mark.2.html): FAN_MARK_EVICTABLE permits inode eviction and loses the mark; FAN_EVENT_ON_CHILD is not recursive; filesystem marks require CAP_SYS_ADMIN.
 - [Owned raw resource receipts](../dev/notes/plan6-evidence/) and [M3 checkpoint](../dev/notes/2026-10-08-plan6-m3-ingestion.md).
+
+## Operator containment clarification —2026-10-09
+
+Operator clarification2026-10-09: bounded metadata reads through a descriptor opened and validated while in the approved root remain acceptable if the directory moves out during that operation. Validate before and after, discard affected output, stop/report a gap, and do not follow the outside destination or probe/export/log outside names. This exception covers formerly admitted objects only; it does not admit initially outside paths/handles, file-content reads, new roots or broader observation. Kernel development is explicitly out of scope. Resource/freshness/soak gates are unchanged.
+
+BRK-CONF-001 is accepted as a bounded transition under this clarified contract; retain the original strict-criterion failure and diagnostic. It is no longer a contract blocker. Real fanotify delivery, privilege lifetime, filtering, resources and installed acceptance remain unqualified. Capability grants, privileged fixtures, filesystem-wide marks and installation still require a concrete separately authorized activation packet.

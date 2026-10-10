@@ -1,0 +1,18 @@
+Captured tool stdout/stderr excerpts from one qualification execution.
+Unit: fsearch-plan6-listener-20261010T0240.service
+Invocation: caa9cdb8259141cdbbb9e8aa4ee8a021
+Commands are recorded in the matching pressure receipt's qualification driver.
+
+broker_listener_pass: creator credentials survive inherited accept; wrong creator/client/path and socketpair refused; no descriptor leak; child reaped
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.003s
+
+OK
++{"status": "assembled_broker_fixture_pass", "controls": ["named_listener_handoff", "inherited_fixture_handoff", "startup", "create", "directory_inventory", "ancestor_rename", "overflow", "restart_after_reap", "root_replacement"], "actual_delivery": "NOT_QUALIFIED", "adversarial_confinement": "NOT_QUALIFIED", "boundary_pids_reaped": [41777, 43185]}
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 10.983s
+CPU time consumed: 8.772s
+Memory peak: 256.0K
+Memory swap peak: 0B

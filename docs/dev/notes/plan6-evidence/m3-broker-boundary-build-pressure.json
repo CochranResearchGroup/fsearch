@@ -1,0 +1,109 @@
+{
+  "command": [
+    "/home/linuxbrew/.linuxbrew/bin/uvx",
+    "--with",
+    "ninja",
+    "--from",
+    "meson",
+    "meson",
+    "compile",
+    "-C",
+    "/tmp/fsearch-generations-build",
+    "fsearch-broker-boundary",
+    "fsearch-broker-setup"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 0.4747381680062972,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 91095040,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.21993909400771372,
+  "initial_host": {
+    "MemAvailable": 60803190784,
+    "SwapFree": 5569208320,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.28,
+    "io_full_avg10": 0.21
+  },
+  "final_host": {
+    "MemAvailable": 60816621568,
+    "SwapFree": 5569208320,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.23,
+    "io_full_avg10": 0.17
+  },
+  "samples": [
+    {
+      "seconds": 0.01849886600393802,
+      "host": {
+        "MemAvailable": 60803190784,
+        "SwapFree": 5569208320,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.28,
+        "io_full_avg10": 0.21
+      },
+      "rss_bytes": 31129600,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.01811197798815556,
+      "swap_bytes": 0,
+      "pids": [
+        86290
+      ]
+    },
+    {
+      "seconds": 0.23843796001165174,
+      "host": {
+        "MemAvailable": 60755640320,
+        "SwapFree": 5569208320,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.23,
+        "io_full_avg10": 0.17
+      },
+      "rss_bytes": 91095040,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.018517888005590066,
+      "swap_bytes": 0,
+      "pids": [
+        86290,
+        86313,
+        86315,
+        86300,
+        86317,
+        86319
+      ]
+    },
+    {
+      "seconds": 0.4575303460005671,
+      "host": {
+        "MemAvailable": 60817920000,
+        "SwapFree": 5569208320,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.23,
+        "io_full_avg10": 0.17
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.018808291002642363,
+      "swap_bytes": 0,
+      "pids": [
+        86290
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-broker-boundary-build.service",
+    "memory.current": 12673024,
+    "memory.peak": 80699392,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

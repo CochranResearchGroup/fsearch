@@ -1,0 +1,78 @@
+{
+  "command": [
+    "python3",
+    "src/tests/test_catalog_checkpoint_worker.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 0.327404898009263,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 13926400,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.23731337202480063,
+  "initial_host": {
+    "MemAvailable": 40193949696,
+    "SwapFree": 1539072000,
+    "memory_some_avg10": 0.77,
+    "memory_full_avg10": 0.72,
+    "io_some_avg10": 6.02,
+    "io_full_avg10": 4.89
+  },
+  "final_host": {
+    "MemAvailable": 40365969408,
+    "SwapFree": 1528074240,
+    "memory_some_avg10": 0.77,
+    "memory_full_avg10": 0.72,
+    "io_some_avg10": 6.02,
+    "io_full_avg10": 4.89
+  },
+  "samples": [
+    {
+      "seconds": 0.0477358209900558,
+      "host": {
+        "MemAvailable": 40192339968,
+        "SwapFree": 1539072000,
+        "memory_some_avg10": 0.77,
+        "memory_full_avg10": 0.72,
+        "io_some_avg10": 6.02,
+        "io_full_avg10": 4.89
+      },
+      "rss_bytes": 13926400,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04672574996948242,
+      "swap_bytes": 0,
+      "pids": [
+        56833
+      ]
+    },
+    {
+      "seconds": 0.28504919301485643,
+      "host": {
+        "MemAvailable": 40238899200,
+        "SwapFree": 1528074240,
+        "memory_some_avg10": 0.77,
+        "memory_full_avg10": 0.72,
+        "io_some_avg10": 6.02,
+        "io_full_avg10": 4.89
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.03710659098578617,
+      "swap_bytes": 0,
+      "pids": [
+        56833
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-background-test.service",
+    "memory.current": 9535488,
+    "memory.peak": 30117888,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

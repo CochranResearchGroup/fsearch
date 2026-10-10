@@ -17,6 +17,7 @@ import subprocess
 import sys
 import time
 import uuid
+from fsearch_catalog_journal import CatalogJournal, JournalError
 
 MAX_FRAME = 65536
 MAX_RESPONSE = 1048576
@@ -232,7 +233,16 @@ def worker_limits():
         resource.setrlimit(key, (limit, limit))
 
 class Supervisor:
-    def __init__(self, directory, database):
+    def __init__(self, directory, database, catalog_journal=False):
+        self.catalog_journal_enabled = catalog_journal
+        self.journal = self.replay = self.replay_record = None
+        self.journal_failure = None
+        self.checkpoint_action = None
+        self.internal_checkpoint = False
+        self.checkpoint_poll_after = 0
+        self.worker_checkpoint_sequence = None
+        self.recovery_gap = None
+        self.recovered_sequence = 0
         self.incremental_coverage = None
         self.coverage_deadline = 0
         self.startup_timeout = worker_startup_timeout()
@@ -251,6 +261,7 @@ class Supervisor:
         self.stranded = None
         self.quarantined = False
         self.candidate = None
+        self.pending_replacement = None
         self.candidate_record = None
         self.candidate_stranded = None
         self.retiring_record = None
@@ -276,10 +287,146 @@ class Supervisor:
         self.selector.register(self.listener, selectors.EVENT_READ, 'listener')
         for sig in (signal.SIGINT, signal.SIGTERM): signal.signal(sig, lambda *_: setattr(self, 'stopping', True))
         signal.signal(signal.SIGPIPE, signal.SIG_IGN)
+    def replay_next(self):
+        try:
+            record = next(self.replay)
+        except StopIteration:
+            self.replay = self.replay_record = None
+            self.worker_ready = True
+            self.save('ready', 'catalog_replayed')
+            return
+        request = validate_request(dict(record['request']))
+        body = base64.b64decode(request['name_b64'])
+        sequence = request['sequence']
+        command = 0x101 if 'entry_id' in request else 0x100
+        words = (command, request['entry_kind'], request['parent_id'], request.get('entry_id', 0), sequence >> 32, sequence & 0xffffffff, len(body))
+        self.replay_record = record
+        self.worker_write = struct.pack('!7I', *words) + body
+        self.selector.register(self.worker.stdin, selectors.EVENT_WRITE, 'worker_write')
+
+    def checkpoint_command(self, phase, name, sequence, client=None):
+        self.checkpoint_action = {'phase': phase, 'name': name, 'sequence': sequence, 'client': client}
+        self.send_checkpoint(0x106)
+
+    def send_checkpoint(self, command):
+        action = self.checkpoint_action
+        body = os.fsencode(f'/proc/{os.getpid()}/fd/{self.directory.fd}/{action["name"]}') if command in (0x105, 0x106) else b''
+        self.internal_checkpoint = True
+        self.worker_write = struct.pack('!7I', command, 0, 0, 0, 0, 0, len(body)) + body
+        self.selector.register(self.worker.stdin, selectors.EVENT_WRITE, 'worker_write')
+
+    def finish_checkpoint(self, payload):
+        action = self.checkpoint_action
+        phase = action['phase']
+        self.internal_checkpoint = False
+        if payload.get('snapshot_id') != self.accepted_identity or payload.get('status') == 'error':
+            self.journal_failure = 'catalog_checkpoint_invalid' if phase == 'recover' else 'catalog_journal_write_failed'
+            self.checkpoint_action = None
+            self.abort_worker('catalog_checkpoint_failed')
+            return
+        if phase == 'recover':
+            if payload.get('status') != 'catalog_restored' or payload.get('sequence') != action['sequence']:
+                self.journal_failure = 'catalog_checkpoint_invalid'
+                self.abort_worker('catalog_checkpoint_invalid')
+                return
+            self.checkpoint_action = None
+            self.recovered_sequence = action['sequence']
+            self.recover_catalog(restored=True)
+            return
+        if phase == 'compact_start':
+            if payload.get('status') != 'catalog_compacting':
+                self.abort_worker('worker_protocol_failed'); return
+            self.active = None
+            action['phase'] = 'compact'
+            if action['client'] is not None: self.reply(action['client'], payload)
+            action['client'] = None
+        elif phase == 'compact':
+            if payload.get('status') != 'catalog_status':
+                self.abort_worker('worker_protocol_failed'); return
+            if not payload.get('building'):
+                if payload.get('deferred_reason'):
+                    self.journal_failure = 'catalog_journal_write_failed'
+                    self.abort_worker('catalog_checkpoint_failed'); return
+                try:
+                    action['name'] = self.journal.prepare_checkpoint()
+                except (JournalError, BoundaryError, OSError):
+                    self.journal_failure = 'catalog_journal_write_failed'
+                    self.abort_worker('catalog_checkpoint_failed'); return
+                action['sequence'] = payload['sequence']
+                action['phase'] = 'write_start'
+                self.send_checkpoint(0x105)
+                return
+        elif phase == 'write_start':
+            if payload.get('status') != 'catalog_checkpointing' or payload.get('checkpoint_sequence') != action['sequence']:
+                self.abort_worker('worker_protocol_failed'); return
+            action['phase'] = 'poll'
+        elif phase == 'poll':
+            if payload.get('checkpoint_sequence') != action['sequence'] or payload.get('status') not in ('catalog_checkpointing', 'catalog_checkpointed'):
+                self.abort_worker('worker_protocol_failed'); return
+            if payload['status'] == 'catalog_checkpointed':
+                try:
+                    self.journal = self.journal.rollover(action['name'], action['sequence'])
+                    self.recovered_sequence = self.journal.count
+                except (JournalError, BoundaryError, OSError, ValueError):
+                    # Reopen the selected pair after ambiguous manifest publication;
+                    # never retry a rename merely because the acknowledgement failed.
+                    self.journal_failure = 'catalog_journal_write_failed'
+                    self.abort_worker('catalog_checkpoint_publication_failed'); return
+                self.checkpoint_action = None
+                if self.pending_replacement is not None:
+                    client = self.pending_replacement; self.pending_replacement = None
+                    self.start_candidate(client)
+                    return
+                if self.journal.checkpoint_required():
+                    self.checkpoint_action = {'phase': 'compact_start', 'name': None, 'sequence': None, 'client': None}
+                    self.send_checkpoint(0x102)
+                return
+        else:
+            self.abort_worker('worker_protocol_failed'); return
+        self.checkpoint_poll_after = time.monotonic() + .05
+
+    def recover_catalog(self, restored=False):
+        if not restored:
+            self.recovered_sequence = 0
+            if self.journal_failure != 'catalog_checkpoint_invalid':
+                try:
+                    selected = CatalogJournal.checkpoint_selection(self.directory, self.accepted_identity)
+                    if selected is not None:
+                        name, sequence = selected
+                        self.checkpoint_command('recover', name, sequence)
+                        return
+                except (JournalError, BoundaryError, OSError, ValueError):
+                    self.journal_failure = 'catalog_checkpoint_invalid'
+
+        self.recovery_gap = 'catalog_recovered_source_gap'
+        if self.journal_failure and self.journal_failure != 'catalog_journal_write_failed':
+            self.recovery_gap = self.journal_failure
+            self.worker_ready = True
+            self.save('ready', self.recovery_gap)
+            return
+        try:
+            self.journal = CatalogJournal(self.directory, self.accepted_identity)
+            self.journal_failure = None
+            if self.journal.tail_uncommitted: self.recovery_gap = 'catalog_journal_tail_uncommitted'
+            # Validate protocol records before exposing any partially replayed view.
+            for record in self.journal.records():
+                request = validate_request(dict(record['request']))
+                if request.get('op') != 'catalog_apply':
+                    raise JournalError('journal_invalid')
+            self.replay = self.journal.records()
+            self.replay_next()
+        except (JournalError, BoundaryError, OSError, ValueError):
+            if self.journal: self.journal.close()
+            self.journal = self.replay = self.replay_record = None
+            self.journal_failure = self.recovery_gap = 'catalog_journal_invalid'
+            self.worker_ready = True
+            self.save('ready', self.recovery_gap)
+
     def save(self, phase, reason=None):
         if phase=='stopped' and (self.candidate_record or self.retiring_record):self.quarantined=True
         self.directory.save({'phase': 'quarantined' if self.quarantined else phase, 'worker': self.record, 'candidate_worker': self.candidate_record, 'retiring_worker': self.retiring_record, 'supervisor': identity(os.getpid()), 'database': os.path.abspath(self.database), 'accepted_database': os.path.abspath(self.worker_database), 'snapshot_id': self.accepted_identity, 'reason': reason})
     def close_client(self, client):
+        if self.pending_replacement is client: self.pending_replacement = None
         sock = client['socket']
         if self.candidate and self.candidate['client'] is client:self.abort_candidate('cancelled', reply=False)
         if client.get('shutdown'): self.stopping = True
@@ -301,6 +448,19 @@ class Supervisor:
             if coverage['state'] in ('watching','pending') and time.monotonic()>self.coverage_deadline:
                 coverage.update(state='deferred',reason='watcher_lease_expired')
             payload['incremental_coverage']=coverage
+        if self.catalog_journal_enabled:
+            if payload.get('status') == 'catalog_status' and self.checkpoint_action is not None:
+                payload['building'] = True
+            payload['durable'] = self.journal is not None and self.journal_failure is None and payload.get('status') in ('catalog_applied', 'replaced', 'catalog_checkpointed', 'catalog_status', 'catalog_located', 'catalog_missing', 'ok', 'truncated')
+            if request.get('op') in (None, 'query') and self.recovery_gap:
+                roots = payload.get('snapshot', {}).get('roots', [])
+                if roots:
+                    root = roots[0]
+                    encoded_root = root.get('path_bytes_base64') or base64.b64encode(os.fsencode(root['path'])).decode()
+                    payload['incremental_coverage'] = {'state': 'deferred', 'root_b64': encoded_root,
+                        'event_sequence': 0, 'catalog_sequence': self.recovered_sequence,
+                        'last_reconciled_unix_ms': None, 'oldest_unapplied_unix_ms': None,
+                        'reason': self.recovery_gap}
         body = encoded(payload)
         if len(body) > request.get('max_bytes', MAX_RESPONSE): body = encoded(error('response_size_limit', request.get('request_id')))
         client['output'] = body; client['deadline'] = time.monotonic() + 2
@@ -342,7 +502,18 @@ class Supervisor:
         self.queue.append(client)
     def spawn(self):
         executable = str(Path(__file__).resolve().with_name('fsearch-worker'))
-        self.worker = subprocess.Popen([executable, self.worker_database, str(os.getpid())], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, close_fds=True, preexec_fn=worker_limits)
+        command = [executable, self.worker_database, str(os.getpid())]
+        self.worker_checkpoint_sequence = None
+        if self.catalog_journal_enabled and self.accepted_identity is not None and self.journal_failure != 'catalog_checkpoint_invalid':
+            try:
+                selected = CatalogJournal.checkpoint_selection(self.directory, self.accepted_identity)
+                if selected is not None:
+                    name, sequence = selected
+                    command = [executable, f'/proc/{os.getpid()}/fd/{self.directory.fd}/{name}', str(os.getpid()), '--checkpoint', self.accepted_identity]
+                    self.worker_checkpoint_sequence = sequence
+            except (JournalError, BoundaryError, OSError, ValueError):
+                self.journal_failure = 'catalog_checkpoint_invalid'
+        self.worker = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, close_fds=True, preexec_fn=worker_limits)
         try:
             self.record = identity(self.worker.pid)
             self.save('starting')  # Durable identity before the worker may open the snapshot.
@@ -357,6 +528,9 @@ class Supervisor:
     def abort_worker(self, code):
         if self.incremental_coverage is not None:self.incremental_coverage.update(state='deferred',reason='worker_stopped')
         if self.candidate:self.abort_candidate(code)
+        if self.pending_replacement is not None:
+            client = self.pending_replacement; self.pending_replacement = None
+            self.reply(client, error(code))
         if self.worker is None: return
         worker = self.worker
         for stream in (worker.stdin, worker.stdout):
@@ -366,7 +540,11 @@ class Supervisor:
         try: worker.wait(timeout=0.1); reaped = True
         except subprocess.TimeoutExpired: reaped = False
         worker.stdin.close(); worker.stdout.close()
+        self.checkpoint_action = None
+        self.internal_checkpoint = False
         self.worker = None; self.worker_ready = False; self.worker_write = b''; self.worker_read.clear()
+        if self.journal: self.journal.close()
+        self.journal = self.replay = self.replay_record = None
         self.stranded = None if reaped else worker
         self.quarantined = self.quarantined or not reaped
         if reaped: self.record = None
@@ -387,23 +565,66 @@ class Supervisor:
         try: payload = json.loads(self.worker_read[4:])
         except (ValueError, UnicodeError): self.abort_worker('worker_protocol_failed'); return
         self.worker_read.clear()
+        if self.checkpoint_action is not None and (self.internal_checkpoint or self.checkpoint_action['phase'] == 'compact_start'):
+            self.finish_checkpoint(payload)
+            return
+        if self.replay_record is not None:
+            record = self.replay_record
+            if payload.get('status') != 'catalog_applied' or payload.get('sequence') != record['request']['sequence'] or payload.get('entry_id') != record['entry_id']:
+                self.journal_failure = 'catalog_replay_failed'
+                self.abort_worker('catalog_replay_failed'); return
+            self.recovered_sequence = payload['sequence']
+            self.replay_record = None
+            self.replay_next()
+            return
         if not self.worker_ready:
-            if payload.get('status') != 'ready': self.abort_worker(payload.get('error', {}).get('code', 'worker_failed')); return
+            if payload.get('status') != 'ready':
+                if self.worker_checkpoint_sequence is not None: self.journal_failure = 'catalog_checkpoint_invalid'
+                self.abort_worker(payload.get('error', {}).get('code', 'worker_failed')); return
             self.accepted_identity = payload.get('snapshot_id')
-            self.worker_ready = True; self.save('ready')
+            if self.catalog_journal_enabled:
+                if self.worker_checkpoint_sequence is not None:
+                    if payload.get('checkpoint_sequence') != self.worker_checkpoint_sequence:
+                        self.journal_failure = 'catalog_checkpoint_invalid'
+                        self.abort_worker('catalog_checkpoint_invalid'); return
+                    self.recovered_sequence = self.worker_checkpoint_sequence
+                    self.recover_catalog(restored=True)
+                else:
+                    self.recover_catalog()
+            else:
+                self.worker_ready = True; self.save('ready')
         elif self.active is not None:
             if time.monotonic() >= self.active['deadline']: self.abort_worker('deadline'); return
-            client = self.active; self.active = None; self.reply(client, payload)
+            client = self.active
+            if self.journal is not None and client['request'].get('op') == 'catalog_apply' and payload.get('status') == 'catalog_applied':
+                try:
+                    self.journal.append(client['request'], payload['entry_id'])
+                    self.recovered_sequence = payload['sequence']
+                except (JournalError, OSError):
+                    self.journal_failure = 'catalog_journal_write_failed'
+                    self.abort_worker('catalog_journal_write_failed'); return
+            self.active = None; self.reply(client, payload)
         else: self.abort_worker('worker_protocol_failed')
     def start_candidate(self, client):
         if self.quarantined:self.reply(client,error('quarantined'));return
         if self.candidate or self.retiring_record:self.reply(client,error('replacement_busy'));return
         if not self.worker_ready:self.reply(client,error('service_starting'));return
+        if self.catalog_journal_enabled:
+            if self.journal is None or self.journal_failure or self.journal.tail_uncommitted:
+                self.reply(client, error('catalog_journal_invalid')); return
+            if self.pending_replacement is not None:
+                self.reply(client, error('replacement_busy')); return
+            if self.checkpoint_action is not None or self.journal.checkpoint_name is None:
+                self.pending_replacement = client
+                client['deadline'] = time.monotonic() + client['request']['timeout_ms']/1000
+                if self.checkpoint_action is None:
+                    self.checkpoint_action = {'phase': 'compact_wait', 'name': None, 'sequence': None, 'client': None}
+                return
         path=os.fsdecode(base64.b64decode(client['request']['candidate_database_b64']))
         executable=str(Path(__file__).resolve().with_name('fsearch-worker'))
         try:
             process=subprocess.Popen([executable,path,str(os.getpid())],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,close_fds=True,preexec_fn=worker_limits)
-            self.candidate={'process':process,'client':client,'path':path,'input':bytearray(),'ready':False,'deadline':time.monotonic()+self.startup_timeout}
+            self.candidate={'process':process,'client':client,'path':path,'input':bytearray(),'ready':False,'deadline':time.monotonic()+self.startup_timeout,'phase':'initial','next_poll':0}
             self.candidate_record=identity(process.pid)
             self.save('ready','candidate_loading')
             process.stdin.write(b'G');process.stdin.flush()
@@ -427,8 +648,20 @@ class Supervisor:
         else:self.quarantined=True;self.candidate_stranded=process
         self.save('ready' if self.worker_ready else 'stopped',code if reaped else 'cleanup_unproved')
         if reply:self.reply(candidate['client'],error(code if reaped else 'cleanup_unproved'))
+    def candidate_checkpoint_command(self, command, phase):
+        candidate = self.candidate
+        body = os.fsencode(f'/proc/{os.getpid()}/fd/{self.directory.fd}/{candidate["checkpoint_name"]}') if command == 0x105 else b''
+        candidate['process'].stdin.write(struct.pack('!7I', command, 0, 0, 0, 0, 0, len(body)) + body)
+        candidate['process'].stdin.flush()
+        candidate['phase'] = phase
+
+    def poll_candidate_checkpoint(self):
+        if self.candidate and self.candidate['phase'] == 'checkpoint_idle' and time.monotonic() >= self.candidate['next_poll']:
+            self.candidate_checkpoint_command(0x107, 'checkpoint_poll')
+
     def read_candidate(self):
-        candidate=self.candidate;data=os.read(candidate['process'].stdout.fileno(),4097)
+        candidate=self.candidate
+        data=os.read(candidate['process'].stdout.fileno(),4096)
         if not data:self.abort_candidate('candidate_failed');return
         candidate['input'].extend(data);buffer=candidate['input']
         if len(buffer)<4:return
@@ -437,16 +670,44 @@ class Supervisor:
         if len(buffer)<size+4:return
         try:payload=json.loads(buffer[4:])
         except (ValueError,UnicodeError):self.abort_candidate('worker_protocol_failed');return
+        buffer.clear()
         if not isinstance(payload,dict):self.abort_candidate('worker_protocol_failed');return
-        if payload.get('status')!='ready':
+        if payload.get('status')=='error':
             failure=payload.get('error')
             self.abort_candidate(failure.get('code','candidate_failed') if isinstance(failure,dict) else 'candidate_failed');return
-        if not isinstance(payload.get('snapshot_id'),str) or len(payload['snapshot_id'])>256:self.abort_candidate('worker_protocol_failed');return
-        candidate['ready']=True;candidate['identity']=payload['snapshot_id']
+        phase=candidate['phase']
+        if phase=='initial':
+            if payload.get('status')!='ready' or not isinstance(payload.get('snapshot_id'),str) or len(payload['snapshot_id'])>256:
+                self.abort_candidate('worker_protocol_failed');return
+            candidate['identity']=payload['snapshot_id']
+            if self.catalog_journal_enabled:
+                if candidate['identity']==self.accepted_identity:
+                    self.abort_candidate('snapshot_conflict');return
+                try:candidate['checkpoint_name']=self.journal.prepare_checkpoint()
+                except (JournalError,BoundaryError,OSError):self.abort_candidate('catalog_checkpoint_failed');return
+                self.candidate_checkpoint_command(0x105,'checkpoint_start');return
+        else:
+            if payload.get('snapshot_id')!=candidate['identity'] or payload.get('checkpoint_sequence')!=0 or payload.get('sequence')!=0:
+                self.abort_candidate('worker_protocol_failed');return
+            if payload.get('status')=='catalog_checkpointing':
+                candidate['phase']='checkpoint_idle';candidate['next_poll']=time.monotonic()+.05;return
+            if phase!='checkpoint_poll' or payload.get('status')!='catalog_checkpointed':
+                self.abort_candidate('worker_protocol_failed');return
+        candidate['ready']=True
         self.selector.unregister(candidate['process'].stdout)
     def promote_candidate(self):
         candidate=self.candidate
-        if not candidate or not candidate['ready'] or self.active is not None:return
+        if not candidate or not candidate['ready'] or self.active is not None or self.internal_checkpoint or self.checkpoint_action is not None:return
+        old_journal = self.journal
+        if self.catalog_journal_enabled:
+            try:
+                next_journal = self.journal.prepare_replacement(candidate['identity'], candidate['checkpoint_name'])
+            except (JournalError, BoundaryError, OSError, ValueError):
+                self.abort_candidate('catalog_replacement_publication_failed'); return
+            self.journal = next_journal
+            self.journal_failure = None
+            self.recovered_sequence = 0
+            self.recovery_gap = 'snapshot_replaced'
         old=self.worker;old_record=self.record
         for stream in (old.stdin,old.stdout):
             try:self.selector.unregister(stream)
@@ -458,21 +719,35 @@ class Supervisor:
         self.candidate=None;self.candidate_record=None;self.retiring_record=old_record
         os.set_blocking(self.worker.stdin.fileno(),False)
         self.selector.register(self.worker.stdout,selectors.EVENT_READ,'worker')
+        self.retiring_stranded = old
         self.save('ready','retiring_previous')
+        if old_journal is not None: old_journal.close()
         old.kill()
         try:old.wait(timeout=.1);reaped=True
         except subprocess.TimeoutExpired:reaped=False
         old.stdin.close();old.stdout.close()
-        if reaped:self.retiring_record=None
+        if reaped:self.retiring_record=None;self.retiring_stranded=None
         else:self.quarantined=True;self.retiring_stranded=old
         self.save('ready' if reaped else 'quarantined','replaced' if reaped else 'cleanup_unproved')
         self.reply(candidate['client'],{'schema_version':1,'status':'replaced','complete':False,'results':[],'snapshot_id':self.accepted_identity} if reaped else error('cleanup_unproved'))
     def schedule(self):
-        if self.quarantined or self.active or not self.queue: return
+        if self.quarantined or self.active or self.internal_checkpoint: return
+        if self.checkpoint_action is not None and self.worker_ready and time.monotonic() >= self.checkpoint_poll_after:
+            phase = self.checkpoint_action['phase']
+            if phase == 'compact_wait':
+                self.checkpoint_action['phase'] = 'compact_start'
+                self.send_checkpoint(0x102)
+                return
+            if phase in ('compact', 'poll'):
+                self.send_checkpoint(0x103 if phase == 'compact' else 0x107)
+                return
+        if not self.queue: return
         if self.worker is None:
             if time.monotonic() >= self.next_start: self.spawn()
             return
         if not self.worker_ready: return
+        if self.checkpoint_action is not None and self.journal is not None and self.queue[0]['request'].get('op') == 'catalog_apply' and self.journal.checkpoint_required():
+            return
         self.active = self.queue.popleft(); request = self.active['request']
         if (request.get('op') or '').startswith('catalog_'):
             expected=request.get('expected_snapshot_id')
@@ -481,10 +756,34 @@ class Supervisor:
             op=request['op'];body=b''
             if op=='catalog_coverage':
                 self.incremental_coverage=dict(request['coverage']);self.coverage_deadline=time.monotonic()+2
+                if self.catalog_journal_enabled and self.journal is not None and self.journal_failure is None and not self.journal.tail_uncommitted and request['coverage']['state']=='watching' and request['coverage']['catalog_sequence']==self.journal.count:
+                    self.recovery_gap=None
                 client=self.active;self.active=None
                 self.reply(client,{'schema_version':1,'status':'catalog_coverage','complete':False,'results':[],'snapshot_id':self.accepted_identity})
                 return
+            if op=='catalog_compact' and self.catalog_journal_enabled:
+                if self.candidate is not None or self.pending_replacement is not None:
+                    client = self.active; self.active = None; self.reply(client, error('replacement_busy')); return
+                if self.checkpoint_action is not None:
+                    client = self.active; self.active = None
+                    self.reply(client, {'schema_version': 1, 'status': 'catalog_compacting', 'complete': False, 'results': [], 'building': True, 'snapshot_id': self.accepted_identity})
+                    return
+                if self.journal is None or self.journal_failure or self.journal.tail_uncommitted:
+                    client = self.active; self.active = None
+                    self.reply(client, error('checkpoint_busy' if self.checkpoint_action else 'catalog_journal_invalid'))
+                    return
+                self.checkpoint_action = {'phase': 'compact_start', 'name': None, 'sequence': None, 'client': self.active}
+                self.worker_write = struct.pack('!7I', 0x102, 0, 0, 0, 0, 0, 0)
+                self.selector.register(self.worker.stdin, selectors.EVENT_WRITE, 'worker_write')
+                return
             if op=='catalog_apply':
+                if self.catalog_journal_enabled:
+                    try:
+                        if self.journal is None: raise JournalError('catalog_journal_invalid')
+                        self.journal.reserve(request)
+                    except (JournalError, OSError) as failure:
+                        self.recovery_gap = str(failure) if isinstance(failure, JournalError) else 'catalog_journal_write_failed'
+                        client = self.active; self.active = None; self.reply(client, error(self.recovery_gap)); return
                 body=base64.b64decode(request['name_b64']);sequence=request['sequence']
                 command=0x101 if 'entry_id' in request else 0x100
                 words=(command,request['entry_kind'],request['parent_id'],request.get('entry_id',0),sequence>>32,sequence&0xffffffff,len(body))
@@ -537,6 +836,7 @@ class Supervisor:
                 if self.candidate and now>=self.candidate['deadline'] and not self.candidate['ready']:self.abort_candidate('startup_deadline')
                 for stranded in (self.candidate_stranded,self.retiring_stranded):
                     if stranded is not None:stranded.poll()
+                self.poll_candidate_checkpoint()
                 self.promote_candidate()
                 self.schedule()
         finally:
@@ -599,6 +899,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('command', choices=('serve', 'query', 'stop', 'recover', 'replace'))
     parser.add_argument('--socket', required=True); parser.add_argument('--database')
+    parser.add_argument('--catalog-journal', action='store_true')
     parser.add_argument('--candidate-database'); parser.add_argument('--query'); parser.add_argument('--extension'); parser.add_argument('--kind', default='all')
     parser.add_argument('--path', action='store_true'); parser.add_argument('--match-case', action='store_true')
     parser.add_argument('--limit', type=int, default=100); parser.add_argument('--max-candidates', type=int, default=500000)
@@ -616,7 +917,7 @@ def main():
         current = 64*1024*1024 if soft == resource.RLIM_INFINITY else min(soft, 64*1024*1024)
         resource.setrlimit(resource.RLIMIT_AS, (min(current, maximum), maximum))
         resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
-        Supervisor(directory, args.database).run(); return 0
+        Supervisor(directory, args.database, args.catalog_journal).run(); return 0
     except BoundaryError as exc: sys.stdout.buffer.write(encoded(error(str(exc)))); return 1
     except (OSError, ValueError, UnicodeError): sys.stdout.buffer.write(encoded(error('service_unavailable'))); return 1
     finally:

@@ -1,0 +1,98 @@
+{
+  "command": [
+    "python3",
+    "src/tests/test_broker_catalog.py",
+    "/tmp/fsearch-plan6-m3-runtime",
+    "/tmp/file-searcher-incremental-coverage"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 0.48813311400590464,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 42598400,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.22207960599916987,
+  "initial_host": {
+    "MemAvailable": 12323692544,
+    "SwapFree": 5899456512,
+    "memory_some_avg10": 0.36,
+    "memory_full_avg10": 0.35,
+    "io_some_avg10": 0.91,
+    "io_full_avg10": 0.87
+  },
+  "final_host": {
+    "MemAvailable": 12215066624,
+    "SwapFree": 5863366656,
+    "memory_some_avg10": 0.36,
+    "memory_full_avg10": 0.35,
+    "io_some_avg10": 0.91,
+    "io_full_avg10": 0.87
+  },
+  "samples": [
+    {
+      "seconds": 0.02489148298627697,
+      "host": {
+        "MemAvailable": 12322947072,
+        "SwapFree": 5899456512,
+        "memory_some_avg10": 0.36,
+        "memory_full_avg10": 0.35,
+        "io_some_avg10": 0.91,
+        "io_full_avg10": 0.87
+      },
+      "rss_bytes": 13434880,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.024302793986862525,
+      "swap_bytes": 0,
+      "pids": [
+        98656
+      ]
+    },
+    {
+      "seconds": 0.24697108898544684,
+      "host": {
+        "MemAvailable": 12249608192,
+        "SwapFree": 5887315968,
+        "memory_some_avg10": 0.36,
+        "memory_full_avg10": 0.35,
+        "io_some_avg10": 0.91,
+        "io_full_avg10": 0.87
+      },
+      "rss_bytes": 42598400,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.02191700498224236,
+      "swap_bytes": 0,
+      "pids": [
+        98656,
+        98665
+      ]
+    },
+    {
+      "seconds": 0.4675903029856272,
+      "host": {
+        "MemAvailable": 12218040320,
+        "SwapFree": 5867880448,
+        "memory_some_avg10": 0.36,
+        "memory_full_avg10": 0.35,
+        "io_some_avg10": 0.91,
+        "io_full_avg10": 0.87
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.020470949995797127,
+      "swap_bytes": 0,
+      "pids": [
+        98656
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-broker-wiring.service",
+    "memory.current": 15912960,
+    "memory.peak": 38227968,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

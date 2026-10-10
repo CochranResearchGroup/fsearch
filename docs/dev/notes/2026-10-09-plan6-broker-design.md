@@ -72,3 +72,9 @@ Before any activation, provide exact executable hashes, launcher privilege mecha
 - [fanotify(7)](https://man7.org/linux/man-pages/man7/fanotify.7.html): record format, rename information, coalescing and overflow behavior.
 
 This is a proposed design. Privilege-transfer, confinement, kernel compatibility and combined resource claims remain unproved.
+
+## Current contract amendment —2026-10-09
+
+Operator clarification2026-10-09: bounded metadata reads through a descriptor opened and validated while in the approved root remain acceptable if the directory moves out during that operation. Validate before and after, discard affected output, stop/report a gap, and do not follow the outside destination or probe/export/log outside names. This exception covers formerly admitted objects only; it does not admit initially outside paths/handles, file-content reads, new roots or broader observation. Kernel development is explicitly out of scope. Resource/freshness/soak gates are unchanged.
+
+The original strict read-time wording above is historical and superseded only for this transition. BRK-CONF-001 is not an activation blocker under the clarified boundary. No custom-kernel work is authorized or needed for this accepted contract. Remaining privileged-observation and installation gates remain in effect.

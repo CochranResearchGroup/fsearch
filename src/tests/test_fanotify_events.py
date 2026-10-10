@@ -55,6 +55,14 @@ class Fixtures(unittest.TestCase):
         self.assertEqual(len(calls), 2)
         self.assertEqual(len(result), 1)
 
+    def test_root_move_is_gap_even_when_both_parents_are_outside(self):
+        broker = f.ExportFilter(1)
+        broker.root_handle = f.Handle(b'12345678', 1, b'root')
+        data = event(f.RENAME | f.ONDIR, [info(10, b'outside-old'), info(12, b'outside-new'), info(1, b'root')])
+        with self.assertRaisesRegex(f.Gap, 'root_identity_changed'):
+            broker.consume(data, 1, lambda *args: None)
+        self.assertEqual(broker.sequence, 0)
+
     def test_malformed_batch_never_exports_valid_prefix(self):
         original = event()
         for cut in range(1, len(original)):
@@ -65,8 +73,35 @@ class Fixtures(unittest.TestCase):
             with self.assertRaises(f.Gap):
                 broker.consume(original, 1, self.admit)
 
+    def test_coalesced_outside_namespace_is_discarded(self):
+        data = event(f.CREATE | f.DELETE, [info(2, b'outside'), info(1)])
+        broker = f.ExportFilter(1)
+        self.assertEqual(broker.consume(data, 1, self.admit), ())
+        self.assertEqual(broker.sequence, 0)
+        self.assertIsNone(broker.reason)
+
+    def test_coalesced_admitted_namespace_remains_gap(self):
+        broker = f.ExportFilter(1)
+        with self.assertRaisesRegex(f.Gap, '^ambiguous_operation$'):
+            broker.consume(event(f.CREATE | f.DELETE), 1, self.admit)
+        self.assertEqual(broker.sequence, 0)
+        with self.assertRaisesRegex(f.Gap, '^ambiguous_operation$'):
+            broker.consume(event(), 1, self.admit)
+
+    def test_coalesced_bootstrap_records_still_detect_dirty_parent(self):
+        inside = f.Handle(b'12345678', 1, b'inside')
+        for parent, dirty in ((b'outside', False), (b'inside', True)):
+            sketch = f.BootstrapChanges()
+            sketch.observe(f.decode(event(f.CREATE | f.DELETE, [info(2, parent), info(1)])))
+            if dirty:
+                with self.assertRaisesRegex(f.Gap, 'bootstrap_dirty'):
+                    sketch.qualify([inside], lambda handle: 7 if handle == inside else None, lambda: None)
+            else:
+                sketch.qualify([inside], lambda handle: 7 if handle == inside else None, lambda: None)
+                self.assertTrue(sketch.qualified)
+
     def test_invalid_abi(self):
-        cases = [event(f.OVERFLOW, []), event(0x10000), event(f.CREATE | f.DELETE),
+        cases = [event(f.OVERFLOW, []), event(0x10000),
                  event(records=[info(2)]), event(records=[info(2), info(2), info(1)]),
                  event(records=[info(99), info(1)]), event(records=[info(2, name=b'../escape'), info(1)]),
                  event(records=[info(2, name=b''), info(1)]), event(records=[info(2, name=b'.'), info(1)]),
@@ -95,6 +130,8 @@ class Fixtures(unittest.TestCase):
                 f.ExportFilter(1).progress(now)
         with self.assertRaisesRegex(f.Gap, 'admission_invalid'):
             f.ExportFilter(1).consume(event(), 1, lambda *args: True)
+        output = f.ExportFilter(1).consume(event(), 1, lambda *args: 0)
+        self.assertEqual(output[0].sides, ((2, 0, b'name'),))
 
     def test_sequence_generation_and_lease(self):
         broker = f.ExportFilter(5)
@@ -192,6 +229,63 @@ class BootstrapFixtures(unittest.TestCase):
         self.assertEqual(session.state, 'deferred')
         session = self.ready()
         with self.assertRaisesRegex(f.Gap, 'source_progress_timeout'): session.check_lease(13)
+        self.assertEqual(session.state, 'deferred')
+
+
+class BootstrapSketchFixtures(unittest.TestCase):
+    inside = f.Handle(b'12345678', 1, b'inside')
+
+    def session(self, **limits):
+        session = f.BootstrapSession(1, bootstrap_changes=f.BootstrapChanges(**limits))
+        session.progress(10)
+        return session
+
+    def test_outside_churn_does_not_publish_or_reject_clean_baseline(self):
+        session = self.session()
+        outside = event(records=[info(2, b'outside', b'outside-secret'), info(1)])
+        self.assertEqual(session.receive(outside, 1, 1, lambda *args: self.fail('no early lookup')), ())
+        self.assertEqual((session.state, session.pending), ('reconciling', []))
+        session.qualify_baseline([self.inside], lambda handle: 0 if handle == self.inside else None, lambda: None)
+        session.finish_baseline(1)
+        self.assertEqual(session.state, 'reconciling')
+        session.drained(1, 1, 10)
+        self.assertEqual(session.state, 'watching')
+        self.assertIsNone(session.bootstrap_changes)
+
+    def test_dirty_parent_detected_after_its_identity_becomes_known(self):
+        session = self.session()
+        session.receive(event(), 1, 1, lambda *args: self.fail('no early lookup'))
+        with self.assertRaisesRegex(f.Gap, 'bootstrap_dirty'):
+            session.qualify_baseline([self.inside], lambda handle: 0, lambda: None)
+        self.assertEqual(session.state, 'deferred')
+        self.assertIsNone(session.bootstrap_changes)
+
+    def test_event_during_validation_cannot_slip_past_scanned_parent(self):
+        session = self.session()
+        def incoming():
+            session.receive(event(), 1, 1, lambda *args: self.fail('no metadata lookup'))
+        with self.assertRaisesRegex(f.Gap, 'bootstrap_dirty'):
+            session.qualify_baseline([self.inside], lambda handle: 0 if handle == self.inside else None, incoming)
+        self.assertEqual(session.state, 'deferred')
+
+    def test_root_move_detected_even_when_event_parents_are_outside(self):
+        session = self.session()
+        data = event(f.RENAME | f.ONDIR, [info(10, b'outside-a'), info(12, b'outside-b'), info(1, b'inside')])
+        session.receive(data, 1, 1, lambda *args: None)
+        with self.assertRaisesRegex(f.Gap, 'bootstrap_dirty'):
+            session.qualify_baseline([self.inside], lambda handle: 0, lambda: None)
+
+    def test_unqualified_collision_and_observation_budget_never_certify_fresh(self):
+        session = self.session()
+        with self.assertRaisesRegex(f.Gap, 'bootstrap_not_qualified'):
+            session.finish_baseline(1)
+        session = self.session(bytes_limit=1)
+        session.bootstrap_changes.bits[:] = b'\xff'
+        with self.assertRaisesRegex(f.Gap, 'bootstrap_dirty'):
+            session.qualify_baseline([self.inside], lambda handle: None, lambda: None)
+        session = self.session(max_observations=1)
+        with self.assertRaisesRegex(f.Gap, 'bootstrap_change_budget'):
+            session.receive(event() * 2, 1, 1, lambda *args: None)
         self.assertEqual(session.state, 'deferred')
 
 

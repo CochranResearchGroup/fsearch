@@ -1,0 +1,162 @@
+{
+  "command": [
+    "/home/ecochran76/worktrees/fsearch-plan6-tools/bin/ninja",
+    "-C",
+    "/home/ecochran76/worktrees/fsearch-plan6-build",
+    "-j2",
+    "src/fsearch-worker"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 1.336728212016169,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 58982400,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.26345376804238185,
+  "initial_host": {
+    "MemAvailable": 37970776064,
+    "SwapFree": 187539456,
+    "memory_some_avg10": 1.75,
+    "memory_full_avg10": 1.41,
+    "io_some_avg10": 9.6,
+    "io_full_avg10": 6.73
+  },
+  "final_host": {
+    "MemAvailable": 37784203264,
+    "SwapFree": 180727808,
+    "memory_some_avg10": 1.98,
+    "memory_full_avg10": 1.51,
+    "io_some_avg10": 10.22,
+    "io_full_avg10": 7.5
+  },
+  "samples": [
+    {
+      "seconds": 0.04410953400656581,
+      "host": {
+        "MemAvailable": 37970259968,
+        "SwapFree": 187539456,
+        "memory_some_avg10": 1.75,
+        "memory_full_avg10": 1.41,
+        "io_some_avg10": 9.6,
+        "io_full_avg10": 6.73
+      },
+      "rss_bytes": 5734400,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.043104782002046704,
+      "swap_bytes": 0,
+      "pids": [
+        72128
+      ]
+    },
+    {
+      "seconds": 0.29739728599088266,
+      "host": {
+        "MemAvailable": 37927952384,
+        "SwapFree": 195100672,
+        "memory_some_avg10": 1.75,
+        "memory_full_avg10": 1.41,
+        "io_some_avg10": 9.6,
+        "io_full_avg10": 6.73
+      },
+      "rss_bytes": 36044800,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.05278977699344978,
+      "swap_bytes": 0,
+      "pids": [
+        72128,
+        72130,
+        72131
+      ]
+    },
+    {
+      "seconds": 0.5608510540332645,
+      "host": {
+        "MemAvailable": 37854007296,
+        "SwapFree": 189620224,
+        "memory_some_avg10": 1.75,
+        "memory_full_avg10": 1.41,
+        "io_some_avg10": 9.6,
+        "io_full_avg10": 6.73
+      },
+      "rss_bytes": 58982400,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.06317146302899346,
+      "swap_bytes": 0,
+      "pids": [
+        72128,
+        72130,
+        72131,
+        72174,
+        72175
+      ]
+    },
+    {
+      "seconds": 0.8071054220199585,
+      "host": {
+        "MemAvailable": 37794648064,
+        "SwapFree": 171433984,
+        "memory_some_avg10": 1.75,
+        "memory_full_avg10": 1.41,
+        "io_some_avg10": 9.6,
+        "io_full_avg10": 6.73
+      },
+      "rss_bytes": 39649280,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.046131603012327105,
+      "swap_bytes": 0,
+      "pids": [
+        72128,
+        72130,
+        72131
+      ]
+    },
+    {
+      "seconds": 1.0533222309895791,
+      "host": {
+        "MemAvailable": 37788254208,
+        "SwapFree": 175812608,
+        "memory_some_avg10": 1.75,
+        "memory_full_avg10": 1.41,
+        "io_some_avg10": 9.6,
+        "io_full_avg10": 6.73
+      },
+      "rss_bytes": 42016768,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.045865666994359344,
+      "swap_bytes": 0,
+      "pids": [
+        72128,
+        72130,
+        72131
+      ]
+    },
+    {
+      "seconds": 1.2950986420037225,
+      "host": {
+        "MemAvailable": 37805101056,
+        "SwapFree": 178630656,
+        "memory_some_avg10": 1.98,
+        "memory_full_avg10": 1.51,
+        "io_some_avg10": 10.22,
+        "io_full_avg10": 7.5
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.041597904986701906,
+      "swap_bytes": 0,
+      "pids": [
+        72128
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-regression-build.service",
+    "memory.current": 39227392,
+    "memory.peak": 69222400,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

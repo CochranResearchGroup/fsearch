@@ -1,5 +1,6 @@
 /* Immutable base + bounded copy-on-write overlay, with explicit compaction replay.
- * No filesystem operations. GLib locks protect ownership, not indexed storage.
+ * Query/mutation paths never probe indexed storage. Private checkpoint cache
+ * descriptors provide bounded persistence; GLib locks protect ownership.
  * GPL-2.0-or-later. */
 #include "fsearch_catalog.h"
 #include "fsearch_catalog_query.h"
@@ -11,6 +12,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdalign.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #define MAX_DEPTH 256u
 #define MAX_NAME 4096u
@@ -609,4 +613,128 @@ bool fsearch_catalog_view_lookup(FsearchCatalogView*v,const char*path,FsearchCat
     const char*p=path+longest;char name[MAX_NAME+1];
     while(*p){while(*p=='/')p++;if(!*p)break;const char*end=strchr(p,'/');size_t n=end?(size_t)(end-p):strlen(p);if(!n||n>MAX_NAME)return false;memcpy(name,p,n);name[n]=0;if(!child(v,out->id,name,out))return false;p+=n;}
     return true;
+}
+
+/* FSCG0001: fixed network-independent little-endian header and entry frames,
+ * followed by SHA256. Streamed cache I/O; no filename resolution or root reads. */
+#define CHECKPOINT_MAX_BYTES (512u * 1024u * 1024u)
+#define CHECKPOINT_HEADER 76u
+typedef struct { int fd; off_t offset; GChecksum *checksum; bool writing; } CheckpointIO;
+static bool checkpoint_io(CheckpointIO *io, void *data, size_t size) {
+    size_t total=size;unsigned char *p=data;
+    if(size>CHECKPOINT_MAX_BYTES || io->offset>CHECKPOINT_MAX_BYTES-size)return false;
+    while(size){ssize_t n=io->writing?pwrite(io->fd,p,size,io->offset):pread(io->fd,p,size,io->offset);
+        if(n<0&&errno==EINTR)continue;
+        if(n<=0)return false;
+        io->offset+=n;p+=n;size-=n;
+    }
+    if(io->checksum)g_checksum_update(io->checksum,data,total);
+    return true;
+}
+static void checkpoint_put32(unsigned char *p,uint32_t value){value=GUINT32_TO_LE(value);memcpy(p,&value,4);}
+static void checkpoint_put64(unsigned char *p,uint64_t value){value=GUINT64_TO_LE(value);memcpy(p,&value,8);}
+static uint32_t checkpoint_get32(const unsigned char*p){uint32_t v;memcpy(&v,p,4);return GUINT32_FROM_LE(v);}
+static uint64_t checkpoint_get64(const unsigned char*p){uint64_t v;memcpy(&v,p,8);return GUINT64_FROM_LE(v);}
+static void checkpoint_binding(const char *identity,unsigned char digest[32]) {
+    GChecksum *sum=g_checksum_new(G_CHECKSUM_SHA256);g_checksum_update(sum,(const guchar*)identity,strlen(identity));
+    gsize n=32;g_checksum_get_digest(sum,digest,&n);g_checksum_free(sum);
+}
+typedef struct { uint32_t count,roots; uint64_t names; CheckpointIO *io; } CheckpointEntries;
+static bool checkpoint_count(const FsearchCatalogEntry *e,void *data) {
+    CheckpointEntries *x=data;if(x->count==UINT32_MAX)return false;
+    x->count++;x->roots+=e->parent==e->id;x->names+=strlen(e->name)+1;
+    return x->names<=UINT32_MAX;
+}
+static bool checkpoint_entry(const FsearchCatalogEntry *e,void *data) {
+    CheckpointEntries *x=data;unsigned char frame[16];uint32_t n=strlen(e->name);
+    checkpoint_put32(frame,e->id);checkpoint_put32(frame+4,e->parent);
+    checkpoint_put32(frame+8,e->kind);checkpoint_put32(frame+12,n);
+    return checkpoint_io(x->io,frame,sizeof(frame))&&checkpoint_io(x->io,(void*)e->name,n);
+}
+struct FsearchCatalogCheckpoint { FsearchCatalogView *view; uint32_t highwater; off_t bytes; unsigned char digest[32]; bool written; };
+FsearchCatalogCheckpoint *fsearch_catalog_checkpoint_capture(FsearchCatalog *c,const char **error) {
+    g_mutex_lock(&c->lock);
+    FsearchCatalogCheckpoint *capture=c->closed?NULL:allocate(c->budget,sizeof(*capture),NULL);
+    if(capture){capture->view=fsearch_catalog_view_ref(c->current);capture->highwater=c->highwater;}
+    bool closed=c->closed;g_mutex_unlock(&c->lock);
+    if(!capture)fail(error,closed?"closed":"memory_budget");
+    return capture;
+}
+void fsearch_catalog_checkpoint_free(FsearchCatalogCheckpoint *capture) {
+    if(capture){fsearch_catalog_view_unref(capture->view);release(capture);}
+}
+uint64_t fsearch_catalog_checkpoint_sequence(FsearchCatalogCheckpoint *capture){return capture->view->sequence;}
+bool fsearch_catalog_checkpoint_write(FsearchCatalog *c,int fd,const char *identity,const char **error) {
+    FsearchCatalogCheckpoint *capture=fsearch_catalog_checkpoint_capture(c,error);if(!capture)return false;
+    bool ok=fsearch_catalog_checkpoint_write_capture(capture,fd,identity,error);
+    fsearch_catalog_checkpoint_free(capture);return ok;
+}
+bool fsearch_catalog_checkpoint_write_capture(FsearchCatalogCheckpoint *capture,int fd,const char *identity,const char **error) {
+    struct stat st;
+    if(!capture||!identity||!*identity||fstat(fd,&st)||!S_ISREG(st.st_mode)||st.st_size)return fail(error,"checkpoint_output");
+    FsearchCatalogView *v=capture->view;uint32_t high=capture->highwater;
+    CheckpointEntries entries={0};bool ok=fsearch_catalog_view_visit(v,checkpoint_count,&entries);
+    if(!ok||CHECKPOINT_HEADER+entries.names+(uint64_t)entries.count*15+32>CHECKPOINT_MAX_BYTES){return fail(error,"checkpoint_budget");}
+    unsigned char header[CHECKPOINT_HEADER]={0};memcpy(header,"FSCG0001",8);
+    checkpoint_put64(header+8,v->sequence);checkpoint_put64(header+16,v->generation);
+    checkpoint_put32(header+24,high);checkpoint_put32(header+28,entries.count);
+    checkpoint_put64(header+32,entries.names);checkpoint_put32(header+40,entries.roots);checkpoint_binding(identity,header+44);
+    CheckpointIO io={fd,0,g_checksum_new(G_CHECKSUM_SHA256),true};entries.io=&io;
+    ok=checkpoint_io(&io,header,sizeof(header))&&fsearch_catalog_view_visit(v,checkpoint_entry,&entries);
+    unsigned char digest[32];gsize n=sizeof(digest);g_checksum_get_digest(io.checksum,digest,&n);g_checksum_free(io.checksum);io.checksum=NULL;
+    ok=ok&&checkpoint_io(&io,digest,sizeof(digest))&&fsync(fd)==0;
+    capture->written=ok;
+    if(ok){capture->bytes=io.offset;memcpy(capture->digest,digest,32);}
+    return ok||fail(error,"checkpoint_write_failed");
+}
+bool fsearch_catalog_checkpoint_verify_capture(FsearchCatalogCheckpoint *capture,int fd,const char **error) {
+    struct stat st;
+    if(!capture||!capture->written||fstat(fd,&st)||!S_ISREG(st.st_mode)||st.st_size!=capture->bytes)return fail(error,"checkpoint_readback_failed");
+    CheckpointIO io={fd,0,g_checksum_new(G_CHECKSUM_SHA256),false};unsigned char buffer[65536];bool ok=true;
+    while(io.offset<capture->bytes-32&&ok){size_t n=MIN((off_t)sizeof(buffer),capture->bytes-32-io.offset);ok=checkpoint_io(&io,buffer,n);}
+    unsigned char digest[32],footer[32];gsize n=32;g_checksum_get_digest(io.checksum,digest,&n);g_checksum_free(io.checksum);io.checksum=NULL;
+    ok=ok&&!memcmp(digest,capture->digest,32)&&checkpoint_io(&io,footer,32)&&!memcmp(footer,capture->digest,32);
+    return ok||fail(error,"checkpoint_readback_failed");
+}
+FsearchCatalog *fsearch_catalog_checkpoint_read(int fd,const char *identity,const FsearchCatalogLimits *limits,const char **error) {
+    struct stat st;unsigned char header[CHECKPOINT_HEADER],binding[32];
+    if(!identity||!*identity||!limits||!limits->memory_limit||!limits->overlay_limit||!limits->replay_limit
+       ||limits->overlay_limit>65536||limits->replay_limit>65536||limits->view_limit<3||limits->view_limit>64
+       ||fstat(fd,&st)||!S_ISREG(st.st_mode)||st.st_size<CHECKPOINT_HEADER+32||st.st_size>CHECKPOINT_MAX_BYTES){fail(error,"checkpoint_invalid");return NULL;}
+    CheckpointIO io={fd,0,g_checksum_new(G_CHECKSUM_SHA256),false};
+    if(!checkpoint_io(&io,header,sizeof(header))||memcmp(header,"FSCG0001",8)){g_checksum_free(io.checksum);fail(error,"checkpoint_invalid");return NULL;}
+    checkpoint_binding(identity,binding);
+    if(memcmp(binding,header+44,32)){g_checksum_free(io.checksum);fail(error,"checkpoint_binding");return NULL;}
+    unsigned count=checkpoint_get32(header+28),roots=checkpoint_get32(header+40);uint64_t names=checkpoint_get64(header+32);
+    if(!count||!roots||roots>count||names<count||names>UINT32_MAX
+       ||CHECKPOINT_HEADER+names+(uint64_t)count*15+32!=(uint64_t)st.st_size){g_checksum_free(io.checksum);fail(error,"checkpoint_invalid");return NULL;}
+    Budget *b=calloc(1,sizeof(*b));if(!b){g_checksum_free(io.checksum);fail(error,"allocation_failed");return NULL;}
+    b->refs=1;b->limit=limits->memory_limit;g_mutex_init(&b->lock);
+    FsearchCatalog *c=allocate(b,sizeof(*c),NULL);Base *base=base_allocate(b,count,names,roots,NULL);
+    if(!c||!base){release(c);if(base)base_unref(base);budget_unref(b);g_checksum_free(io.checksum);fail(error,"memory_budget");return NULL;}
+    c->budget=b;c->limits=*limits;c->highwater=checkpoint_get32(header+24);g_mutex_init(&c->lock);
+    size_t offset=0;unsigned seen_roots=0;bool ok=true;
+    for(unsigned i=0;i<count&&ok;i++) {
+        unsigned char frame[16];ok=checkpoint_io(&io,frame,sizeof(frame));if(!ok)break;
+        uint32_t id=checkpoint_get32(frame),parent=checkpoint_get32(frame+4),kind=checkpoint_get32(frame+8),n=checkpoint_get32(frame+12);
+        if(!n||n>MAX_NAME||n+1>names-offset||id>c->highwater||kind<FSEARCH_CATALOG_FILE||kind>FSEARCH_CATALOG_FOLDER){ok=false;break;}
+        char *name=base->names+offset;ok=checkpoint_io(&io,name,n);if(!ok||memchr(name,0,n)){ok=false;break;}name[n]=0;
+        if((parent!=id&&!basename_valid(name))||(parent==id&&(kind!=FSEARCH_CATALOG_FOLDER||name[0]!='/'))){ok=false;break;}
+        base->entries[i]=(Packed){id,parent,offset,kind};offset+=n+1;seen_roots+=parent==id;
+    }
+    unsigned char actual[32],expected[32];gsize digest_size=32;
+    g_checksum_get_digest(io.checksum,expected,&digest_size);g_checksum_free(io.checksum);io.checksum=NULL;
+    ok=ok&&offset==names&&seen_roots==roots&&checkpoint_io(&io,actual,sizeof(actual))
+       &&io.offset==st.st_size&&!memcmp(actual,expected,32);
+    if(ok){base_sort(base);c->current=view_new(b,base,0,NULL);ok=c->current!=NULL;}
+    base_unref(base);
+    if(ok){c->current->sequence=checkpoint_get64(header+8);c->current->generation=checkpoint_get64(header+16);
+        Base *x=c->current->base;ok=x->entries[0].id==0&&x->entries[0].parent==0;
+        for(unsigned i=0;i<count&&ok;i++){FsearchCatalogEntry entry;Packed*r=&x->entries[i];
+            ok=(!i||r->id!=x->entries[i-1].id)&&fsearch_catalog_view_get(c->current,r->id,&entry);
+        }
+        for(unsigned i=1;i<count&&ok;i++)ok=namespace_cmp(&x->namespace_order[i-1],&x->namespace_order[i],x)!=0;
+    }
+    if(!ok){fsearch_catalog_free(c);fail(error,"checkpoint_invalid");return NULL;}
+    return c;
 }

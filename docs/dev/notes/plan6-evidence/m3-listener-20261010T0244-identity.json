@@ -1,0 +1,71 @@
+{
+  "source_base": "51f6af730f8b3f8f459c721ec6b6fffa8f34d49d",
+  "branch": "feat/incremental-generations",
+  "worktree": "/home/ecochran76/worktrees/fsearch-incremental-generations",
+  "publication": "uncommitted_unpublished",
+  "window_start_utc": "2026-10-10T02:33:29Z",
+  "checkpoint_by_utc": "2026-10-10T05:28:29Z",
+  "hard_deadline_utc": "2026-10-10T05:33:29Z",
+  "sha256": {
+    "src/fsearch_broker.py": "d6f9da27db131989822b33eebb9b092fdff3023d155447c20271561b4728eef3",
+    "src/fsearch_broker_setup.c": "394e956cab799fb8fa7b0c3fda4b62921a83d71c2553f91ac15768e6d08ccd37",
+    "src/tests/test_broker_listener.c": "63efc10cfddb3d9ef96f9f1deacf0afcf4ffd9601db9a280ae11df0d5e6d90d0",
+    "src/tests/test_broker_process.py": "334a44616d67ef6831abed1ed6328dbdfed57bb44d5d3d4decebc3e891f69a26",
+    "src/tests/meson.build": "3ef34e514f6a0c8e31c837e85f7bf0f4ffb966bbedb13268942d28c7a6d53564",
+    "/home/ecochran76/worktrees/fsearch-broker-listener-build/fsearch-broker-setup": "2fd710d4648722b108f555d785b27f0486e05b8e789448dd36f53ff53785a487",
+    "/home/ecochran76/worktrees/fsearch-broker-listener-build/test_broker_listener": "5b36114175d1be1be43786625deec23d6499ff3ee74975529d331b895101fc89",
+    "/tmp/fsearch-generations-build/src/fsearch-broker-boundary": "e9c97ee37d22ae6d03740de0abe0e9e3b2e777d831eaadd783b24f87f22c80eb"
+  },
+  "kernel_reference_sources": [
+    {
+      "path": "/home/ecochran76/worktrees/fsearch-kernel-containment-research-2026-10-09/fs/readdir.c",
+      "url": "https://raw.githubusercontent.com/microsoft/WSL2-Linux-Kernel/linux-msft-wsl-6.6.87.2/fs/readdir.c",
+      "sha256": "494ec14b74292487cc95d26cbdf9dba5b8442c9b839d033742ecf6c3cdca3f2c"
+    },
+    {
+      "path": "/home/ecochran76/worktrees/fsearch-kernel-containment-research-2026-10-09/fs/namei.c",
+      "url": "https://raw.githubusercontent.com/microsoft/WSL2-Linux-Kernel/linux-msft-wsl-6.6.87.2/fs/namei.c",
+      "sha256": "6ce85b31f416beac5a015384fc9d652d61dd4e12738e30e3e2e8c57b642374aa"
+    },
+    {
+      "path": "/home/ecochran76/worktrees/fsearch-kernel-containment-research-2026-10-09/security/apparmor/file.c",
+      "url": "https://raw.githubusercontent.com/microsoft/WSL2-Linux-Kernel/linux-msft-wsl-6.6.87.2/security/apparmor/file.c",
+      "sha256": "eb0ccb6849885d9d58494fe6ba9313df7a002b3374a420a0b878881c2a7108cf"
+    },
+    {
+      "path": "/home/ecochran76/worktrees/fsearch-kernel-containment-research-2026-10-09/security/landlock/fs.c",
+      "url": "https://raw.githubusercontent.com/microsoft/WSL2-Linux-Kernel/linux-msft-wsl-6.6.87.2/security/landlock/fs.c",
+      "sha256": "a1a7b5bdccef1e3df2a982ae516e7624b880562c7793ec1252bfae819af4ab12"
+    },
+    {
+      "path": "/home/ecochran76/worktrees/fsearch-kernel-containment-research-2026-10-09/fs/namespace.c",
+      "url": "https://raw.githubusercontent.com/microsoft/WSL2-Linux-Kernel/linux-msft-wsl-6.6.87.2/fs/namespace.c",
+      "sha256": "af1a171691d14dc0a84d66946d6182cb4af081341abc260e7a774a4e48922e23"
+    }
+  ],
+  "compiled_commands": [
+    [
+      "cc",
+      "-std=gnu11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "src/fsearch_broker_setup.c",
+      "-o",
+      "/home/ecochran76/worktrees/fsearch-broker-listener-build/fsearch-broker-setup"
+    ],
+    [
+      "cc",
+      "-std=gnu11",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-O2",
+      "src/tests/test_broker_listener.c",
+      "-o",
+      "/home/ecochran76/worktrees/fsearch-broker-listener-build/test_broker_listener"
+    ]
+  ],
+  "post_test_change": "SO_PEERCRED comment corrected to list listen/connect/socketpair; no executable source change."
+}

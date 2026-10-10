@@ -1,0 +1,41 @@
+Log of Meson test suite run on 2026-10-10T11:52:53.975824
+
+Inherited environment: HOME=/home/ecochran76 LANG=C.UTF-8 LOGNAME=ecochran76 PATH=/home/ecochran76/worktrees/fsearch-plan6-tools/bin:/usr/bin:/bin SHELL=/bin/zsh USER=ecochran76 XDG_RUNTIME_DIR=/run/user/1000 QT_ACCESSIBILITY=1 XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/var/lib/snapd/desktop DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus GSM_SKIP_SSH_AGENT_WORKAROUND=true SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh MANAGERPID=696 INVOCATION_ID=42cb75cc2564460ebb3386e1665e72f3 SYSTEMD_EXEC_PID=77489 MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-fixes-20261010.service/memory.pressure MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA= FSEARCH_FRONTEND_ACCEPTANCE_ROOT=/tmp/file-searcher-incremental-coverage 
+
+==================================== 1/3 =====================================
+test:         fsearch:boot_recovery
+start time:   16:52:53
+duration:     0.13s
+result:       exit status 0
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=215 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_boot_recovery.py
+----------------------------------- stderr -----------------------------------
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.035s
+
+OK
+==============================================================================
+
+==================================== 2/3 =====================================
+test:         fsearch:incremental_visibility
+start time:   16:52:54
+duration:     8.20s
+result:       exit status 0
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=175 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_incremental.py /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-service /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-incremental /home/ecochran76/worktrees/fsearch-plan6-build/src/tests/snapshot_fixture
+----------------------------------- stdout -----------------------------------
+{"result": "pass", "normal_max_seconds": 0.12749977997737005, "heavy_seconds": 2.1742802030057646, "watcher_stall_deferred_seconds": 1.6188164560007863, "topology_reconciliation_seconds": null, "burst_events": 1100, "checks": ["create", "cross-parent rename", "replace rename", "hardlink", "delete", "raw bytes", "excluded symlink", "background compaction threshold", "clean/dirty/unacknowledged startup drain barriers", "source observation age survives queued inventory/events", "invalid observation clocks fail closed", "idle inventory heartbeat stays pending", "directory create inventory", "directory ancestor rename", "directory replacement rename", "subtree import", "subtree move out without outside indexing", "no snapshot replacement for directory changes", "query-visible exact root/last reconciliation", "abrupt updater death expires coverage lease and retains cached view", "paused native watcher fails deferred while updater is alive and cached queries remain complete", "paused watcher is killed and reaped"], "scope": "owned fixture actual mutation to native socket query"}
+==============================================================================
+
+==================================== 3/3 =====================================
+test:         fsearch:broker_process_cli_mcp
+start time:   16:53:02
+duration:     9.81s
+result:       exit status 0
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=174 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_process.py /home/ecochran76/worktrees/fsearch-plan6-build/src - /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary
+----------------------------------- stdout -----------------------------------
+{"status": "assembled_broker_fixture_pass", "durable_catalog": false, "controls": ["named_listener_handoff", "outside_bootstrap_churn", "startup", "create", "directory_inventory", "ancestor_rename", "root_replacement", "inherited_fixture_handoff", "overflow", "restart_after_reap"], "actual_delivery": "NOT_QUALIFIED", "adversarial_confinement": "SEPARATE_RECEIPT_REQUIRED", "boundary_pids_reaped": [79505, 80553]}
+==============================================================================
+
+
+Ok:                3   
+Fail:              0   

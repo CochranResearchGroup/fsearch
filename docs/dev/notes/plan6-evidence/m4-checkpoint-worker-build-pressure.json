@@ -1,0 +1,163 @@
+{
+  "command": [
+    "/home/ecochran76/worktrees/fsearch-plan6-tools/bin/ninja",
+    "-C",
+    "/home/ecochran76/worktrees/fsearch-plan6-build",
+    "-j2",
+    "src/fsearch-worker",
+    "src/fsearch-refresh-worker",
+    "src/fsearch-cli",
+    "src/tests/test_catalog"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 1.2886003410094418,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 41287680,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.24690057802945375,
+  "initial_host": {
+    "MemAvailable": 37781110784,
+    "SwapFree": 0,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 3.67,
+    "io_full_avg10": 3.15
+  },
+  "final_host": {
+    "MemAvailable": 37894184960,
+    "SwapFree": 471040,
+    "memory_some_avg10": 0.18,
+    "memory_full_avg10": 0.18,
+    "io_some_avg10": 5.9,
+    "io_full_avg10": 5.12
+  },
+  "samples": [
+    {
+      "seconds": 0.0374744480359368,
+      "host": {
+        "MemAvailable": 37781110784,
+        "SwapFree": 0,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 3.67,
+        "io_full_avg10": 3.15
+      },
+      "rss_bytes": 5406720,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.036907342029735446,
+      "swap_bytes": 0,
+      "pids": [
+        27838
+      ]
+    },
+    {
+      "seconds": 0.28049024898791686,
+      "host": {
+        "MemAvailable": 37719089152,
+        "SwapFree": 0,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 3.67,
+        "io_full_avg10": 3.15
+      },
+      "rss_bytes": 39976960,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04269993299385533,
+      "swap_bytes": 0,
+      "pids": [
+        27840,
+        27838,
+        27839
+      ]
+    },
+    {
+      "seconds": 0.5177390599856153,
+      "host": {
+        "MemAvailable": 37796216832,
+        "SwapFree": 16384,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 3.67,
+        "io_full_avg10": 3.15
+      },
+      "rss_bytes": 40960000,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.03696326195495203,
+      "swap_bytes": 0,
+      "pids": [
+        27840,
+        27838,
+        27839
+      ]
+    },
+    {
+      "seconds": 0.7542800080263987,
+      "host": {
+        "MemAvailable": 37795954688,
+        "SwapFree": 438272,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 3.67,
+        "io_full_avg10": 3.15
+      },
+      "rss_bytes": 41287680,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0361611699918285,
+      "swap_bytes": 0,
+      "pids": [
+        27840,
+        27838,
+        27839
+      ]
+    },
+    {
+      "seconds": 0.9898881749832071,
+      "host": {
+        "MemAvailable": 37790535680,
+        "SwapFree": 442368,
+        "memory_some_avg10": 0.18,
+        "memory_full_avg10": 0.18,
+        "io_some_avg10": 5.9,
+        "io_full_avg10": 5.12
+      },
+      "rss_bytes": 41287680,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.035315730958245695,
+      "swap_bytes": 0,
+      "pids": [
+        27840,
+        27838,
+        27839
+      ]
+    },
+    {
+      "seconds": 1.236788753012661,
+      "host": {
+        "MemAvailable": 37872578560,
+        "SwapFree": 471040,
+        "memory_some_avg10": 0.18,
+        "memory_full_avg10": 0.18,
+        "io_some_avg10": 5.9,
+        "io_full_avg10": 5.12
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04674038500525057,
+      "swap_bytes": 0,
+      "pids": [
+        27838
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-build.service",
+    "memory.current": 8769536,
+    "memory.peak": 41234432,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

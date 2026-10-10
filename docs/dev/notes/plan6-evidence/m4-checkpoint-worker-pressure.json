@@ -1,0 +1,78 @@
+{
+  "command": [
+    "python3",
+    "src/tests/test_catalog_checkpoint_worker.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 0.3074540160014294,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 13762560,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.23560861899750307,
+  "initial_host": {
+    "MemAvailable": 39809167360,
+    "SwapFree": 529813504,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 4.2,
+    "io_full_avg10": 3.3
+  },
+  "final_host": {
+    "MemAvailable": 39818969088,
+    "SwapFree": 529813504,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 4.2,
+    "io_full_avg10": 3.3
+  },
+  "samples": [
+    {
+      "seconds": 0.03457431902643293,
+      "host": {
+        "MemAvailable": 39809167360,
+        "SwapFree": 529813504,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 4.2,
+        "io_full_avg10": 3.3
+      },
+      "rss_bytes": 13762560,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.03391004499280825,
+      "swap_bytes": 0,
+      "pids": [
+        44372
+      ]
+    },
+    {
+      "seconds": 0.270182938023936,
+      "host": {
+        "MemAvailable": 39821037568,
+        "SwapFree": 529813504,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 4.2,
+        "io_full_avg10": 3.3
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.03532726503908634,
+      "swap_bytes": 0,
+      "pids": [
+        44372
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-test.service",
+    "memory.current": 8970240,
+    "memory.peak": 29519872,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

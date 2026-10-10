@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/resource.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 static FsearchCatalogLimits limits={16*1024*1024,256,256,16};
 static const FsearchCatalogEntry seed[]={
@@ -224,9 +226,37 @@ static void test_query_bounds(void) {
     fsearch_catalog_query_clear(&r);
 }
 static void test_churn(void){churn(128,false);}
+static void test_checkpoint(void) {
+    g_autoptr(FsearchCatalog)c=make(limits);const char*e=NULL;uint32_t retired,new_id;
+    g_assert_true(fsearch_catalog_create(c,1,0,FSEARCH_CATALOG_FILE,"retired",&retired,&e));
+    g_assert_true(fsearch_catalog_change(c,2,retired,0,FSEARCH_CATALOG_DELETED,NULL,&e));
+    g_assert_true(fsearch_catalog_change(c,3,1,0,FSEARCH_CATALOG_FOLDER,"renamed",&e));
+    compact(c);
+    char path[]="/tmp/fsearch-checkpoint-owned-XXXXXX";int fd=mkstemp(path);g_assert_cmpint(fd,>=,0);
+    FsearchCatalogCheckpoint *capture=fsearch_catalog_checkpoint_capture(c,&e);g_assert_nonnull(capture);
+    g_assert_true(fsearch_catalog_checkpoint_write_capture(capture,fd,"owned-snapshot",&e));
+    g_assert_true(fsearch_catalog_checkpoint_verify_capture(capture,fd,&e));
+    g_autoptr(FsearchCatalog)restored=fsearch_catalog_checkpoint_read(fd,"owned-snapshot",&limits,&e);
+    g_assert_nonnull(restored);g_assert_cmpuint(status(restored).sequence,==,3);
+    g_assert_cmpuint(status(restored).generation,==,1);
+    g_autoptr(FsearchCatalogView)v=fsearch_catalog_acquire(restored);
+    path_is(v,4,"/__catalog_owned__/renamed/nested/raw-\xff.txt");
+    g_assert_true(fsearch_catalog_create(restored,4,0,FSEARCH_CATALOG_FILE,"new",&new_id,&e));
+    g_assert_cmpuint(new_id,>,retired);
+    g_assert_null(fsearch_catalog_checkpoint_read(fd,"other-snapshot",&limits,&e));
+    g_assert_cmpstr(e,==,"checkpoint_binding");
+    unsigned char byte;g_assert_cmpint(pread(fd,&byte,1,80),==,1);byte^=1;
+    g_assert_cmpint(pwrite(fd,&byte,1,80),==,1);
+    g_assert_null(fsearch_catalog_checkpoint_read(fd,"owned-snapshot",&limits,&e));
+    g_assert_cmpstr(e,==,"checkpoint_invalid");
+    g_assert_false(fsearch_catalog_checkpoint_verify_capture(capture,fd,&e));
+    fsearch_catalog_checkpoint_free(capture);
+    close(fd);unlink(path);
+}
 int main(int argc,char**argv) {
     if(argc==3&&!strcmp(argv[1],"--scale")){churn(atoi(argv[2]),true);return 0;}
     g_test_init(&argc,&argv,NULL);
+    g_test_add_func("/catalog/checkpoint",test_checkpoint);
     g_test_add_func("/catalog/immutable",test_immutable);g_test_add_func("/catalog/replay",test_replay);
     g_test_add_func("/catalog/replay-overflow",test_overflow);g_test_add_func("/catalog/failures",test_failures);
     g_test_add_func("/catalog/lagging-reader",test_readers);g_test_add_func("/catalog/budgets",test_budget);

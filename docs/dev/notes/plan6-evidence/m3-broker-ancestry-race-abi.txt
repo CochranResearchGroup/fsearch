@@ -1,0 +1,8 @@
+Running as unit: fsearch-plan6-race-abi.service; invocation ID: df7414d69e7448c4bfaa86cfa13c7b5a
+{"status": "diagnostic_complete", "fixture_reached": true, "source_exit": 4, "deferred_control": "PASS", "outside_export": "PASS", "outside_metadata_read": "FAIL", "outside_read_count": 1, "trace_evidence": ["57018 getdents64(7<<owned-fixture>/outside-owned-fixture>, 0x5eab0e177600 /* 4 entries */, 32768) = 128"]}
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 296ms
+CPU time consumed: 151ms
+Memory peak: 360.0K
+Memory swap peak: 0B

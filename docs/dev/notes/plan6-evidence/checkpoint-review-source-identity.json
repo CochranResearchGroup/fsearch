@@ -1,0 +1,90 @@
+{
+  "reference_time": "2026-10-10T16:53:55.093655+00:00",
+  "source_sha256": {
+    "src/fsearch_broker.py": "19cabbb674b06bce9cb7bd9c48f4060631727c151a52fce3b27dfd22ebe97608",
+    "src/fsearch_broker_admission.py": "0e523bfb06099a0f963ef0dcb7b9e86656c4cfe075f915a3d88004d994432444",
+    "src/fsearch_broker_boundary.c": "e6621f4851b036fd6531050d4ed65eab331d6f61496dee92c6bc732eb39e4bce",
+    "src/fsearch_broker_setup.c": "5c21eae7ed9301dff84bab2e802b3502360c501dd4d094680b02c33ce9626710",
+    "src/fsearch_broker_source.py": "665e107af0fe9d03afad23e12da8a497b73a8c4f2b90e256b54030e417b38df7",
+    "src/fsearch_catalog.c": "5fa4559539604f699ef4f19651db6d82df954c0b8e016cae31e6d2c76440c130",
+    "src/fsearch_catalog_journal.py": "ab1163e4897a467ce8043c79d338ccfdd66458ed0bb6233c6a0bbdbd5a3a86fb",
+    "src/fsearch_headless.c": "016627a942b06ffc2f1e4521a72f8459b5b2bf3d55dd345628736384a15df7d1",
+    "src/fsearch_service.py": "fe1912ed3b54d151081772700ac378aea53a9fce9adfdaace29aba803185dde1",
+    "src/fsearch_worker.c": "e2950664eecd8e6613383b1126810c6fc2598114cb71f61a7ffec19b25e87213",
+    "src/tests/test_boot_recovery.py": "018427e4d43905c23d25ef55cb356b0739e478b7531b085faf89600cac989f19",
+    "src/tests/test_catalog_capacity.py": "55eb991801bf4184704b110cf428b98e7b762a625277ddc609fb47b311820cbd",
+    "src/tests/test_incremental.py": "01f6d2d6ebc11b02af0eef532e5c98baa10fba67dff7cb9c29e9f9c5e1aa6535"
+  },
+  "receipts": {
+    "checkpoint-review-suite-pressure.json": {
+      "exit_code": 1,
+      "reason": null,
+      "elapsed_seconds": 77.11201861896552,
+      "cgroup": {
+        "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-suite-20261010.service",
+        "memory.current": 19103744,
+        "memory.peak": 105566208,
+        "memory.max": 1342177280,
+        "memory.swap.current": 0,
+        "memory.swap.peak": 0,
+        "memory.swap.max": 0
+      }
+    },
+    "checkpoint-review-regression-pressure.json": {
+      "exit_code": 1,
+      "reason": null,
+      "elapsed_seconds": 0.312354221008718,
+      "cgroup": {
+        "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-review-20261010.service",
+        "memory.current": 8523776,
+        "memory.peak": 36302848,
+        "memory.max": 1342177280,
+        "memory.swap.current": 0,
+        "memory.swap.peak": 0,
+        "memory.swap.max": 0
+      }
+    },
+    "checkpoint-review-regression-pressure-b.json": {
+      "exit_code": 1,
+      "reason": null,
+      "elapsed_seconds": 0.33187807200010866,
+      "cgroup": {
+        "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-review-b-20261010.service",
+        "memory.current": 8339456,
+        "memory.peak": 36622336,
+        "memory.max": 1342177280,
+        "memory.swap.current": 0,
+        "memory.swap.peak": 0,
+        "memory.swap.max": 0
+      }
+    },
+    "checkpoint-review-build-pressure.json": {
+      "exit_code": 0,
+      "reason": null,
+      "elapsed_seconds": 12.36083995399531,
+      "cgroup": {
+        "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-build-20261010.service",
+        "memory.current": 79110144,
+        "memory.peak": 162119680,
+        "memory.max": 1342177280,
+        "memory.swap.current": 0,
+        "memory.swap.peak": 0,
+        "memory.swap.max": 0
+      }
+    },
+    "checkpoint-review-import-fixes-pressure.json": {
+      "exit_code": 0,
+      "reason": null,
+      "elapsed_seconds": 18.636069657979533,
+      "cgroup": {
+        "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-fixes-20261010.service",
+        "memory.current": 19673088,
+        "memory.peak": 180666368,
+        "memory.max": 1342177280,
+        "memory.swap.current": 0,
+        "memory.swap.peak": 0,
+        "memory.swap.max": 0
+      }
+    }
+  }
+}

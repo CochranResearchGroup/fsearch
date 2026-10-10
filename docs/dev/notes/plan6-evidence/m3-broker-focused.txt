@@ -1,0 +1,26 @@
+Running as unit: fsearch-plan6-broker-focused.service; invocation ID: e89057a39f074456a5c0e11220c5d871
+ninja: Entering directory `/tmp/fsearch-generations-build'
+ninja: no work to do.
+WARNING: Received SIGTERM, exiting
+1/3 fsearch:monitor_supervisor      INTERRUPT      13.89s   killed by signal 15 SIGTERM
+>>> LD_LIBRARY_PATH=/tmp/fsearch-generations-build/src/tests MALLOC_PERTURB_=78 MESON_TEST_ITERATION=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 /home/ecochran76/.cache/uv/archive-v0/tALM90RtG3-OOvvcfx9hK/bin/python3 /tmp/fsearch-generations-build/../fsearch-incremental-generations/src/tests/test_monitor.py /tmp/fsearch-generations-build/src/fsearch-monitor /tmp/fsearch-generations-build/src/fsearch-cli /tmp/fsearch-generations-build/src/tests
+――――――――――――――――――――――――――――――――――――― ✀  ―――――――――――――――――――――――――――――――――――――
+stderr:
+F............
+――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――
+
+
+Summary of Failures:
+
+1/3 fsearch:monitor_supervisor      INTERRUPT      13.89s   killed by signal 15 SIGTERM
+
+Ok:                0   
+Fail:              1   
+
+Full log written to /tmp/fsearch-generations-build/meson-logs/testlog.txt
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 15.178s
+CPU time consumed: 3.549s
+Memory peak: 288.0K
+Memory swap peak: 0B

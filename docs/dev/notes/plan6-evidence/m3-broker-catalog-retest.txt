@@ -1,0 +1,17 @@
+Running as unit: fsearch-plan6-broker-wiring-retest.service; invocation ID: 431fed190ad04ccd9a5075cf098d2b01
+Traceback (most recent call last):
+  File "/tmp/fsearch-incremental-generations/src/tests/test_broker_catalog.py", line 125, in <module>
+    main()
+  File "/tmp/fsearch-incremental-generations/src/tests/test_broker_catalog.py", line 95, in main
+    cli('broker-visible pdf', [created]); asyncio.run(fresh_mcp('broker-visible pdf', [created]))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/fsearch-incremental-generations/src/tests/test_broker_catalog.py", line 67, in cli
+    assert sorted(row['path'] for row in payload['results']) == sorted(map(str, expected)), payload
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'alias_suggestions': [], 'backend_query': 'broker-visible pdf', 'backends': {'everything': {'available': False, 'ok': False, 'reason': 'disabled by --no-everything'}, 'everything_helper': {'available': False, 'ok': False, 'reason': 'disabled by --no-everything'}, 'fsearch': {'available': True, 'complete': True, 'incremental_coverage': {'catalog_sequence': 1, 'event_sequence': 1, 'last_reconciled_unix_ms': 1791582205808, 'oldest_unapplied_unix_ms': None, 'reason': 'source_drained', 'root_b64': 'L3RtcC9mc2VhcmNoLWJyb2tlci1jYXRhbG9nLXZkcHd4d3VwL293bmVk', 'state': 'watching'}, 'ok': True, 'snapshot': {'age_seconds': 0, 'identity': '2096:9873030:256:1791582205:645217072:1791582205:673521542', 'mtime_unix': 1791582205, 'roots': [{'age_seconds': 0, 'last_error_code': 0, 'last_scan_unix': 1791582205, 'path': '/tmp/fsearch-broker-catalog-vdpwxwup/owned', 'path_bytes_base64': None}]}, 'status': 'ok', 'transport': 'warm_socket', 'truncated': False, 'visibility': 'cached'}, 'locate': {'available': False, 'ok': False, 'reason': 'disabled by --no-locate'}, 'sqlite': {'available': True, 'db_path': '/tmp/fsearch-broker-catalog-vdpwxwup/sqlite', 'ok': True}}, 'capabilities': {'backend_capture_bytes': 1048576, 'native_linux_backends': True, 'windows_interop': False}, 'coverage': {'complete': False, 'reason': 'bounded_candidates', 'scope_listings': []}, 'everything': [], 'everything_helper': [], 'everything_query_policy': {'cli_skipped': False, 'helper_fallback': 'disabled', 'helper_skipped': False}, 'filters': [{'extensions': ['.pdf'], 'name': 'pdf', 'path_terms': [], 'summary': 'PDF files'}], 'fsearch': [], 'locate': [], 'query': 'broker-visible pdf', 'recency_ranked': False, 'recorded_alias_suggestions': None, 'results': [], 'scoped_filesystem': [], 'scopes': [], 'sqlite': []}
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 739ms
+CPU time consumed: 532ms
+Memory peak: 512.0K
+Memory swap peak: 0B

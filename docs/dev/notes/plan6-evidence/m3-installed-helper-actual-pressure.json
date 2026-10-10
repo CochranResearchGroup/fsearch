@@ -1,0 +1,45 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/tests/test_broker_process.py",
+    "/home/ecochran76/worktrees/fsearch-broker-candidate/bin",
+    "/tmp/file-searcher-incremental-coverage",
+    "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/fsearch-broker-boundary",
+    "--actual-fixture-dir",
+    "/home/ecochran76/worktrees/fsr-q-20261010"
+  ],
+  "reason": "host_pressure_preflight",
+  "exit_code": null,
+  "elapsed_seconds": 0.00016924203373491764,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 0,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0,
+  "initial_host": {
+    "MemAvailable": 41836167168,
+    "SwapFree": 315727872,
+    "memory_some_avg10": 3.0,
+    "memory_full_avg10": 2.15,
+    "io_some_avg10": 8.48,
+    "io_full_avg10": 4.84
+  },
+  "final_host": {
+    "MemAvailable": 41836167168,
+    "SwapFree": 315727872,
+    "memory_some_avg10": 3.0,
+    "memory_full_avg10": 2.15,
+    "io_some_avg10": 8.48,
+    "io_full_avg10": 4.84
+  },
+  "samples": [],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-actual-owned-20261010.service",
+    "memory.current": 7446528,
+    "memory.peak": 7446528,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

@@ -61,10 +61,9 @@ def decode(data, *, max_bytes=65536, max_events=1024):
             raise Gap('queue_overflow')
         if mask & ~SUPPORTED or not mask & (CREATE | DELETE | RENAME):
             raise Gap('unsupported_mask')
-        # Coalesced/mixed namespace operations cannot be guessed safely.
+        # Decode merged masks so outside churn can be admitted/discarded first.
+        # Ambiguous admitted operations remain a sticky gap in ExportFilter.
         operation = mask & (CREATE | DELETE | RENAME)
-        if operation not in (CREATE, DELETE, RENAME):
-            raise Gap('ambiguous_operation')
         end = offset + size
         cursor = offset + header
         sides, target, seen = [], None, set()
@@ -96,7 +95,7 @@ def decode(data, *, max_bytes=65536, max_events=1024):
                     raise Gap('name_invalid')
                 sides.append(Side(role, handle, name))
             cursor += length
-        required = {10, 12} if operation == RENAME else {2}
+        required = {10, 12} if operation & RENAME else {2}
         if {side.role for side in sides} != required or target is None:
             raise Gap('namespace_identity_missing')
         events.append(Event(mask, tuple(sides), target))
@@ -129,6 +128,7 @@ class ExportFilter:
         self.sequence = 0
         self.reason = None
         self.last_progress = None
+        self.root_handle = None
 
     def fail(self, reason):
         self.reason = self.reason or reason
@@ -162,6 +162,8 @@ class ExportFilter:
             events = decode(data)
             result = []
             for event in events:
+                if self.root_handle is not None and event.target == self.root_handle and event.mask & ONDIR and event.mask & (RENAME | DELETE):
+                    raise Gap('root_identity_changed')
                 admitted = []
                 for side in event.sides:
                     try:
@@ -169,10 +171,13 @@ class ExportFilter:
                     except Exception:
                         raise Gap('admission_failed') from None
                     if parent_id is not None:
-                        if type(parent_id) is not int or parent_id < 1:
+                        # Native catalog IDs are zero-based: the root is ID 0.
+                        if type(parent_id) is not int or parent_id < 0:
                             raise Gap('admission_invalid')
                         admitted.append((side.role, parent_id, side.name))
                 if admitted:
+                    if event.mask & (CREATE | DELETE | RENAME) not in (CREATE, DELETE, RENAME):
+                        raise Gap('ambiguous_operation')
                     if len(result) >= self.max_exports:
                         raise Gap('export_limit')
                     result.append(Export(self.sequence + len(result) + 1, generation, event.mask, tuple(admitted)))
@@ -184,6 +189,59 @@ class ExportFilter:
             self.fail('admission_failed')
 
 
+class BootstrapChanges:
+    """Bounded ephemeral dirty-set sketch; no names or handle list retained.
+
+    Every namespace parent and removed/renamed directory target contributes
+    keyed bitmap positions. Query only admitted handles once inventory exists.
+    Collisions may reject a clean baseline; they cannot certify a dirty one.
+    Outside events contribute bits, never replayable identifiers or raw records.
+    """
+    def __init__(self, *, bytes_limit=1048576, max_observations=1000000):
+        import os
+        if type(bytes_limit) is not int or not 1 <= bytes_limit <= 1048576 or type(max_observations) is not int or max_observations < 1:
+            raise ValueError('bootstrap_sketch_configuration')
+        self.bits = bytearray(bytes_limit)
+        self.key = os.urandom(32)
+        self.max_observations = max_observations
+        self.observations = 0
+        self.admitted = None
+        self.qualified = False
+
+    def positions(self, handle):
+        import hashlib
+        digest = hashlib.blake2b(handle.fsid + struct.pack('!i', handle.kind) + handle.opaque,
+                                 key=self.key, digest_size=16).digest()
+        return tuple(value % (len(self.bits) * 8) for value in struct.unpack('!4I', digest))
+
+    def changed(self, handle):
+        return all(self.bits[position // 8] & (1 << (position % 8)) for position in self.positions(handle))
+
+    def observe(self, events):
+        for event in events:
+            handles = [side.parent for side in event.sides]
+            if event.mask & ONDIR and event.mask & (RENAME | DELETE):
+                handles.append(event.target)
+            for handle in handles:
+                self.observations += 1
+                if self.observations > self.max_observations:
+                    raise Gap('bootstrap_change_budget')
+                if self.admitted is not None and self.admitted(handle) is not None:
+                    raise Gap('bootstrap_dirty')
+                for position in self.positions(handle):
+                    self.bits[position // 8] |= 1 << (position % 8)
+
+    def qualify(self, handles, admitted, source_check):
+        self.admitted = admitted
+        for index, handle in enumerate(handles):
+            if self.changed(handle):
+                raise Gap('bootstrap_dirty')
+            if index % 256 == 0:
+                source_check()
+        source_check()
+        self.qualified = True
+
+
 class BootstrapSession:
     """Conservative clean-baseline cut and bounded admitted replay controller.
 
@@ -191,7 +249,7 @@ class BootstrapSession:
     This controller cannot manufacture a kernel drain proof. Dirty bootstrap is
     rejected instead of retaining filesystem-wide raw events. No automatic retry.
     """
-    def __init__(self, generation, *, max_pending=1024):
+    def __init__(self, generation, *, max_pending=1024, bootstrap_changes=None):
         if type(max_pending) is not int or max_pending < 1:
             raise ValueError('configuration_invalid')
         self.filter = ExportFilter(generation, max_exports=max_pending)
@@ -202,11 +260,13 @@ class BootstrapSession:
         self.applied_sequence = 0
         self.baseline_finished = False
         self.inventory_work = set()
+        self.bootstrap_changes = bootstrap_changes
 
     def fail(self, reason):
         self.state = 'deferred'
         self.pending.clear()
         self.inventory_work.clear()
+        self.bootstrap_changes = None
         self.filter.fail(reason)
 
     def receive(self, data, generation, source_sequence, validate):
@@ -218,7 +278,13 @@ class BootstrapSession:
             # Decode before treating a batch as dirty: retain original gap reason.
             events = decode(data)
             if self.state == 'reconciling' and events:
-                self.fail('bootstrap_dirty')
+                if self.bootstrap_changes is None:
+                    self.fail('bootstrap_dirty')
+                if generation != self.filter.generation:
+                    self.fail('root_generation_changed')
+                self.bootstrap_changes.observe(events)
+                self.source_sequence = source_sequence
+                return ()
             exports = self.filter.consume(data, generation, validate)
             if len(exports) + len(self.pending) > self.max_pending:
                 self.fail('pending_limit')
@@ -230,9 +296,19 @@ class BootstrapSession:
         except Gap as error:
             self.fail(str(error))
 
+    def qualify_baseline(self, handles, admitted, source_check):
+        if self.state != 'reconciling' or self.bootstrap_changes is None:
+            self.fail('baseline_identity_invalid')
+        try:
+            self.bootstrap_changes.qualify(handles, admitted, source_check)
+        except Gap as error:
+            self.fail(str(error))
+
     def finish_baseline(self, generation):
         if self.state != 'reconciling' or generation != self.filter.generation:
             self.fail('baseline_identity_invalid')
+        if self.bootstrap_changes is not None and not self.bootstrap_changes.qualified:
+            self.fail('bootstrap_not_qualified')
         self.baseline_finished = True
 
     def drained(self, generation, source_sequence, now):
@@ -250,6 +326,7 @@ class BootstrapSession:
             self.state = 'pending'
         else:
             self.state = 'watching'
+            self.bootstrap_changes = None
 
     def applied(self, sequence):
         if self.state == 'deferred':

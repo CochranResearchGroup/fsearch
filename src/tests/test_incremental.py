@@ -2,6 +2,8 @@
 import base64,io,json,os,runpy,signal,socket,subprocess,sys,tempfile,time,types
 from pathlib import Path
 service,incremental,fixture=sys.argv[1:];os.umask(0o077)
+# run_path does not add the installed script directory for sibling modules.
+sys.path.insert(0, str(Path(service).resolve().parent))
 # A watcher may pause while traversing an admitted populated subtree. Idle
 # heartbeats must retain pending coverage until its explicit end marker.
 implementation=runpy.run_path(incremental)

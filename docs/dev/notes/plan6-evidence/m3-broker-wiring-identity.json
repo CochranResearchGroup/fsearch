@@ -1,0 +1,26 @@
+{
+  "baseline": "51f6af730f8b3f8f459c721ec6b6fffa8f34d49d",
+  "custody": "uncommitted source checkpoint; not integration-ready",
+  "source_sha256": {
+    "src/fsearch_fanotify_events.py": "1518f54511cb59442d20de40fb11dd29a745810b749fd4545a14d6cf9bad69b7",
+    "src/fsearch_broker_source.py": "098c96252e97ca84cd8643fac8c1f01e56d99230cc863a00096af3e4cda33124",
+    "src/fsearch_broker_setup.c": "be120a92f4bb3857d7418fa4eb8accfc188986700867ccc462061817b97fb263",
+    "src/tests/test_fanotify_events.py": "84d97cdb15dac2bf91e49b8589a36cc76e9467e3989ce5b473d041d743882518",
+    "src/tests/test_broker_source.py": "d65212c78601e595a8c5589d06105a2c1d3d41319cfc29b1e06f2b313e1def79",
+    "src/tests/test_broker_catalog.py": "b324dec9e832050548c3623fbd3fc0a6bd054f9a05bdea022f9a6d1421750c21",
+    "src/meson.build": "7d35906943075e1d7d9c6341907fdb44faf085fe677115fbb6988808f172389d",
+    "src/tests/meson.build": "4a3807d444bca258c3b836f794ad80899ccb63cf792e278299a1c3d7c7a6b662"
+  },
+  "runtime_sha256": {
+    "fsearch-service": "6e56f919b3671a6c6f8c5ca5f386e604d97b5aa1b74c051ae1a9585370c68696",
+    "fsearch-worker": "83266d9777dd7a63c0b5895d3623bdd42f2fd7ff6321b1ad05c50286ce31bb14",
+    "fsearch-refresh": "7ea98c67f0bec307386a0af126c359f91b746fac54855dacc1022d6f949a9cd2",
+    "fsearch-cli": "13abb2c49c6c2adbb81d9161ad7f1ad6c723e6b06c87d1ebc8b29c830cd0c582",
+    "fsearch-incremental": "c06159dce79e8d9144b6f9754790aeeb473fe3631a96675650196fe276ef5120"
+  },
+  "production": "MainPID=94383\nNRestarts=0\nExecStart={ path=/home/ecochran76/.local/share/fsearch/runtimes/e0ec8e758db755dbd3cf8b3a83c9e4a467c50137/bin/fsearch-service ; argv[]=/home/ecochran76/.local/share/fsearch/runtimes/e0ec8e758db755dbd3cf8b3a83c9e4a467c50137/bin/fsearch-service serve --socket /home/ecochran76/.local/share/fsearch/pilots/workspace.local/query.sock --database /home/ecochran76/.local/share/fsearch/pilots/workspace.local/snapshot.db ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }\n",
+  "host_pressure": {
+    "memory": "some avg10=3.83 avg60=2.83 avg300=2.73 total=285194428\nfull avg10=2.83 avg60=2.35 avg300=2.36 total=266440711\n",
+    "io": "some avg10=15.63 avg60=11.55 avg300=8.17 total=1441735586\nfull avg10=10.27 avg60=8.61 avg300=6.27 total=1286702557\n"
+  }
+}

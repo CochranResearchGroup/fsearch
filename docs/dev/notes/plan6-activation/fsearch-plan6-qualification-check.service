@@ -1,0 +1,22 @@
+[Unit]
+Description=Unprivileged actual owned broker acceptance
+Requires=fsearch-plan6-qualification-setup.socket
+After=fsearch-plan6-qualification-setup.socket
+[Service]
+Type=oneshot
+User=1000
+Group=1000
+Slice=fsearch-plan6-qualification.slice
+WorkingDirectory=/home/ecochran76/worktrees/fsearch-incremental-generations
+ExecStart=/usr/bin/python3 /run/fsearch-plan6-qualification/bin/tests/run_pressure_guard.py --receipt /home/ecochran76/worktrees/fsearch-incremental-generations/docs/dev/notes/plan6-evidence/m3-actual-owned-pressure.json --seconds 45 -- /usr/bin/python3 /run/fsearch-plan6-qualification/bin/tests/test_broker_process.py /run/fsearch-plan6-qualification/bin /tmp/file-searcher-incremental-coverage /run/fsearch-plan6-qualification/bin/fsearch-broker-boundary --actual-fixture-dir /home/ecochran76/worktrees/fsr-q-20261010
+CapabilityBoundingSet=
+NoNewPrivileges=yes
+Restart=no
+TimeoutStartSec=50
+LimitCORE=0
+StandardOutput=journal
+StandardError=journal
+TimeoutStopSec=5
+MemoryAccounting=yes
+MemoryMax=1280M
+MemorySwapMax=0

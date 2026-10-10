@@ -149,6 +149,16 @@ static FsearchHeadlessSnapshot *open_snapshot(const char *path, bool indexed, co
 
 FsearchHeadlessSnapshot *fsearch_headless_open(const char *path,const char **error) {return open_snapshot(path,true,error);}
 FsearchCatalog *fsearch_headless_catalog(FsearchHeadlessSnapshot*s) {return s->catalog;}
+bool fsearch_headless_restore_catalog(FsearchHeadlessSnapshot *s,int fd,const char **error) {
+    FsearchCatalogLimits limits={1200UL*1024*1024,4096,4096,16};
+    FsearchCatalog *next=fsearch_catalog_checkpoint_read(fd,s->identity,&limits,error);
+    if(!next)return false;
+    FsearchCatalog *old=s->catalog;s->catalog=next;fsearch_catalog_free(old);
+#if defined(__GLIBC__)
+    malloc_trim(0);
+#endif
+    return true;
+}
 FsearchHeadlessSnapshot *fsearch_headless_open_catalog(const char*path,const char**error) {
     FsearchHeadlessSnapshot*s=open_snapshot(path,false,error);if(!s)return NULL;
     g_autoptr(FsearchDatabaseChunkedArray)folders=fsearch_database_index_store_get_folders(s->store,DATABASE_INDEX_PROPERTY_NAME);
@@ -187,6 +197,83 @@ FsearchHeadlessSnapshot *fsearch_headless_open_catalog(const char*path,const cha
 #if defined(__GLIBC__)
     malloc_trim(0);
 #endif
+    return s;
+}
+
+/* Cached coverage metadata accompanies a private catalog generation. It never
+ * reconstructs roots by probing the filesystem or makes an observation claim. */
+#define CHECKPOINT_METADATA_MAX (64u * 1024u)
+static void metadata_u32(GByteArray *data,uint32_t value){value=GUINT32_TO_LE(value);g_byte_array_append(data,(guint8*)&value,4);}
+static void metadata_u64(GByteArray *data,uint64_t value){value=GUINT64_TO_LE(value);g_byte_array_append(data,(guint8*)&value,8);}
+static uint32_t metadata_read32(const guint8 *data){uint32_t value;memcpy(&value,data,4);return GUINT32_FROM_LE(value);}
+static uint64_t metadata_read64(const guint8 *data){uint64_t value;memcpy(&value,data,8);return GUINT64_FROM_LE(value);}
+static void metadata_digest(const void *data,size_t length,guint8 digest[32]) {
+    GChecksum *sum=g_checksum_new(G_CHECKSUM_SHA256);g_checksum_update(sum,data,length);
+    gsize n=32;g_checksum_get_digest(sum,digest,&n);g_checksum_free(sum);
+}
+static bool metadata_io(int fd,void *data,size_t size,bool writing) {
+    size_t offset=0;while(offset<size){ssize_t n=writing?pwrite(fd,(char*)data+offset,size-offset,offset):pread(fd,(char*)data+offset,size-offset,offset);
+        if(n<0&&errno==EINTR)continue;
+        if(n<=0)return false;
+        offset+=n;
+    }
+    return true;
+}
+bool fsearch_headless_checkpoint_metadata_write(FsearchHeadlessSnapshot *s,int fd,uint64_t sequence,const char **error) {
+    struct stat info;if(fstat(fd,&info)||!S_ISREG(info.st_mode)||info.st_size){*error="checkpoint_metadata_output";return false;}
+    g_autoptr(GPtrArray) roots=fsearch_database_include_manager_get_includes(s->root_metadata);
+    if(roots->len>1024){*error="checkpoint_metadata_budget";return false;}
+    g_autoptr(GByteArray) data=g_byte_array_new();g_byte_array_append(data,(guint8*)"FSHM0001",8);
+    guint8 digest[32];metadata_digest(s->identity,strlen(s->identity),digest);g_byte_array_append(data,digest,32);
+    metadata_u64(data,sequence);metadata_u64(data,s->stat.st_mtime);metadata_u32(data,roots->len);
+    for(unsigned i=0;i<roots->len;i++){
+        FsearchDatabaseInclude *root=g_ptr_array_index(roots,i);const char *path=fsearch_database_include_get_path(root);size_t n=strnlen(path,4097);
+        if(!n||n>4096||path[0]!='/'||data->len+16+n+32>CHECKPOINT_METADATA_MAX){*error="checkpoint_metadata_budget";return false;}
+        metadata_u32(data,n);metadata_u64(data,fsearch_database_include_get_last_scan_time(root));
+        metadata_u32(data,fsearch_database_include_get_last_error_code(root));g_byte_array_append(data,(guint8*)path,n);
+    }
+    metadata_digest(data->data,data->len,digest);g_byte_array_append(data,digest,32);
+    if(!metadata_io(fd,data->data,data->len,true)||fsync(fd)){*error="checkpoint_metadata_write_failed";return false;}
+    g_autofree guint8 *readback=g_malloc(data->len);struct stat written;
+    if(fstat(fd,&written)||written.st_size!=data->len||!metadata_io(fd,readback,data->len,false)||memcmp(data->data,readback,data->len)){
+        *error="checkpoint_metadata_readback_failed";return false;
+    }
+    return true;
+}
+static int checkpoint_private_open(const char *path) {
+    int fd=open(path,O_RDONLY|O_CLOEXEC|O_NOFOLLOW|O_NONBLOCK);struct stat info;
+    if(fd<0)return -1;
+    if(fstat(fd,&info)||!S_ISREG(info.st_mode)||info.st_uid!=geteuid()||(info.st_mode&077)||info.st_nlink!=1){close(fd);return -1;}
+    return fd;
+}
+FsearchHeadlessSnapshot *fsearch_headless_open_checkpoint(const char *path,const char *identity,const char **error) {
+    if(!identity||!*identity||strlen(identity)>256||strspn(identity,"0123456789:-")!=strlen(identity)){*error="checkpoint_binding";return NULL;}
+    g_autofree char *metadata_path=g_strconcat(path,".metadata",NULL);
+    int meta=checkpoint_private_open(metadata_path);struct stat info;
+    if(meta<0){*error="checkpoint_metadata_missing";return NULL;}
+    if(fstat(meta,&info)||info.st_size<92||info.st_size>CHECKPOINT_METADATA_MAX){close(meta);*error="checkpoint_metadata_invalid";return NULL;}
+    g_autofree guint8 *data=g_malloc(info.st_size);bool loaded=metadata_io(meta,data,info.st_size,false);close(meta);
+    if(!loaded){*error="checkpoint_metadata_invalid";return NULL;}
+    guint8 digest[32],binding[32];metadata_digest(data,info.st_size-32,digest);metadata_digest(identity,strlen(identity),binding);
+    if(!loaded||memcmp(data,"FSHM0001",8)||memcmp(data+8,binding,32)||memcmp(data+info.st_size-32,digest,32)){*error="checkpoint_metadata_invalid";return NULL;}
+    unsigned count=metadata_read32(data+56);size_t offset=60,end=info.st_size-32;
+    FsearchHeadlessSnapshot *s=g_new0(FsearchHeadlessSnapshot,1);s->identity=g_strdup(identity);s->stat.st_mtime=metadata_read64(data+48);
+    s->root_metadata=fsearch_database_include_manager_new();bool valid=count<=1024;
+    for(unsigned i=0;i<count&&valid;i++){
+        if(end-offset<16){valid=false;break;}
+        unsigned n=metadata_read32(data+offset);int64_t scan=metadata_read64(data+offset+4);uint32_t code=metadata_read32(data+offset+12);offset+=16;
+        if(!n||n>4096||n>end-offset||data[offset]!='/'||memchr(data+offset,0,n)){valid=false;break;}
+        g_autofree char *root_path=g_strndup((char*)data+offset,n);offset+=n;
+        g_autoptr(FsearchDatabaseInclude) root=fsearch_database_include_new(root_path,false,true,false,false,-1);
+        fsearch_database_include_set_last_scan_time(root,scan);fsearch_database_include_set_last_error_code(root,code);
+        fsearch_database_include_manager_add(s->root_metadata,root);
+    }
+    if(!valid||offset!=end){fsearch_headless_close(s);*error="checkpoint_metadata_invalid";return NULL;}
+    int fd=checkpoint_private_open(path);
+    if(fd<0){fsearch_headless_close(s);*error="checkpoint_open_failed";return NULL;}
+    FsearchCatalogLimits limits={1200UL*1024*1024,4096,4096,16};s->catalog=fsearch_catalog_checkpoint_read(fd,identity,&limits,error);close(fd);
+    FsearchCatalogStatus state={0};if(s->catalog)fsearch_catalog_status(s->catalog,&state);
+    if(!s->catalog||state.sequence!=metadata_read64(data+40)){if(s->catalog)*error="checkpoint_metadata_sequence";fsearch_headless_close(s);return NULL;}
     return s;
 }
 

@@ -1,0 +1,19 @@
+{
+  "verdict": "bounded_durable_catalog_replay_source_pass",
+  "source_base": "51f6af730f8b3f8f459c721ec6b6fffa8f34d49d",
+  "publication": "uncommitted_unpublished",
+  "all_sampled_owned_pids_absent": 9,
+  "sha256": {
+    "/home/ecochran76/worktrees/fsearch-incremental-generations/src/fsearch_service.py": "8387c96a4bcafbfa37586fd6dbe2958e7a052c5badac6f2e98eb778a57719bef",
+    "/home/ecochran76/worktrees/fsearch-incremental-generations/src/fsearch_catalog_journal.py": "7b58003930809afb67eb39bf2f4d31c7cb005f92fccc6260ac2ce59754d0ebd7",
+    "/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests/test_catalog_durability.py": "87de1fc436b9267315bff9f0d514d7530d71a8586a51c06bf412f93686acc945",
+    "/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests/test_catalog_journal.py": "f0f935f26cae451b6bef4825731fe85381d497fa3cd467191504ca6303d018ab"
+  },
+  "limitations": [
+    "opt-in --catalog-journal",
+    "1024-record bound; checkpoint rollover not implemented",
+    "replacement refused until checkpoint support",
+    "fsync assumes qualified local filesystem semantics; no power-cut proof",
+    "replay coverage deferred due lost observation interval; no automatic watching"
+  ]
+}

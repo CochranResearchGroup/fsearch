@@ -1,0 +1,19 @@
+[Unit]
+Description=One bounded FSearch fanotify setup
+StartLimitIntervalSec=infinity
+StartLimitBurst=1
+[Service]
+Type=oneshot
+User=1000
+Group=1000
+Slice=fsearch-plan6-qualification.slice
+ExecStart=/home/ecochran76/worktrees/fsearch-broker-candidate/bin/fsearch-broker-setup --listener-fd 3
+CapabilityBoundingSet=CAP_SYS_ADMIN
+AmbientCapabilities=CAP_SYS_ADMIN
+NoNewPrivileges=yes
+Restart=no
+TimeoutStartSec=5
+LimitCORE=0
+StandardOutput=null
+StandardError=journal
+TimeoutStopSec=5

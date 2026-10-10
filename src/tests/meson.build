@@ -160,5 +160,26 @@ if host_machine.system() == 'linux'
         depends: [fsearch_monitor_worker, fsearch_refresh_worker, fsearch_worker, snapshot_fixture], timeout: 40)
 endif
 if host_machine.system() == 'linux'
+    test('catalog_journal_boundaries', python, args: files('test_catalog_journal.py'), timeout: 15)
+    checkpoint_fault_fixture = shared_library('checkpoint_fault_fixture', 'checkpoint_fault_fixture.c', dependencies: cc.find_library('dl'), install: false)
+    test('catalog_durable_capacity', python, args: [files('test_catalog_capacity.py'), join_paths(meson.project_build_root(), 'src')],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 120)
+    test('catalog_durable_replacement', python, args: [files('test_catalog_replacement_durability.py'), join_paths(meson.project_build_root(), 'src')],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 40)
+    test('catalog_durable_rollover', python, args: [files('test_catalog_rollover.py'), join_paths(meson.project_build_root(), 'src'), checkpoint_fault_fixture.full_path()],
+        depends: [fsearch_refresh_worker, fsearch_worker, checkpoint_fault_fixture], timeout: 30)
+    test('catalog_native_checkpoint', python, args: [files('test_catalog_checkpoint_worker.py'), join_paths(meson.project_build_root(), 'src'), checkpoint_fault_fixture.full_path()],
+        depends: [fsearch_refresh_worker, fsearch_worker, checkpoint_fault_fixture], timeout: 30)
+    test('catalog_durable_replay', python, args: [files('test_catalog_durability.py'), join_paths(meson.project_build_root(), 'src')],
+        depends: [fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 30)
     test('fanotify_event_filter', python, args: files('test_fanotify_events.py'), timeout: 10)
+    test('fanotify_owned_coalescing', python, args: files('test_fanotify_coalescing.py'), timeout: 10)
+    test('broker_source_transport', python, args: files('test_broker_source.py'), timeout: 10)
+    test_broker_listener = executable('test_broker_listener', 'test_broker_listener.c', install: false)
+    test('broker_listener_credentials', test_broker_listener, timeout: 10)
+    test_broker_mark_descriptor = executable('test_broker_mark_descriptor', 'test_broker_mark_descriptor.c', install: false)
+    test('broker_mark_descriptor', test_broker_mark_descriptor, timeout: 10)
+    test('broker_directory_map', python, args: files('test_broker_admission.py'), timeout: 10)
+    test('broker_process_cli_mcp', python, args: [files('test_broker_process.py'), join_paths(meson.project_build_root(), 'src'), '-', broker_boundary.full_path()],
+        depends: [broker_boundary, fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 30)
 endif

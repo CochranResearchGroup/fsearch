@@ -1,0 +1,96 @@
+{
+  "command": [
+    "/home/ecochran76/worktrees/fsearch-plan6-tools/bin/meson",
+    "test",
+    "-C",
+    "/home/ecochran76/worktrees/fsearch-plan6-build",
+    "--no-rebuild",
+    "--num-processes",
+    "1",
+    "immutable_catalog",
+    "catalog_durable_replacement",
+    "catalog_durable_rollover",
+    "catalog_native_checkpoint",
+    "catalog_journal_boundaries",
+    "catalog_durable_replay",
+    "fanotify_event_filter",
+    "fanotify_owned_coalescing",
+    "broker_source_transport",
+    "broker_listener_credentials",
+    "broker_mark_descriptor",
+    "broker_directory_map",
+    "broker_process_cli_mcp",
+    "headless_service"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 0.312354221008718,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 17203200,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.24191333603812382,
+  "initial_host": {
+    "MemAvailable": 38535643136,
+    "SwapFree": 15560704,
+    "memory_some_avg10": 0.1,
+    "memory_full_avg10": 0.08,
+    "io_some_avg10": 3.6,
+    "io_full_avg10": 2.98
+  },
+  "final_host": {
+    "MemAvailable": 38666739712,
+    "SwapFree": 15564800,
+    "memory_some_avg10": 0.1,
+    "memory_full_avg10": 0.08,
+    "io_some_avg10": 3.6,
+    "io_full_avg10": 2.98
+  },
+  "samples": [
+    {
+      "seconds": 0.03539382200688124,
+      "host": {
+        "MemAvailable": 38535127040,
+        "SwapFree": 15560704,
+        "memory_some_avg10": 0.1,
+        "memory_full_avg10": 0.08,
+        "io_some_avg10": 3.6,
+        "io_full_avg10": 2.98
+      },
+      "rss_bytes": 17203200,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.03485093399649486,
+      "swap_bytes": 0,
+      "pids": [
+        34460
+      ]
+    },
+    {
+      "seconds": 0.27730715804500505,
+      "host": {
+        "MemAvailable": 38662389760,
+        "SwapFree": 15564800,
+        "memory_some_avg10": 0.1,
+        "memory_full_avg10": 0.08,
+        "io_some_avg10": 3.6,
+        "io_full_avg10": 2.98
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0413965200423263,
+      "swap_bytes": 0,
+      "pids": [
+        34460
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-checkpoint-review-20261010.service",
+    "memory.current": 8523776,
+    "memory.peak": 36302848,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

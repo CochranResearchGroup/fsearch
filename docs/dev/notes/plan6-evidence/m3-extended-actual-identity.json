@@ -1,0 +1,31 @@
+{
+  "verdict": "extended_actual_owned_pass",
+  "worker_pids_absent": [
+    80234,
+    81301
+  ],
+  "pressure": {
+    "exit_code": 0,
+    "reason": null,
+    "elapsed_seconds": 14.893082429945935,
+    "cgroup": {
+      "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-actual-extended-20261010.service",
+      "memory.current": 18259968,
+      "memory.peak": 145457152,
+      "memory.max": 1342177280,
+      "memory.swap.current": 0,
+      "memory.swap.peak": 0,
+      "memory.swap.max": 0
+    },
+    "peak_sampled_rss_bytes": 202129408
+  },
+  "hashes": {
+    "/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests/test_broker_process.py": "51e4053024ad63b694854d380815d252f302cf1f8d6aa469dbd92449ea315794",
+    "/home/ecochran76/worktrees/fsearch-incremental-generations/src/fsearch_fanotify_events.py": "09d9d0417822310a01dfec35e06f7c3b84f7110ace86b37c918dacbab263d7a9",
+    "/usr/local/libexec/fsearch-broker/installation.json": "bbc11961f12a621a47320e47aa5c667f98c23d99b7be7f2423f58a3299fba2de"
+  },
+  "limits": [
+    "restart uses clean rebuild, not durable replay",
+    "not real-workspace or scale acceptance"
+  ]
+}

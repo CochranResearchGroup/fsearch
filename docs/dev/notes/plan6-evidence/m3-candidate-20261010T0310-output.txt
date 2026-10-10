@@ -1,0 +1,35 @@
+Running as unit: fsearch-plan6-candidate-20261010T0310.service; invocation ID: 332e523321384468bf5d8a112d2ace60
+{"command": ["cc", "-std=gnu11", "-Wall", "-Wextra", "-Werror", "-O2", "src/fsearch_broker_setup.c", "-o", "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/fsearch-broker-setup"]}
+{"command": ["cc", "-std=gnu11", "-Wall", "-Wextra", "-Werror", "-O2", "src/tests/test_broker_listener.c", "-o", "/home/ecochran76/worktrees/fsearch-broker-listener-build/test_broker_listener"]}
+{"command": ["/home/ecochran76/worktrees/fsearch-broker-listener-build/test_broker_listener"]}
+broker_listener_pass: creator credentials survive inherited accept; wrong creator/client/path and socketpair refused; no descriptor leak; child reaped
+{"command": ["python3", "src/tests/test_fanotify_events.py"]}
+.....................
+----------------------------------------------------------------------
+Ran 21 tests in 0.007s
+
+OK
+{"command": ["python3", "src/tests/test_broker_source.py"]}
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.002s
+
+OK
+{"command": ["python3", "src/tests/test_broker_admission.py"]}
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.003s
+
+OK
+{"command": ["python3", "src/tests/qualify_broker_inventory_race.py", "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/fsearch-broker-boundary", "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/tests/libbroker_inventory_race_fixture.so"]}
+{"status": "diagnostic_complete", "fixture_reached": true, "case": "move_after_admission", "source_exit": 4, "deferred_control": "PASS", "outside_export": "PASS", "outside_metadata_read": "FAIL", "outside_secondary_probe": "PASS", "current_contract": "PASS", "contract_disposition": "accepted_bounded_transition", "outside_read_count": 1, "trace_evidence": ["74432 getdents64(7<<owned-fixture>/outside-owned-fixture>, 0x636a29814600 /* 4 entries */, 32768) = 128"]}
+{"command": ["python3", "src/tests/qualify_broker_inventory_race.py", "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/fsearch-broker-boundary", "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/tests/libbroker_inventory_race_fixture.so", "--pre-moved"]}
+{"status": "diagnostic_complete", "fixture_reached": false, "case": "outside_before_admission", "source_exit": 4, "deferred_control": "PASS", "outside_export": "PASS", "outside_metadata_read": "PASS", "outside_secondary_probe": "PASS", "current_contract": "PASS", "contract_disposition": "rejected_before_read", "outside_read_count": 0, "trace_evidence": []}
+{"command": ["python3", "src/tests/test_broker_process.py", "/home/ecochran76/worktrees/fsearch-broker-candidate/bin", "/tmp/file-searcher-incremental-coverage", "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/fsearch-broker-boundary"]}
+{"status": "assembled_broker_fixture_pass", "controls": ["named_listener_handoff", "outside_bootstrap_churn", "startup", "create", "directory_inventory", "ancestor_rename", "root_replacement", "inherited_fixture_handoff", "overflow", "restart_after_reap"], "actual_delivery": "NOT_QUALIFIED", "adversarial_confinement": "SEPARATE_RECEIPT_REQUIRED", "boundary_pids_reaped": [74497, 75543]}
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 8.704s
+CPU time consumed: 8.450s
+Memory peak: 256.0K
+Memory swap peak: 0B

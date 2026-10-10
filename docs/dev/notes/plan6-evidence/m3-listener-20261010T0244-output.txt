@@ -1,0 +1,19 @@
+Running as unit: fsearch-plan6-listener-20261010T0244.service; invocation ID: 0f1f98d00a4e431c8ce3c9ee4a600635
+{"command": ["cc", "-std=gnu11", "-Wall", "-Wextra", "-Werror", "-O2", "src/fsearch_broker_setup.c", "-o", "/home/ecochran76/worktrees/fsearch-broker-listener-build/fsearch-broker-setup"]}
+{"command": ["cc", "-std=gnu11", "-Wall", "-Wextra", "-Werror", "-O2", "src/tests/test_broker_listener.c", "-o", "/home/ecochran76/worktrees/fsearch-broker-listener-build/test_broker_listener"]}
+{"command": ["/home/ecochran76/worktrees/fsearch-broker-listener-build/test_broker_listener"]}
+broker_listener_pass: creator credentials survive inherited accept; wrong creator/client/path and socketpair refused; no descriptor leak; child reaped
+{"command": ["python3", "src/tests/test_broker_source.py"]}
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.002s
+
+OK
+{"command": ["python3", "src/tests/test_broker_process.py", "/tmp/fsearch-generations-build/src", "/tmp/file-searcher-incremental-coverage", "/tmp/fsearch-generations-build/src/fsearch-broker-boundary"]}
+{"status": "assembled_broker_fixture_pass", "controls": ["named_listener_handoff", "inherited_fixture_handoff", "startup", "create", "directory_inventory", "ancestor_rename", "overflow", "restart_after_reap", "root_replacement"], "actual_delivery": "NOT_QUALIFIED", "adversarial_confinement": "NOT_QUALIFIED", "boundary_pids_reaped": [80400, 81407]}
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 8.043s
+CPU time consumed: 7.258s
+Memory peak: 256.0K
+Memory swap peak: 0B

@@ -91,6 +91,9 @@ fsearch_enums = gnome.mkenums_simple('fsearch_enums',
 )
 
 if host_machine.system() == 'linux'
+    # Source preparation only. No installation or privilege grant is implied.
+    executable('fsearch-broker-setup', 'fsearch_broker_setup.c', install: false)
+    broker_boundary = executable('fsearch-broker-boundary', 'fsearch_broker_boundary.c', dependencies: dependency('glib-2.0'), install: false)
     libfsearch_sources += ['fsearch_headless.c', 'fsearch_catalog.c']
 endif
 
@@ -131,6 +134,8 @@ if host_machine.system() == 'linux'
     fsearch_monitor_worker = executable('fsearch-monitor-worker', 'fsearch_monitor_worker.c', dependencies: dependency('glib-2.0'), install: true)
     fsearch_refresh_worker = executable('fsearch-refresh-worker', 'fsearch_refresh_worker.c', dependencies: libfsearch_dep, install: true)
     fsearch_worker = executable('fsearch-worker', 'fsearch_worker.c', dependencies: libfsearch_dep, install: true)
+    configure_file(input: 'fsearch_catalog_journal.py', output: 'fsearch_catalog_journal.py', copy: true,
+        install: true, install_dir: get_option('bindir'))
     fsearch_service = configure_file(input: 'fsearch_service.py', output: 'fsearch-service', copy: true,
         install: true, install_dir: get_option('bindir'), install_mode: 'rwxr-xr-x')
 endif

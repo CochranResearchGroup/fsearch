@@ -1,0 +1,48 @@
+{
+  "command": [
+    "uvx",
+    "--with",
+    "ninja",
+    "--from",
+    "meson",
+    "meson",
+    "test",
+    "-C",
+    "/tmp/fsearch-generations-build",
+    "--print-errorlogs"
+  ],
+  "reason": "spawn_error: [Errno 2] No such file or directory: 'uvx'",
+  "exit_code": null,
+  "elapsed_seconds": 0.0009351579938083887,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 0,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0,
+  "initial_host": {
+    "MemAvailable": 13592428544,
+    "SwapFree": 0,
+    "memory_some_avg10": 1.06,
+    "memory_full_avg10": 0.97,
+    "io_some_avg10": 6.78,
+    "io_full_avg10": 5.41
+  },
+  "final_host": {
+    "MemAvailable": 13592367104,
+    "SwapFree": 0,
+    "memory_some_avg10": 1.06,
+    "memory_full_avg10": 0.97,
+    "io_some_avg10": 6.78,
+    "io_full_avg10": 5.41
+  },
+  "samples": [],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-broker-native-check.service",
+    "memory.current": 7720960,
+    "memory.peak": 7761920,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

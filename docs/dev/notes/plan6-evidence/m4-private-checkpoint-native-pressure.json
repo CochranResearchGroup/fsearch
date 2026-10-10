@@ -1,0 +1,79 @@
+{
+  "command": [
+    "python3",
+    "src/tests/test_catalog_checkpoint_worker.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src/tests/libcheckpoint_fault_fixture.so"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 0.3576696990057826,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 18186240,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2480914909974672,
+  "initial_host": {
+    "MemAvailable": 34694414336,
+    "SwapFree": 8192,
+    "memory_some_avg10": 0.19,
+    "memory_full_avg10": 0.19,
+    "io_some_avg10": 2.15,
+    "io_full_avg10": 1.34
+  },
+  "final_host": {
+    "MemAvailable": 34568069120,
+    "SwapFree": 0,
+    "memory_some_avg10": 0.19,
+    "memory_full_avg10": 0.19,
+    "io_some_avg10": 2.15,
+    "io_full_avg10": 1.34
+  },
+  "samples": [
+    {
+      "seconds": 0.05194938700878993,
+      "host": {
+        "MemAvailable": 34694156288,
+        "SwapFree": 8192,
+        "memory_some_avg10": 0.19,
+        "memory_full_avg10": 0.19,
+        "io_some_avg10": 2.15,
+        "io_full_avg10": 1.34
+      },
+      "rss_bytes": 18186240,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0512967889662832,
+      "swap_bytes": 0,
+      "pids": [
+        33248
+      ]
+    },
+    {
+      "seconds": 0.3000408780062571,
+      "host": {
+        "MemAvailable": 34587570176,
+        "SwapFree": 0,
+        "memory_some_avg10": 0.19,
+        "memory_full_avg10": 0.19,
+        "io_some_avg10": 2.15,
+        "io_full_avg10": 1.34
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.047896984964609146,
+      "swap_bytes": 0,
+      "pids": [
+        33248
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-private-native-test.service",
+    "memory.current": 9043968,
+    "memory.peak": 26800128,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

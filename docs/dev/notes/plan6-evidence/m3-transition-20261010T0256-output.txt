@@ -1,0 +1,25 @@
+Running as unit: fsearch-plan6-transition-20261010T0256.service; invocation ID: 626b938b416144159436e30cccbc3f80
+{"command": ["python3", "src/tests/qualify_broker_inventory_race.py", "/tmp/fsearch-generations-build/src/fsearch-broker-boundary", "/tmp/fsearch-generations-build/src/tests/libbroker_inventory_race_fixture.so"]}
+{"status": "diagnostic_complete", "fixture_reached": true, "case": "move_after_admission", "source_exit": 4, "deferred_control": "PASS", "outside_export": "PASS", "outside_metadata_read": "FAIL", "outside_secondary_probe": "PASS", "current_contract": "PASS", "contract_disposition": "accepted_bounded_transition", "outside_read_count": 1, "trace_evidence": ["30796 getdents64(7<<owned-fixture>/outside-owned-fixture>, 0x6238e4304600 /* 4 entries */, 32768) = 128"]}
+{"command": ["python3", "src/tests/qualify_broker_inventory_race.py", "/tmp/fsearch-generations-build/src/fsearch-broker-boundary", "/tmp/fsearch-generations-build/src/tests/libbroker_inventory_race_fixture.so", "--pre-moved"]}
+{"status": "diagnostic_complete", "fixture_reached": false, "case": "outside_before_admission", "source_exit": 4, "deferred_control": "PASS", "outside_export": "PASS", "outside_metadata_read": "PASS", "outside_secondary_probe": "PASS", "current_contract": "PASS", "contract_disposition": "rejected_before_read", "outside_read_count": 0, "trace_evidence": []}
+{"command": ["python3", "src/tests/test_fanotify_events.py"]}
+................
+----------------------------------------------------------------------
+Ran 16 tests in 0.002s
+
+OK
+{"command": ["python3", "src/tests/test_broker_source.py"]}
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.002s
+
+OK
+{"command": ["python3", "src/tests/test_broker_process.py", "/tmp/fsearch-generations-build/src", "/tmp/file-searcher-incremental-coverage", "/tmp/fsearch-generations-build/src/fsearch-broker-boundary"]}
+{"status": "assembled_broker_fixture_pass", "controls": ["named_listener_handoff", "inherited_fixture_handoff", "startup", "create", "directory_inventory", "ancestor_rename", "overflow", "restart_after_reap", "root_replacement"], "actual_delivery": "NOT_QUALIFIED", "adversarial_confinement": "NOT_QUALIFIED", "boundary_pids_reaped": [30849, 31386]}
+Finished with result: success
+Main processes terminated with: code=exited/status=0
+Service runtime: 7.287s
+CPU time consumed: 6.842s
+Memory peak: 288.0K
+Memory swap peak: 0B

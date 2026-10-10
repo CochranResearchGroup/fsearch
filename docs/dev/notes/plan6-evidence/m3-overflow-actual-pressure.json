@@ -1,0 +1,83 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/tests/test_broker_process.py",
+    "/home/ecochran76/worktrees/fsearch-broker-candidate/bin",
+    "/tmp/file-searcher-incremental-coverage",
+    "/home/ecochran76/worktrees/fsearch-broker-candidate/bin/fsearch-broker-boundary",
+    "--actual-fixture-dir",
+    "/home/ecochran76/worktrees/fsr-q-20261010",
+    "--actual-overflow"
+  ],
+  "reason": null,
+  "exit_code": 2,
+  "elapsed_seconds": 0.33096535701770335,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 17203200,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2389918770059012,
+  "initial_host": {
+    "MemAvailable": 37556264960,
+    "SwapFree": 16384,
+    "memory_some_avg10": 0.61,
+    "memory_full_avg10": 0.34,
+    "io_some_avg10": 12.35,
+    "io_full_avg10": 8.43
+  },
+  "final_host": {
+    "MemAvailable": 37587402752,
+    "SwapFree": 163840,
+    "memory_some_avg10": 0.61,
+    "memory_full_avg10": 0.34,
+    "io_some_avg10": 12.35,
+    "io_full_avg10": 8.43
+  },
+  "samples": [
+    {
+      "seconds": 0.054447912028990686,
+      "host": {
+        "MemAvailable": 37554847744,
+        "SwapFree": 16384,
+        "memory_some_avg10": 0.61,
+        "memory_full_avg10": 0.34,
+        "io_some_avg10": 12.35,
+        "io_full_avg10": 8.43
+      },
+      "rss_bytes": 17203200,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.05396186903817579,
+      "swap_bytes": 0,
+      "pids": [
+        92288
+      ]
+    },
+    {
+      "seconds": 0.2934397890348919,
+      "host": {
+        "MemAvailable": 37505388544,
+        "SwapFree": 65536,
+        "memory_some_avg10": 0.61,
+        "memory_full_avg10": 0.34,
+        "io_some_avg10": 12.35,
+        "io_full_avg10": 8.43
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.03821386001072824,
+      "swap_bytes": 0,
+      "pids": [
+        92288
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-actual-overflow-20261010.service",
+    "memory.current": 8994816,
+    "memory.peak": 20008960,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

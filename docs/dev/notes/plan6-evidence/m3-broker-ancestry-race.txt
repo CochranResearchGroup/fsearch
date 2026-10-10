@@ -1,0 +1,15 @@
+Running as unit: fsearch-plan6-race-check.service; invocation ID: c58804ee116c49eeab922e484de26f94
+Traceback (most recent call last):
+  File "/tmp/fsearch-incremental-generations/src/tests/qualify_broker_inventory_race.py", line 61, in <module>
+    if __name__ == '__main__': main()
+                               ^^^^^^
+  File "/tmp/fsearch-incremental-generations/src/tests/qualify_broker_inventory_race.py", line 37, in main
+    assert select.select([progress_read], [], [], 3)[0], 'fixture did not reach read boundary'
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+AssertionError: fixture did not reach read boundary
+Finished with result: exit-code
+Main processes terminated with: code=exited/status=1
+Service runtime: 3.366s
+CPU time consumed: 487ms
+Memory peak: 512.0K
+Memory swap peak: 0B

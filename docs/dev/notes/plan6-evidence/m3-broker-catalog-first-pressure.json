@@ -1,0 +1,34 @@
+{
+  "command": [
+    "python3",
+    "src/tests/test_broker_catalog.py",
+    "/tmp/fsearch-plan6-m3-runtime",
+    "/tmp/file-searcher-incremental-coverage"
+  ],
+  "reason": "host_pressure_preflight",
+  "exit_code": null,
+  "elapsed_seconds": 0.00016284699086099863,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 0,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0,
+  "initial_host": {
+    "MemAvailable": 19641929728,
+    "SwapFree": 7149719552,
+    "memory_some_avg10": 2.92,
+    "memory_full_avg10": 2.92,
+    "io_some_avg10": 2.6,
+    "io_full_avg10": 2.53
+  },
+  "final_host": {
+    "MemAvailable": 19641929728,
+    "SwapFree": 7149719552,
+    "memory_some_avg10": 2.92,
+    "memory_full_avg10": 2.92,
+    "io_some_avg10": 2.6,
+    "io_full_avg10": 2.53
+  },
+  "samples": [],
+  "cgroup": null,
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

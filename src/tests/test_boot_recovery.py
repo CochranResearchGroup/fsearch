@@ -1,7 +1,8 @@
 """Boot-proof lifecycle boundary; synthetic private state, no root traversal."""
-import importlib.util, json, os, tempfile, unittest, uuid
+import importlib.util, json, os, sys, tempfile, unittest, uuid
 from pathlib import Path
 from unittest.mock import patch
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 spec = importlib.util.spec_from_file_location('lifecycle', Path(__file__).parents[1]/'fsearch_service.py')
 lifecycle = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(lifecycle)
