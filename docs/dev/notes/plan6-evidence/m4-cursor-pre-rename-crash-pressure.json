@@ -1,0 +1,137 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "src/tests/test_catalog_append_crash.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src",
+    "cursor_pre_rename"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 1.1320552820106968,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 44011520,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2622485639876686,
+  "initial_host": {
+    "MemAvailable": 42093928448,
+    "SwapFree": 0,
+    "memory_some_avg10": 1.91,
+    "memory_full_avg10": 1.35,
+    "io_some_avg10": 4.98,
+    "io_full_avg10": 3.33
+  },
+  "final_host": {
+    "MemAvailable": 42163970048,
+    "SwapFree": 12288,
+    "memory_some_avg10": 1.91,
+    "memory_full_avg10": 1.35,
+    "io_some_avg10": 4.98,
+    "io_full_avg10": 3.33
+  },
+  "samples": [
+    {
+      "seconds": 0.05036962399026379,
+      "host": {
+        "MemAvailable": 42092896256,
+        "SwapFree": 0,
+        "memory_some_avg10": 1.91,
+        "memory_full_avg10": 1.35,
+        "io_some_avg10": 4.98,
+        "io_full_avg10": 3.33
+      },
+      "rss_bytes": 14581760,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04966909298673272,
+      "swap_bytes": 0,
+      "pids": [
+        40096
+      ]
+    },
+    {
+      "seconds": 0.3126181879779324,
+      "host": {
+        "MemAvailable": 42067668992,
+        "SwapFree": 0,
+        "memory_some_avg10": 1.91,
+        "memory_full_avg10": 1.35,
+        "io_some_avg10": 4.98,
+        "io_full_avg10": 3.33
+      },
+      "rss_bytes": 35819520,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.06201107701053843,
+      "swap_bytes": 0,
+      "pids": [
+        40096,
+        40136
+      ]
+    },
+    {
+      "seconds": 0.5644573909812607,
+      "host": {
+        "MemAvailable": 42135851008,
+        "SwapFree": 8192,
+        "memory_some_avg10": 1.91,
+        "memory_full_avg10": 1.35,
+        "io_some_avg10": 4.98,
+        "io_full_avg10": 3.33
+      },
+      "rss_bytes": 44011520,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.05155919695971534,
+      "swap_bytes": 0,
+      "pids": [
+        40096,
+        40154,
+        40136
+      ]
+    },
+    {
+      "seconds": 0.8209241119911894,
+      "host": {
+        "MemAvailable": 42109009920,
+        "SwapFree": 8192,
+        "memory_some_avg10": 1.91,
+        "memory_full_avg10": 1.35,
+        "io_some_avg10": 4.98,
+        "io_full_avg10": 3.33
+      },
+      "rss_bytes": 36536320,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.05630651698447764,
+      "swap_bytes": 0,
+      "pids": [
+        40096,
+        40231
+      ]
+    },
+    {
+      "seconds": 1.0721066659898497,
+      "host": {
+        "MemAvailable": 42153803776,
+        "SwapFree": 12288,
+        "memory_some_avg10": 1.91,
+        "memory_full_avg10": 1.35,
+        "io_some_avg10": 4.98,
+        "io_full_avg10": 3.33
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.051019836973864585,
+      "swap_bytes": 0,
+      "pids": [
+        40096
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-pre-rename-crash-20261010.service",
+    "memory.current": 8740864,
+    "memory.peak": 29343744,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

@@ -1,0 +1,282 @@
+{
+  "command": [
+    "/home/ecochran76/worktrees/fsearch-plan6-tools/bin/meson",
+    "test",
+    "-C",
+    "/home/ecochran76/worktrees/fsearch-plan6-build",
+    "catalog_append_log_fsync_crash",
+    "catalog_append_cursor_pre_rename_crash",
+    "catalog_append_cursor_published_crash",
+    "--print-errorlogs"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 2.7296414809534326,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 176812032,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2993057200219482,
+  "initial_host": {
+    "MemAvailable": 41426415616,
+    "SwapFree": 8192,
+    "memory_some_avg10": 2.09,
+    "memory_full_avg10": 1.7,
+    "io_some_avg10": 5.56,
+    "io_full_avg10": 3.6
+  },
+  "final_host": {
+    "MemAvailable": 41314967552,
+    "SwapFree": 45056,
+    "memory_some_avg10": 2.25,
+    "memory_full_avg10": 1.76,
+    "io_some_avg10": 6.37,
+    "io_full_avg10": 4.04
+  },
+  "samples": [
+    {
+      "seconds": 0.06115701998351142,
+      "host": {
+        "MemAvailable": 41426354176,
+        "SwapFree": 8192,
+        "memory_some_avg10": 2.09,
+        "memory_full_avg10": 1.7,
+        "io_some_avg10": 5.56,
+        "io_full_avg10": 3.6
+      },
+      "rss_bytes": 15892480,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.06019974104128778,
+      "swap_bytes": 0,
+      "pids": [
+        43007
+      ]
+    },
+    {
+      "seconds": 0.31406396796228364,
+      "host": {
+        "MemAvailable": 41388687360,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.09,
+        "memory_full_avg10": 1.7,
+        "io_some_avg10": 5.56,
+        "io_full_avg10": 3.6
+      },
+      "rss_bytes": 25231360,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.052528826985508204,
+      "swap_bytes": 0,
+      "pids": [
+        43072,
+        43007
+      ]
+    },
+    {
+      "seconds": 0.5695735029876232,
+      "host": {
+        "MemAvailable": 41351929856,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.09,
+        "memory_full_avg10": 1.7,
+        "io_some_avg10": 5.56,
+        "io_full_avg10": 3.6
+      },
+      "rss_bytes": 35545088,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.055391877016518265,
+      "swap_bytes": 0,
+      "pids": [
+        43007
+      ]
+    },
+    {
+      "seconds": 0.8258410429698415,
+      "host": {
+        "MemAvailable": 41321074688,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.09,
+        "memory_full_avg10": 1.7,
+        "io_some_avg10": 5.56,
+        "io_full_avg10": 3.6
+      },
+      "rss_bytes": 75812864,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0558217890211381,
+      "swap_bytes": 0,
+      "pids": [
+        43362,
+        43364,
+        43365,
+        43007
+      ]
+    },
+    {
+      "seconds": 1.077416578948032,
+      "host": {
+        "MemAvailable": 41295036416,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.09,
+        "memory_full_avg10": 1.7,
+        "io_some_avg10": 5.56,
+        "io_full_avg10": 3.6
+      },
+      "rss_bytes": 76304384,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.05128301098011434,
+      "swap_bytes": 0,
+      "pids": [
+        43362,
+        43364,
+        43365,
+        43007
+      ]
+    },
+    {
+      "seconds": 1.3284729569568299,
+      "host": {
+        "MemAvailable": 41265004544,
+        "SwapFree": 20480,
+        "memory_some_avg10": 2.09,
+        "memory_full_avg10": 1.7,
+        "io_some_avg10": 5.56,
+        "io_full_avg10": 3.6
+      },
+      "rss_bytes": 77778944,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.050662360968999565,
+      "swap_bytes": 0,
+      "pids": [
+        43362,
+        43364,
+        43365,
+        43007
+      ]
+    },
+    {
+      "seconds": 1.627778676978778,
+      "host": {
+        "MemAvailable": 41284661248,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.09,
+        "memory_full_avg10": 1.7,
+        "io_some_avg10": 5.56,
+        "io_full_avg10": 3.6
+      },
+      "rss_bytes": 144007168,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.09904421301325783,
+      "swap_bytes": 0,
+      "pids": [
+        43553,
+        43555,
+        43558,
+        43559,
+        43561,
+        43550,
+        43007
+      ]
+    },
+    {
+      "seconds": 1.9147745949449018,
+      "host": {
+        "MemAvailable": 41265864704,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.25,
+        "memory_full_avg10": 1.76,
+        "io_some_avg10": 6.37,
+        "io_full_avg10": 4.04
+      },
+      "rss_bytes": 151175168,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.08667426597094163,
+      "swap_bytes": 0,
+      "pids": [
+        43553,
+        43555,
+        43575,
+        43576,
+        43578,
+        43550,
+        43007
+      ]
+    },
+    {
+      "seconds": 2.156556791975163,
+      "host": {
+        "MemAvailable": 41238585344,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.25,
+        "memory_full_avg10": 1.76,
+        "io_some_avg10": 6.37,
+        "io_full_avg10": 4.04
+      },
+      "rss_bytes": 176812032,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0417013390106149,
+      "swap_bytes": 0,
+      "pids": [
+        43553,
+        43586,
+        43555,
+        43582,
+        43583,
+        43575,
+        43576,
+        43578,
+        43550,
+        43007
+      ]
+    },
+    {
+      "seconds": 2.418273754999973,
+      "host": {
+        "MemAvailable": 41279094784,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.25,
+        "memory_full_avg10": 1.76,
+        "io_some_avg10": 6.37,
+        "io_full_avg10": 4.04
+      },
+      "rss_bytes": 152690688,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.06157906400039792,
+      "swap_bytes": 0,
+      "pids": [
+        43553,
+        43555,
+        43606,
+        43607,
+        43608,
+        43550,
+        43007
+      ]
+    },
+    {
+      "seconds": 2.669959391991142,
+      "host": {
+        "MemAvailable": 41325178880,
+        "SwapFree": 0,
+        "memory_some_avg10": 2.25,
+        "memory_full_avg10": 1.76,
+        "io_some_avg10": 6.37,
+        "io_full_avg10": 4.04
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.05149740900378674,
+      "swap_bytes": 0,
+      "pids": [
+        43007
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-append-three-20261010.service",
+    "memory.current": 18006016,
+    "memory.peak": 108298240,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

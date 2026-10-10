@@ -209,7 +209,7 @@ Out of scope: content indexing, whole-Ubuntu/Windows/Google Drive scans, replaci
 | M5 | PENDING | Current-scale aggregate acceptance and 24-hour synthetic soak |
 | M6 | PENDING | Installed CLI/MCP acceptance, rollback and 72-hour operational soak |
 
-Planning closeout: document/tracker publication only; no implementation or runtime effect. Memory disposition: forbidden; durable memory writes are not authorized by this planning packet. Preserve a non-write receipt with the planning evidence.
+Historical planning packet only (superseded for current implementation closeouts by the operator authorization and AGENTS.md Graphiti workflow): document/tracker publication only; no implementation or runtime effect. Memory disposition: forbidden; durable memory writes are not authorized by this planning packet. Preserve a non-write receipt with the planning evidence.
 
 Broker parser continuation2026-10-09: [source checkpoint](../notes/2026-10-09-plan6-broker-parser.md),9owned ABI/filter fixtures pass. No broker integration, privileged delivery, containment or M3 acceptance claim. Next source packet is bootstrap/state transitions and concrete launcher/broker preparation.
 

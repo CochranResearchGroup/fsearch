@@ -1,0 +1,137 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "src/tests/test_catalog_append_crash.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src",
+    "cursor_published"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 1.092577728035394,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 44494848,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.25130967202130705,
+  "initial_host": {
+    "MemAvailable": 41860177920,
+    "SwapFree": 27828224,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.54,
+    "io_full_avg10": 0.45
+  },
+  "final_host": {
+    "MemAvailable": 41870041088,
+    "SwapFree": 27963392,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.54,
+    "io_full_avg10": 0.45
+  },
+  "samples": [
+    {
+      "seconds": 0.05092987499665469,
+      "host": {
+        "MemAvailable": 41860177920,
+        "SwapFree": 27828224,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.54,
+        "io_full_avg10": 0.45
+      },
+      "rss_bytes": 14909440,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.05021256400505081,
+      "swap_bytes": 0,
+      "pids": [
+        32589
+      ]
+    },
+    {
+      "seconds": 0.30223954701796174,
+      "host": {
+        "MemAvailable": 41858838528,
+        "SwapFree": 27910144,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.54,
+        "io_full_avg10": 0.45
+      },
+      "rss_bytes": 36302848,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.05085643602069467,
+      "swap_bytes": 0,
+      "pids": [
+        32589,
+        32607
+      ]
+    },
+    {
+      "seconds": 0.5514453509822488,
+      "host": {
+        "MemAvailable": 41842257920,
+        "SwapFree": 27910144,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.54,
+        "io_full_avg10": 0.45
+      },
+      "rss_bytes": 44494848,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.048848291975446045,
+      "swap_bytes": 0,
+      "pids": [
+        32644,
+        32589,
+        32607
+      ]
+    },
+    {
+      "seconds": 0.7951328129856847,
+      "host": {
+        "MemAvailable": 41865748480,
+        "SwapFree": 27955200,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.54,
+        "io_full_avg10": 0.45
+      },
+      "rss_bytes": 36864000,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04336337395943701,
+      "swap_bytes": 0,
+      "pids": [
+        32721,
+        32589
+      ]
+    },
+    {
+      "seconds": 1.0448638600064442,
+      "host": {
+        "MemAvailable": 41866412032,
+        "SwapFree": 27959296,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.54,
+        "io_full_avg10": 0.45
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04936549998819828,
+      "swap_bytes": 0,
+      "pids": [
+        32589
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-cursor-crash-20261010.service",
+    "memory.current": 8224768,
+    "memory.peak": 29544448,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

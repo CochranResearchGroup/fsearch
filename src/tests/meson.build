@@ -164,6 +164,12 @@ if host_machine.system() == 'linux'
     checkpoint_fault_fixture = shared_library('checkpoint_fault_fixture', 'checkpoint_fault_fixture.c', dependencies: cc.find_library('dl'), install: false)
     test('catalog_durable_capacity', python, args: [files('test_catalog_capacity.py'), join_paths(meson.project_build_root(), 'src')],
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 120)
+    test('catalog_append_log_fsync_crash', python, args: [files('test_catalog_append_crash.py'), join_paths(meson.project_build_root(), 'src'), 'log_fsync'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_append_cursor_pre_rename_crash', python, args: [files('test_catalog_append_crash.py'), join_paths(meson.project_build_root(), 'src'), 'cursor_pre_rename'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_append_cursor_published_crash', python, args: [files('test_catalog_append_crash.py'), join_paths(meson.project_build_root(), 'src'), 'cursor_published'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
     test('catalog_corrupt_pair', python, args: [files('test_catalog_corrupt_pair.py'), join_paths(meson.project_build_root(), 'src')],
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
     test('catalog_corrupt_pair_unavailable', python, args: [files('test_catalog_corrupt_pair.py'), join_paths(meson.project_build_root(), 'src'), 'both'],
