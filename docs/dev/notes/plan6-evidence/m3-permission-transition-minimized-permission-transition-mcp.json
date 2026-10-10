@@ -1,0 +1,259 @@
+{
+  "alias_suggestions": [],
+  "backend_query": "attribute-permission-",
+  "backends": {
+    "everything": {
+      "available": false,
+      "ok": false,
+      "reason": "disabled by --no-everything"
+    },
+    "everything_helper": {
+      "available": false,
+      "ok": false,
+      "reason": "disabled by --no-everything"
+    },
+    "fsearch": {
+      "available": true,
+      "complete": true,
+      "incremental_coverage": {
+        "catalog_sequence": 3,
+        "event_sequence": 2,
+        "last_reconciled_unix_ms": 1791661734187,
+        "oldest_unapplied_unix_ms": null,
+        "reason": "source_drained",
+        "root_b64": "L2hvbWUvZWNvY2hyYW43Ni93b3JrdHJlZXMvZnNyLXEtMjAyNjEwMTAvb3duZWQ=",
+        "state": "watching"
+      },
+      "ok": true,
+      "snapshot": {
+        "age_seconds": 2,
+        "identity": "2096:1019446:266:1791661732:638200644:1791661732:817429704",
+        "mtime_unix": 1791661732,
+        "roots": [
+          {
+            "age_seconds": 2,
+            "last_error_code": 0,
+            "last_scan_unix": 1791661732,
+            "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned",
+            "path_bytes_base64": null
+          }
+        ]
+      },
+      "status": "ok",
+      "transport": "warm_socket",
+      "truncated": false,
+      "visibility": "cached"
+    },
+    "locate": {
+      "available": false,
+      "ok": false,
+      "reason": "disabled by --no-locate"
+    },
+    "sqlite": {
+      "available": true,
+      "db_path": "/home/ecochran76/worktrees/fsr-q-20261010/sqlite",
+      "ok": true
+    }
+  },
+  "capabilities": {
+    "backend_capture_bytes": 1048576,
+    "native_linux_backends": true,
+    "windows_interop": false
+  },
+  "coverage": {
+    "complete": false,
+    "reason": "bounded_candidates",
+    "scope_listings": []
+  },
+  "everything": [],
+  "everything_helper": [],
+  "everything_query_policy": {
+    "cli_skipped": false,
+    "helper_fallback": "disabled",
+    "helper_skipped": false
+  },
+  "filters": [],
+  "fsearch": [
+    {
+      "confidence": 0.72,
+      "freshness_detail": {
+        "incremental_coverage": {
+          "catalog_sequence": 3,
+          "event_sequence": 2,
+          "last_reconciled_unix_ms": 1791661734187,
+          "oldest_unapplied_unix_ms": null,
+          "reason": "source_drained",
+          "root_b64": "L2hvbWUvZWNvY2hyYW43Ni93b3JrdHJlZXMvZnNyLXEtMjAyNjEwMTAvb3duZWQ=",
+          "state": "watching"
+        },
+        "snapshot_age_seconds": 2,
+        "snapshot_id": "2096:1019446:266:1791661732:638200644:1791661732:817429704",
+        "snapshot_mtime_unix": 1791661732
+      },
+      "kind": "path",
+      "name": "attribute-permission-child.txt",
+      "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned/attribute-permission-directory/attribute-permission-child.txt",
+      "path_bytes_base64": null,
+      "path_semantics": "posix",
+      "rank_source": "fsearch_literal_name_order",
+      "reason": "FSearch cached literal match",
+      "source": "fsearch",
+      "visibility": "cached"
+    },
+    {
+      "confidence": 0.72,
+      "freshness_detail": {
+        "incremental_coverage": {
+          "catalog_sequence": 3,
+          "event_sequence": 2,
+          "last_reconciled_unix_ms": 1791661734187,
+          "oldest_unapplied_unix_ms": null,
+          "reason": "source_drained",
+          "root_b64": "L2hvbWUvZWNvY2hyYW43Ni93b3JrdHJlZXMvZnNyLXEtMjAyNjEwMTAvb3duZWQ=",
+          "state": "watching"
+        },
+        "snapshot_age_seconds": 2,
+        "snapshot_id": "2096:1019446:266:1791661732:638200644:1791661732:817429704",
+        "snapshot_mtime_unix": 1791661732
+      },
+      "kind": "path",
+      "name": "attribute-permission-directory",
+      "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned/attribute-permission-directory",
+      "path_bytes_base64": null,
+      "path_semantics": "posix",
+      "rank_source": "fsearch_literal_name_order",
+      "reason": "FSearch cached literal match",
+      "source": "fsearch",
+      "visibility": "cached"
+    }
+  ],
+  "locate": [],
+  "query": "attribute-permission-",
+  "recency_ranked": false,
+  "recorded_alias_suggestions": null,
+  "results": [
+    {
+      "confidence": 0.72,
+      "coverage_summary": "FSearch saved snapshot roots",
+      "freshness_detail": {
+        "incremental_coverage": {
+          "catalog_sequence": 3,
+          "event_sequence": 2,
+          "last_reconciled_unix_ms": 1791661734187,
+          "oldest_unapplied_unix_ms": null,
+          "reason": "source_drained",
+          "root_b64": "L2hvbWUvZWNvY2hyYW43Ni93b3JrdHJlZXMvZnNyLXEtMjAyNjEwMTAvb3duZWQ=",
+          "state": "watching"
+        },
+        "snapshot_age_seconds": 2,
+        "snapshot_id": "2096:1019446:266:1791661732:638200644:1791661732:817429704",
+        "snapshot_mtime_unix": 1791661732
+      },
+      "freshness_summary": "FSearch cached snapshot",
+      "kind": "path",
+      "merged_confidence": 0.72,
+      "name": "attribute-permission-child.txt",
+      "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned/attribute-permission-directory/attribute-permission-child.txt",
+      "path_bytes_base64": null,
+      "path_semantics": "posix",
+      "primary_source": "fsearch",
+      "rank_source": "fsearch_literal_name_order",
+      "reason": "FSearch cached literal match",
+      "source": "fsearch",
+      "source_confidences": {
+        "fsearch": 0.72
+      },
+      "source_metadata": {
+        "fsearch": {
+          "coverage": "fsearch_saved_roots",
+          "coverage_summary": "FSearch saved snapshot roots",
+          "freshness": "fsearch_scan_snapshot",
+          "freshness_detail": {
+            "incremental_coverage": {
+              "catalog_sequence": 3,
+              "event_sequence": 2,
+              "last_reconciled_unix_ms": 1791661734187,
+              "oldest_unapplied_unix_ms": null,
+              "reason": "source_drained",
+              "root_b64": "L2hvbWUvZWNvY2hyYW43Ni93b3JrdHJlZXMvZnNyLXEtMjAyNjEwMTAvb3duZWQ=",
+              "state": "watching"
+            },
+            "snapshot_age_seconds": 2,
+            "snapshot_id": "2096:1019446:266:1791661732:638200644:1791661732:817429704",
+            "snapshot_mtime_unix": 1791661732
+          },
+          "freshness_summary": "FSearch cached snapshot",
+          "staleness_risk": "medium"
+        }
+      },
+      "sources": [
+        "fsearch"
+      ],
+      "staleness_risk": "medium",
+      "visibility": "cached"
+    },
+    {
+      "confidence": 0.72,
+      "coverage_summary": "FSearch saved snapshot roots",
+      "freshness_detail": {
+        "incremental_coverage": {
+          "catalog_sequence": 3,
+          "event_sequence": 2,
+          "last_reconciled_unix_ms": 1791661734187,
+          "oldest_unapplied_unix_ms": null,
+          "reason": "source_drained",
+          "root_b64": "L2hvbWUvZWNvY2hyYW43Ni93b3JrdHJlZXMvZnNyLXEtMjAyNjEwMTAvb3duZWQ=",
+          "state": "watching"
+        },
+        "snapshot_age_seconds": 2,
+        "snapshot_id": "2096:1019446:266:1791661732:638200644:1791661732:817429704",
+        "snapshot_mtime_unix": 1791661732
+      },
+      "freshness_summary": "FSearch cached snapshot",
+      "kind": "path",
+      "merged_confidence": 0.72,
+      "name": "attribute-permission-directory",
+      "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned/attribute-permission-directory",
+      "path_bytes_base64": null,
+      "path_semantics": "posix",
+      "primary_source": "fsearch",
+      "rank_source": "fsearch_literal_name_order",
+      "reason": "FSearch cached literal match",
+      "source": "fsearch",
+      "source_confidences": {
+        "fsearch": 0.72
+      },
+      "source_metadata": {
+        "fsearch": {
+          "coverage": "fsearch_saved_roots",
+          "coverage_summary": "FSearch saved snapshot roots",
+          "freshness": "fsearch_scan_snapshot",
+          "freshness_detail": {
+            "incremental_coverage": {
+              "catalog_sequence": 3,
+              "event_sequence": 2,
+              "last_reconciled_unix_ms": 1791661734187,
+              "oldest_unapplied_unix_ms": null,
+              "reason": "source_drained",
+              "root_b64": "L2hvbWUvZWNvY2hyYW43Ni93b3JrdHJlZXMvZnNyLXEtMjAyNjEwMTAvb3duZWQ=",
+              "state": "watching"
+            },
+            "snapshot_age_seconds": 2,
+            "snapshot_id": "2096:1019446:266:1791661732:638200644:1791661732:817429704",
+            "snapshot_mtime_unix": 1791661732
+          },
+          "freshness_summary": "FSearch cached snapshot",
+          "staleness_risk": "medium"
+        }
+      },
+      "sources": [
+        "fsearch"
+      ],
+      "staleness_risk": "medium",
+      "visibility": "cached"
+    }
+  ],
+  "scoped_filesystem": [],
+  "scopes": [],
+  "sqlite": []
+}

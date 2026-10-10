@@ -37,6 +37,7 @@ def main():
     parser.add_argument('--actual-loss', action='store_true')
     parser.add_argument('--actual-churn', action='store_true')
     parser.add_argument('--actual-exclusions', action='store_true')
+    parser.add_argument('--actual-permission-transition', action='store_true')
     parser.add_argument('--profile-broker', action='store_true')
     parser.add_argument('--profile-service', action='store_true')
     parser.add_argument('--startup-churn', action='store_true')
@@ -53,6 +54,7 @@ def main():
     assert not args.actual_churn or actual and args.durable_catalog and not any((args.extended_actual, args.actual_overflow, args.actual_edges, args.actual_loss)), 'churn requires a separate actual durable run'
     assert not args.permission_exclusions or not any((args.extended_actual, args.actual_overflow, args.actual_edges, args.actual_loss, args.actual_churn, args.startup_churn)), 'permission exclusions require a separate run'
     assert not args.actual_exclusions or actual and args.durable_catalog and not any((args.extended_actual, args.actual_overflow, args.actual_edges, args.actual_loss, args.actual_churn, args.startup_churn, args.permission_exclusions)), 'live exclusions require a separate actual durable run'
+    assert not args.actual_permission_transition or actual and args.durable_catalog and not any((args.extended_actual,args.actual_overflow,args.actual_edges,args.actual_loss,args.actual_churn,args.startup_churn,args.permission_exclusions,args.actual_exclusions)), 'permission transition requires a separate actual durable run'
     if args.actual_overflow:
         assert 0 < int(Path('/proc/sys/fs/fanotify/max_queued_events').read_text()) <= 16384, 'queue bound outside reviewed burst'
     if actual:
@@ -169,6 +171,8 @@ asyncio.run(main())
                 sample = {'control': 'normal_create', 'seconds': measured, 'gate_seconds': 1, 'surface': 'initialized_fresh_mcp', 'entries': 1}
                 record_timing(sample)
                 assert measured <= 1, sample
+            if args.actual_permission_transition and mcp:
+                (work/'permission-transition-mcp.json').write_text(json.dumps(payload,indent=2)+'\n')
             assert result_paths(payload['results']) == sorted(map(os.fsencode, expected)), payload
             coverage = payload['backends']['fsearch']['incremental_coverage']
             assert coverage['state'] in (state,) if state else coverage['state'] in ('watching', 'pending'), payload
@@ -309,6 +313,26 @@ asyncio.run(main())
                 public('unqualified-bootstrap', [], 'deferred', mcp=True)
                 print(json.dumps({'result': 'dirty_bootstrap_preserves_accepted_snapshot', 'snapshot_id': snapshot}))
                 return 0
+            if args.actual_permission_transition:
+                directory=root/'attribute-permission-directory';directory.mkdir()
+                child=directory/'attribute-permission-child.txt';child.touch()
+                visible(child.stem,[child])
+                try:
+                    origin=time.monotonic();directory.chmod(0)
+                    sentinel=root/'after-attribute-permission.txt';sentinel.touch()
+                    visible(sentinel.stem,[sentinel],origin)
+                    oracle=work/'attribute-oracle'
+                    refreshed=subprocess.run([sys.executable,str(runtime/'fsearch-refresh'),'refresh','--root',str(root),'--database',str(oracle)],check=True,capture_output=True,text=True,timeout=10)
+                    reference=subprocess.run([str(runtime/'fsearch-cli'),'--database',str(oracle),'--query','attribute-permission-'],check=True,capture_output=True,text=True,timeout=3)
+                    serving=subprocess.run([str(runtime/'fsearch-cli'),'--socket',str(endpoint),'--query','attribute-permission-'],check=True,capture_output=True,text=True,timeout=3)
+                    evidence={'mutation':'chmod_existing_directory_000','later_regular_barrier':str(sentinel),'scan':json.loads(refreshed.stdout)['scan'],'oracle':json.loads(reference.stdout),'serving':json.loads(serving.stdout),'seconds':time.monotonic()-origin}
+                    (work/'permission-transition-result.json').write_text(json.dumps(evidence,indent=2)+'\n')
+                    assert evidence['scan']['excluded_permissions']==1 and evidence['oracle']['results']==[],evidence['oracle']
+                    public('attribute-permission-',[],mcp=True)
+                    visible('attribute-permission-',[])
+                    return 0
+                finally:
+                    directory.chmod(0o700)
             public('outside-bootstrap-secret', [], mcp=True)
             initial = root / 'process-created.pdf'; initial.touch()
             inject(writer, event(CREATE, [side(2, os.fsencode(initial.name)), info(1)]))

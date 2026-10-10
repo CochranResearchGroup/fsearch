@@ -1,0 +1,84 @@
+{
+  "mutation": "chmod_existing_directory_000",
+  "later_regular_barrier": "/home/ecochran76/worktrees/fsr-q-20261010/owned/after-attribute-permission.txt",
+  "scan": {
+    "status": "candidate",
+    "excluded_symlinks": 0,
+    "excluded_mounts": 0,
+    "excluded_permissions": 1,
+    "files": 4,
+    "directories": 3
+  },
+  "oracle": {
+    "schema_version": 1,
+    "status": "ok",
+    "complete": true,
+    "truncated": false,
+    "visibility": "cached",
+    "examined": 0,
+    "snapshot": {
+      "identity": "2096:5833186:422:1791661681:555465909:1791661681:599552909",
+      "mtime_unix": 1791661681,
+      "age_seconds": 0,
+      "roots": [
+        {
+          "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned",
+          "path_bytes_base64": null,
+          "last_scan_unix": 1791661681,
+          "age_seconds": 0,
+          "last_error_code": 0
+        }
+      ]
+    },
+    "results": []
+  },
+  "serving": {
+    "schema_version": 1,
+    "status": "ok",
+    "complete": true,
+    "truncated": false,
+    "visibility": "cached",
+    "examined": 2,
+    "catalog": {
+      "sequence": 8,
+      "generation": 0,
+      "deferred_reason": null
+    },
+    "snapshot": {
+      "identity": "2096:985147:266:1791661677:259478076:1791661677:443443762",
+      "mtime_unix": 1791661677,
+      "age_seconds": 4,
+      "roots": [
+        {
+          "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned",
+          "path_bytes_base64": null,
+          "last_scan_unix": 1791661677,
+          "age_seconds": 4,
+          "last_error_code": 0
+        }
+      ]
+    },
+    "results": [
+      {
+        "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned/attribute-permission-directory/attribute-permission-child.txt",
+        "path_bytes_base64": null
+      },
+      {
+        "path": "/home/ecochran76/worktrees/fsr-q-20261010/owned/attribute-permission-directory",
+        "path_bytes_base64": null
+      }
+    ],
+    "request_id": "28046-288612212171-2421156643",
+    "incremental_coverage": {
+      "state": "watching",
+      "root_b64": "L2hvbWUvZWNvY2hyYW43Ni93b3JrdHJlZXMvZnNyLXEtMjAyNjEwMTAvb3duZWQ=",
+      "event_sequence": 5,
+      "catalog_sequence": 8,
+      "last_reconciled_unix_ms": 1791661681615,
+      "oldest_unapplied_unix_ms": null,
+      "reason": "source_drained"
+    },
+    "durable": true
+  },
+  "seconds": 0.20094961300492287
+}
