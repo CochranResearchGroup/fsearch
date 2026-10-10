@@ -1,0 +1,65 @@
+Log of Meson test suite run on 2026-10-10T12:35:25.019956
+
+Inherited environment: HOME=/home/ecochran76 LANG=C.UTF-8 LOGNAME=ecochran76 PATH=/home/ecochran76/worktrees/fsearch-plan6-tools/bin:/usr/bin:/bin SHELL=/bin/zsh USER=ecochran76 XDG_RUNTIME_DIR=/run/user/1000 QT_ACCESSIBILITY=1 XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/var/lib/snapd/desktop DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus GSM_SKIP_SSH_AGENT_WORKAROUND=true SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh MANAGERPID=696 INVOCATION_ID=bb197553c9f448daa8b8eb8290ca1b10 SYSTEMD_EXEC_PID=50944 MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-prior-boot-five-20261010.service/memory.pressure MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA= 
+
+==================================== 1/5 =====================================
+test:         fsearch:catalog_prior_boot_ready
+start time:   17:35:25
+duration:     0.82s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MESON_TEST_ITERATION=1 MALLOC_PERTURB_=237 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src ready
+----------------------------------- stdout -----------------------------------
+{"result": "actual_prior_boot_catalog_recovery_pass", "phase": "ready", "real_reboot_qualified": false, "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+==================================== 2/5 =====================================
+test:         fsearch:catalog_prior_boot_starting
+start time:   17:35:25
+duration:     0.90s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=107 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src starting
+----------------------------------- stdout -----------------------------------
+{"result": "actual_prior_boot_catalog_recovery_pass", "phase": "starting", "real_reboot_qualified": false, "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+==================================== 3/5 =====================================
+test:         fsearch:catalog_prior_boot_quarantined
+start time:   17:35:26
+duration:     0.81s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=18 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src quarantined
+----------------------------------- stdout -----------------------------------
+{"result": "actual_prior_boot_catalog_recovery_pass", "phase": "quarantined", "real_reboot_qualified": false, "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+==================================== 4/5 =====================================
+test:         fsearch:catalog_prior_boot_current_boot
+start time:   17:35:27
+duration:     0.95s
+result:       exit status 0
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=101 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src current_boot
+----------------------------------- stdout -----------------------------------
+{"result": "actual_prior_boot_catalog_recovery_pass", "phase": "current_boot", "real_reboot_qualified": false, "acknowledged_sequence": 2, "root_and_original_snapshot_absent": true, "raw_bytes_and_entry_ids_preserved": true, "power_loss_qualified": false}
+==============================================================================
+
+==================================== 5/5 =====================================
+test:         fsearch:catalog_prior_boot_mixed_boot
+start time:   17:35:28
+duration:     0.71s
+result:       exit status 1
+command:      MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MALLOC_PERTURB_=7 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py /home/ecochran76/worktrees/fsearch-plan6-build/src mixed_boot
+----------------------------------- stderr -----------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_catalog_prior_boot.py", line 89, in <module>
+    assert result.returncode == 1, result
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: CompletedProcess(args=['/home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3', '/home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-service', 'recover', '--socket', '/tmp/fsearch-prior-boot-axqvn6id/q.sock'], returncode=0, stdout=b'{"status": "recovered"}\n', stderr=b'')
+==============================================================================
+
+
+Summary of Failures:
+
+5/5 fsearch:catalog_prior_boot_mixed_boot   FAIL            0.71s   exit status 1
+
+Ok:                4   
+Fail:              1   

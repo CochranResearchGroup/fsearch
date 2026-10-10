@@ -1,0 +1,136 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "src/tests/test_catalog_prior_boot.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src",
+    "mixed_boot"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 1.0988024329999462,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 44728320,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2558275939663872,
+  "initial_host": {
+    "MemAvailable": 37912416256,
+    "SwapFree": 5386240,
+    "memory_some_avg10": 0.5,
+    "memory_full_avg10": 0.3,
+    "io_some_avg10": 5.24,
+    "io_full_avg10": 3.5
+  },
+  "final_host": {
+    "MemAvailable": 37849550848,
+    "SwapFree": 5435392,
+    "memory_some_avg10": 0.41,
+    "memory_full_avg10": 0.25,
+    "io_some_avg10": 5.37,
+    "io_full_avg10": 3.77
+  },
+  "samples": [
+    {
+      "seconds": 0.04557140701217577,
+      "host": {
+        "MemAvailable": 37912416256,
+        "SwapFree": 5386240,
+        "memory_some_avg10": 0.5,
+        "memory_full_avg10": 0.3,
+        "io_some_avg10": 5.24,
+        "io_full_avg10": 3.5
+      },
+      "rss_bytes": 14909440,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04490397701738402,
+      "swap_bytes": 0,
+      "pids": [
+        53749
+      ]
+    },
+    {
+      "seconds": 0.301399000978563,
+      "host": {
+        "MemAvailable": 37893615616,
+        "SwapFree": 5386240,
+        "memory_some_avg10": 0.5,
+        "memory_full_avg10": 0.3,
+        "io_some_avg10": 5.24,
+        "io_full_avg10": 3.5
+      },
+      "rss_bytes": 36700160,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.055438637966290116,
+      "swap_bytes": 0,
+      "pids": [
+        53749,
+        53758
+      ]
+    },
+    {
+      "seconds": 0.5435159290209413,
+      "host": {
+        "MemAvailable": 37887766528,
+        "SwapFree": 5423104,
+        "memory_some_avg10": 0.41,
+        "memory_full_avg10": 0.25,
+        "io_some_avg10": 5.37,
+        "io_full_avg10": 3.77
+      },
+      "rss_bytes": 44728320,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04174001602223143,
+      "swap_bytes": 0,
+      "pids": [
+        53749,
+        53758,
+        53782
+      ]
+    },
+    {
+      "seconds": 0.7892699550138786,
+      "host": {
+        "MemAvailable": 37900873728,
+        "SwapFree": 5427200,
+        "memory_some_avg10": 0.41,
+        "memory_full_avg10": 0.25,
+        "io_some_avg10": 5.37,
+        "io_full_avg10": 3.77
+      },
+      "rss_bytes": 15073280,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.045480149041395634,
+      "swap_bytes": 0,
+      "pids": [
+        53749
+      ]
+    },
+    {
+      "seconds": 1.0416861189878546,
+      "host": {
+        "MemAvailable": 37880803328,
+        "SwapFree": 5427200,
+        "memory_some_avg10": 0.41,
+        "memory_full_avg10": 0.25,
+        "io_some_avg10": 5.37,
+        "io_full_avg10": 3.77
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.05206598195945844,
+      "swap_bytes": 0,
+      "pids": [
+        53749
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-mixed-live-boot-refusal-20261010.service",
+    "memory.current": 8445952,
+    "memory.peak": 29450240,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

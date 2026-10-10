@@ -1,0 +1,136 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "src/tests/test_catalog_prior_boot.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src",
+    "current_boot"
+  ],
+  "reason": null,
+  "exit_code": 0,
+  "elapsed_seconds": 1.1619437590125017,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 44728320,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.2623548070550896,
+  "initial_host": {
+    "MemAvailable": 37808439296,
+    "SwapFree": 4714496,
+    "memory_some_avg10": 3.02,
+    "memory_full_avg10": 0.74,
+    "io_some_avg10": 11.18,
+    "io_full_avg10": 4.26
+  },
+  "final_host": {
+    "MemAvailable": 38154436608,
+    "SwapFree": 4714496,
+    "memory_some_avg10": 2.47,
+    "memory_full_avg10": 0.6,
+    "io_some_avg10": 9.34,
+    "io_full_avg10": 3.67
+  },
+  "samples": [
+    {
+      "seconds": 0.04784657101845369,
+      "host": {
+        "MemAvailable": 37808439296,
+        "SwapFree": 4714496,
+        "memory_some_avg10": 3.02,
+        "memory_full_avg10": 0.74,
+        "io_some_avg10": 11.18,
+        "io_full_avg10": 4.26
+      },
+      "rss_bytes": 14581760,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.047206432034727186,
+      "swap_bytes": 0,
+      "pids": [
+        46436
+      ]
+    },
+    {
+      "seconds": 0.28923863399541005,
+      "host": {
+        "MemAvailable": 37756235776,
+        "SwapFree": 4714496,
+        "memory_some_avg10": 3.02,
+        "memory_full_avg10": 0.74,
+        "io_some_avg10": 11.18,
+        "io_full_avg10": 4.26
+      },
+      "rss_bytes": 36372480,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04094282997539267,
+      "swap_bytes": 0,
+      "pids": [
+        46481,
+        46436
+      ]
+    },
+    {
+      "seconds": 0.5506772269727662,
+      "host": {
+        "MemAvailable": 37808005120,
+        "SwapFree": 4714496,
+        "memory_some_avg10": 3.02,
+        "memory_full_avg10": 0.74,
+        "io_some_avg10": 11.18,
+        "io_full_avg10": 4.26
+      },
+      "rss_bytes": 44728320,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.06128500698832795,
+      "swap_bytes": 0,
+      "pids": [
+        46481,
+        46436,
+        46494
+      ]
+    },
+    {
+      "seconds": 0.8130320340278558,
+      "host": {
+        "MemAvailable": 37447450624,
+        "SwapFree": 4714496,
+        "memory_some_avg10": 2.47,
+        "memory_full_avg10": 0.6,
+        "io_some_avg10": 9.34,
+        "io_full_avg10": 3.67
+      },
+      "rss_bytes": 14745600,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.06028984405566007,
+      "swap_bytes": 0,
+      "pids": [
+        46436
+      ]
+    },
+    {
+      "seconds": 1.075241094978992,
+      "host": {
+        "MemAvailable": 37908942848,
+        "SwapFree": 4714496,
+        "memory_some_avg10": 2.47,
+        "memory_full_avg10": 0.6,
+        "io_some_avg10": 9.34,
+        "io_full_avg10": 3.67
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.0597495730035007,
+      "swap_bytes": 0,
+      "pids": [
+        46436
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-current-boot-refusal-20261010.service",
+    "memory.current": 8392704,
+    "memory.peak": 29212672,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

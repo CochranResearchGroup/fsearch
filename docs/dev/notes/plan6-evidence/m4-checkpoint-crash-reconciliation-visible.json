@@ -1,0 +1,126 @@
+{
+  "artifact_path": "/home/ecochran76/.graphiti-openclaw/state/closeout-memory/20261010T173605Z-reconciliation.json",
+  "classification": "completed_visible",
+  "command": "remember-reconcile",
+  "get_memory_job_status_elapsed_seconds": 1.391,
+  "graphiti_writes_attempted": 0,
+  "group_id": "openclaw_ec_main",
+  "job_id": "db6addfd-ee48-4be4-a595-37cbb5ced833",
+  "job_status": {
+    "current_stage": "completed",
+    "episode_uuid": "bf9ccee2-41bf-4dab-a13f-3b5f0169257e",
+    "episode_visible_in_group": true,
+    "error_type": null,
+    "failure_category": null,
+    "finished_at": "2026-10-10T17:35:25.914967+00:00",
+    "group_id": "openclaw_ec_main",
+    "job_id": "db6addfd-ee48-4be4-a595-37cbb5ced833",
+    "name": "fsearch-plan0006-checkpoint-crash-2026-10-10",
+    "processing_elapsed_seconds": 175.00713560800068,
+    "provider_latency_event_count": 49,
+    "provider_latency_summary": {
+      "by_prompt_name": {
+        "dedupe_edges.resolve_edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 5.281702
+        },
+        "dedupe_nodes.nodes": {
+          "event_count": 21,
+          "total_elapsed_seconds": 16.80573
+        },
+        "extract_edges.edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 20.012679
+        },
+        "extract_nodes.extract_attributes_batch": {
+          "event_count": 7,
+          "total_elapsed_seconds": 5.025373
+        },
+        "extract_nodes.extract_text": {
+          "event_count": 7,
+          "total_elapsed_seconds": 13.382957
+        }
+      },
+      "by_substage": {
+        "initialize": {
+          "event_count": 7,
+          "status_counts": {
+            "completed": 7
+          },
+          "total_elapsed_seconds": 0.185614
+        },
+        "parse_validation": {
+          "event_count": 7,
+          "status_counts": {
+            "completed": 7
+          },
+          "total_elapsed_seconds": 0.015
+        },
+        "process_start": {
+          "event_count": 7,
+          "status_counts": {
+            "completed": 7
+          },
+          "total_elapsed_seconds": 0.057742
+        },
+        "process_teardown": {
+          "event_count": 7,
+          "status_counts": {
+            "completed": 7
+          },
+          "total_elapsed_seconds": 1.393855
+        },
+        "thread_start": {
+          "event_count": 7,
+          "status_counts": {
+            "completed": 7
+          },
+          "total_elapsed_seconds": 9.10497
+        },
+        "turn_completion": {
+          "event_count": 7,
+          "status_counts": {
+            "completed": 7
+          },
+          "total_elapsed_seconds": 49.402609
+        },
+        "turn_start": {
+          "event_count": 7,
+          "status_counts": {
+            "completed": 7
+          },
+          "total_elapsed_seconds": 0.348651
+        }
+      },
+      "event_count": 49,
+      "models": [
+        "gpt-5.5"
+      ],
+      "provider_call_count": 7,
+      "providers": [
+        "codex"
+      ],
+      "schema_version": "provider_latency_summary.v0",
+      "status_counts": {
+        "completed": 49
+      },
+      "total_elapsed_seconds": 60.508441,
+      "transports": [
+        "app-server-stdio"
+      ]
+    },
+    "queued_at": "2026-10-10T17:32:42.847493+00:00",
+    "read_after_write_ready": true,
+    "retryable": null,
+    "started_at": "2026-10-10T17:32:46.579134+00:00",
+    "status": "completed",
+    "warnings": []
+  },
+  "mcp_url": "http://127.0.0.1:8817/mcp",
+  "name": "fsearch-plan0006-checkpoint-crash-2026-10-10",
+  "recorded_at": "2026-10-10T17:35:56.516947+00:00",
+  "safe_to_retry": false,
+  "schema_version": "graphiti_closeout_memory_reconciliation.v1",
+  "source_description": "FSearch Plan0006 source1db59ca7 actual checkpoint publication process-crash qualification",
+  "source_receipt": "docs/dev/notes/plan6-evidence/m4-checkpoint-crash-memory-retry-receipt.json"
+}

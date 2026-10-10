@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: owned append/checkpoint process-crash controls and corrupt-pair recovery pass; combined53-group serial regression passes. Retained parallel-run task-exhaustion failure is unqualified. Next: public-seam prior-boot/dirty-startup durable-catalog evidence under unchanged limits. M3/M4 remain IN_PROGRESS; M5/M6 pending. Installed workspace runtime unchanged. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
+Current packet: owned append/checkpoint crash controls pass (combined53-group regression), and five public-seam prior-boot state controls pass. Next: bounded startup/replay worker transport failure without query-triggered restart storms. Synthetic prior-boot proof does not qualify real reboot or power loss. M3/M4 IN_PROGRESS; M5/M6 pending. Installed workspace runtime unchanged. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
 
 ## Destination and completion rule
 
@@ -216,3 +216,5 @@ Broker parser continuation2026-10-09: [source checkpoint](../notes/2026-10-09-pl
 Bootstrap continuation2026-10-09: [checkpoint](../notes/2026-10-09-plan6-broker-bootstrap.md),15synthetic cases pass. Clean-baseline/drain, pending acknowledgments and inventory dependencies are implemented; actual reader, launcher and containment remain unqualified. Next is broker adapter/descriptor-transfer preparation.
 
 Checkpoint crash continuation2026-10-10: [public-seam qualification](../notes/2026-10-10-plan6-checkpoint-crash.md), three actual-worker process-crash cases pass; full M3/M4 and power-loss acceptance remain open.
+
+Prior-boot continuation2026-10-10: [durable catalog public-seam controls](../notes/2026-10-10-plan6-prior-boot.md), five registered cases pass; retained fixture-expectation failure, no reboot qualification.

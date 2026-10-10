@@ -170,6 +170,16 @@ if host_machine.system() == 'linux'
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
     test('catalog_append_cursor_published_crash', python, args: [files('test_catalog_append_crash.py'), join_paths(meson.project_build_root(), 'src'), 'cursor_published'],
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_prior_boot_ready', python, args: [files('test_catalog_prior_boot.py'), join_paths(meson.project_build_root(), 'src'), 'ready'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_prior_boot_starting', python, args: [files('test_catalog_prior_boot.py'), join_paths(meson.project_build_root(), 'src'), 'starting'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_prior_boot_quarantined', python, args: [files('test_catalog_prior_boot.py'), join_paths(meson.project_build_root(), 'src'), 'quarantined'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_prior_boot_current_boot', python, args: [files('test_catalog_prior_boot.py'), join_paths(meson.project_build_root(), 'src'), 'current_boot'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
+    test('catalog_prior_boot_mixed_boot', python, args: [files('test_catalog_prior_boot.py'), join_paths(meson.project_build_root(), 'src'), 'mixed_boot'],
+        depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
     test('catalog_crash_manifest_pre_rename', python, args: [files('test_catalog_checkpoint_crash.py'), join_paths(meson.project_build_root(), 'src'), 'manifest_pre_rename'],
         depends: [fsearch_refresh_worker, fsearch_worker], timeout: 30)
     test('catalog_crash_manifest_published', python, args: [files('test_catalog_checkpoint_crash.py'), join_paths(meson.project_build_root(), 'src'), 'manifest_published'],
