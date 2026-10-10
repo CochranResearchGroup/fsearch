@@ -34,9 +34,11 @@ def main():
     parser.add_argument('--actual-overflow', action='store_true')
     parser.add_argument('--actual-edges', action='store_true')
     parser.add_argument('--actual-loss', action='store_true')
+    parser.add_argument('--startup-churn', action='store_true')
     parser.add_argument('--durable-catalog', action='store_true')
     args = parser.parse_args()
     actual = args.actual_fixture_dir is not None
+    assert not args.startup_churn or not actual, 'startup churn uses the explicit descriptor fixture'
     assert not args.durable_catalog or actual, 'durability requires explicit actual fixture'
     assert not args.extended_actual or actual, 'extended controls require explicit actual fixture'
     assert not args.actual_overflow or actual and not args.extended_actual, 'overflow requires separate actual fixture run'
@@ -213,6 +215,9 @@ asyncio.run(main())
                 magic, generation, token, device, inode = transport.HANDOFF.unpack(request)
                 assert magic == transport.MAGIC and (device, inode) == (root.stat().st_dev, root.stat().st_ino)
                 writer.send(event(CREATE, [info(2, b'outside-bootstrap', b'outside-bootstrap-secret'), info(1)]))
+                if args.startup_churn:
+                    (root / 'unqualified-bootstrap.txt').touch()
+                    writer.send(event(CREATE, [side(2, b'unqualified-bootstrap.txt'), info(1)]))
                 transport.send_source(client, source.fileno(), peer_uid=os.geteuid(), generation=generation,
                                       token=token, root_identity=(device, inode))
                 source.close(); client.close()
@@ -220,6 +225,8 @@ asyncio.run(main())
             while True:
                 rows = [json.loads(line) for line in log.read_text().splitlines()]
                 watching = next((row for row in rows if row['status'] == 'watching'), None)
+                if args.startup_churn and any(row['status'] == 'error' for row in rows):
+                    return writer, log
                 if watching:
                     worker_pids.append(watching['boundary_worker']['pid'])
                     if actual:
@@ -238,9 +245,8 @@ asyncio.run(main())
             assert broker.returncode == code, error
             assert all(not Path('/proc', str(pid)).exists() for pid in worker_pids), worker_pids
 
-        def lookup_id(path):
-            request = {'schema_version': 1, 'request_id': 'hardlink-identity',
-                       'op': 'catalog_lookup', 'path_b64': base64.b64encode(os.fsencode(path)).decode()}
+        def catalog_call(op, **fields):
+            request = {'schema_version': 1, 'request_id': 'catalog-control', 'op': op, **fields}
             with socket.socket(socket.AF_UNIX) as channel:
                 channel.settimeout(3); channel.connect(str(endpoint))
                 channel.sendall((json.dumps(request) + '\n').encode())
@@ -250,7 +256,10 @@ asyncio.run(main())
                     body += block
             result = json.loads(body)
             assert result['status'] != 'error', result
-            return result['entry_id']
+            return result
+
+        def lookup_id(path):
+            return catalog_call('catalog_lookup', path_b64=base64.b64encode(os.fsencode(path)).decode())['entry_id']
 
         def inject(writer, data):
             if not actual:
@@ -260,7 +269,22 @@ asyncio.run(main())
             deadline = time.monotonic() + 5
             while not endpoint.exists():
                 assert server.poll() is None and time.monotonic() < deadline; time.sleep(.01)
+            if args.startup_churn:
+                before = subprocess.run([str(runtime / 'fsearch-cli'), '--socket', str(endpoint), '--query', 'initial'], capture_output=True, text=True, timeout=3)
+                assert before.returncode == 0, before.stderr
+                original_snapshot = catalog_call('catalog_status')['snapshot_id']
+                original_cache = database.read_bytes()
             writer, log = start('first', named=True)
+            if args.startup_churn:
+                terminal('bootstrap_changed')
+                after = subprocess.run([str(runtime / 'fsearch-cli'), '--socket', str(endpoint), '--query', 'initial'], capture_output=True, text=True, timeout=3)
+                assert after.returncode == 0, after.stderr
+                snapshot = catalog_call('catalog_status')['snapshot_id']
+                assert snapshot == original_snapshot, ('failed bootstrap replaced accepted snapshot', original_snapshot, snapshot)
+                assert database.read_bytes() == original_cache, 'failed bootstrap replaced restart cache'
+                public('unqualified-bootstrap', [], 'deferred', mcp=True)
+                print(json.dumps({'result': 'dirty_bootstrap_preserves_accepted_snapshot', 'snapshot_id': snapshot}))
+                return 0
             public('outside-bootstrap-secret', [], mcp=True)
             initial = root / 'process-created.pdf'; initial.touch()
             inject(writer, event(CREATE, [side(2, os.fsencode(initial.name)), info(1)]))

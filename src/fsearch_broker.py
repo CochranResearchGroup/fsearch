@@ -12,6 +12,8 @@ import os
 from pathlib import Path
 import signal
 import socket
+import subprocess
+import sys
 import time
 
 from fsearch_fanotify_events import BootstrapSession, BootstrapChanges, Gap
@@ -39,6 +41,63 @@ class StartupSource:
         # Keep only bounded dirty-set bits until admission exists. No outside
         # names/handles are retained for replay; admitted changes reject startup.
         self.reader.pump(lambda *args: None, lambda *args: None)
+
+
+class PreviewCatalog:
+    """One isolated candidate reader, reaped before serving publication."""
+    def __init__(self, module, runtime, database, socket_path, remaining):
+        self.module, self.runtime, self.database = module, runtime, database
+        self.socket_path, self.remaining = socket_path, remaining
+        self.process = self.client = None
+
+    @staticmethod
+    def preflight(module, socket_path):
+        directory = module.lifecycle.PrivateDirectory(socket_path)
+        try:
+            directory.lock(); module.lifecycle.reconcile(directory)
+        finally:
+            directory.close()
+
+    def __enter__(self):
+        self.preflight(self.module, self.socket_path)
+        self.client = self.module.CatalogClient(self.socket_path)
+        try:
+            self.process = subprocess.Popen([sys.executable, str(self.runtime / 'fsearch-service'),
+                'serve', '--socket', self.socket_path, '--database', self.database],
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            while True:
+                self.remaining()
+                if self.process.poll() is not None: raise Gap('candidate_reader_failed')
+                try:
+                    self.client.reset()
+                    return self.client
+                except (FileNotFoundError, ConnectionRefusedError):
+                    time.sleep(.01)
+        except BaseException:
+            self.close()
+            raise
+
+    def close(self):
+        if self.client:
+            self.client.close(); self.client = None
+        if self.process:
+            if self.process.poll() is None: self.process.terminate()
+            try: self.process.wait(timeout=1)
+            except subprocess.TimeoutExpired:
+                self.process.kill()
+                try: self.process.wait(timeout=.1)
+                except subprocess.TimeoutExpired: raise Gap('cleanup_unproved')
+            self.process = None
+            directory = self.module.lifecycle.PrivateDirectory(self.socket_path)
+            try:
+                directory.lock(); self.module.lifecycle.reconcile(directory)
+            except self.module.lifecycle.BoundaryError as error:
+                raise Gap('cleanup_unproved') from error
+            finally:
+                directory.close()
+
+    def __exit__(self, *args):
+        self.close()
 
 
 def interrupted(signum, frame):
@@ -86,6 +145,7 @@ def main():
         root = os.fsencode(os.path.abspath(args.root)); database = os.path.abspath(args.database)
         directory = module.lifecycle.PrivateDirectory(database + '.broker')
         directory.lock(); module.lifecycle.reconcile(directory)
+        PreviewCatalog.preflight(module, database + '.broker-preview')
         client = module.CatalogClient(args.socket); client.reset()
         client.coverage('reconciling', root, reason='broker_startup')
         directory_map = DirectoryMap()
@@ -103,29 +163,49 @@ def main():
         reader = SourceReader(descriptor, session)
         startup = StartupSource(reader, os.fsdecode(root))
         signal.signal(signal.SIGTERM, interrupted); signal.signal(signal.SIGINT, interrupted)
-        # Build an actual contained baseline while source reads reject dirty
-        # bootstrap. Queries continue serving the previous accepted generation.
+        # Scan a private candidate. A failed namespace qualification must not
+        # replace either the serving generation or its restart cache.
+        candidate = database + '.broker-candidate'
         update = module.lifecycle.PrivateDirectory(database + '.refresh')
         try:
             update.lock(); module.lifecycle.reconcile(update)
-            module.monitor.MonitoredRefresh(update, startup).run(os.fsdecode(root), database, remaining())
+            module.monitor.MonitoredRefresh(update, startup).run(os.fsdecode(root), candidate, remaining())
             startup.check()
-            identity = module.monitor.accepted_identity(directory, Path(database).name)
-            module.monitor.replace_serving(args.socket, database, identity, os.fsdecode(root))
         finally:
             update.close()
-        client.reset()
-        located_root = client.lookup(root)
-        if not located_root or located_root['entry_kind'] != 2:
-            raise Gap('catalog_root_missing')
-        admission.inventory(located_root['entry_id'], root, baseline=True,
-                            seconds=remaining(), source_check=startup.check)
-        session.filter.root_handle = directory_map.identity(located_root['entry_id'])
-        def bootstrap_check():
-            remaining()
-            startup.check()
-        session.qualify_baseline(directory_map.identities(), directory_map.admitted, bootstrap_check)
-        startup.check(); session.finish_baseline(args.generation)
+        with PreviewCatalog(module, args.runtime, candidate, database + '.broker-preview', remaining) as preview:
+            admission.client = preview
+            located_root = preview.lookup(root)
+            if not located_root or located_root['entry_kind'] != 2:
+                raise Gap('catalog_root_missing')
+            admission.inventory(located_root['entry_id'], root, baseline=True,
+                                seconds=remaining(), source_check=startup.check)
+            session.filter.root_handle = directory_map.identity(located_root['entry_id'])
+            def bootstrap_check():
+                remaining()
+                startup.check()
+            session.qualify_baseline(directory_map.identities(), directory_map.admitted, bootstrap_check)
+            startup.check(); session.finish_baseline(args.generation)
+        # The isolated reader is gone. Events after the qualified baseline cut
+        # stay queued until the serving catalog accepts this same image.
+        remaining()
+        candidate_name, database_name = Path(candidate).name, Path(database).name
+        fd = directory.open_private(candidate_name, os.O_RDONLY)
+        try:
+            if os.fstat(fd).st_nlink != 1: raise Gap('candidate_custody')
+            os.fsync(fd)
+            previous = directory.open_private(database_name, os.O_RDONLY)
+            os.close(previous)
+            os.replace(candidate_name, database_name, src_dir_fd=directory.fd, dst_dir_fd=directory.fd)
+            os.fsync(directory.fd)
+        finally:
+            os.close(fd)
+        identity = module.monitor.accepted_identity(directory, database_name)
+        module.monitor.replace_serving(args.socket, database, identity, os.fsdecode(root))
+        client.reset(); admission.client = client
+        published_root = client.lookup(root)
+        if not published_root or published_root['entry_id'] != located_root['entry_id']:
+            raise Gap('catalog_root_changed')
         broker = CatalogBroker(reader, client, root, admission.validate, directory_map, admission.inventory)
         deadline = min(startup_deadline, time.monotonic() + 2)
         while not broker.pump():

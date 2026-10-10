@@ -224,4 +224,6 @@ if host_machine.system() == 'linux'
     test('broker_directory_map', python, args: files('test_broker_admission.py'), timeout: 10)
     test('broker_process_cli_mcp', python, args: [files('test_broker_process.py'), join_paths(meson.project_build_root(), 'src'), '-', broker_boundary.full_path()],
         depends: [broker_boundary, fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 30)
+    test('broker_dirty_startup_preserves_accepted', python, args: [files('test_broker_process.py'), join_paths(meson.project_build_root(), 'src'), '-', broker_boundary.full_path(), '--startup-churn'],
+        depends: [broker_boundary, fsearch_refresh_worker, fsearch_worker, fsearch_cli], timeout: 30)
 endif

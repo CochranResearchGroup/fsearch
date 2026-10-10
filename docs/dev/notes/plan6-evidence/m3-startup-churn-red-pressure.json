@@ -1,0 +1,100 @@
+{
+  "command": [
+    "/tmp/file-searcher-incremental-coverage/.venv/bin/python",
+    "src/tests/test_broker_process.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src",
+    "/tmp/file-searcher-incremental-coverage",
+    "/home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary",
+    "--startup-churn"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 0.5822819650056772,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 38666240,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.24532591202296317,
+  "initial_host": {
+    "MemAvailable": 37891215360,
+    "SwapFree": 4657152,
+    "memory_some_avg10": 0.01,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.71,
+    "io_full_avg10": 0.64
+  },
+  "final_host": {
+    "MemAvailable": 37865095168,
+    "SwapFree": 4685824,
+    "memory_some_avg10": 0.01,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.71,
+    "io_full_avg10": 0.64
+  },
+  "samples": [
+    {
+      "seconds": 0.04902092996053398,
+      "host": {
+        "MemAvailable": 37891231744,
+        "SwapFree": 4657152,
+        "memory_some_avg10": 0.01,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.71,
+        "io_full_avg10": 0.64
+      },
+      "rss_bytes": 18022400,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04668105498421937,
+      "swap_bytes": 0,
+      "pids": [
+        78328
+      ]
+    },
+    {
+      "seconds": 0.29434684198349714,
+      "host": {
+        "MemAvailable": 37874442240,
+        "SwapFree": 4685824,
+        "memory_some_avg10": 0.01,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.71,
+        "io_full_avg10": 0.64
+      },
+      "rss_bytes": 38666240,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04487579897977412,
+      "swap_bytes": 0,
+      "pids": [
+        78328,
+        78341
+      ]
+    },
+    {
+      "seconds": 0.5374816489638761,
+      "host": {
+        "MemAvailable": 37860184064,
+        "SwapFree": 4685824,
+        "memory_some_avg10": 0.01,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.71,
+        "io_full_avg10": 0.64
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04294228198705241,
+      "swap_bytes": 0,
+      "pids": [
+        78328
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-startup-churn-red-20261010.service",
+    "memory.current": 9158656,
+    "memory.peak": 34426880,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}

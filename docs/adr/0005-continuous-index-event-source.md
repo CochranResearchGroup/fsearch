@@ -44,3 +44,15 @@ The operator accepted recommendation 1 on 2026-10-09: preserve600MiB and prepare
 Operator clarification2026-10-09: bounded metadata reads through a descriptor opened and validated while in the approved root remain acceptable if the directory moves out during that operation. Validate before and after, discard affected output, stop/report a gap, and do not follow the outside destination or probe/export/log outside names. This exception covers formerly admitted objects only; it does not admit initially outside paths/handles, file-content reads, new roots or broader observation. Kernel development is explicitly out of scope. Resource/freshness/soak gates are unchanged.
 
 BRK-CONF-001 is accepted as a bounded transition under this clarified contract; retain the original strict-criterion failure and diagnostic. It is no longer a contract blocker. Real fanotify delivery, privilege lifetime, filtering, resources and installed acceptance remain unqualified. Capability grants, privileged fixtures, filesystem-wide marks and installation still require a concrete separately authorized activation packet.
+
+## Qualified bootstrap publication —2026-10-10
+
+A rejected namespace qualification must preserve the accepted serving generation
+and restart cache. Scan one private candidate and inventory/qualify it through
+an isolated native reader. Reap and reconcile that reader before publishing
+the same image and constructing the replacement serving reader. Queue events
+after the qualified baseline cut until serving accepts it. Unproved private
+reader cleanup blocks further bootstrap; coverage remains explicitly deferred
+on failure. The [source qualification](../dev/notes/2026-10-10-plan6-startup-publication.md)
+records the public red/green and actual fixed-root regression. Production-scale
+aggregate, actual dirty-startup delivery and durable cursor gates remain open.

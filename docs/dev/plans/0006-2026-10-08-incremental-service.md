@@ -7,7 +7,7 @@ Tracker: https://github.com/CochranResearchGroup/fsearch/issues/26
 Parent: https://github.com/CochranResearchGroup/fsearch/issues/1
 Related adoption/storage work: https://github.com/CochranResearchGroup/fsearch/issues/5
 Planning source baseline: 2f313c825b6591542d0cfbce205c530ce3c683c5
-Current packet: actual hard-link identity and abrupt broker-loss lease expiry/cached-query/explicit recovery controls pass on the fixed owned fixture. Helper configuration/root/hash unchanged; helper/kernel aggregate and dirty-startup cursor continuity remain unqualified. Next: M3 owned in-root startup churn and bounded reconciliation admission. M3/M4 IN_PROGRESS; M5/M6 pending. No reboot or installed workspace activation. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
+Current packet: rejected in-root bootstrap now preserves accepted serving/cache state; private candidate qualification precedes publication. Public red/green,63/63 serial regression and fixed-root actual CLI/MCP regression pass. Helper/kernel aggregate and actual dirty-startup cursor continuity remain unqualified. Next: bounded M3 ignored-policy/mount and observation-loss admission controls. M3/M4 IN_PROGRESS; M5/M6 pending. No reboot or installed workspace activation. Worktree `/home/ecochran76/worktrees/fsearch-incremental-generations`.
 
 ## Destination and completion rule
 

@@ -1,0 +1,122 @@
+{
+  "artifact_path": "/home/ecochran76/.graphiti-openclaw/state/closeout-memory/20261010T181127Z-reconciliation.json",
+  "classification": "completed_visible",
+  "command": "remember-reconcile",
+  "get_memory_job_status_elapsed_seconds": 0.074,
+  "graphiti_writes_attempted": 0,
+  "group_id": "openclaw_ec_main",
+  "job_id": "eb16d6f7-8b27-42cb-8e5d-45a4df121fba",
+  "job_status": {
+    "current_stage": "completed",
+    "episode_uuid": "c0c6dd92-4dcc-48b2-8cfc-86615aa9a82d",
+    "episode_visible_in_group": true,
+    "error_type": null,
+    "failure_category": null,
+    "finished_at": "2026-10-10T17:59:55.595961+00:00",
+    "group_id": "openclaw_ec_main",
+    "job_id": "eb16d6f7-8b27-42cb-8e5d-45a4df121fba",
+    "name": "fsearch-plan0006-actual-session-loss-2026-10-10",
+    "processing_elapsed_seconds": 124.20379458600655,
+    "provider_latency_event_count": 35,
+    "provider_latency_summary": {
+      "by_prompt_name": {
+        "dedupe_nodes.nodes": {
+          "event_count": 14,
+          "total_elapsed_seconds": 15.18713
+        },
+        "extract_edges.edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 20.488722
+        },
+        "extract_nodes.extract_summaries_batch": {
+          "event_count": 7,
+          "total_elapsed_seconds": 5.017095
+        },
+        "extract_nodes.extract_text": {
+          "event_count": 7,
+          "total_elapsed_seconds": 10.504659
+        }
+      },
+      "by_substage": {
+        "initialize": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.071032
+        },
+        "parse_validation": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.009564
+        },
+        "process_start": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.016117
+        },
+        "process_teardown": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.64084
+        },
+        "thread_start": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 5.150912
+        },
+        "turn_completion": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 45.122666
+        },
+        "turn_start": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.186475
+        }
+      },
+      "event_count": 35,
+      "models": [
+        "gpt-5.5"
+      ],
+      "provider_call_count": 5,
+      "providers": [
+        "codex"
+      ],
+      "schema_version": "provider_latency_summary.v0",
+      "status_counts": {
+        "completed": 35
+      },
+      "total_elapsed_seconds": 51.197606,
+      "transports": [
+        "app-server-stdio"
+      ]
+    },
+    "queued_at": "2026-10-10T17:57:57.272962+00:00",
+    "read_after_write_ready": true,
+    "retryable": null,
+    "started_at": "2026-10-10T17:58:02.020030+00:00",
+    "status": "completed",
+    "warnings": []
+  },
+  "mcp_url": "http://127.0.0.1:8817/mcp",
+  "name": "fsearch-plan0006-actual-session-loss-2026-10-10",
+  "recorded_at": "2026-10-10T18:11:27.826937+00:00",
+  "safe_to_retry": false,
+  "schema_version": "graphiti_closeout_memory_reconciliation.v1",
+  "source_description": "FSearch Plan0006 sourceeb48ebc4 actual broker session loss lease expiry and public recovery qualification",
+  "source_receipt": "docs/dev/notes/plan6-evidence/m3-session-loss-memory-receipt.json"
+}

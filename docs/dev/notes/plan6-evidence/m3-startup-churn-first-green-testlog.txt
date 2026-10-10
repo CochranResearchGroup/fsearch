@@ -1,0 +1,27 @@
+Log of Meson test suite run on 2026-10-10T13:06:22.202461
+
+Inherited environment: HOME=/home/ecochran76 LANG=C.UTF-8 LOGNAME=ecochran76 PATH=/home/ecochran76/worktrees/fsearch-plan6-tools/bin:/usr/bin:/bin SHELL=/bin/zsh USER=ecochran76 XDG_RUNTIME_DIR=/run/user/1000 QT_ACCESSIBILITY=1 XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/var/lib/snapd/desktop DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus GSM_SKIP_SSH_AGENT_WORKAROUND=true SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh MANAGERPID=696 INVOCATION_ID=1a2e350071974233987bbe3d59295b53 SYSTEMD_EXEC_PID=29483 MEMORY_PRESSURE_WATCH=/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-startup-churn-green-20261010.service/memory.pressure MEMORY_PRESSURE_WRITE=c29tZSAyMDAwMDAgMjAwMDAwMAA= FSEARCH_FRONTEND_ACCEPTANCE_ROOT=/tmp/file-searcher-incremental-coverage 
+
+==================================== 1/2 =====================================
+test:         fsearch:broker_process_cli_mcp
+start time:   18:06:22
+duration:     10.18s
+result:       exit status 0
+command:      MALLOC_PERTURB_=252 ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_process.py /home/ecochran76/worktrees/fsearch-plan6-build/src - /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary
+----------------------------------- stdout -----------------------------------
+{"status": "assembled_broker_fixture_pass", "durable_catalog": false, "controls": ["named_listener_handoff", "outside_bootstrap_churn", "startup", "create", "directory_inventory", "ancestor_rename", "root_replacement", "inherited_fixture_handoff", "overflow", "restart_after_reap"], "actual_delivery": "NOT_QUALIFIED", "adversarial_confinement": "SEPARATE_RECEIPT_REQUIRED", "boundary_pids_reaped": [30471, 32594]}
+==============================================================================
+
+==================================== 2/2 =====================================
+test:         fsearch:broker_dirty_startup_preserves_accepted
+start time:   18:06:32
+duration:     2.12s
+result:       exit status 0
+command:      ASAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1 MALLOC_PERTURB_=183 UBSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MSAN_OPTIONS=halt_on_error=1:abort_on_error=1:print_summary=1:print_stacktrace=1 MESON_TEST_ITERATION=1 /home/ecochran76/worktrees/fsearch-plan6-tools/bin/python3 /home/ecochran76/worktrees/fsearch-plan6-build/../fsearch-incremental-generations/src/tests/test_broker_process.py /home/ecochran76/worktrees/fsearch-plan6-build/src - /home/ecochran76/worktrees/fsearch-plan6-build/src/fsearch-broker-boundary --startup-churn
+----------------------------------- stdout -----------------------------------
+{"result": "dirty_bootstrap_preserves_accepted_snapshot", "snapshot_id": "2096:10621229:256:1791655592:672762634:1791655592:703524708"}
+==============================================================================
+
+
+Ok:                2   
+Fail:              0   
