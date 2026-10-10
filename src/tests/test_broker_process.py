@@ -33,6 +33,7 @@ def main():
     parser.add_argument('--extended-actual', action='store_true')
     parser.add_argument('--actual-overflow', action='store_true')
     parser.add_argument('--actual-edges', action='store_true')
+    parser.add_argument('--actual-loss', action='store_true')
     parser.add_argument('--durable-catalog', action='store_true')
     args = parser.parse_args()
     actual = args.actual_fixture_dir is not None
@@ -40,6 +41,7 @@ def main():
     assert not args.extended_actual or actual, 'extended controls require explicit actual fixture'
     assert not args.actual_overflow or actual and not args.extended_actual, 'overflow requires separate actual fixture run'
     assert not args.actual_edges or actual and not args.extended_actual and not args.actual_overflow, 'edge controls require separate actual run'
+    assert not args.actual_loss or actual and not any((args.extended_actual, args.actual_overflow, args.actual_edges)), 'session loss requires a separate actual run'
     if args.actual_overflow:
         assert 0 < int(Path('/proc/sys/fs/fanotify/max_queued_events').read_text()) <= 16384, 'queue bound outside reviewed burst'
     if actual:
@@ -361,6 +363,36 @@ asyncio.run(main())
                 visible('process-offline', [offline])
                 public('process-offline', [offline], mcp=True)
                 extended_controls.append('actual_restart_clean_rebuild')
+            if args.actual_loss:
+                assert broker.poll() is None
+                os.killpg(broker.pid, signal.SIGKILL)
+                broker.communicate(timeout=5); assert broker.returncode == -signal.SIGKILL
+                deadline = time.monotonic() + 3
+                for pid in worker_pids:
+                    while Path('/proc', str(pid)).exists():
+                        try:
+                            if os.waitpid(pid, os.WNOHANG)[0]: break
+                        except ChildProcessError: pass
+                        assert time.monotonic() < deadline, ('lost broker worker not reaped', pid)
+                        time.sleep(.01)
+                missed = root / 'session-loss-missed.txt'; missed.touch()
+                origin = time.monotonic()
+                while True:
+                    result = subprocess.run([str(runtime / 'fsearch-cli'), '--socket', str(endpoint), '--query', 'process-created'], capture_output=True, text=True, timeout=3)
+                    assert result.returncode == 0, result.stderr
+                    payload = json.loads(result.stdout)
+                    if payload['incremental_coverage']['state'] == 'deferred': break
+                    assert time.monotonic() - origin < 3, payload
+                    time.sleep(.05)
+                assert payload['incremental_coverage']['reason'] == 'watcher_lease_expired', payload
+                public('process-created', [initial], 'deferred', mcp=True)
+                public('session-loss-missed', [], 'deferred')
+                recovery = subprocess.run([sys.executable, str(runtime / 'fsearch-service'), 'recover', '--socket', str(database) + '.broker'], capture_output=True, text=True, timeout=3)
+                assert recovery.returncode == 0 and json.loads(recovery.stdout)['status'] == 'recovered', recovery
+                writer, log = start('actual-session-loss-restart', named=True)
+                visible('session-loss-missed', [missed])
+                public('session-loss-missed', [missed], mcp=True)
+                extended_controls.append('abrupt_session_loss_lease_expiry_clean_reconciliation')
             if args.actual_overflow:
                 burst = work / 'outside-overflow'; burst.mkdir()
                 os.killpg(broker.pid, signal.SIGSTOP)

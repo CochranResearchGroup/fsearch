@@ -1,0 +1,84 @@
+{
+  "command": [
+    "/tmp/file-searcher-incremental-coverage/.venv/bin/python",
+    "src/tests/test_broker_process.py",
+    "/home/ecochran76/worktrees/fsearch-plan6-m3-runtime",
+    "/tmp/file-searcher-incremental-coverage",
+    "/home/ecochran76/worktrees/fsearch-plan6-m3-runtime/fsearch-broker-boundary",
+    "--actual-fixture-dir",
+    "/home/ecochran76/worktrees/fsr-q-20261010",
+    "--actual-loss",
+    "--durable-catalog"
+  ],
+  "reason": null,
+  "exit_code": 1,
+  "elapsed_seconds": 0.3593454550136812,
+  "sample_interval_seconds": 0.2,
+  "peak_sampled_rss_bytes": 19169280,
+  "peak_sampled_pss_bytes": null,
+  "max_sample_gap_seconds": 0.24352410301798955,
+  "initial_host": {
+    "MemAvailable": 36193669120,
+    "SwapFree": 2764800,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.96,
+    "io_full_avg10": 0.57
+  },
+  "final_host": {
+    "MemAvailable": 36034199552,
+    "SwapFree": 2768896,
+    "memory_some_avg10": 0.0,
+    "memory_full_avg10": 0.0,
+    "io_some_avg10": 0.79,
+    "io_full_avg10": 0.46
+  },
+  "samples": [
+    {
+      "seconds": 0.06051713397027925,
+      "host": {
+        "MemAvailable": 36195033088,
+        "SwapFree": 2764800,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.96,
+        "io_full_avg10": 0.57
+      },
+      "rss_bytes": 19169280,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.059409321984276175,
+      "swap_bytes": 0,
+      "pids": [
+        66816
+      ]
+    },
+    {
+      "seconds": 0.3040412369882688,
+      "host": {
+        "MemAvailable": 36063518720,
+        "SwapFree": 2768896,
+        "memory_some_avg10": 0.0,
+        "memory_full_avg10": 0.0,
+        "io_some_avg10": 0.79,
+        "io_full_avg10": 0.46
+      },
+      "rss_bytes": 0,
+      "pss_bytes": null,
+      "sample_duration_seconds": 0.04307729098945856,
+      "swap_bytes": 0,
+      "pids": [
+        66816
+      ]
+    }
+  ],
+  "cgroup": {
+    "path": "/user.slice/user-1000.slice/user@1000.service/app.slice/fsearch-plan6-session-loss-actual-20261010.service",
+    "memory.current": 9052160,
+    "memory.peak": 20373504,
+    "memory.max": 1342177280,
+    "memory.swap.current": 0,
+    "memory.swap.peak": 0,
+    "memory.swap.max": 0
+  },
+  "qualification": "dedicated cgroup peak when present; sampled owned descendant RSS otherwise; PSS omitted to avoid blocking monitor"
+}
