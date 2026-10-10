@@ -1,0 +1,40 @@
+Sat Oct 10 13:22:21 2026    /home/ecochran76/worktrees/fsr-q-20261010/service.profile
+
+         6138436 function calls (6138076 primitive calls) in 79.571 seconds
+
+   Ordered by: cumulative time
+   List reduced from 765 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     26/1    0.000    0.000   79.592   79.592 {built-in method builtins.exec}
+        1    0.000    0.000   79.592   79.592 fsearch-service:1(<module>)
+        1    0.000    0.000   79.574   79.574 fsearch-service:927(main)
+        1    0.808    0.808   79.523   79.523 fsearch-service:829(run)
+    32175    0.263    0.000   54.901    0.002 fsearch-service:569(read_worker)
+     3872    0.055    0.000   51.836    0.013 fsearch_catalog_journal.py:328(append)
+    11698   50.270    0.004   50.270    0.004 {built-in method posix.fsync}
+     3882    0.031    0.000   35.191    0.009 fsearch_catalog_journal.py:221(publish_commit)
+     3887    0.092    0.000   35.191    0.009 fsearch_catalog_journal.py:207(publish_json)
+   108446    0.438    0.000   18.508    0.000 selectors.py:451(select)
+   108446   17.903    0.000   17.903    0.000 {method 'poll' of 'select.epoll' objects}
+    22485    0.173    0.000    1.332    0.000 fsearch-service:450(reply)
+    22485    0.150    0.000    1.165    0.000 fsearch-service:476(accept)
+    22485    0.196    0.000    1.149    0.000 fsearch-service:487(read_client)
+    45520    0.120    0.000    1.133    0.000 __init__.py:299(loads)
+    22485    0.094    0.000    1.022    0.000 fsearch-service:436(close_client)
+    38001    0.156    0.000    1.019    0.000 __init__.py:183(dumps)
+    38001    0.086    0.000    0.831    0.000 encoder.py:183(encode)
+    22492    0.060    0.000    0.827    0.000 fsearch-service:32(encoded)
+    45520    0.095    0.000    0.825    0.000 decoder.py:332(decode)
+    38001    0.707    0.000    0.707    0.000 encoder.py:205(iterencode)
+    27706    0.678    0.000    0.678    0.000 {built-in method posix.write}
+   108446    0.164    0.000    0.631    0.000 fsearch-service:760(schedule)
+    22485    0.110    0.000    0.622    0.000 socket.py:288(accept)
+    45520    0.618    0.000    0.618    0.000 decoder.py:343(raw_decode)
+    22485    0.617    0.000    0.617    0.000 {method 'send' of '_socket.socket' objects}
+    22485    0.278    0.000    0.553    0.000 {method 'remove' of 'collections.deque' objects}
+     3887    0.463    0.000    0.463    0.000 {built-in method posix.rename}
+    42430    0.087    0.000    0.444    0.000 selectors.py:351(register)
+     3953    0.020    0.000    0.433    0.000 fsearch-service:51(open_private)
+
+

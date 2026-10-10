@@ -310,6 +310,10 @@ class BootstrapSession:
         if self.bootstrap_changes is not None and not self.bootstrap_changes.qualified:
             self.fail('bootstrap_not_qualified')
         self.baseline_finished = True
+        if self.bootstrap_changes is not None:
+            # Qualification defines the baseline cut; later events are replay,
+            # while only a subsequent drain can establish watching.
+            self.state = 'pending'
 
     def drained(self, generation, source_sequence, now):
         if self.state == 'deferred':

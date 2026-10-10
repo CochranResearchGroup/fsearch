@@ -1,0 +1,4 @@
+Started fsearch-plan6-mixed-churn-20261010.service - /usr/bin/env PATH=/home/ecochran76/worktrees/fsearch-plan6-tools/bin:/usr/bin:/bin /usr/bin/python3 src/tests/run_pressure_guard.py --receipt docs/dev/notes/plan6-evidence/m3-mixed-churn-actual-pressure.json --seconds 180 -- /usr/bin/python3 src/tests/test_broker_process.py /home/ecochran76/worktrees/fsearch-plan6-publication-runtime /tmp/file-searcher-incremental-coverage /home/ecochran76/worktrees/fsearch-plan6-publication-runtime/fsearch-broker-boundary --actual-fixture-dir /home/ecochran76/worktrees/fsr-q-20261010 --actual-churn --durable-catalog.
+fsearch-plan6-mixed-churn-20261010.service: Main process exited, code=exited, status=1/FAILURE
+fsearch-plan6-mixed-churn-20261010.service: Failed with result 'exit-code'.
+fsearch-plan6-mixed-churn-20261010.service: Consumed 16.260s CPU time, 256.0K memory peak, 0B memory swap peak.

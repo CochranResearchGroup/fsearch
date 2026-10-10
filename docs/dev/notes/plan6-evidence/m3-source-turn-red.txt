@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_slow_consumer_yields_with_pending_events_without_false_drain (__main__.Reader.test_slow_consumer_yields_with_pending_events_without_false_drain)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests/test_broker_source.py", line 133, in test_slow_consumer_yields_with_pending_events_without_false_drain
+    self.assertEqual(len(self.applied), count)
+AssertionError: 3 != 1
+
+----------------------------------------------------------------------
+Ran 1 test in 0.062s
+
+FAILED (failures=1)

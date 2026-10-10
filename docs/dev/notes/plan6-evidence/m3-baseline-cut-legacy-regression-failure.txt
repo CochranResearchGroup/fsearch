@@ -1,0 +1,18 @@
+...F....................
+======================================================================
+FAIL: test_dirty_inventory_never_calls_admission (__main__.BootstrapFixtures.test_dirty_inventory_never_calls_admission)
+----------------------------------------------------------------------
+fsearch_fanotify_events.Gap: admission_failed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests/test_fanotify_events.py", line 182, in test_dirty_inventory_never_calls_admission
+    with self.assertRaisesRegex(f.Gap, 'bootstrap_dirty'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "bootstrap_dirty" does not match "admission_failed"
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.006s
+
+FAILED (failures=1)

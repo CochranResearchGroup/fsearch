@@ -1,0 +1,40 @@
+Sat Oct 10 13:18:11 2026    /home/ecochran76/worktrees/fsr-q-20261010/first.profile
+
+         700399 function calls (699928 primitive calls) in 25.369 seconds
+
+   Ordered by: cumulative time
+   List reduced from 987 to 30 due to restriction <30>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+     58/1    0.002    0.000   25.387   25.387 {built-in method builtins.exec}
+        1    0.000    0.000   25.387   25.387 fsearch_broker.py:1(<module>)
+        1    0.002    0.002   25.361   25.361 fsearch_broker.py:107(main)
+      109    0.004    0.000   19.319    0.177 fsearch_broker_source.py:236(pump)
+      118    0.010    0.000   19.185    0.163 fsearch_broker_source.py:104(pump)
+     4279    0.123    0.000   18.798    0.004 fsearch-incremental:61(call)
+     1020    0.013    0.000   18.740    0.018 fsearch_broker_source.py:183(__call__)
+     4271   18.188    0.004   18.188    0.004 {method 'recv' of '_socket.socket' objects}
+     1022    0.011    0.000   15.847    0.016 fsearch-incremental:89(apply)
+      124    5.544    0.045    5.544    0.045 {built-in method time.sleep}
+     3025    0.018    0.000    2.801    0.001 fsearch-incremental:85(lookup)
+     1508    0.013    0.000    2.024    0.001 fsearch_broker_source.py:160(_side)
+      127    0.002    0.000    0.423    0.003 fsearch_fanotify_events.py:272(receive)
+      122    0.010    0.000    0.371    0.003 fsearch_fanotify_events.py:156(consume)
+     5076    0.010    0.000    0.317    0.000 fsearch_broker_admission.py:155(validate)
+        1    0.000    0.000    0.260    0.260 fsearch-monitor:126(replace_serving)
+        1    0.000    0.000    0.260    0.260 fsearch-service:879(client)
+     1598    0.018    0.000    0.213    0.000 fsearch-incremental:16(message)
+     1594    0.164    0.000    0.164    0.000 {built-in method select.select}
+     4281    0.152    0.000    0.152    0.000 {method 'connect' of '_socket.socket' objects}
+     5874    0.024    0.000    0.137    0.000 __init__.py:299(loads)
+      220    0.002    0.000    0.133    0.001 fsearch-incremental:82(coverage)
+        9    0.000    0.000    0.116    0.013 fsearch_broker_source.py:171(_remove)
+        1    0.000    0.000    0.114    0.114 fsearch_broker.py:61(__enter__)
+       20    0.100    0.005    0.100    0.005 {built-in method posix.fsync}
+      249    0.059    0.000    0.093    0.000 fsearch_fanotify_events.py:44(decode)
+     4280    0.062    0.000    0.087    0.000 fsearch-service:147(validate_request)
+     4279    0.011    0.000    0.087    0.000 fsearch-service:32(encoded)
+        1    0.000    0.000    0.085    0.085 fsearch-refresh:78(run)
+        8    0.001    0.000    0.081    0.010 fsearch-service:72(save)
+
+

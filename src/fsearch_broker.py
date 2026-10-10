@@ -218,8 +218,8 @@ def main():
             if time.monotonic() >= next_root_check:
                 admission.validate(session.filter.root_handle, args.generation)
                 next_root_check = time.monotonic() + .5
-            broker.pump()
-            time.sleep(.05)
+            if broker.pump():
+                time.sleep(.05)
     except Gap as error:
         reason = str(error)
         exit_code = 0 if reason == 'interrupted' else 1

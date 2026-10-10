@@ -247,7 +247,7 @@ class BootstrapSketchFixtures(unittest.TestCase):
         self.assertEqual((session.state, session.pending), ('reconciling', []))
         session.qualify_baseline([self.inside], lambda handle: 0 if handle == self.inside else None, lambda: None)
         session.finish_baseline(1)
-        self.assertEqual(session.state, 'reconciling')
+        self.assertEqual(session.state, 'pending')
         session.drained(1, 1, 10)
         self.assertEqual(session.state, 'watching')
         self.assertIsNone(session.bootstrap_changes)

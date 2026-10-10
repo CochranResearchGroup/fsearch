@@ -56,3 +56,22 @@ reader cleanup blocks further bootstrap; coverage remains explicitly deferred
 on failure. The [source qualification](../dev/notes/2026-10-10-plan6-startup-publication.md)
 records the public red/green and actual fixed-root regression. Production-scale
 aggregate, actual dirty-startup delivery and durable cursor gates remain open.
+
+## Cooperative source turns and progress —2026-10-10
+
+A source read can contain more work than a single serving-coverage interval.
+Retain only the already bounded admitted exports, yield between applications at
+the cooperative turn limit, and continue without an idle pause while work remains.
+Application progress renews liveness while coverage stays pending. Only a subsequent
+EAGAIN after pending applications finish proves a drained source and permits
+watching. Individual admission/application calls retain their own deadlines;
+this is not a hard interrupt of a blocked call. Preserve byte, pending and
+durable journal limits. The [mixed churn source qualification](../dev/notes/2026-10-10-plan6-mixed-churn.md)
+records the public red/green, failed timing controls, independent oracle and
+actual four-client workload. Production aggregate/current-scale/soak gates remain
+open; marginal fixture throughput does not authorize weakened durability.
+
+A qualified finish_baseline transitions immediately to pending. Events received
+after that cut are replay, even before the first drain or serving-publication
+completion. Legacy unqualified startup keeps its conservative dirty-inventory
+behavior. Neither transition permits watching without a subsequent drain.

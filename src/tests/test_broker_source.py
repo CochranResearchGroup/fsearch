@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import socket
 import sys
+import time
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -103,6 +104,17 @@ class Reader(unittest.TestCase):
         self.assertTrue(self.pump())
         self.assertEqual(self.session.state, 'watching')
 
+    def test_event_after_baseline_cut_before_first_drain_is_applied(self):
+        self.session.bootstrap_changes = f.BootstrapChanges()
+        parent = f.decode(event())[0].sides[0].parent
+        self.session.qualify_baseline((parent,), lambda *args: 7, lambda: None)
+        self.session.finish_baseline(1)
+        self.output.send(event())
+        self.assertTrue(self.pump())
+        self.assertEqual(len(self.applied), 1)
+        self.assertEqual(self.session.applied_sequence, 1)
+        self.assertEqual(self.session.state, 'watching')
+
     def test_budget_exhaustion_does_not_manufacture_drain(self):
         self.ready(); self.reader.max_batches = 1
         self.output.send(event())
@@ -120,6 +132,21 @@ class Reader(unittest.TestCase):
         self.assertEqual(self.session.state, 'pending')
         self.assertTrue(self.pump())
         self.assertEqual(self.session.source_sequence, 3)
+
+    def test_slow_consumer_yields_with_pending_events_without_false_drain(self):
+        self.ready(); self.reader.max_seconds = .01
+        self.output.send(event() + event() + event())
+        def slow_consumer(export):
+            time.sleep(.02)
+            self.applied.append(export)
+        for count in range(1, 4):
+            self.assertFalse(self.reader.pump(lambda *args: 7, slow_consumer))
+            self.assertEqual(len(self.applied), count)
+            self.assertEqual(len(self.session.pending), 3 - count)
+            self.assertEqual(self.session.state, 'pending')
+        self.assertTrue(self.pump())
+        self.assertEqual(self.session.state, 'watching')
+        self.assertEqual([item.sequence for item in self.applied], [1, 2, 3])
 
     def test_dirty_bootstrap_overflow_and_partial_batch_defer(self):
         self.output.send(event())

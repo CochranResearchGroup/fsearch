@@ -1,0 +1,25 @@
+E
+======================================================================
+ERROR: test_event_after_baseline_cut_before_first_drain_is_applied (__main__.Reader.test_event_after_baseline_cut_before_first_drain_is_applied)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests/test_broker_source.py", line 110, in test_event_after_baseline_cut_before_first_drain_is_applied
+    self.assertTrue(self.pump())
+                    ^^^^^^^^^^^
+  File "/home/ecochran76/worktrees/fsearch-incremental-generations/src/tests/test_broker_source.py", line 84, in pump
+    return self.reader.pump(lambda handle, generation: 7 if handle.opaque == b'inside' else None, self.applied.append)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ecochran76/worktrees/fsearch-incremental-generations/src/fsearch_broker_source.py", line 152, in pump
+    self.session.receive(data, self.session.filter.generation, self.session.source_sequence + 1, validate)
+  File "/home/ecochran76/worktrees/fsearch-incremental-generations/src/fsearch_fanotify_events.py", line 297, in receive
+    self.fail(str(error))
+  File "/home/ecochran76/worktrees/fsearch-incremental-generations/src/fsearch_fanotify_events.py", line 270, in fail
+    self.filter.fail(reason)
+  File "/home/ecochran76/worktrees/fsearch-incremental-generations/src/fsearch_fanotify_events.py", line 135, in fail
+    raise Gap(self.reason) from None
+fsearch_fanotify_events.Gap: bootstrap_dirty
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (errors=1)

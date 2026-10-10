@@ -1,0 +1,126 @@
+{
+  "artifact_path": "/home/ecochran76/.graphiti-openclaw/state/closeout-memory/20261010T181614Z-reconciliation.json",
+  "classification": "completed_visible",
+  "command": "remember-reconcile",
+  "get_memory_job_status_elapsed_seconds": 0.083,
+  "graphiti_writes_attempted": 0,
+  "group_id": "openclaw_ec_main",
+  "job_id": "298e33de-af0f-4824-92fe-40f38daa9ba5",
+  "job_status": {
+    "current_stage": "completed",
+    "episode_uuid": "b4316cd0-a3bf-4d4c-9fb7-7803b30af2f7",
+    "episode_visible_in_group": true,
+    "error_type": null,
+    "failure_category": null,
+    "finished_at": "2026-10-10T18:14:56.747680+00:00",
+    "group_id": "openclaw_ec_main",
+    "job_id": "298e33de-af0f-4824-92fe-40f38daa9ba5",
+    "name": "fsearch-plan0006-qualified-bootstrap-publication-2026-10-10",
+    "processing_elapsed_seconds": 99.20753981202142,
+    "provider_latency_event_count": 35,
+    "provider_latency_summary": {
+      "by_prompt_name": {
+        "dedupe_edges.resolve_edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 2.849863
+        },
+        "dedupe_nodes.nodes": {
+          "event_count": 7,
+          "total_elapsed_seconds": 5.9635
+        },
+        "extract_edges.edge": {
+          "event_count": 7,
+          "total_elapsed_seconds": 10.883371
+        },
+        "extract_nodes.extract_attributes_batch": {
+          "event_count": 7,
+          "total_elapsed_seconds": 3.199758
+        },
+        "extract_nodes.extract_text": {
+          "event_count": 7,
+          "total_elapsed_seconds": 8.180474
+        }
+      },
+      "by_substage": {
+        "initialize": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.06938
+        },
+        "parse_validation": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.010041
+        },
+        "process_start": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.015315
+        },
+        "process_teardown": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.653048
+        },
+        "thread_start": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 5.273234
+        },
+        "turn_completion": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 24.998475
+        },
+        "turn_start": {
+          "event_count": 5,
+          "status_counts": {
+            "completed": 5
+          },
+          "total_elapsed_seconds": 0.057473
+        }
+      },
+      "event_count": 35,
+      "models": [
+        "gpt-5.5"
+      ],
+      "provider_call_count": 5,
+      "providers": [
+        "codex"
+      ],
+      "schema_version": "provider_latency_summary.v0",
+      "status_counts": {
+        "completed": 35
+      },
+      "total_elapsed_seconds": 31.076966,
+      "transports": [
+        "app-server-stdio"
+      ]
+    },
+    "queued_at": "2026-10-10T18:13:22.329849+00:00",
+    "read_after_write_ready": true,
+    "retryable": null,
+    "started_at": "2026-10-10T18:13:25.577747+00:00",
+    "status": "completed",
+    "warnings": []
+  },
+  "mcp_url": "http://127.0.0.1:8817/mcp",
+  "name": "fsearch-plan0006-qualified-bootstrap-publication-2026-10-10",
+  "recorded_at": "2026-10-10T18:16:14.616954+00:00",
+  "safe_to_retry": false,
+  "schema_version": "graphiti_closeout_memory_reconciliation.v1",
+  "source_description": "FSearch Plan0006 public red and private candidate qualification before serving publication",
+  "source_receipt": "docs/dev/notes/plan6-evidence/m3-startup-publication-memory-receipt.json"
+}

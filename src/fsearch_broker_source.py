@@ -79,9 +79,12 @@ def receive_source(channel, *, peer_uid, generation, token, root_identity=(0, 0)
 class SourceReader:
     """Own a nonblocking source; only EAGAIN establishes a drain cut.
 
-    Each pump has byte/batch/time bounds, including dropped outside events.
+    Each pump has byte/batch bounds, including dropped outside events, and
+    yields between reads/applications at its cooperative time bound. Individual
+    admission/application callbacks retain their own containment deadlines.
     Reaching any work bound leaves coverage pending, never falsely drained.
-    No raw batch is retained after this call. Admission remains an explicit
+    Only bounded admitted exports can carry over; no raw batch is retained.
+    Admission remains an explicit
     security dependency supplied by the contained broker, not this reader.
     """
     def __init__(self, fd, session, *, max_batches=16, max_bytes=1048576, max_seconds=.05):
@@ -106,11 +109,27 @@ class SourceReader:
             self.session.fail('source_closed')
         started = time.monotonic()
         consumed = 0
+        def apply_pending():
+            while self.session.pending:
+                if time.monotonic() - started >= self.max_seconds:
+                    return False
+                export = self.session.pending[0]
+                try:
+                    apply(export)
+                except Exception:
+                    self.session.fail('catalog_apply_failed')
+                self.session.applied(export.sequence)
+                # Application is real progress through already admitted data.
+                # It renews liveness, but only a later EAGAIN can prove drain.
+                self.session.progress(time.monotonic())
+            return True
         # Reading begins a new observation interval, so old drain proof cannot
         # certify events not yet read. Bootstrap remains reconciling.
         if self.session.state == 'watching':
             self.session.state = 'pending'
         try:
+            if not apply_pending():
+                return False
             for _ in range(self.max_batches):
                 if consumed >= self.max_bytes or time.monotonic() - started >= self.max_seconds:
                     return False
@@ -130,13 +149,9 @@ class SourceReader:
                     self.session.fail('source_eof')
                 consumed += len(data)
                 self.session.progress(time.monotonic())
-                exports = self.session.receive(data, self.session.filter.generation, self.session.source_sequence + 1, validate)
-                for export in exports:
-                    try:
-                        apply(export)
-                    except Exception:
-                        self.session.fail('catalog_apply_failed')
-                    self.session.applied(export.sequence)
+                self.session.receive(data, self.session.filter.generation, self.session.source_sequence + 1, validate)
+                if not apply_pending():
+                    return False
             return False
         except Gap:
             raise
